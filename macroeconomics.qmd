@@ -1,0 +1,10 @@
+---
+title: "Macroeconomics"
+format: html
+---
+
+This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.
+
+## Corso introduttivo di Macroeconomia con Python
+- [Le variabili macroeconomiche](notebooks/Le variabili macroeconomiche.ipynb)  
+  An interactive notebook (in Italian) exploring macroeconomic variables and their applications.

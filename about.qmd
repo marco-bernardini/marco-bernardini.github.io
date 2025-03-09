@@ -1,0 +1,11 @@
+---
+title: "About Me"
+---
+
+<div class="about-container">
+  </div>
+  <div class="about-text">
+    <h1>Your Name</h1>
+    <p>I'm a macroeconomics researcher with a passion for data, finance, and programming. Currently pursuing my MSc at LSE, I explore economic crises, nonlinear models, and financial stability. I also enjoy endurance sports and mountaineering.</p>
+  </div>
+</div>
