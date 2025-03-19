@@ -180,7 +180,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Nel finire degli anni 50 l’economista della LSE A.W.Phillips osservò una relazione inversa fra disoccupazione e inflazione salariale, ovvero il tasso di crescita dei salari nominali, nell’economia britannica. Pochi anni dopo, Samuelson e Solow mostrarono che una simile relazione esisteva anche nell’economia americana, legando non più la disoccupazione solamente all’inflazione salariale, ma al tasso di crescita generale dei prezzi. La curva divenne così uno strumento utilizzato dai policy makers che, dopo aver valutato il trade-off tra inflazione e disoccupazione, mettevano in atto strategie atte a raggiungere un punto specifico della curva.<br> In questa sezione, replicheremo l’articolo originale di Phillips, utilizzando i dati forniti dalla Bank Of England (https://www.bankofengland.co.uk/statistics/research-datasets), e cercheremo di analizzare il fenomeno all’iterno dell’economia Americana, per la quale i dati sono purtroppo frammentari (https://data.bls.gov/pdq/SurveyOutputServlet e https://fred.stlouisfed.org/series/M08142USM055NNBR)</p>
+<p>Nel finire degli anni 50 l’economista della LSE A.W.Phillips osservò una relazione inversa fra disoccupazione e inflazione salariale, ovvero il tasso di crescita dei salari nominali, nell’economia britannica. Pochi anni dopo, Samuelson e Solow mostrarono che una simile relazione esisteva anche nell’economia americana, legando non più la disoccupazione solamente all’inflazione salariale, ma al tasso di crescita generale dei prezzi. La curva divenne così uno strumento utilizzato dai policy makers che, dopo aver valutato il trade-off tra inflazione e disoccupazione, mettevano in atto strategie atte a raggiungere un punto specifico della curva.</p>
 <div id="29accbef" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -249,6 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="paper-di-phillips" class="level2">
 <h2 class="anchored" data-anchor-id="paper-di-phillips">Paper di Phillips</h2>
+<p>In questa sezione, replicheremo l’articolo originale di Phillips, utilizzando i dati forniti dalla Bank Of England (https://www.bankofengland.co.uk/statistics/research-datasets)</p>
 <div id="6c2c25d9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importa i dati sulla disoccupazione dal file Excel contenente dati macroeconomici del Regno Unito</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>unemployment <span class="op">=</span> pd.read_excel(<span class="st">'a-millennium-of-macroeconomic-data-for-the-uk.xlsx'</span>, </span>
@@ -447,18 +448,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Crea uno scatter plot con i dati osservati</span></span>
 <span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    ax[i].scatter(_[<span class="st">'Unemployment rate'</span>], _[<span class="st">'Percent change'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, </span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                  label<span class="op">=</span><span class="st">"Observations"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>                  label<span class="op">=</span><span class="st">"Osservazioni"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Disegna la curva di Phillips stimata dalla regressione</span></span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    ax[i].plot(sorted_data[<span class="st">'Unemployment rate'</span>], sorted_data[<span class="st">'Predicted wage inflation rate'</span>], </span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Phillips Curve"</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>               color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Curva Di Phillips"</span>)</span>
 <span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Imposta il titolo per ciascun sottografico</span></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(<span class="ss">f"UK, </span><span class="sc">{</span>dates[i]<span class="sc">}</span><span class="ss">"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Etichette degli assi</span></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlabel(<span class="st">'Unemployment Rate'</span>)</span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    ax[i].set_ylabel(<span class="st">'Wage Inflation Rate'</span>)</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    ax[i].set_xlabel(<span class="st">'Tasso Di Disoccupazione'</span>)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    ax[i].set_ylabel(<span class="st">'Tasso Di Inflazione Salariale'</span>)</span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Attiva la griglia</span></span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>    ax[i].grid(<span class="va">True</span>)</span>
@@ -479,6 +480,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="paper-di-samuelson-e-solow" class="level2">
 <h2 class="anchored" data-anchor-id="paper-di-samuelson-e-solow">Paper di Samuelson e Solow</h2>
+<p>In questa sezione, cercheremo di analizzare il fenomeno all’interno dell’economia Americana, per la quale i dati sono purtroppo frammentari (si vedano https://data.bls.gov/pdq/SurveyOutputServlet e https://fred.stlouisfed.org/series/M08142USM055NNBR)</p>
 <div id="0dc9362a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carica i dati sulla disoccupazione (BLS) dal file Excel, saltando le prime 16 righe e impostando 'Year' come indice</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>unemp <span class="op">=</span> pd.read_excel(<span class="st">'BLS1.xlsx'</span>, skiprows<span class="op">=</span><span class="dv">16</span>).set_index(<span class="st">'Year'</span>)</span>
@@ -606,18 +608,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'silver'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea uno scatter plot con i dati osservati</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">'UNEMPLOYMENT'</span>], df[<span class="st">'PCT_CHANGE'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Observations"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">'UNEMPLOYMENT'</span>], df[<span class="st">'PCT_CHANGE'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Osservazioni"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
 <span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Disegna la curva di Phillips stimata dalla regressione</span></span>
 <span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>ax.plot(sorted_data[<span class="st">'UNEMPLOYMENT'</span>], sorted_data[<span class="st">'Predicted inflation rate'</span>], </span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Phillips Curve"</span>)</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Curva Di Phillips"</span>)</span>
 <span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Imposta il titolo del grafico</span></span>
 <span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"US, 1930-1947"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Etichette degli assi</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Unemployment Rate'</span>)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Wage Inflation Rate'</span>)</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Tasso Di Disoccupazione'</span>)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Tasso Di Inflazione Salariale'</span>)</span>
 <span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Attiva la griglia</span></span>
 <span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
@@ -673,9 +675,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>df.head()  <span class="co"># Mostra le prime righe del dataframe</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\Marco\AppData\Local\Temp\ipykernel_21508\1025282998.py:7: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+<pre><code>C:\Users\Marco\AppData\Local\Temp\ipykernel_12692\1025282998.py:7: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'])  # Converte il periodo in formato datetime
-C:\Users\Marco\AppData\Local\Temp\ipykernel_21508\1025282998.py:7: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
+C:\Users\Marco\AppData\Local\Temp\ipykernel_12692\1025282998.py:7: UserWarning: Could not infer format, so each element will be parsed individually, falling back to `dateutil`. To ensure parsing is consistent and as-expected, please specify a format.
   df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'])  # Converte il periodo in formato datetime</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -765,18 +767,18 @@ C:\Users\Marco\AppData\Local\Temp\ipykernel_21508\1025282998.py:7: UserWarning: 
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span><span class="st">'silver'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Crea uno scatter plot con i dati osservati</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">'Unemployment Rate'</span>], df[<span class="st">'Wage inflation rate'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Observations"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">'Unemployment Rate'</span>], df[<span class="st">'Wage inflation rate'</span>], alpha<span class="op">=</span><span class="fl">0.7</span>, label<span class="op">=</span><span class="st">"Osservazioni"</span>, color<span class="op">=</span>bmh_colors[<span class="dv">0</span>])</span>
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Disegna la curva di Phillips stimata dalla regressione</span></span>
 <span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>ax.plot(sorted_data[<span class="st">'Unemployment Rate'</span>], sorted_data[<span class="st">'Predicted inflation rate'</span>], </span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Phillips Curve"</span>)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>bmh_colors[<span class="dv">1</span>], label<span class="op">=</span><span class="st">"Curva Di Phillips"</span>)</span>
 <span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Imposta il titolo del grafico</span></span>
 <span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"EU, 2001-2024"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
 <span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Etichette degli assi</span></span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Unemployment Rate'</span>)</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Wage Inflation Rate'</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Tasso Di Disoccupazione'</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Tasso Di Inflazione Salariale'</span>)</span>
 <span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Attiva la griglia</span></span>
 <span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>)</span>
