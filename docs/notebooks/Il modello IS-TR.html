@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Il modello IS-TR – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-0a69ef66e92badd8c5f9ec924b1ec991.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../macroeconomics.html"> 
+<span class="menu-text">Macroeconomics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data-analysis.html"> 
+<span class="menu-text">Data Analysis</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#la-domanda-aggregata" id="toc-la-domanda-aggregata" class="nav-link active" data-scroll-target="#la-domanda-aggregata">La domanda aggregata</a></li>
+  <li><a href="#la-curva-is" id="toc-la-curva-is" class="nav-link" data-scroll-target="#la-curva-is">La curva IS</a></li>
+  <li><a href="#la-curva-tr" id="toc-la-curva-tr" class="nav-link" data-scroll-target="#la-curva-tr">La curva TR</a></li>
+  <li><a href="#il-modello-is-tr" id="toc-il-modello-is-tr" class="nav-link" data-scroll-target="#il-modello-is-tr">Il modello IS-TR</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Il modello IS-TR</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Il modello IS-TR viene utilizzato per rappresentare l’equilibrio economico di breve periodo dal punto di vista qualitativo.<br>
+L’ipotesi di base, proveniente da Keynes, è che nel breve periodo il livello dei prezzi sia “vischioso” (costante). In periodi di normale attività economica, in assenza di squilibri dal punto di vista geopolitico, si tratta di un’ipotesi ragionevole e supportata dai dati. In questo modello sono presenti due mercati, quello dei beni (e servizi) e quello della moneta.<br>
+La seconda ipotesi del modello è che i mercati raggiungano l’equilibrio, e lo raggiungano simultaneamente.<br>
+Si partirà quindi dall’analisi del mercato dei beni, presentando la curva IS, per passare successivamente al mercato della moneta e all’analisi della regola di Taylor.</p>
+<div id="da1677eb" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> config <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="la-domanda-aggregata" class="level2">
+<h2 class="anchored" data-anchor-id="la-domanda-aggregata">La domanda aggregata</h2>
+<p>Si è vista nella prima sezione l’identità contabile fondamentale: <span class="math display">\[
+    Y=C+I+G+NX
+\]</span> dove il termine di sinistra rappresenza l’offerta aggregata, mentre il termine di destra riporta le componenti della domanda aggregata. Piuttosto che ad un concetto contabile, conviene pensare a questa uguaglianza come ad una condizione di equilibrio: perchè il mercato dei beni sia in equilibrio, è necessario che la domanda e l’offerta si incontrino. Nel framework Keynesiano di breve periodo, si può immaginare che l’offerta sia determinata dalla domanda, che a sua volta è determinata da forze esogene.</p>
+<p>Si vedrà ora rapidamente quali siano le determinanti della domanda in questo modello semplificato. - Il <strong>consumo</strong> delle famiglie <span class="math inline">\(C\)</span> è una funzione della ricchezza <span class="math inline">\(\Omega\)</span> e del reddito ante imposte, dove le imposte <span class="math inline">\(T\)</span> vengono trattate come esogene per semplicità. L’idea qui è semplicemente che maggiori disponibilità economiche producano maggiori consumi. In simboli: <span class="math inline">\(C=\mathcal{C}\left(Y-\bar{T},\Omega\right)\)</span> - L’<strong>investimento</strong> delle imprese dipende dal tasso di interesse reale <span class="math inline">\(r\)</span> e dalla <span class="math inline">\(q\)</span> di Tobin, un parametro che cattura le aspettative degli imprenditori. Chiaramente, quando il costo del capitale è maggiore, gli investimenti diminuiranno, in periodi di tassi bassi questi aumenteranno. In simboli: <span class="math inline">\(I=\mathcal{I}\left(r,q\right)\)</span> - Le <strong>importazioni</strong> dipendono dalla domanda interna <span class="math inline">\(C+I+\bar{G}\)</span> e dal tasso di cambio reale <span class="math inline">\(\epsilon\)</span>. Una spesa interna maggiore comporterà, in media, maggiori import, e un apprezzamento del tasso di cambio reale renderà l’acquisto di beni esteri meno oneroso, incoraggiando le importazioni (e sfavorendo le esportazioni). Si ha quindi <span class="math inline">\(IM=\mathcal{IM}\left(C+I+\bar{G},\epsilon\right)\)</span> - In maniera simile, le <strong>esportazioni</strong> sono funzione della domanda estera (<span class="math inline">\(A^*=C^*+I^*+G^*\)</span>) e del tasso di cambio reale: <span class="math inline">\(EX=\mathcal{EX}\left(A^*,\epsilon\right)\)</span> - Semplificando le due equazioni precedenti, notando che <span class="math inline">\(A \propto Y\)</span> e <span class="math inline">\(\bar{A^*} \propto Y^*\)</span>, si ottiene la funzione per le <strong>esportazioni nette</strong>: <span class="math inline">\(NX=\mathcal{NX}\left(Y,Y^*,\epsilon\right)\)</span>. Come si può immaginare, un maggiore prodotto interno riduce le esportazioni nettem così come un apprezzamento del tasso di cambio reale.</p>
+<p>Concludendo, si riprende ora l’equazione iniziale, indicando le componenti della domanda: <span class="math display">\[
+    Y = ZZ = \mathcal{C}\left(Y-\bar{T},\Omega\right) + \mathcal{I}\left(r,q\right) + \mathcal{NX}\left(Y,Y^*,\epsilon\right)
+\]</span> dove il PIL che soddisfa la precedente equazione è detto PIL di equilibrio e <span class="math inline">\(ZZ\)</span> indica la <strong>domanda desiderata</strong>.<br>
+Conviene concentrarsi su due aspetti prima di proseguire: 1. C’è una apparente contraddizione nella precedente funzione, in quando <span class="math inline">\(Y\)</span> interviene sia aumentando il consumo che riducendo le esportazioni nette. I dati hanno dimostrato che un incremento <span class="math inline">\(\Delta Y\)</span> produce degli incrementi <span class="math inline">\(|\Delta C| &gt; |\Delta NX|\)</span> quindi <span class="math inline">\(\Delta Y &gt;0 \Rightarrow \Delta ZZ &gt;0\)</span> 2. Nel breve periodo variazioni delel variabili esogene producono variazioni della domanda tali per cui <span class="math inline">\(ZZ_{t_1}&lt;ZZ_{t_0}\)</span> e <span class="math inline">\(ZZ_{t_1}&lt;Y_{t_1}\)</span>. In questo caso, dal momento che la produzione è maggiore della domanda, le aziende inizieranno ad accumulare merce invenduta come scorte di magazzino, per poi ridurre il livello della produzione fino a che questo non incontrerà la domanda desiderata. Il processo inverso si ottiene quando la domanda desiderata supererà la produzione attuale.</p>
+</section>
+<section id="la-curva-is" class="level2">
+<h2 class="anchored" data-anchor-id="la-curva-is">La curva IS</h2>
+<p>La curva IS rappresenta le combinazioni del tasso di interesse nominale <span class="math inline">\(i\)</span> (si ricorda che nel breve periodo <span class="math inline">\(\pi \approx 0\)</span> e <span class="math inline">\(r \approx i\)</span>) e del PIL <span class="math inline">\(Y\)</span> che sono coerenti con l’equilibrio nel mercato dei beni.<br>
+Nella seguente rappresentazione, è possibile interagire modificando i valori delle variabili esogene. Inoltre, è consentito variare <span class="math inline">\(i\)</span> ma non <span class="math inline">\(Y\)</span>, in quanto variazioni del prodotto porterebbero temporaneamente nelle aree di eccesso di domanda o di offerta, riassorbite nel breve periodo. Inoltre, non è possibile interagire con le determinanti di <span class="math inline">\(\epsilon\)</span> - <span class="math inline">\(P\)</span> e <span class="math inline">\(P^*\)</span>, in quanto ciò contraddirebbe l’ipotesi 1.</p>
+<div id="a339d5a6" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ipywidgets <span class="im">as</span> widgets</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interactive, HBox, VBox, FloatSlider, Label</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_IS(ΔT, ΔG, ΔΩ, Δr, Δq, ΔYstar, Δϵ):</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.9</span>, <span class="fl">.9</span>, <span class="dv">100</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    xa <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    ya <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    xa_equilib <span class="op">=</span> <span class="op">-</span> Δr</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ya_equilib <span class="op">=</span> (<span class="op">-</span> ΔT <span class="op">+</span> ΔG <span class="op">+</span> ΔΩ <span class="op">+</span> Δq <span class="op">+</span> ΔYstar <span class="op">-</span> Δϵ) <span class="op">-</span> xa_equilib </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    IS <span class="op">=</span> (<span class="op">-</span> ΔT <span class="op">+</span> ΔG <span class="op">+</span> ΔΩ <span class="op">+</span> Δq <span class="op">+</span> ΔYstar <span class="op">-</span> Δϵ) <span class="op">-</span> x</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    IS_ <span class="op">=</span> <span class="op">-</span>x</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    ax.plot([xa, xa], [<span class="op">-</span><span class="dv">1</span>, ya], color<span class="op">=</span><span class="st">'silver'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="op">-</span><span class="dv">1</span>, xa], [ya, ya], color<span class="op">=</span><span class="st">'silver'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, IS_, color<span class="op">=</span><span class="st">'silver'</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, IS, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xa, ya, color<span class="op">=</span><span class="st">'#525252'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xa_equilib, ya_equilib, color<span class="op">=</span><span class="st">'green'</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'i0'</span>, xy<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, ya), xytext<span class="op">=</span>(<span class="dv">2</span>, <span class="op">-</span><span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">'offset points'</span>, color<span class="op">=</span><span class="st">'#525252'</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'Y0'</span>, xy<span class="op">=</span>(xa, <span class="op">-</span><span class="dv">1</span>), xytext<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>), textcoords<span class="op">=</span><span class="st">'offset points'</span>, color<span class="op">=</span><span class="st">'#525252'</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    ax.text(xa_equilib<span class="op">-</span><span class="fl">.05</span>, ya_equilib<span class="op">-</span><span class="fl">.1</span>, <span class="st">"Eccesso</span><span class="ch">\n</span><span class="st">di Domanda"</span>, fontsize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">'#525252'</span>, ha<span class="op">=</span><span class="st">'right'</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ax.text(xa_equilib<span class="op">+</span><span class="fl">.1</span>, ya_equilib<span class="op">+</span><span class="fl">.05</span>, <span class="st">"Eccesso</span><span class="ch">\n</span><span class="st">di Offerta"</span>, fontsize<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">'#525252'</span>, ha<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Prodotto"</span>)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Tasso Di Interesse Nominale"</span>)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Curva IS"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>sliders <span class="op">=</span> VBox([</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    Label(value<span class="op">=</span><span class="st">"Parametri della Funzione"</span>, style<span class="op">=</span>{<span class="st">'font_weight'</span>: <span class="st">'bold'</span>}, loc<span class="op">=</span><span class="st">'center'</span>),</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δr'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔT'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔG'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔΩ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δq'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔYstar'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δϵ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>interactive_plot <span class="op">=</span> interactive(plot_IS, ΔT<span class="op">=</span>sliders.children[<span class="dv">1</span>], ΔG<span class="op">=</span>sliders.children[<span class="dv">2</span>], </span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                               ΔΩ<span class="op">=</span>sliders.children[<span class="dv">3</span>], Δr<span class="op">=</span>sliders.children[<span class="dv">4</span>], Δq<span class="op">=</span>sliders.children[<span class="dv">5</span>], </span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                               ΔYstar<span class="op">=</span>sliders.children[<span class="dv">6</span>], Δϵ<span class="op">=</span>sliders.children[<span class="dv">7</span>])</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>display(HBox([interactive_plot.children[<span class="op">-</span><span class="dv">1</span>], sliders]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"9a112f1d598543d5a0fd791e91f9a024","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+</section>
+<section id="la-curva-tr" class="level2">
+<h2 class="anchored" data-anchor-id="la-curva-tr">La curva TR</h2>
+<p>La curva TR (Taylor Rule) individua i livelli di PIL e tasso di interesse che individuano l’equilibrio sul mercato monetario. Si è visto in particolare come la regola di Taylor sia in grado di approssimare fedelmente gli interventi della banca centrale, tramite la seguente equazione: <span class="math display">\[
+    i = \bar{i} + \alpha\left(\pi-\bar{\pi}\right) + \beta y
+\]</span> dove <span class="math inline">\(\alpha\)</span> e <span class="math inline">\(\beta\)</span> rappresentano l’importanza attribuita dalla banca centrale agli scostamenti dell’inflazione dall’ inflazione target <span class="math inline">\(\bar{\pi}\)</span> e del PIL <span class="math inline">\(Y\)</span> dal suo livello naturale <span class="math inline">\(Y^n\)</span>, relazione catturata dall’output gap <span class="math inline">\(y\)</span>. <span class="math inline">\(\bar{i}\)</span> rappresenta il tasso di interesse naturale che si otterrebbe qualora <span class="math inline">\(y=0\)</span> e <span class="math inline">\(\pi=\bar{\pi}\)</span>.<br>
+Importante notare che nel breve periodo, per l’ipotesi iniziale la regola si riduce a: <span class="math display">\[
+    i = \bar{i} + \beta y
+\]</span> Da questa formula derivano due osservazioni fondamentali: 1. A differenza del mercato dei beni, l’economia non può qui mai trovarsi fuori dalla curva TR. Per definizione, infatti, la banca centrale non sceglierà punti che non siano coerenti con la regola adottata. 2. Quando <span class="math inline">\(y=0\)</span>, <span class="math inline">\(i=\bar{i}\)</span> per ovvi motivi.</p>
+<div id="e0f5ed7b" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_TR(Δβ, Δibar, y, Δi):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    ibar <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.9</span>, <span class="fl">.9</span>, <span class="dv">100</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    xa <span class="op">=</span> <span class="fl">.0</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ya <span class="op">=</span> ibar</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    xa_equilib <span class="op">=</span> xa <span class="op">-</span> Δi <span class="op">+</span> y</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    ya_equilib <span class="op">=</span> (ibar <span class="op">+</span> Δibar) <span class="op">+</span> ( beta <span class="op">+</span> Δβ ) <span class="op">*</span> xa_equilib</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    TR <span class="op">=</span> (ibar <span class="op">+</span> Δibar) <span class="op">+</span> ( beta <span class="op">+</span> Δβ ) <span class="op">*</span> x</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    TR_ <span class="op">=</span> ibar <span class="op">+</span> (beta) <span class="op">*</span> x</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    ax.plot([xa, xa], [<span class="op">-</span><span class="dv">1</span>, ya], color<span class="op">=</span><span class="st">'silver'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="op">-</span><span class="dv">1</span>, xa], [ya, ya], color<span class="op">=</span><span class="st">'silver'</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, TR_, color<span class="op">=</span><span class="st">'silver'</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, TR, zorder<span class="op">=</span><span class="dv">2</span>, color<span class="op">=</span>bmh_colors[<span class="dv">1</span>])</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xa, ya, color<span class="op">=</span><span class="st">'#525252'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xa_equilib, ya_equilib, color<span class="op">=</span><span class="st">'green'</span>, zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'ibar'</span>, xy<span class="op">=</span>(<span class="op">-</span><span class="dv">1</span>, ya), xytext<span class="op">=</span>(<span class="dv">2</span>, <span class="op">-</span><span class="dv">10</span>), textcoords<span class="op">=</span><span class="st">'offset points'</span>, color<span class="op">=</span><span class="st">'#525252'</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">'Ybar'</span>, xy<span class="op">=</span>(xa, <span class="op">-</span><span class="dv">1</span>), xytext<span class="op">=</span>(<span class="dv">2</span>, <span class="dv">2</span>), textcoords<span class="op">=</span><span class="st">'offset points'</span>, color<span class="op">=</span><span class="st">'#525252'</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Prodotto"</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Tasso Di Interesse"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Curva TR"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>sliders <span class="op">=</span> VBox([</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    Label(value<span class="op">=</span><span class="st">"Parametri della Funzione"</span>, style<span class="op">=</span>{<span class="st">'font_weight'</span>: <span class="st">'bold'</span>}, loc<span class="op">=</span><span class="st">'center'</span>),</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δβ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="dv">1</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">1</span>, step<span class="op">=</span><span class="fl">0.04</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δibar'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'y'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δi'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>interactive_plot <span class="op">=</span> interactive(plot_TR, Δβ<span class="op">=</span>sliders.children[<span class="dv">1</span>], Δibar<span class="op">=</span>sliders.children[<span class="dv">2</span>], </span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>                               y<span class="op">=</span>sliders.children[<span class="dv">3</span>], Δi<span class="op">=</span>sliders.children[<span class="dv">4</span>])</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>display(HBox([interactive_plot.children[<span class="op">-</span><span class="dv">1</span>], sliders]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"0dacaff66ea44d0493f5f62639376902","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+</section>
+<section id="il-modello-is-tr" class="level2">
+<h2 class="anchored" data-anchor-id="il-modello-is-tr">Il modello IS-TR</h2>
+<p>Nel seguente grafico è possibile replicare l’effetto di shock reali e monetari secondo il modello IS-TR. Attenzione però: i risultati sono validi unicamente dal punto di vista qualitativo.</p>
+<div id="c417ac2f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_IS_TR(ΔT, ΔG, ΔΩ, Δr, Δq, ΔYequilib, Δϵ, Δβ, Δibar):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">.9</span>, <span class="fl">.9</span>, <span class="dv">100</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    exog_IS <span class="op">=</span> <span class="op">-</span> ΔT <span class="op">+</span> ΔG <span class="op">+</span> ΔΩ <span class="op">+</span> Δq <span class="op">+</span> ΔYequilib <span class="op">-</span> Δϵ</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    IS <span class="op">=</span> exog_IS <span class="op">-</span> x</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    IS_ <span class="op">=</span> <span class="op">-</span>x</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    ibar <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> <span class="dv">1</span>   </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    TR <span class="op">=</span> (ibar <span class="op">+</span> Δibar) <span class="op">+</span> ( beta <span class="op">+</span> Δβ ) <span class="op">*</span> x</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    TR_ <span class="op">=</span> ibar <span class="op">+</span> beta <span class="op">*</span> x</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    xa_equilib <span class="op">=</span> ( exog_IS <span class="op">-</span> Δibar ) <span class="op">/</span> ( <span class="dv">1</span> <span class="op">+</span> beta )</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    ya_equilib <span class="op">=</span> ( beta <span class="op">*</span> exog_IS <span class="op">+</span> Δibar ) <span class="op">/</span> ( <span class="dv">1</span> <span class="op">+</span> beta )</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, IS_, color<span class="op">=</span><span class="st">'silver'</span>, zorder<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, IS, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, TR_, color<span class="op">=</span><span class="st">'silver'</span>, zorder<span class="op">=</span><span class="dv">1</span>, linestyle<span class="op">=</span><span class="st">":"</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, TR, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    ax.scatter(xa_equilib, ya_equilib, color<span class="op">=</span><span class="st">'green'</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    ax.set_xlim(<span class="op">-</span><span class="fl">1.3</span>, <span class="fl">1.3</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    ax.set_ylim(<span class="op">-</span><span class="fl">1.3</span>, <span class="fl">1.3</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    ax.set_xticks([])</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    ax.set_yticks([])</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Prodotto"</span>)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Tasso Di Interesse Nominale"</span>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Modello IS-TR"</span>, loc<span class="op">=</span><span class="st">'left'</span>)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>sliders <span class="op">=</span> VBox([</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    Label(value<span class="op">=</span><span class="st">"Parametri della Funzione"</span>, style<span class="op">=</span>{<span class="st">'font_weight'</span>: <span class="st">'bold'</span>}, loc<span class="op">=</span><span class="st">'center'</span>),</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔT'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔG'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔΩ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δr'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δq'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'ΔYequilib'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δϵ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δβ'</span>, <span class="bu">min</span><span class="op">=-</span><span class="dv">1</span>, <span class="bu">max</span><span class="op">=</span><span class="dv">1</span>, step<span class="op">=</span><span class="fl">0.04</span>, value<span class="op">=</span><span class="dv">0</span>),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    FloatSlider(description<span class="op">=</span><span class="st">'Δibar'</span>, <span class="bu">min</span><span class="op">=-</span><span class="fl">0.5</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">0.5</span>, step<span class="op">=</span><span class="fl">0.02</span>, value<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>interactive_plot <span class="op">=</span> interactive(plot_IS_TR, ΔT<span class="op">=</span>sliders.children[<span class="dv">1</span>], ΔG<span class="op">=</span>sliders.children[<span class="dv">2</span>], </span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                               ΔΩ<span class="op">=</span>sliders.children[<span class="dv">3</span>], Δr<span class="op">=</span>sliders.children[<span class="dv">4</span>], Δq<span class="op">=</span>sliders.children[<span class="dv">5</span>], </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>                               ΔYequilib<span class="op">=</span>sliders.children[<span class="dv">6</span>], Δϵ<span class="op">=</span>sliders.children[<span class="dv">7</span>], Δβ<span class="op">=</span>sliders.children[<span class="dv">8</span>],</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>                               Δibar<span class="op">=</span>sliders.children[<span class="dv">9</span>])</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>display(HBox([interactive_plot.children[<span class="op">-</span><span class="dv">1</span>], sliders]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"e5862ff8c7ea4f9d933058c87b42a7e0","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
