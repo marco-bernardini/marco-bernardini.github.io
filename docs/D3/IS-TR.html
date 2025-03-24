@@ -144,7 +144,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#la-domanda-aggregata" id="toc-la-domanda-aggregata" class="nav-link active" data-scroll-target="#la-domanda-aggregata">La domanda aggregata</a></li>
+  <li><a href="#introduzione" id="toc-introduzione" class="nav-link active" data-scroll-target="#introduzione">Introduzione</a></li>
+  <li><a href="#la-domanda-aggregata" id="toc-la-domanda-aggregata" class="nav-link" data-scroll-target="#la-domanda-aggregata">La domanda aggregata</a></li>
   <li><a href="#la-curva-is" id="toc-la-curva-is" class="nav-link" data-scroll-target="#la-curva-is">La curva IS</a></li>
   <li><a href="#la-curva-tr" id="toc-la-curva-tr" class="nav-link" data-scroll-target="#la-curva-tr">La curva TR</a></li>
   <li><a href="#il-modello-is-tr" id="toc-il-modello-is-tr" class="nav-link" data-scroll-target="#il-modello-is-tr">Il modello IS-TR</a></li>
@@ -174,10 +175,13 @@ window.Quarto = {
 
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<section id="introduzione" class="level2">
+<h2 class="anchored" data-anchor-id="introduzione">Introduzione</h2>
 <p>Il modello IS-TR viene utilizzato per rappresentare l’equilibrio economico di breve periodo dal punto di vista qualitativo.<br>
 L’ipotesi di base, proveniente da Keynes, è che nel breve periodo il livello dei prezzi sia “vischioso” (costante). In periodi di normale attività economica, in assenza di squilibri dal punto di vista geopolitico, si tratta di un’ipotesi ragionevole e supportata dai dati. In questo modello sono presenti due mercati, quello dei beni (e servizi) e quello della moneta.<br>
 La seconda ipotesi del modello è che i mercati raggiungano l’equilibrio, e lo raggiungano simultaneamente.<br>
 Si partirà quindi dall’analisi del mercato dei beni, presentando la curva IS, per passare successivamente al mercato della moneta e all’analisi della regola di Taylor.</p>
+</section>
 <section id="la-domanda-aggregata" class="level2">
 <h2 class="anchored" data-anchor-id="la-domanda-aggregata">La domanda aggregata</h2>
 <p>Si è vista nella prima sezione l’identità contabile fondamentale: <span class="math display">\[
@@ -635,7 +639,6 @@ document.getElementById("container2").appendChild(svg.node());
 <h3 class="slider-title anchored">
 Variabili:
 </h3>
-<p><input type="range" id="delta_r_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider"> <label for="Δr">Δr</label></p>
 <p><input type="range" id="delta_T_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider"> <label for="ΔT">ΔT</label></p>
 <p><input type="range" id="delta_G_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider"> <label for="ΔG">ΔG</label></p>
 <p><input type="range" id="delta_O_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider"> <label for="ΔΩ">ΔΩ</label></p>
@@ -799,8 +802,7 @@ svg.append("text")
 
 // Function to update the curves when sliders change.
 function updateLine() {
-
-    let delta_r = parseFloat(document.getElementById("delta_r_IS_TR").value);
+    
     let delta_T = parseFloat(document.getElementById("delta_T_IS_TR").value);
     let delta_G = parseFloat(document.getElementById("delta_G_IS_TR").value);
     let delta_O = parseFloat(document.getElementById("delta_O_IS_TR").value);

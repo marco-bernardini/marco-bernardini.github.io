@@ -208,7 +208,7 @@ window.Quarto = {
 </header>
 
 
-<div id="222ce57b" class="cell" data-execution_count="4">
+<div id="222ce57b" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> config <span class="im">import</span> <span class="op">*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -237,7 +237,7 @@ Alla luce di queste considerazioni, si può immaginare l’esistenza di una rela
     (2) \pi = \mathbb{E}\left(\pi\right) -bu + \varepsilon
 \]</span> laddove il segno dello shock è arbitrario, e in questo caso uno shock sfavorevole, o “negativo”, ha segno positivo.<br>
 Può essere interessante ora visualizzare la curva AS (1) e la Curva di Phillips aumentata per l’inflazione e gli shock di offerta (2).</p>
-<div id="9f8693cf" class="cell" data-execution_count="5">
+<div id="9f8693cf" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_ad_as(ε<span class="op">=</span><span class="dv">0</span>, y<span class="op">=</span><span class="dv">0</span>, u<span class="op">=</span><span class="dv">0</span>, EP1<span class="op">=</span><span class="dv">0</span>):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> np.linspace(<span class="fl">.1</span>, <span class="fl">.9</span>, <span class="dv">100</span>)</span>
@@ -303,10 +303,10 @@ Può essere interessante ora visualizzare la curva AS (1) e la Curva di Phillips
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>interact(plot_ad_as, ε<span class="op">=</span>(<span class="op">-</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.02</span>), y<span class="op">=</span>(<span class="op">-</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.02</span>), u<span class="op">=</span>(<span class="op">-</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.02</span>), EP1<span class="op">=</span>(<span class="op">-</span><span class="fl">.5</span>, <span class="fl">.5</span>, <span class="fl">.02</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id":"ff13a454bc564e4c92d2c181c44fc7f6","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+{"model_id":"cecf2a0b1f244d269da54a91a5a53b4d","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
 </script>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <pre><code>&lt;function __main__.plot_ad_as(ε=0, y=0, u=0, EP1=0)&gt;</code></pre>
 </div>
 </div>

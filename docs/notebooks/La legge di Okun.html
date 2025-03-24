@@ -181,7 +181,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#i.-differenze-percentuali" id="toc-i.-differenze-percentuali" class="nav-link active" data-scroll-target="#i.-differenze-percentuali">I. Differenze percentuali</a></li>
+  <li><a href="#introduzione" id="toc-introduzione" class="nav-link active" data-scroll-target="#introduzione">Introduzione</a></li>
+  <li><a href="#i.-differenze-percentuali" id="toc-i.-differenze-percentuali" class="nav-link" data-scroll-target="#i.-differenze-percentuali">I. Differenze percentuali</a></li>
   <li><a href="#ii.-elasticità" id="toc-ii.-elasticità" class="nav-link" data-scroll-target="#ii.-elasticità">II. Elasticità</a></li>
   <li><a href="#e-oggi" id="toc-e-oggi" class="nav-link" data-scroll-target="#e-oggi">E oggi?</a></li>
   </ul>
@@ -209,6 +210,8 @@ window.Quarto = {
 </header>
 
 
+<section id="introduzione" class="level2">
+<h2 class="anchored" data-anchor-id="introduzione">Introduzione</h2>
 <p>All’inizio degli anni ’60, la crescita economica e la riduzione della disoccupazione erano temi centrali per gli economisti americani. Arthur M. Okun si specializzò nello studio del prodotto potenziale, ovvero il livello di output raggiungibile in condizioni di disoccupazione ottimale (all’epoca stimata intorno al 4%) e di una domanda sufficiente ad assorbire l’offerta disponibile.<br>
 Dal punto di vista pratico, era fondamentale quantificare l’impatto di una variazione della disoccupazione sulla produzione. Ad esempio, una riduzione del tasso di disoccupazione dal 6% al 4,5% avrebbe avvicinato il prodotto al suo livello potenziale, riducendo il “gap” tra output effettivo e potenziale. Al contrario, un aumento della disoccupazione avrebbe avuto l’effetto opposto.<br>
 L’obiettivo di Okun era individuare una relazione quantitativa tra il prodotto nazionale lordo (PNL) e il tasso di disoccupazione. In questa sezione analizzeremo le due metodologie con cui Okun ha stimato tale relazione.</p>
@@ -217,6 +220,7 @@ L’obiettivo di Okun era individuare una relazione quantitativa tra il prodotto
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> config <span class="im">import</span> make_df_ECB</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 <section id="i.-differenze-percentuali" class="level2">
 <h2 class="anchored" data-anchor-id="i.-differenze-percentuali">I. Differenze percentuali</h2>
 <p>In questo primo esercizio, viene utilizzato un modello di regressione lineare con intercetta, dove le variazioni nel tasso di disoccupazione Y vengono regredite sulle variazioni percentuali di PNL X. Tutti i dati sono rilevati trimestralmente. Le serie utilizzate sono: - https://fred.stlouisfed.org/series/UNRATE per il tasso di disoccupazione - https://www.nber.org/research/data/american-business-cycle-continuity-and-change-historic-data-tables per il PNL</p>
