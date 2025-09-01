@@ -1,0 +1,33 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Marco Bernardini"
+  navbar:
+    search: false
+    left:
+      - href: cv.qmd
+        text: CV
+      - href: macroeconomics.qmd
+        text: MACROECONOMICS
+      - href: data-analysis.qmd
+        text: DATA ANALYSIS
+      - href: articles.qmd
+        text: ARTICLES
+  
+resources:
+  - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf
+  - assets/Tesi Marco Bernardini.pdf
+    
+format:
+  html:
+    toc: true
+    toc-location: right
+    theme: lux
+    html-metadata:
+      data-bs-theme: dark
+    execute:
+      echo: true
+      warning: false
+    ipywidgets: true

@@ -1,0 +1,23 @@
+---
+title: "Macroeconomics"
+format: html
+---
+
+This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.
+
+## Corso introduttivo di Macroeconomia con Python
+### A series of lectures on the principles of macroeconomics in italian
+- [Le variabili macroeconomiche](notebooks/Le variabili macroeconomiche.ipynb)  
+  A notebook exploring macroeconomic variables and their applications.
+- [La curva di Phillips](notebooks/La%20curva%20di%20Phillips.ipynb)  
+  A notebook exploring the relationship between inflation and unemployment
+- [La legge di Okun](notebooks/La%20legge%20di%20Okun.ipynb)  
+  A notebook diving into the relationship between unemployment and output
+- [Il mercato della moneta](D3/money.qmd)  
+  Financial markets 1 - money
+- [La regola di Taylor](notebooks/La%20regola%20di%20Taylor.ipynb)  
+  A notebook showing a practical application of the Taylor Rule
+- [Il modello IS-TR](D3/IS-TR.qmd)  
+  Tools to experiment and interact with the IS-TR model
+- [Il modello Mundell-Fleming (work in progress)](D3/Mundell-Fleming.qmd)    
+  Tools to experiment and interact with the Mundell-Fleming model

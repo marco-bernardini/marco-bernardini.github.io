@@ -1,0 +1,247 @@
+---
+title: "Il mercato della moneta"
+format: html
+---
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+## Introduzione
+
+Moneta e tassi di interesse hanno un ruolo centrale per la loro capacità di influenzare l'economia reale. L'obiettivo di questa sezione sarà evidenziare le determinanti della domanda di moneta e del tasso di interesse, e derivare la relazione esistente tra offerta di moneta e tassi. In una lezione successiva verranno approfondite tematiche più strettamente legate ai titoli.  
+Innanzitutto, occorre dividere la moneta in circolante, ovvero la moneta correntemente utilizzata per le transazioni, e depositi bancari, ovvero le passività delle banche commerciali. Si individuano poi quattro aggregati monetari:  
+
+- **M0** (base monetaria) = circolante + riserve delle banche commerciali  
+- **M1** = circolante + depositi a vista  
+- **M2** = M1 + depositi a tempo non vincolati  
+- **M3** = M2 + depositi vincolati + conti presso istituti non bancari  
+
+Nella presente sezione, conviene pensare alla moneta nella sua formulazione M0.
+
+## La domanda di moneta
+
+La domanda di moneta dipende essenzialmente da due parametri:  
+
+- Volume e frequenza delle transazioni  
+- Tasso di interesse sui titoli  
+
+L'intuizione è che a volumi (livelli di prodotto) maggiori, corrisponderà una crescente domanda di moneta; a tassi di interesse maggiori corrisponderà una minore domanda, in quanto gli agenti economici 1. preferiranno detenere la propria ricchezza in titoli piuttosto che in moneta e 2. diminuiranno gli investimenti visto il maggior costo del capitale  
+Si può quindi scrivere che la domanda di moneta $M^d$ è data da:  
+
+$$
+    M^d = \mathcal{f}\left(i\right)PY
+$$
+
+Chiamando $M$ l'offerta di moneta, l'equilibrio nel mercato della moneta è dato da:  
+
+$$
+    M = M^d = \mathcal{f}\left(i\right)PY
+$$
+
+Questo permette di individuare il tasso di interesse di equilibrio, ovvero il tasso in grado di eguagliare la domanda di moneta (che è funzione di $i$) e l'offerta di moneta, determinata dalla banca centrale, per valori costanti di $PY$.  
+Si può utilizzare il seguente grafico interattivo per valutare gli effetti di variazioni del prodotto nominale e dell'offerta di moneta sul tasso di interesse.
+
+<div id="wrapper">
+<div id="container1">
+<h3 class="slider-title">Mercato della moneta</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+
+<input type="range" id="delta_PY" min="-0.7" max="0.7" step="0.02" value="0" class="slider">
+<label for="ΔPY">ΔPY</label>
+
+<input type="range" id="delta_M" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔM">ΔM</label>
+
+</div>
+</div>
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 500;
+const height = 500;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const MD_ = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+let MD = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+let M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+let x_eq = 0
+let y_eq = 0
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(MD_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the dynamic MD curve.
+const MDLine = svg.append("path")
+    .datum(MD)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+const MLine = svg.append("path")
+    .datum(M_)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(-.8)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("M");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(-.8))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+// Function to update the MD curve when sliders change.
+function updateLine() {
+
+    let delta_PY = parseFloat(document.getElementById("delta_PY").value);
+    let delta_M = parseFloat(document.getElementById("delta_M").value);
+
+    // Factor to scale MD with nominal income
+    let scalePY = 1 + delta_PY;
+
+    // Update MD curve data (shift OUTWARD with higher PY)
+    MD = d3.range(-0.8, 0.8, 0.02).map(d => ({
+        x: d,
+        y: -d * scalePY
+    }));
+
+    // Update the line with new data
+    MDLine.datum(MD)
+        .attr("d", line);
+
+    // Update M curve data (vertical line shifts with ΔM)
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ 
+        x: delta_M, 
+        y: d 
+    }));
+
+    // Update the line with new data
+    MLine.datum(M_).attr("d", line);
+
+    // Compute equilibrium: where MD = M
+    // Solve: at x = delta_M, y = -x * scalePY
+    x_eq = delta_M;
+    y_eq = - delta_M * scalePY;
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq));
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+});
+
+// Append the SVG element.
+document.getElementById("container1").appendChild(svg.node());
+
+</script>

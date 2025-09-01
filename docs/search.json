@@ -84,67 +84,67 @@
     "text": "E oggi?\n\ndef make_df_ECB(key, obs_name):\n    \"\"\"Estrae i dati dal datawarehouse della BCE\"\"\"\n    url_ = 'https://sdw-wsrest.ecb.europa.eu/service/data/'  # URL di base per il servizio web della BCE\n    format_ = '?format=csvdata'  # Impostazione del formato dei dati in CSV\n    df = pd.read_csv(url_+key+format_)  # Legge i dati CSV dal servizio web BCE usando la chiave\n    df = df[['TIME_PERIOD', 'OBS_VALUE']]  # Seleziona le colonne di interesse (periodo e valore osservato)\n    df['TIME_PERIOD'] = pd.to_datetime(df['TIME_PERIOD'])  # Converte il periodo in formato datetime\n    df = df.set_index('TIME_PERIOD')  # Imposta il periodo come indice del dataframe\n    df.columns = [obs_name]  # Rinomina la colonna con il nome della variabile\n    return df\n\n# Chiave per il tasso di disoccupazione\nunemp_rate_key = 'LFSI/Q.I9.S.UNEHRT.TOTAL0.15_74.T'  # Codice identificativo del tasso di disoccupazione\nunemp_rate = make_df_ECB(unemp_rate_key, 'Unemployment Rate')  # Ottieni i dati dal database ECB\n\n# Chiave per la wage inflation (inflazione salariale)\nwage_inflation_key = 'MNA/Q.Y.I9.W2.S1.S1._Z.COM_PS._Z._T._Z.IX.V.N'  # Codice identificativo del salario per addetto (indice)\nwage_inflation = make_df_ECB(wage_inflation_key, 'Compensation per employee')  # Ottieni i dati dal database ECB\n\nwage_inflation = wage_inflation[wage_inflation.index &gt;= '2000-01-01']  # Filtra i dati dal 2000 in poi\n\n# Combina i dati di disoccupazione e salario in un unico dataframe\ndf = pd.merge(unemp_rate, wage_inflation, right_index=True, left_index=True)\n\n# Raggruppa i dati per anno e calcola la media per il tasso di disoccupazione e l'ultimo valore per la compensazione per addetto\ndf = df.groupby(pd.Grouper(freq='Y'))[['Unemployment Rate', 'Compensation per employee']].agg({'Unemployment Rate':'mean',\n                                                                                             'Compensation per employee':'last'})\n\ndf.index = df.index.year  # Imposta l'indice come anno\ndf['Wage inflation rate'] = df['Compensation per employee'].pct_change()*100  # Calcola il tasso di inflazione salariale come variazione percentuale\ndf = df.dropna()  # Rimuove i valori mancanti\n\ndf.head()  # Mostra le prime righe del dataframe\n\n\n\n\n\n\n\n\nUnemployment Rate\nCompensation per employee\nWage inflation rate\n\n\nTIME_PERIOD\n\n\n\n\n\n\n\n2001\n8.508061\n70.332653\n2.705440\n\n\n2002\n8.753020\n72.127430\n2.551840\n\n\n2003\n9.188271\n73.757671\n2.260224\n\n\n2004\n9.399281\n75.327356\n2.128164\n\n\n2005\n9.231180\n77.193789\n2.477762\n\n\n\n\n\n\n\n\n# Calcola il termine di aggiustamento per evitare problemi con il logaritmo\na = abs(df[\"Wage inflation rate\"].min()) + 0.9\n\n# Calcola il logaritmo del tasso di variazione percentuale delle retribuzioni, aggiungendo il termine 'a'\ndf[\"LOG_VAR_PERC\"] = np.log(df[\"Wage inflation rate\"] + a)\n\n# Calcola il logaritmo del tasso di disoccupazione\ndf[\"LOG_UNRATE\"] = np.log(df[\"Unemployment Rate\"])\n\n# Definisce le variabili per la regressione lineare (modello di Phillips)\nX = df[\"LOG_UNRATE\"]\nY = df[\"LOG_VAR_PERC\"]\nX = sm.add_constant(X)  # Aggiunge l'intercetta al modello di regressione\nmodel = sm.OLS(Y, X).fit()  # Stima il modello di regressione\nR2 = model.rsquared  # Ottiene il coefficiente di determinazione R^2\n\n# Calcola i valori predetti dalla regressione e li riconverte dalla scala logaritmica\ndf[\"Predicted log inflation rate\"] = model.predict(X)\ndf[\"Predicted inflation rate\"] = np.exp(df[\"Predicted log inflation rate\"]) - a\n\n# Ordina i dati per il tasso di disoccupazione per una migliore rappresentazione grafica\nsorted_data = df.sort_values(by='Unemployment Rate')\n\n# Crea una figura con un solo sottografico\nfig, ax = plt.subplots(1, 1)\n\n# Disegna una linea orizzontale per rappresentare l'asse y=0\nax.axhline(y=0, color='silver', linewidth=2)\n\n# Crea uno scatter plot con i dati osservati\nax.scatter(df['Unemployment Rate'], df['Wage inflation rate'], alpha=0.7, label=\"Osservazioni\", color=bmh_colors[0])\n\n# Disegna la curva di Phillips stimata dalla regressione\nax.plot(sorted_data['Unemployment Rate'], sorted_data['Predicted inflation rate'], \n        color=bmh_colors[1], label=\"Curva Di Phillips\")\n\n# Imposta il titolo del grafico\nax.set_title(f\"EU, 2001-2024\", loc='left')\n\n# Etichette degli assi\nax.set_xlabel('Tasso Di Disoccupazione')\nax.set_ylabel('Tasso Di Inflazione Salariale')\n\n# Attiva la griglia\nax.grid(True)\n\n# Aggiunge la legenda\nax.legend()\n\n# Migliora la disposizione dei grafici per evitare sovrapposizioni\nplt.tight_layout()"
   },
   {
-    "objectID": "macroeconomics.html",
-    "href": "macroeconomics.html",
-    "title": "Macroeconomics",
+    "objectID": "notebooks/I mercati finanziari.html",
+    "href": "notebooks/I mercati finanziari.html",
+    "title": "I mercati finanziari",
     "section": "",
-    "text": "This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources."
+    "text": "import ipywidgets as widgets\nfrom IPython.display import display, HTML, Javascript\n\n# Output widget for rendering the D3.js visualization\noutput = widgets.Output()\n\n# Inject initial HTML & D3.js\nhtml_code = \"\"\"\n&lt;div id=\"d3-container\"&gt;&lt;/div&gt;\n&lt;script src=\"https://d3js.org/d3.v7.min.js\"&gt;&lt;/script&gt;\n&lt;script&gt;\n    var svg = d3.select(\"#d3-container\")\n                .append(\"svg\")\n                .attr(\"width\", 400)\n                .attr(\"height\", 200);\n\n    var circle = svg.append(\"circle\")\n                    .attr(\"cx\", 200)\n                    .attr(\"cy\", 100)\n                    .attr(\"r\", 50)\n                    .style(\"fill\", \"blue\");\n\n    // Define function to update the circle's radius\n    window.updateD3 = function(value) {\n        circle.transition().duration(300).attr(\"r\", value);\n    };\n&lt;/script&gt;\n\"\"\"\nwith output:\n    display(HTML(html_code))\n\n# Create slider widget\nslider = widgets.IntSlider(value=50, min=10, max=100, step=1, description=\"Radius\")\n\n# Define function to update JavaScript dynamically\ndef update_circle(change):\n    js_code = f\"window.updateD3({change['new']});\"\n    display(Javascript(js_code))\n\n# Attach slider event listener\nslider.observe(update_circle, names=\"value\")\n\n# Display components\ndisplay(output, slider)"
   },
   {
-    "objectID": "macroeconomics.html#corso-introduttivo-di-macroeconomia-con-python",
-    "href": "macroeconomics.html#corso-introduttivo-di-macroeconomia-con-python",
-    "title": "Macroeconomics",
-    "section": "Corso introduttivo di Macroeconomia con Python",
-    "text": "Corso introduttivo di Macroeconomia con Python\n\nA series of lectures on the principles of macroeconomics in italian\n\nLe variabili macroeconomiche\nA notebook exploring macroeconomic variables and their applications.\nLa curva di Phillips\nA notebook exploring the relationship between inflation and unemployment\nLa legge di Okun\nA notebook diving into the relationship between unemployment and output\nLa regola di Taylor\nA notebook showing a practical application of the Taylor Rule\nIl modello IS-TR\nTools to experiment and interact with the IS-TR model"
-  },
-  {
-    "objectID": "data-analysis.html",
-    "href": "data-analysis.html",
-    "title": "Data Analysis",
+    "objectID": "notebooks/I mercati finanziari.html#introduzione",
+    "href": "notebooks/I mercati finanziari.html#introduzione",
+    "title": "I mercati finanziari",
     "section": "",
-    "text": "This section provides a collection of resources on data analysis, including notebooks and practical insights drawn from my professional experience."
+    "text": "import ipywidgets as widgets\nfrom IPython.display import display, HTML, Javascript\n\n# Output widget for rendering the D3.js visualization\noutput = widgets.Output()\n\n# Inject initial HTML & D3.js\nhtml_code = \"\"\"\n&lt;div id=\"d3-container\"&gt;&lt;/div&gt;\n&lt;script src=\"https://d3js.org/d3.v7.min.js\"&gt;&lt;/script&gt;\n&lt;script&gt;\n    var svg = d3.select(\"#d3-container\")\n                .append(\"svg\")\n                .attr(\"width\", 400)\n                .attr(\"height\", 200);\n\n    var circle = svg.append(\"circle\")\n                    .attr(\"cx\", 200)\n                    .attr(\"cy\", 100)\n                    .attr(\"r\", 50)\n                    .style(\"fill\", \"blue\");\n\n    // Define function to update the circle's radius\n    window.updateD3 = function(value) {\n        circle.transition().duration(300).attr(\"r\", value);\n    };\n&lt;/script&gt;\n\"\"\"\nwith output:\n    display(HTML(html_code))\n\n# Create slider widget\nslider = widgets.IntSlider(value=50, min=10, max=100, step=1, description=\"Radius\")\n\n# Define function to update JavaScript dynamically\ndef update_circle(change):\n    js_code = f\"window.updateD3({change['new']});\"\n    display(Javascript(js_code))\n\n# Attach slider event listener\nslider.observe(update_circle, names=\"value\")\n\n# Display components\ndisplay(output, slider)"
   },
   {
-    "objectID": "data-analysis.html#marketing",
-    "href": "data-analysis.html#marketing",
-    "title": "Data Analysis",
-    "section": "Marketing",
-    "text": "Marketing\n\nUsers Cohorts Analysis\nUnderstanding user behavior over time is crucial for any business, especially in fast-growing startups where data-driven decisions can define success. One of the most effective ways to analyze retention engagement, and growth is through cohort analysis."
-  },
-  {
-    "objectID": "cv.html",
-    "href": "cv.html",
-    "title": "CV",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Marco Bernardini",
     "section": "",
-    "text": "BSc in Economics - Graduated with 110/110 cum laude"
+    "text": "Linkedin\n  \n  \n    \n     Github\n  \n\n  \n  \nHi, I’m Marco, a macroeconomics researcher with a passion for data, math, and programming. I am currently working as a consultant, helping banks and insurance companies develop insightful ML and AI tools. When I’m not diving into data, you’ll find me enjoying endurance sports, mountaineering, or spending quality time with my two poodles, Joyce and Leyla.\n\n\n\n\nMPhil in Economics\n\n\n\nBSc in Economics\n\n\n\n\n\n\nFinancial Services Consultant\n\n\n\nData Analytics & BI Lead"
   },
   {
-    "objectID": "cv.html#education",
-    "href": "cv.html#education",
-    "title": "CV",
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Marco Bernardini",
     "section": "",
-    "text": "BSc in Economics - Graduated with 110/110 cum laude"
+    "text": "MPhil in Economics\n\n\n\nBSc in Economics"
   },
   {
-    "objectID": "cv.html#work-experience",
-    "href": "cv.html#work-experience",
-    "title": "CV",
-    "section": "Work Experience",
-    "text": "Work Experience\n\nLeonardo Assicurazioni, Milan\nLeonardo Assicurazioni is a leading insurance distributor with a robust network of over 400 consultants based in Milan. After three years in technical roles, I founded and led the company’s data analytics office for five years, driving key insights and innovations.\n\nData Analyst\n\nLed and trained a team of three, ensuring the successful delivery of key data projects that enhanced business operations and decision-making.\nConsolidated and structured raw data from multiple sources and formats (SQL, JSON, legacy systems).\nIncreased revenue by developing unsupervised clustering models for client segmentation and supervised classification models (KNN, Decision Tree, Logistic Regression) to optimize sales campaign efficiency.\nReduced costs by building classification models to prevent churn and insolvencies and collaborating with the quality control department to develop fraud-prevention models.\nWorked with HR to design and analyze employee surveys, extracting insights and developing predictive models to reduce turnover.\nConducted in-depth sales data analysis using Python, generating actionable insights and presenting findings with Matplotlib visualizations.\nBuilt over 50 Power BI dashboards from scratch in close collaboration with top management to support decision-making.\nDeveloped interactive web-based data visualizations with D3.js, allowing stakeholders to explore complex datasets intuitively on portable devices.\nCreated structured reports and presentations in Excel and PowerPoint to effectively communicate insights to senior leadership.\nServed as a translator in key meetings with foreign investors and presented at large conferences.\nOrganized and monitored sales competitions in close collaboration with the sales director.\nAutomated key processes by working with the IT team to develop custom VBA applications, significantly reducing manual effort and improving efficiency.\n\n\n\nUnderwriter and Sales Support Specialist\n\nManaged back-office and control activities, ensuring efficient operations\nStreamlined administrative workflows, reducing processing times and improving efficiency\nGained deep knowledge of insurance products and the market through one year of experience in the underwriting office."
-  },
-  {
-    "objectID": "cv.html#certificates",
-    "href": "cv.html#certificates",
-    "title": "CV",
-    "section": "Certificates",
-    "text": "Certificates\n\nGRE\n\n\n\nOverall 336\n\n\n\n\nQuant 170\n\n\n\n\nVerbal 166\n\n\n\n\n\nIELTS\n\n\n\nOverall 8/9\n\n\n\n\nReading 9/9\n\n\n\n\nListening 9/9\n\n\n\n\nWriting 7.5/9\n\n\n\n\nSpeaking 7/9"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About Me",
+    "objectID": "index.html#experience",
+    "href": "index.html#experience",
+    "title": "Marco Bernardini",
     "section": "",
-    "text": "&lt;h1&gt;Your Name&lt;/h1&gt;\n&lt;p&gt;I'm a macroeconomics researcher with a passion for data, finance, and programming. Currently pursuing my MSc at LSE, I explore economic crises, nonlinear models, and financial stability. I also enjoy endurance sports and mountaineering.&lt;/p&gt;"
+    "text": "Financial Services Consultant\n\n\n\nData Analytics & BI Lead"
+  },
+  {
+    "objectID": "D3/Mundell-Fleming.html",
+    "href": "D3/Mundell-Fleming.html",
+    "title": "Il modello Mundell-Fleming",
+    "section": "",
+    "text": "Il modello Mundell-Fleming fu introdotto per estendere i risultati del modello IS-TR ad una piccola economia aperta, ovvero un’economia in cui non ci siano limitazioni agli scambi commerciali e finanziari con l’estero. Inotrducendo il commercio internazionale di attività finanziare, infatti, i risultati visti fin’ora cambiano considerevolmente. Particolare importanza ha qui il regime di tasso di cambio adottato dall’economia oggetto di studio.\nIn particolare, verranno considerati:\n- Il regime di cambi fissi, dove la banca centrale si impegna a manetenere fisso un certo valore del tasso di cambio nominale, di solito nei confronti del Dollaro.\n- Il regime di cambi flessibili, dove invece i tassi di cambio sono liberi di variare.\nSi partirà dunque dall’analisi delle principali conseguenze dell’apertura ai flussi finanziari internazionali, per entrare poi nello specifico del modello per le due tipologie di economia elencate."
+  },
+  {
+    "objectID": "D3/Mundell-Fleming.html#introduzione",
+    "href": "D3/Mundell-Fleming.html#introduzione",
+    "title": "Il modello Mundell-Fleming",
+    "section": "",
+    "text": "Il modello Mundell-Fleming fu introdotto per estendere i risultati del modello IS-TR ad una piccola economia aperta, ovvero un’economia in cui non ci siano limitazioni agli scambi commerciali e finanziari con l’estero. Inotrducendo il commercio internazionale di attività finanziare, infatti, i risultati visti fin’ora cambiano considerevolmente. Particolare importanza ha qui il regime di tasso di cambio adottato dall’economia oggetto di studio.\nIn particolare, verranno considerati:\n- Il regime di cambi fissi, dove la banca centrale si impegna a manetenere fisso un certo valore del tasso di cambio nominale, di solito nei confronti del Dollaro.\n- Il regime di cambi flessibili, dove invece i tassi di cambio sono liberi di variare.\nSi partirà dunque dall’analisi delle principali conseguenze dell’apertura ai flussi finanziari internazionali, per entrare poi nello specifico del modello per le due tipologie di economia elencate."
+  },
+  {
+    "objectID": "D3/Mundell-Fleming.html#la-parità-dei-tassi-di-interesse-e-la-retta-ifm",
+    "href": "D3/Mundell-Fleming.html#la-parità-dei-tassi-di-interesse-e-la-retta-ifm",
+    "title": "Il modello Mundell-Fleming",
+    "section": "La parità dei tassi di interesse e la retta IFM",
+    "text": "La parità dei tassi di interesse e la retta IFM\nLa regola di parità dei tassi di interesse afferma che, in un mercato aperto e finanziariamente integrato, il livello di attività simili non possa divergere sistematicamente a livello internazionale, nemmeno nel breve periodo. Questa viene vista come una condizione di equilibrio dei mercati internazionali.\nPer capire come mai, si può far riferimento ad un semplice esercizio di arbitraggio. Esulando per un attimo dagli aspetti legati alle variazioni del tasso di cambio e ai bid-ask spread, si chiamino \\(i\\) il tasso di interesse interno e \\(i^*\\) il tasso di interesse internazionale. Si supponga che \\(i^*&gt;i\\): in questo caso prendendo a prestito nell’economia interna e investendo nell’economia internazionale si avrebbe un sicuro profitto. Si avrebbe quindi una istantaneo incremento della domanda di moneta in valuta nazionale, spingendo \\(i\\) verso \\(i^*\\). Il movimento opposto si avrebbe qualora \\(i&gt;i^*\\).\nLa condizione di parità dei tassi di interesse è rappresentata dalla retta dei mercati finanziari internazionali, la retta IFM.\n\n\n\nMercato Monetario\n\n\n\n\n\n\n\n\nVariabili:\n\n Δi Reset"
+  },
+  {
+    "objectID": "D3/Mundell-Fleming.html#il-modello-in-un-regime-di-cambi-fissi",
+    "href": "D3/Mundell-Fleming.html#il-modello-in-un-regime-di-cambi-fissi",
+    "title": "Il modello Mundell-Fleming",
+    "section": "Il modello in un regime di cambi fissi",
+    "text": "Il modello in un regime di cambi fissi\nIn regime di cambi fissi, la banca centrale si impegna a mantenere ancorata la propria valuta in riferimento ad una valuta estera. Per raggiungere questo obiettivo, questa crea un mercato per la propria valuta, impiegando passività ed attività sul mercato finanziario. Per impedire l’apprezzamento della valuta nazionale, indebolirà la propria valuta, aumentando l’offerta di moneta. Al contrario, per rafforzare la propria valuta la banca centrale può vendere attività finanziarie denominate in valuta estera, per riacquistare la propria valuta.\nEmerge quindi come la banca centrale perda il controllo sul tasso di interesse, che viene quindi determinato dal tasso di interesse internazionale. Infatti, la banca deve variare l’offerta di moneta per mantenere fisso il tasso di cambio ed eventuali variazioni tese a modificare il tasso di interesse trascinerebbero con sè variazioni del tasso di cambio.\n\n\n\nMercato Monetario\n\n\n\n\nApprezzamento Valuta\n\n\n\n\nVariabili:\n\n Δi"
   },
   {
     "objectID": "D3/IS-TR.html",
@@ -172,35 +172,105 @@
     "href": "D3/IS-TR.html#la-curva-is",
     "title": "Il modello IS-TR",
     "section": "La curva IS",
-    "text": "La curva IS\nLa curva IS rappresenta le combinazioni del tasso di interesse nominale \\(i\\) (si ricorda che nel breve periodo \\(\\pi \\approx 0\\) e \\(r \\approx i\\)) e del PIL \\(Y\\) che sono coerenti con l’equilibrio nel mercato dei beni.\nNella seguente rappresentazione, è possibile interagire modificando i valori delle variabili esogene. Inoltre, è consentito variare \\(i\\) ma non \\(Y\\), in quanto variazioni del prodotto porterebbero temporaneamente nelle aree di eccesso di domanda o di offerta, riassorbite nel breve periodo. Inoltre, non è possibile interagire con le determinanti di \\(\\epsilon\\) - \\(P\\) e \\(P^*\\), in quanto ciò contraddirebbe l’ipotesi 1.\n\n\n\n\n\n\nVariabili:\n\n Δy\n Δr\n ΔT\n ΔG\n ΔΩ\n Δq\n ΔY*\n Δε"
+    "text": "La curva IS\nLa curva IS rappresenta le combinazioni del tasso di interesse nominale \\(i\\) (si ricorda che nel breve periodo \\(\\pi \\approx 0\\) e \\(r \\approx i\\)) e del PIL \\(Y\\) che sono coerenti con l’equilibrio nel mercato dei beni.\nNella seguente rappresentazione, è possibile interagire modificando i valori delle variabili esogene. Inoltre, è consentito variare \\(i\\) ma non \\(Y\\), in quanto variazioni del prodotto porterebbero temporaneamente nelle aree di eccesso di domanda o di offerta, riassorbite nel breve periodo. Inoltre, non è possibile interagire con le determinanti di \\(\\epsilon\\) - \\(P\\) e \\(P^*\\), in quanto ciò contraddirebbe l’ipotesi 1.\n\n\n\nCurva IS\n\n\n\n\nVariabili:\n\n Δy\n Δr\n ΔT\n ΔG\n ΔΩ\n Δq\n ΔY*\n Δε"
   },
   {
     "objectID": "D3/IS-TR.html#la-curva-tr",
     "href": "D3/IS-TR.html#la-curva-tr",
     "title": "Il modello IS-TR",
     "section": "La curva TR",
-    "text": "La curva TR\nLa curva TR (Taylor Rule) individua i livelli di PIL e tasso di interesse che individuano l’equilibrio sul mercato monetario. Si è visto in particolare come la regola di Taylor sia in grado di approssimare fedelmente gli interventi della banca centrale, tramite la seguente equazione: \\[\n    i = \\bar{i} + \\alpha\\left(\\pi-\\bar{\\pi}\\right) + \\beta y\n\\] dove \\(\\alpha\\) e \\(\\beta\\) rappresentano l’importanza attribuita dalla banca centrale agli scostamenti dell’inflazione dall’ inflazione target \\(\\bar{\\pi}\\) e del PIL \\(Y\\) dal suo livello naturale \\(Y^n\\), relazione catturata dall’output gap \\(y\\). \\(\\bar{i}\\) rappresenta il tasso di interesse naturale che si otterrebbe qualora \\(y=0\\) e \\(\\pi=\\bar{\\pi}\\).\nImportante notare che nel breve periodo, per l’ipotesi iniziale la regola si riduce a: \\[\n    i = \\bar{i} + \\beta y\n\\] Da questa formula derivano due osservazioni fondamentali:\n\nA differenza del mercato dei beni, l’economia non può qui mai trovarsi fuori dalla curva TR. Per definizione, infatti, la banca centrale non sceglierà punti che non siano coerenti con la regola adottata.\n\nQuando \\(y=0\\), \\(i=\\bar{i}\\) per ovvi motivi.\n\n\n\n\n\n\n\nVariabili:\n\n y\n Δβ\n Δibar"
+    "text": "La curva TR\nLa curva TR (Taylor Rule) individua i livelli di PIL e tasso di interesse che individuano l’equilibrio sul mercato monetario. Si è visto in particolare come la regola di Taylor sia in grado di approssimare fedelmente gli interventi della banca centrale, tramite la seguente equazione: \\[\n    i = \\bar{i} + \\alpha\\left(\\pi-\\bar{\\pi}\\right) + \\beta y\n\\] dove \\(\\alpha\\) e \\(\\beta\\) rappresentano l’importanza attribuita dalla banca centrale agli scostamenti dell’inflazione dall’ inflazione target \\(\\bar{\\pi}\\) e del PIL \\(Y\\) dal suo livello naturale \\(Y^n\\), relazione catturata dall’output gap \\(y\\). \\(\\bar{i}\\) rappresenta il tasso di interesse naturale che si otterrebbe qualora \\(y=0\\) e \\(\\pi=\\bar{\\pi}\\).\nImportante notare che nel breve periodo, per l’ipotesi iniziale la regola si riduce a: \\[\n    i = \\bar{i} + \\beta y\n\\] Da questa formula derivano due osservazioni fondamentali:\n\nA differenza del mercato dei beni, l’economia non può qui mai trovarsi fuori dalla curva TR. Per definizione, infatti, la banca centrale non sceglierà punti che non siano coerenti con la regola adottata.\n\nQuando \\(y=0\\), \\(i=\\bar{i}\\) per ovvi motivi.\n\n\n\n\nCurva TR\n\n\n\n\nVariabili:\n\n y\n Δβ\n Δibar"
   },
   {
     "objectID": "D3/IS-TR.html#il-modello-is-tr",
     "href": "D3/IS-TR.html#il-modello-is-tr",
     "title": "Il modello IS-TR",
     "section": "Il modello IS-TR",
-    "text": "Il modello IS-TR\nNel seguente grafico è possibile replicare l’effetto di shock reali e monetari secondo il modello IS-TR. Attenzione però: i risultati sono validi unicamente dal punto di vista qualitativo.\n\n\n\n\n\n\nVariabili:\n\n ΔT\n ΔG\n ΔΩ\n Δq\n ΔY*\n Δε\n Δβ\n Δibar"
+    "text": "Il modello IS-TR\nNel seguente grafico è possibile replicare l’effetto di shock reali e monetari secondo il modello IS-TR. Attenzione però: i risultati sono validi unicamente dal punto di vista qualitativo.\n\n\n\nModello IS-TR\n\n\n\n\nVariabili:\n\n ΔT\n ΔG\n ΔΩ\n Δq\n ΔY*\n Δε\n Δβ\n Δibar"
   },
   {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Marco Bernardini",
-    "section": "Education",
-    "text": "Education\nUniversità Bicocca, Milano (IT)\nBSc in Economics"
+    "objectID": "articles.html",
+    "href": "articles.html",
+    "title": "Articles",
+    "section": "",
+    "text": "This section presents some of my original work, such as my dissertation (in Italian) and a selection of shorter pieces.\n- Dissertation\n- Behavioural Macro"
   },
   {
-    "objectID": "index.html#experience",
-    "href": "index.html#experience",
-    "title": "Marco Bernardini",
-    "section": "Experience",
-    "text": "Experience\nSDG Group, Milano (IT)\nConsultant\nLeonardo Assicurazioni, Milano (IT)\nLead Data Analyst"
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "CV",
+    "section": "",
+    "text": "MPhil in Economics - Graduation year: 2027\n\n\n\nBSc in Economics - Graduated with 110/110 cum laude"
+  },
+  {
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "CV",
+    "section": "",
+    "text": "MPhil in Economics - Graduation year: 2027\n\n\n\nBSc in Economics - Graduated with 110/110 cum laude"
+  },
+  {
+    "objectID": "cv.html#work-experience",
+    "href": "cv.html#work-experience",
+    "title": "CV",
+    "section": "Work Experience",
+    "text": "Work Experience\n\nSDG Group Italy\n\nFinancial Services Consultant\n\nServed as Project Manager for a high-impact data solution for a major banking institution, overseeing delivery of secure data entry systems, ETL pipelines for structured ingestion and executive dashboards tailored for bank leadership. Ensured full project delivery on time and within scope, coordinating a cross-functional team of engineers and stakeholders.\nDesigned and implemented a fully operational custom CRM platform to manage the business unit’s pipeline, client segmentation, and opportunity tracking (demo with anonymized data available here)\nLed the redefinition of the company’s insurance vertical value proposition, working across business units to align offerings and strategy.\nCo-developed client pitch decks and strategic proposals in collaboration with unit directors; actively participated in client meetings and pitch sessions, contributing to 3 successful deal closures.\n\n\n\n\nLeonardo Assicurazioni\nLeonardo Assicurazioni is a leading insurance distributor with a robust network of over 400 consultants based in Milan. After three years in technical roles, I founded and led the company’s data analytics office for five years. I scaled the function from a solo effort to a three-analyst team by 2023, providing direct management and training.\n\nData Analytics & BI Lead\n\nBuilt core reporting tools in Python and 50+ PBI dashboards used by 500+ salespeople and 100+ staff.\nProposed and implemented KPIs across multiple departments, standardizing performance tracking and enabling data-driven decision-making at scale.\nDeveloped predictive models (OLS, KNN, Logistic Regression, Decision Tree) for client segmentation, campaign optimization, churn prediction, and insolvency risk analysis.\nConsolidated messy data (SQL, JSON, legacy systems) into clean, scalable pipelines, dramatically reducing ad hoc reporting time.\n\n\n\nUnderwriter and Sales Support Specialist\n\nSupported policy underwriting, risk assessments, and sales processes.\nIdentified workflow inefficiencies that later shaped the company’s BI strategy.\nActed as liaison between sales team and underwriting team, building cross-functional knowledge.\nDelivered insight reports manually before automated systems were in place."
+  },
+  {
+    "objectID": "cv.html#certificates",
+    "href": "cv.html#certificates",
+    "title": "CV",
+    "section": "Certificates",
+    "text": "Certificates\n\nGRE\n\n\n\n\nOverall 336\n\n\n\n\nQuant 170\n\n\n\n\nVerbal 166\n\n\n\n\n\n\nIELTS\n\n\n\n\nOverall 8/9\n\n\n\n\nReading 9/9\n\n\n\n\nListening 9/9\n\n\n\n\nWriting 7.5/9\n\n\n\n\nSpeaking 7/9"
+  },
+  {
+    "objectID": "D3/money.html",
+    "href": "D3/money.html",
+    "title": "Il mercato della moneta",
+    "section": "",
+    "text": "Moneta e tassi di interesse hanno un ruolo centrale per la loro capacità di influenzare l’economia reale. L’obiettivo di questa sezione sarà evidenziare le determinanti della domanda di moneta e del tasso di interesse, e derivare la relazione esistente tra offerta di moneta e tassi. In una lezione successiva verranno approfondite tematiche più strettamente legate ai titoli.\nInnanzitutto, occorre dividere la moneta in circolante, ovvero la moneta correntemente utilizzata per le transazioni, e depositi bancari, ovvero le passività delle banche commerciali. Si individuano poi quattro aggregati monetari:\n\nM0 (base monetaria) = circolante + riserve delle banche commerciali\n\nM1 = circolante + depositi a vista\n\nM2 = M1 + depositi a tempo non vincolati\n\nM3 = M2 + depositi vincolati + conti presso istituti non bancari\n\nNella presente sezione, conviene pensare alla moneta nella sua formulazione M0."
+  },
+  {
+    "objectID": "D3/money.html#introduzione",
+    "href": "D3/money.html#introduzione",
+    "title": "Il mercato della moneta",
+    "section": "",
+    "text": "Moneta e tassi di interesse hanno un ruolo centrale per la loro capacità di influenzare l’economia reale. L’obiettivo di questa sezione sarà evidenziare le determinanti della domanda di moneta e del tasso di interesse, e derivare la relazione esistente tra offerta di moneta e tassi. In una lezione successiva verranno approfondite tematiche più strettamente legate ai titoli.\nInnanzitutto, occorre dividere la moneta in circolante, ovvero la moneta correntemente utilizzata per le transazioni, e depositi bancari, ovvero le passività delle banche commerciali. Si individuano poi quattro aggregati monetari:\n\nM0 (base monetaria) = circolante + riserve delle banche commerciali\n\nM1 = circolante + depositi a vista\n\nM2 = M1 + depositi a tempo non vincolati\n\nM3 = M2 + depositi vincolati + conti presso istituti non bancari\n\nNella presente sezione, conviene pensare alla moneta nella sua formulazione M0."
+  },
+  {
+    "objectID": "D3/money.html#la-domanda-di-moneta",
+    "href": "D3/money.html#la-domanda-di-moneta",
+    "title": "Il mercato della moneta",
+    "section": "La domanda di moneta",
+    "text": "La domanda di moneta\nLa domanda di moneta dipende essenzialmente da due parametri:\n\nVolume e frequenza delle transazioni\n\nTasso di interesse sui titoli\n\nL’intuizione è che a volumi (livelli di prodotto) maggiori, corrisponderà una crescente domanda di moneta; a tassi di interesse maggiori corrisponderà una minore domanda, in quanto gli agenti economici 1. preferiranno detenere la propria ricchezza in titoli piuttosto che in moneta e 2. diminuiranno gli investimenti visto il maggior costo del capitale\nSi può quindi scrivere che la domanda di moneta \\(M^d\\) è data da:\n\\[\n    M^d = \\mathcal{f}\\left(i\\right)PY\n\\]\nChiamando \\(M\\) l’offerta di moneta, l’equilibrio nel mercato della moneta è dato da:\n\\[\n    M = M^d = \\mathcal{f}\\left(i\\right)PY\n\\]\nQuesto permette di individuare il tasso di interesse di equilibrio, ovvero il tasso in grado di eguagliare la domanda di moneta (che è funzione di \\(i\\)) e l’offerta di moneta, determinata dalla banca centrale, per valori costanti di \\(PY\\).\nSi può utilizzare il seguente grafico interattivo per valutare gli effetti di variazioni del prodotto nominale e dell’offerta di moneta sul tasso di interesse.\n\n\n\nMercato della moneta\n\n\n\n\nVariabili:\n\n ΔPY\n ΔM"
+  },
+  {
+    "objectID": "data-analysis.html",
+    "href": "data-analysis.html",
+    "title": "Data Analysis",
+    "section": "",
+    "text": "This section provides a collection of resources on data analysis, including notebooks and practical insights drawn from my professional experience."
+  },
+  {
+    "objectID": "data-analysis.html#marketing",
+    "href": "data-analysis.html#marketing",
+    "title": "Data Analysis",
+    "section": "Marketing",
+    "text": "Marketing\n\nUsers Cohorts Analysis\nUnderstanding user behavior over time is crucial for any business, especially in fast-growing startups where data-driven decisions can define success. One of the most effective ways to analyze retention engagement, and growth is through cohort analysis."
+  },
+  {
+    "objectID": "macroeconomics.html",
+    "href": "macroeconomics.html",
+    "title": "Macroeconomics",
+    "section": "",
+    "text": "This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources."
+  },
+  {
+    "objectID": "macroeconomics.html#corso-introduttivo-di-macroeconomia-con-python",
+    "href": "macroeconomics.html#corso-introduttivo-di-macroeconomia-con-python",
+    "title": "Macroeconomics",
+    "section": "Corso introduttivo di Macroeconomia con Python",
+    "text": "Corso introduttivo di Macroeconomia con Python\n\nA series of lectures on the principles of macroeconomics in italian\n\nLe variabili macroeconomiche\nA notebook exploring macroeconomic variables and their applications.\nLa curva di Phillips\nA notebook exploring the relationship between inflation and unemployment\nLa legge di Okun\nA notebook diving into the relationship between unemployment and output\nIl mercato della moneta\nFinancial markets 1 - money\nLa regola di Taylor\nA notebook showing a practical application of the Taylor Rule\nIl modello IS-TR\nTools to experiment and interact with the IS-TR model\nIl modello Mundell-Fleming (work in progress)\nTools to experiment and interact with the Mundell-Fleming model"
   },
   {
     "objectID": "notebooks/Il modello AS-AD.html",

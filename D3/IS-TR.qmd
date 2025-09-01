@@ -1,0 +1,721 @@
+---
+title: "Il modello IS-TR"
+format: html
+---
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+## Introduzione
+
+Il modello IS-TR viene utilizzato per rappresentare l'equilibrio economico di breve periodo dal punto di vista qualitativo.   
+L'ipotesi di base, proveniente da Keynes, è che nel breve periodo il livello dei prezzi sia "vischioso" (costante). In periodi di normale attività economica, in assenza di squilibri dal punto di vista geopolitico, si tratta di un'ipotesi ragionevole e supportata dai dati. In questo modello sono presenti due mercati, quello dei beni (e servizi) e quello della moneta.  
+La seconda ipotesi del modello è che i mercati raggiungano l'equilibrio, e lo raggiungano simultaneamente.  
+Si partirà quindi dall'analisi del mercato dei beni, presentando la curva IS, per passare successivamente al mercato della moneta e all'analisi della regola di Taylor.  
+
+## La domanda aggregata
+
+Si è vista nella prima sezione l'identità contabile fondamentale:
+$$
+    Y=C+I+G+NX
+$$
+dove il termine di sinistra rappresenza l'offerta aggregata, mentre il termine di destra riporta le componenti della domanda aggregata. Piuttosto che ad un concetto contabile, conviene pensare a questa uguaglianza come ad una condizione di equilibrio: perchè il mercato dei beni sia in equilibrio, è necessario che la domanda e l'offerta si incontrino. Nel framework Keynesiano di breve periodo, si può immaginare che l'offerta sia determinata dalla domanda, che a sua volta è determinata da forze esogene.  
+
+Si vedrà ora rapidamente quali siano le determinanti della domanda in questo modello semplificato.  
+
+- Il **consumo** delle famiglie $C$ è una funzione della ricchezza $\Omega$ e del reddito ante imposte, dove le imposte $T$ vengono trattate come esogene per semplicità. L'idea qui è semplicemente che maggiori disponibilità economiche producano maggiori consumi. In simboli: $C=\mathcal{C}\left(Y-\bar{T},\Omega\right)$  
+- L'**investimento** delle imprese dipende dal tasso di interesse reale $r$ e dalla $q$ di Tobin, un parametro che cattura le aspettative degli imprenditori. Chiaramente, quando il costo del capitale è maggiore, gli investimenti diminuiranno, in periodi di tassi bassi questi aumenteranno. In simboli: $I=\mathcal{I}\left(r,q\right)$  
+- Le **importazioni** dipendono dalla domanda interna $C+I+\bar{G}$ e dal tasso di cambio reale $\epsilon$. Una spesa interna maggiore comporterà, in media, maggiori import, e un apprezzamento del tasso di cambio reale renderà l'acquisto di beni esteri meno oneroso, incoraggiando le importazioni (e sfavorendo le esportazioni). Si ha quindi $IM=\mathcal{IM}\left(C+I+\bar{G},\epsilon\right)$  
+- In maniera simile, le **esportazioni** sono funzione della domanda estera ($A^*=C^*+I^*+G^*$) e del tasso di cambio reale: $EX=\mathcal{EX}\left(A^*,\epsilon\right)$  
+- Semplificando le due equazioni precedenti, notando che $A \propto Y$ e $\bar{A^*} \propto Y^*$, si ottiene la funzione per le **esportazioni nette**: $NX=\mathcal{NX}\left(Y,Y^*,\epsilon\right)$. Come si può immaginare, un maggiore prodotto interno riduce le esportazioni nettem così come un apprezzamento del tasso di cambio reale.
+
+Concludendo, si riprende ora l'equazione iniziale, indicando le componenti della domanda:
+$$
+    Y = ZZ = \mathcal{C}\left(Y-\bar{T},\Omega\right) + \mathcal{I}\left(r,q\right) + \mathcal{NX}\left(Y,Y^*,\epsilon\right)
+$$
+dove il PIL che soddisfa la precedente equazione è detto PIL di equilibrio e $ZZ$ indica la **domanda desiderata**.  
+Conviene concentrarsi su due aspetti prima di proseguire:  
+
+1. C'è una apparente contraddizione nella precedente funzione, in quando $Y$ interviene sia aumentando il consumo che riducendo le esportazioni nette. I dati hanno dimostrato che un incremento $\Delta Y$ produce degli incrementi $|\Delta C| > |\Delta NX|$ quindi $\Delta Y >0 \Rightarrow \Delta ZZ >0$  
+2. Nel breve periodo variazioni delel variabili esogene producono variazioni della domanda tali per cui $ZZ_{t_1}<ZZ_{t_0}$ e $ZZ_{t_1}<Y_{t_1}$. In questo caso, dal momento che la produzione è maggiore della domanda, le aziende inizieranno ad accumulare merce invenduta come scorte di magazzino, per poi ridurre il livello della produzione fino a che questo non incontrerà la domanda desiderata. Il processo inverso si ottiene quando la domanda desiderata supererà la produzione attuale.  
+
+## La curva IS
+
+La curva IS rappresenta le combinazioni del tasso di interesse nominale $i$ (si ricorda che nel breve periodo $\pi \approx 0$ e $r \approx i$) e del PIL $Y$ che sono coerenti con l'equilibrio nel mercato dei beni.  
+Nella seguente rappresentazione, è possibile interagire modificando i valori delle variabili esogene. Inoltre, è consentito variare $i$ ma non $Y$, in quanto variazioni del prodotto porterebbero temporaneamente nelle aree di eccesso di domanda o di offerta, riassorbite nel breve periodo. Inoltre, non è possibile interagire con le determinanti di $\epsilon$ - $P$ e $P^*$, in quanto ciò contraddirebbe l'ipotesi 1.  
+
+<div id="wrapper">
+<div id="container1">
+<h3 class="slider-title">Curva IS</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+
+<input type="range" id="delta_y" min="-0.7" max="0.7" step="0.02" value="0" class="slider">
+<label for="Δy">Δy</label>
+
+<input type="range" id="delta_r" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δr">Δr</label>
+
+<input type="range" id="delta_T" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔT">ΔT</label>
+
+<input type="range" id="delta_G" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔG">ΔG</label>
+
+<input type="range" id="delta_O" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔΩ">ΔΩ</label>
+
+<input type="range" id="delta_q" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δq">Δq</label>
+
+<input type="range" id="delta_Ystar" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔY*">ΔY*</label>
+
+<input type="range" id="delta_e" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δε">Δε</label>
+
+</div>
+</div>
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 500;
+const height = 500;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const IS_ = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+let IS = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+let x_eq = 0
+let y_eq = 0
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IS_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the dynamic IS curve.
+const ISLine = svg.append("path")
+    .datum(IS)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(0)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("Y");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+svg.append("text")
+  .attr("x", x(-.5)) 
+  .attr("y", y(-.5))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "silver")
+  .style("font-size", "12px")
+  .text("ECCESSO DI DOMANDA");
+
+svg.append("text")
+  .attr("x", x(.5)) 
+  .attr("y", y(.5))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "silver")
+  .style("font-size", "12px")
+  .text("ECCESSO DI OFFERTA");
+
+// Function to update the IS curve when sliders change.
+function updateLine() {
+
+    let delta_y = parseFloat(document.getElementById("delta_y").value);
+    let delta_r = parseFloat(document.getElementById("delta_r").value);
+    let delta_T = parseFloat(document.getElementById("delta_T").value);
+    let delta_G = parseFloat(document.getElementById("delta_G").value);
+    let delta_O = parseFloat(document.getElementById("delta_O").value);
+    let delta_q = parseFloat(document.getElementById("delta_q").value);
+    let delta_Ystar = parseFloat(document.getElementById("delta_Ystar").value);
+    let delta_e = parseFloat(document.getElementById("delta_e").value);
+    let exog_values = -delta_T + delta_G + delta_O + delta_q + delta_Ystar - delta_e;
+
+    // Update IS curve data
+    IS = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: exog_values - d }));
+
+    // Update the line with new data
+    ISLine.datum(IS)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = - delta_r
+    y_eq = exog_values - x_eq
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq+delta_y))
+        .attr("cy", y(y_eq))
+
+
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+});
+
+const yslider = d3.select("#delta_y");
+yslider.on("change", function() {
+    let delta_r = parseFloat(document.getElementById("delta_r").value)
+    dot.transition()
+        .duration(500)
+        .attr("cx", x(- delta_r))
+    yslider.property("value", 0);
+});
+
+// Append the SVG element.
+document.getElementById("container1").appendChild(svg.node());
+
+</script>
+
+
+## La curva TR
+
+La curva TR (Taylor Rule) individua i livelli di PIL e tasso di interesse che individuano l'equilibrio sul mercato monetario. Si è visto in particolare come la regola di Taylor sia in grado di approssimare fedelmente gli interventi della banca centrale, tramite la seguente equazione:
+$$
+    i = \bar{i} + \alpha\left(\pi-\bar{\pi}\right) + \beta y
+$$
+dove $\alpha$ e $\beta$ rappresentano l'importanza attribuita dalla banca centrale agli scostamenti dell'inflazione dall' inflazione target $\bar{\pi}$ e del PIL $Y$ dal suo livello naturale $Y^n$, relazione catturata dall'output gap $y$. $\bar{i}$ rappresenta il tasso di interesse naturale che si otterrebbe qualora $y=0$ e $\pi=\bar{\pi}$.  
+Importante notare che nel breve periodo, per l'ipotesi iniziale la regola si riduce a:
+$$
+    i = \bar{i} + \beta y
+$$
+Da questa formula derivano due osservazioni fondamentali:  
+
+1. A differenza del mercato dei beni, l'economia non può qui mai trovarsi fuori dalla curva TR. Per definizione, infatti, la banca centrale non sceglierà punti che non siano coerenti con la regola adottata.  
+2. Quando $y=0$, $i=\bar{i}$ per ovvi motivi.
+
+<div id="wrapper">
+<div id="container2">
+<h3 class="slider-title">Curva TR</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+
+<input type="range" id="y" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="y">y</label>
+
+<input type="range" id="delta_beta" min="-1" max="1" step="0.02" value="0" class="slider">
+<label for="Δβ">Δβ</label>
+
+<input type="range" id="delta_ibar" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δibar">Δibar</label>
+
+</div>
+</div>
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 500;
+const height = 500;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const TR_ = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: d }));
+let TR = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: d }));
+let x_eq = 0
+let y_eq = 0
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(TR_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the dynamic TR curve.
+const TRLine = svg.append("path")
+    .datum(TR)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(0)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("Y");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+// Function to update the TR curve when sliders change.
+function updateLine() {
+
+    let y_ = parseFloat(document.getElementById("y").value);
+    let delta_beta = parseFloat(document.getElementById("delta_beta").value);
+    let delta_ibar = parseFloat(document.getElementById("delta_ibar").value);
+
+    // Update TR curve data
+    TR = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: delta_ibar + ( 1 + delta_beta ) * d }));
+
+    // Update the line with new data
+    TRLine.datum(TR)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = y_
+    y_eq = delta_ibar + ( 1 + delta_beta ) * x_eq
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+       .attr("cy", y(y_eq))
+
+
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+});
+
+// Append the SVG element.
+document.getElementById("container2").appendChild(svg.node());
+
+</script>
+
+## Il modello IS-TR
+
+Nel seguente grafico è possibile replicare l'effetto di shock reali e monetari secondo il modello IS-TR. Attenzione però: i risultati sono validi unicamente dal punto di vista qualitativo.
+
+<div id="wrapper">
+<div id="container3">
+<h3 class="slider-title">Modello IS-TR</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+
+<input type="range" id="delta_T_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔT">ΔT</label>
+
+<input type="range" id="delta_G_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔG">ΔG</label>
+
+<input type="range" id="delta_O_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔΩ">ΔΩ</label>
+
+<input type="range" id="delta_q_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δq">Δq</label>
+
+<input type="range" id="delta_Ystar_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="ΔY*">ΔY*</label>
+
+<input type="range" id="delta_e_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δε">Δε</label>
+
+<input type="range" id="delta_beta_IS_TR" min="-1" max="1" step="0.02" value="0" class="slider">
+<label for="Δβ">Δβ</label>
+
+<input type="range" id="delta_ibar_IS_TR" min="-0.5" max="0.5" step="0.02" value="0" class="slider">
+<label for="Δibar">Δibar</label>
+
+</div>
+</div>
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 500;
+const height = 500;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const IS_ = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+let IS = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: -d }));
+const TR_ = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: d }));
+let TR = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: d }));
+let x_eq = 0
+let y_eq = 0
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IS_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the dynamic IS curve.
+const ISLine = svg.append("path")
+    .datum(IS)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append the original reference line.
+svg.append("path")
+    .datum(TR_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the dynamic TR curve.
+const TRLine = svg.append("path")
+    .datum(TR)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(0)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("Y");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+// Function to update the curves when sliders change.
+function updateLine() {
+    
+    let delta_T = parseFloat(document.getElementById("delta_T_IS_TR").value);
+    let delta_G = parseFloat(document.getElementById("delta_G_IS_TR").value);
+    let delta_O = parseFloat(document.getElementById("delta_O_IS_TR").value);
+    let delta_q = parseFloat(document.getElementById("delta_q_IS_TR").value);
+    let delta_Ystar = parseFloat(document.getElementById("delta_Ystar_IS_TR").value);
+    let delta_e = parseFloat(document.getElementById("delta_e_IS_TR").value);
+    let exog_values = -delta_T + delta_G + delta_O + delta_q + delta_Ystar - delta_e;
+    let delta_beta = parseFloat(document.getElementById("delta_beta_IS_TR").value);
+    let delta_ibar = parseFloat(document.getElementById("delta_ibar_IS_TR").value);
+
+    // Update IS curve data
+    IS = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: exog_values - d }));
+
+    // Update the line with new data
+    ISLine.datum(IS)
+        .attr("d", line);
+
+    // Update TR curve data
+    TR = d3.range(-0.8, 0.8, 0.02).map(d => ({ x: d, y: delta_ibar + ( 1 + delta_beta ) * d }));
+
+    // Update the line with new data
+    TRLine.datum(TR)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = ( exog_values - delta_ibar ) / ( 2 + delta_beta )
+    y_eq = ( exog_values + delta_beta * exog_values + delta_ibar ) / ( 2 + delta_beta )
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+});
+
+// Append the SVG element.
+document.getElementById("container3").appendChild(svg.node());
+
+</script>

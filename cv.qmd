@@ -1,0 +1,87 @@
+---
+title: "CV"
+format: html
+---
+
+## Education
+
+### University of Oxford
+MPhil in Economics - Graduation year: 2027
+
+### Università degli studi di Milano - Bicocca  
+BSc in Economics - Graduated with 110/110 cum laude  
+
+## Work Experience
+
+### SDG Group Italy
+#### Financial Services Consultant
+*  Served as Project Manager for a high-impact data solution for a major banking institution,
+overseeing delivery of secure data entry systems, ETL pipelines for structured ingestion and
+executive dashboards tailored for bank leadership. Ensured full project delivery on time and within
+scope, coordinating a cross-functional team of engineers and stakeholders.
+*  Designed and implemented a fully operational custom CRM platform to manage the business
+unit’s pipeline, client segmentation, and opportunity tracking (demo with anonymized data
+available [here](https://abc-demo-version-mb.vercel.app/))
+*  Led the redefinition of the company’s insurance vertical value proposition, working across
+business units to align offerings and strategy.
+*  Co-developed client pitch decks and strategic proposals in collaboration with unit directors;
+actively participated in client meetings and pitch sessions, contributing to 3 successful deal
+closures.
+
+### Leonardo Assicurazioni
+*Leonardo Assicurazioni is a leading insurance distributor with a robust network of over 400 consultants based in Milan. After three years in technical roles, I founded and led the company's data analytics office for five years. I scaled the function from a solo effort to a three-analyst team by 2023, providing direct management and training.*  
+
+#### Data Analytics & BI Lead
+*  Built core reporting tools in Python and 50+ PBI dashboards used by 500+ salespeople and
+100+ staff.
+*  Proposed and implemented KPIs across multiple departments, standardizing performance
+tracking and enabling data-driven decision-making at scale.
+*  Developed predictive models (OLS, KNN, Logistic Regression, Decision Tree) for client
+segmentation, campaign optimization, churn prediction, and insolvency risk analysis.
+*  Consolidated messy data (SQL, JSON, legacy systems) into clean, scalable pipelines,
+dramatically reducing ad hoc reporting time.
+
+#### Underwriter and Sales Support Specialist
+*  Supported policy underwriting, risk assessments, and sales processes.
+*  Identified workflow inefficiencies that later shaped the company’s BI strategy.
+*  Acted as liaison between sales team and underwriting team, building cross-functional
+knowledge.
+*  Delivered insight reports manually before automated systems were in place.
+
+## Certificates
+
+### GRE
+<div class="row">
+<div class="col-lg-12">
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 99%;">Overall 336</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%;">Quant 170</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 98%;">Verbal 166</div>
+</div>
+</div>
+</div>
+
+### IELTS
+<div class="row">
+<div class="col-lg-12">
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 89%;">Overall 8/9</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%;">Reading 9/9</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 100%;">Listening 9/9</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 83%;">Writing 7.5/9</div>
+</div>
+<div class="progress mb-3">
+<div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 78%;">Speaking 7/9</div>
+</div>
+</div>
+</div>

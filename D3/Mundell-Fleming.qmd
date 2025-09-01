@@ -1,0 +1,693 @@
+---
+title: "Il modello Mundell-Fleming"
+format: html
+---
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+## Introduzione
+
+Il modello Mundell-Fleming fu introdotto per estendere i risultati del modello IS-TR ad una piccola economia aperta, ovvero un'economia in cui non ci siano limitazioni agli scambi commerciali e finanziari con l'estero. Inotrducendo il commercio internazionale di attività finanziare, infatti, i risultati visti fin'ora cambiano considerevolmente. Particolare importanza ha qui il regime di tasso di cambio adottato dall'economia oggetto di studio.  
+In particolare, verranno considerati:  
+- Il regime di **cambi fissi**, dove la banca centrale si impegna a manetenere fisso un certo valore del tasso di cambio nominale, di solito nei confronti del Dollaro.  
+- Il regime di **cambi flessibili**, dove invece i tassi di cambio sono liberi di variare.  
+Si partirà dunque dall'analisi delle principali conseguenze dell'apertura ai flussi finanziari internazionali, per entrare poi nello specifico del modello per le due tipologie di economia elencate.
+
+## La parità dei tassi di interesse e la retta IFM
+
+La regola di parità dei tassi di interesse afferma che, in un mercato aperto e finanziariamente integrato, il livello di attività *simili* non possa divergere sistematicamente a livello internazionale, nemmeno nel breve periodo. Questa viene vista come una condizione di equilibrio dei mercati internazionali.  
+Per capire come mai, si può far riferimento ad un semplice esercizio di arbitraggio. Esulando per un attimo dagli aspetti legati alle variazioni del tasso di cambio e ai bid-ask spread, si chiamino $i$ il tasso di interesse interno e $i^*$ il tasso di interesse internazionale. Si supponga che $i^*>i$: in questo caso prendendo a prestito nell'economia interna e investendo nell'economia internazionale si avrebbe un sicuro profitto. Si avrebbe quindi una istantaneo incremento della domanda di moneta in valuta nazionale, spingendo $i$ verso $i^*$. Il movimento opposto si avrebbe qualora $i>i^*$.  
+La condizione di parità dei tassi di interesse è rappresentata dalla retta dei mercati finanziari internazionali, la retta IFM. 
+
+<div id="wrapper">
+<div style="padding-right:5px;" id="MD">
+<h3 class="slider-title">Mercato Monetario</h3>
+</div>
+<div style="padding-left:5px;" id="">
+<h3 class="slider-title"></h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+<input type="range" id="delta_i" min="-0.8" max="0.8" step="0.02" value="0" class="slider">
+<label for="delta_i">Δi</label>
+<button id="resetButton">Reset</button>
+</div>
+</div>
+
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 300;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const istar = 0
+const IFM_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+let IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+const MD_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+let x_eq = 0
+let y_eq = istar
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IFM_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic IFM curve.
+const IFMLine = svg.append("path")
+    .datum(IFM)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the original reference line.
+svg.append("path")
+    .datum(MD_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic MD curve.
+const MDLine = svg.append("path")
+    .datum(MD)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+const MLine = svg.append("path")
+    .datum(M_)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(-.8)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("M/P");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(-.8))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .style("font-weight", "bold")
+  .text("i*");
+
+// Function to update the MD curve when sliders change.
+function updateLine() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i").value);
+
+    // Update IFM curve data
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar + delta_i }));
+
+    // Update the line with new data
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    // Update M curve data
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: -delta_i, y: d }));
+
+    // Update the line with new data
+    MLine.datum(M_)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = - delta_i
+    y_eq = delta_i
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+function resetLine() {
+    let delta_i = parseFloat(document.getElementById("delta_i").value)
+
+    dot.transition()
+        .duration(1000)
+        .attr("cy", y(0))
+    
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: 0 }));
+    IFMLine.datum(IFM)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+
+    MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d - delta_i, y: -d}));
+    MDLine.datum(MD)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+    slider.addEventListener("change", resetLine);
+});
+
+const i_slider = d3.select("#delta_i");
+i_slider.on("change", function() {
+    i_slider.property("value", 0);
+});
+
+// Function to trigger D3 action (reset)
+function resetChart() {
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+    MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+    M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+    x_eq = 0
+    y_eq = istar
+
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    MLine.datum(M_)
+        .attr("d", line);
+
+    MDLine.datum(MD)
+        .attr("d", line)
+
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+// Add event listener to reset button
+d3.select("#resetButton").on("click", function() {
+    resetChart();
+});
+
+// Append the SVG element.
+document.getElementById("MD").appendChild(svg.node());
+
+</script>
+
+
+
+
+
+
+
+## Il modello in un regime di cambi fissi
+
+In regime di cambi fissi, la banca centrale  si impegna a mantenere ancorata la propria valuta in riferimento ad una valuta estera. Per raggiungere questo obiettivo, questa crea un mercato per la propria valuta, impiegando passività ed attività sul mercato finanziario. Per impedire l'apprezzamento della valuta nazionale, indebolirà la propria valuta, aumentando l'offerta di moneta. Al contrario, per rafforzare la propria valuta la banca centrale può vendere attività finanziarie denominate in valuta estera, per riacquistare la propria valuta.  
+Emerge quindi come la banca centrale perda il controllo sul tasso di interesse, che viene quindi determinato dal tasso di interesse internazionale. Infatti, la banca deve variare l'offerta di moneta per mantenere fisso il tasso di cambio ed eventuali variazioni tese a modificare il tasso di interesse trascinerebbero con sè variazioni del tasso di cambio.
+
+<div id="wrapper">
+<div style="padding-right:5px;" id="MD_fixed">
+<h3 class="slider-title">Mercato Monetario</h3>
+</div>
+<div style="padding-left:5px;" id="E_fixed">
+<h3 class="slider-title">Apprezzamento Valuta</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title">Variabili:</h3>
+<input type="range" id="delta_i_fixed" min="-0.8" max="0.8" step="0.02" value="0" class="slider">
+<label for="delta_i">Δi</label>
+</div>
+</div>
+
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 300;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const istar = 0
+const IFM_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+let IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+const MD_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+let x_eq = 0
+let y_eq = istar
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IFM_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic IFM curve.
+const IFMLine = svg.append("path")
+    .datum(IFM)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the original reference line.
+svg.append("path")
+    .datum(MD_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic MD curve.
+const MDLine = svg.append("path")
+    .datum(MD)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+const MLine = svg.append("path")
+    .datum(M_)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(-.8)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("M/P");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(-.8))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .style("font-weight", "bold")
+  .text("i*");
+
+// Function to update the MD curve when sliders change.
+function updateLine() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value);
+
+    // Update IFM curve data
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar + delta_i }));
+
+    // Update the line with new data
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    // Update M curve data
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: -delta_i, y: d }));
+
+    // Update the line with new data
+    MLine.datum(M_)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = - delta_i
+    y_eq = delta_i
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+function resetLine() {
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value)
+
+    dot.transition()
+        .duration(1000)
+        .attr("cy", y(0))
+        .attr("cx", x(0))
+    
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: 0 }));
+    IFMLine.datum(IFM)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: 0, y: d }));
+    MLine.datum(M_)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+    slider.addEventListener("change", resetLine);
+});
+
+// Append the SVG element.
+document.getElementById("MD_fixed").appendChild(svg.node());
+
+</script>
+
+
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 200;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Generate initial data.
+
+let change = 0
+
+// Append various text
+const E_ = svg.append("text")
+                .attr("x", x(0)) 
+                .attr("y", y(0))
+                .attr("text-anchor", "middle")
+                .attr("dy", ".35em")
+                .style("fill", "#525252")
+                .style("font-size", "64px")
+                .style("font-weight", "bold")
+                .text(change.toFixed(0) + '%');
+
+// Function to update the MD curve when sliders change.
+function updateChange() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value);
+
+    const colorScale = d3.scaleLinear()
+                        .domain([0, 25, 50, 80]) 
+                        .range(["green", "yellow", "red", "purple"]);
+
+    change = delta_i * 100
+    E_.text(change.toFixed(0) + '%')
+      .style("fill", colorScale(Math.abs(change)))
+
+}
+
+function resetChange() {
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value)
+
+    change = 0
+    E_.transition()
+        .duration(1000)
+        .text(change.toFixed(0) + '%')
+        .style("fill", "#525252")
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateChange);
+    slider.addEventListener("change", resetChange);
+});
+
+const i_slider = d3.select("#delta_i_fixed");
+i_slider.on("change", function() {
+    i_slider.property("value", 0);
+});
+
+// Append the SVG element.
+document.getElementById("E_fixed").appendChild(svg.node());
+
+</script>

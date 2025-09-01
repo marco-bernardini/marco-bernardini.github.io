@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Il modello Mundell-Fleming – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bf19b75f51ea680c8de03e84aa65eabd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../macroeconomics.html"> 
+<span class="menu-text">MACROECONOMICS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data-analysis.html"> 
+<span class="menu-text">DATA ANALYSIS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles.html"> 
+<span class="menu-text">ARTICLES</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduzione" id="toc-introduzione" class="nav-link active" data-scroll-target="#introduzione">Introduzione</a></li>
+  <li><a href="#la-parità-dei-tassi-di-interesse-e-la-retta-ifm" id="toc-la-parità-dei-tassi-di-interesse-e-la-retta-ifm" class="nav-link" data-scroll-target="#la-parità-dei-tassi-di-interesse-e-la-retta-ifm">La parità dei tassi di interesse e la retta IFM</a></li>
+  <li><a href="#il-modello-in-un-regime-di-cambi-fissi" id="toc-il-modello-in-un-regime-di-cambi-fissi" class="nav-link" data-scroll-target="#il-modello-in-un-regime-di-cambi-fissi">Il modello in un regime di cambi fissi</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Il modello Mundell-Fleming</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<section id="introduzione" class="level2">
+<h2 class="anchored" data-anchor-id="introduzione">Introduzione</h2>
+<p>Il modello Mundell-Fleming fu introdotto per estendere i risultati del modello IS-TR ad una piccola economia aperta, ovvero un’economia in cui non ci siano limitazioni agli scambi commerciali e finanziari con l’estero. Inotrducendo il commercio internazionale di attività finanziare, infatti, i risultati visti fin’ora cambiano considerevolmente. Particolare importanza ha qui il regime di tasso di cambio adottato dall’economia oggetto di studio.<br>
+In particolare, verranno considerati:<br>
+- Il regime di <strong>cambi fissi</strong>, dove la banca centrale si impegna a manetenere fisso un certo valore del tasso di cambio nominale, di solito nei confronti del Dollaro.<br>
+- Il regime di <strong>cambi flessibili</strong>, dove invece i tassi di cambio sono liberi di variare.<br>
+Si partirà dunque dall’analisi delle principali conseguenze dell’apertura ai flussi finanziari internazionali, per entrare poi nello specifico del modello per le due tipologie di economia elencate.</p>
+</section>
+<section id="la-parità-dei-tassi-di-interesse-e-la-retta-ifm" class="level2">
+<h2 class="anchored" data-anchor-id="la-parità-dei-tassi-di-interesse-e-la-retta-ifm">La parità dei tassi di interesse e la retta IFM</h2>
+<p>La regola di parità dei tassi di interesse afferma che, in un mercato aperto e finanziariamente integrato, il livello di attività <em>simili</em> non possa divergere sistematicamente a livello internazionale, nemmeno nel breve periodo. Questa viene vista come una condizione di equilibrio dei mercati internazionali.<br>
+Per capire come mai, si può far riferimento ad un semplice esercizio di arbitraggio. Esulando per un attimo dagli aspetti legati alle variazioni del tasso di cambio e ai bid-ask spread, si chiamino <span class="math inline">\(i\)</span> il tasso di interesse interno e <span class="math inline">\(i^*\)</span> il tasso di interesse internazionale. Si supponga che <span class="math inline">\(i^*&gt;i\)</span>: in questo caso prendendo a prestito nell’economia interna e investendo nell’economia internazionale si avrebbe un sicuro profitto. Si avrebbe quindi una istantaneo incremento della domanda di moneta in valuta nazionale, spingendo <span class="math inline">\(i\)</span> verso <span class="math inline">\(i^*\)</span>. Il movimento opposto si avrebbe qualora <span class="math inline">\(i&gt;i^*\)</span>.<br>
+La condizione di parità dei tassi di interesse è rappresentata dalla retta dei mercati finanziari internazionali, la retta IFM.</p>
+<div id="wrapper">
+<div id="MD" style="padding-right:5px;">
+<h3 class="slider-title anchored">
+Mercato Monetario
+</h3>
+</div>
+<div style="padding-left:5px;">
+<h3 class="slider-title anchored">
+</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title anchored">
+Variabili:
+</h3>
+<p><input type="range" id="delta_i" min="-0.8" max="0.8" step="0.02" value="0" class="slider"> <label for="delta_i">Δi</label> <button id="resetButton">Reset</button></p>
+</div>
+</div>
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 300;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const istar = 0
+const IFM_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+let IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+const MD_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+let x_eq = 0
+let y_eq = istar
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IFM_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic IFM curve.
+const IFMLine = svg.append("path")
+    .datum(IFM)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the original reference line.
+svg.append("path")
+    .datum(MD_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic MD curve.
+const MDLine = svg.append("path")
+    .datum(MD)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+const MLine = svg.append("path")
+    .datum(M_)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(-.8)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("M/P");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(-.8))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .style("font-weight", "bold")
+  .text("i*");
+
+// Function to update the MD curve when sliders change.
+function updateLine() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i").value);
+
+    // Update IFM curve data
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar + delta_i }));
+
+    // Update the line with new data
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    // Update M curve data
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: -delta_i, y: d }));
+
+    // Update the line with new data
+    MLine.datum(M_)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = - delta_i
+    y_eq = delta_i
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+function resetLine() {
+    let delta_i = parseFloat(document.getElementById("delta_i").value)
+
+    dot.transition()
+        .duration(1000)
+        .attr("cy", y(0))
+    
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: 0 }));
+    IFMLine.datum(IFM)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+
+    MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d - delta_i, y: -d}));
+    MDLine.datum(MD)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+    slider.addEventListener("change", resetLine);
+});
+
+const i_slider = d3.select("#delta_i");
+i_slider.on("change", function() {
+    i_slider.property("value", 0);
+});
+
+// Function to trigger D3 action (reset)
+function resetChart() {
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+    MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+    M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+    x_eq = 0
+    y_eq = istar
+
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    MLine.datum(M_)
+        .attr("d", line);
+
+    MDLine.datum(MD)
+        .attr("d", line)
+
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+// Add event listener to reset button
+d3.select("#resetButton").on("click", function() {
+    resetChart();
+});
+
+// Append the SVG element.
+document.getElementById("MD").appendChild(svg.node());
+
+</script>
+</section>
+<section id="il-modello-in-un-regime-di-cambi-fissi" class="level2">
+<h2 class="anchored" data-anchor-id="il-modello-in-un-regime-di-cambi-fissi">Il modello in un regime di cambi fissi</h2>
+<p>In regime di cambi fissi, la banca centrale si impegna a mantenere ancorata la propria valuta in riferimento ad una valuta estera. Per raggiungere questo obiettivo, questa crea un mercato per la propria valuta, impiegando passività ed attività sul mercato finanziario. Per impedire l’apprezzamento della valuta nazionale, indebolirà la propria valuta, aumentando l’offerta di moneta. Al contrario, per rafforzare la propria valuta la banca centrale può vendere attività finanziarie denominate in valuta estera, per riacquistare la propria valuta.<br>
+Emerge quindi come la banca centrale perda il controllo sul tasso di interesse, che viene quindi determinato dal tasso di interesse internazionale. Infatti, la banca deve variare l’offerta di moneta per mantenere fisso il tasso di cambio ed eventuali variazioni tese a modificare il tasso di interesse trascinerebbero con sè variazioni del tasso di cambio.</p>
+<div id="wrapper">
+<div id="MD_fixed" style="padding-right:5px;">
+<h3 class="slider-title anchored">
+Mercato Monetario
+</h3>
+</div>
+<div id="E_fixed" style="padding-left:5px;">
+<h3 class="slider-title anchored">
+Apprezzamento Valuta
+</h3>
+</div>
+<div id="sliders-container">
+<h3 class="slider-title anchored">
+Variabili:
+</h3>
+<p><input type="range" id="delta_i_fixed" min="-0.8" max="0.8" step="0.02" value="0" class="slider"> <label for="delta_i">Δi</label></p>
+</div>
+</div>
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 300;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Create the line generator.
+const line = d3.line()
+    .x(d => x(d.x))
+    .y(d => y(d.y));
+
+// Generate initial data.
+
+const istar = 0
+const IFM_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+let IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar }));
+const MD_ = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let MD = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: -d }));
+let M_ = d3.range(-1, 0.8, 0.02).map(d => ({ x: 0, y: d }));
+let x_eq = 0
+let y_eq = istar
+
+
+// Append the original reference line.
+svg.append("path")
+    .datum(IFM_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic IFM curve.
+const IFMLine = svg.append("path")
+    .datum(IFM)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 2)
+    .attr("d", line);
+
+// Append the original reference line.
+svg.append("path")
+    .datum(MD_)
+    .attr("fill", "none")
+    .attr("stroke", "#525252")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "5,5")
+    .attr("d", line);
+
+// Append the dynamic MD curve.
+const MDLine = svg.append("path")
+    .datum(MD)
+    .attr("fill", "none")
+    .attr("stroke", "#04AA6D")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+const MLine = svg.append("path")
+    .datum(M_)
+    .attr("fill", "none")
+    .attr("stroke", "#8A2BE2")
+    .attr("stroke-width", 4)
+    .attr("d", line);
+
+// Append equilibrium point
+let initialX = x(x_eq)
+let initialY = y(y_eq)
+let initialRadius = 7.5
+
+const dot = svg.append("circle")
+    .attr("cx", initialX)
+    .attr("cy", initialY)
+    .attr("r", initialRadius)
+    .attr("fill", "red");
+
+// Append various text
+svg.append("text")
+  .attr("x", x(-.8)) 
+  .attr("y", y(-.95))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("M/P");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(-.8))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .text("i");
+
+svg.append("text")
+  .attr("x", x(-.95)) 
+  .attr("y", y(0))
+  .attr("text-anchor", "middle")
+  .attr("dy", ".35em")
+  .style("fill", "#525252")
+  .style("font-size", "16px")
+  .style("font-weight", "bold")
+  .text("i*");
+
+// Function to update the MD curve when sliders change.
+function updateLine() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value);
+
+    // Update IFM curve data
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: istar + delta_i }));
+
+    // Update the line with new data
+    IFMLine.datum(IFM)
+        .attr("d", line);
+
+    // Update M curve data
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: -delta_i, y: d }));
+
+    // Update the line with new data
+    MLine.datum(M_)
+        .attr("d", line);
+
+    // Update equilibrium
+    x_eq = - delta_i
+    y_eq = delta_i
+
+    // Update equilibrium point
+    dot.attr("cx", x(x_eq))
+        .attr("cy", y(y_eq))
+}
+
+function resetLine() {
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value)
+
+    dot.transition()
+        .duration(1000)
+        .attr("cy", y(0))
+        .attr("cx", x(0))
+    
+    IFM = d3.range(-0.9, 0.9, 0.02).map(d => ({ x: d, y: 0 }));
+    IFMLine.datum(IFM)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+
+    M_ = d3.range(-1, 0.9, 0.02).map(d => ({ x: 0, y: d }));
+    MLine.datum(M_)
+        .transition()
+        .duration(1000)
+        .attr("d", line);
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateLine);
+    slider.addEventListener("change", resetLine);
+});
+
+// Append the SVG element.
+document.getElementById("MD_fixed").appendChild(svg.node());
+
+</script>
+<script type="module">
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 200;
+const height = 300;
+const marginTop = 0;
+const marginRight = 0;
+const marginBottom = 0;
+const marginLeft = 0;
+
+// Declare the x (horizontal position) scale.
+const x = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([marginLeft, width - marginRight]);
+
+// Declare the y (vertical position) scale.
+const y = d3.scaleLinear()
+    .domain([-1, 1])
+    .range([height - marginBottom, marginTop]);
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("rect")
+  .attr("width", width)
+  .attr("height", height)
+  .attr("fill", "white");
+
+// Add the x-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(0,${height - marginBottom})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the y-axis line (without ticks/labels).
+svg.append("g")
+    .attr("transform", `translate(${marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Add the upper-line
+svg.append("g")
+    .attr("transform", `translate(0,${marginTop})`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", marginLeft)
+    .attr("x2", width - marginRight)
+    .attr("y1", 0)
+    .attr("y2", 0);
+
+// Add the right-line
+svg.append("g")
+    .attr("transform", `translate(${width-marginLeft},0)`)
+    .attr("stroke", "silver")
+    .attr("stroke-width", 3)
+    .append("line")
+    .attr("x1", 0)
+    .attr("x2", 0)
+    .attr("y1", marginTop)
+    .attr("y2", height - marginBottom);
+
+// Generate initial data.
+
+let change = 0
+
+// Append various text
+const E_ = svg.append("text")
+                .attr("x", x(0)) 
+                .attr("y", y(0))
+                .attr("text-anchor", "middle")
+                .attr("dy", ".35em")
+                .style("fill", "#525252")
+                .style("font-size", "64px")
+                .style("font-weight", "bold")
+                .text(change.toFixed(0) + '%');
+
+// Function to update the MD curve when sliders change.
+function updateChange() {
+
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value);
+
+    const colorScale = d3.scaleLinear()
+                        .domain([0, 25, 50, 80]) 
+                        .range(["green", "yellow", "red", "purple"]);
+
+    change = delta_i * 100
+    E_.text(change.toFixed(0) + '%')
+      .style("fill", colorScale(Math.abs(change)))
+
+}
+
+function resetChange() {
+    let delta_i = parseFloat(document.getElementById("delta_i_fixed").value)
+
+    change = 0
+    E_.transition()
+        .duration(1000)
+        .text(change.toFixed(0) + '%')
+        .style("fill", "#525252")
+    
+}
+
+// Attach event listeners to sliders
+document.querySelectorAll("input[type=range]").forEach(slider => {
+    slider.addEventListener("input", updateChange);
+    slider.addEventListener("change", resetChange);
+});
+
+const i_slider = d3.select("#delta_i_fixed");
+i_slider.on("change", function() {
+    i_slider.property("value", 0);
+});
+
+// Append the SVG element.
+document.getElementById("E_fixed").appendChild(svg.node());
+
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

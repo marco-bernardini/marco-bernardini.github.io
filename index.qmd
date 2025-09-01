@@ -1,0 +1,38 @@
+---
+title: "Marco Bernardini"
+toc: false
+about:
+  id: hero-heading
+  template: trestles
+  image: images/IMG_4101.jpeg
+  image-width: 17em
+  links:
+    - icon: linkedin
+      text: Linkedin
+      href: https://www.linkedin.com/in/emmeb/
+    - icon: github
+      text: Github
+      href: https://github.com/marco-bernardini/
+---
+
+:::{#hero-heading}
+
+Hi, I'm Marco, a macroeconomics researcher with a passion for data, math, and programming. I am currently working as a consultant, helping banks and insurance companies develop insightful ML and AI tools. When I'm not diving into data, you'll find me enjoying endurance sports, mountaineering, or spending quality time with my two poodles, [Joyce](images/joyce.jpg) and [Leyla](images/leyla.jpg).
+
+## Education
+
+#### University of Oxford 
+MPhil in Economics
+
+#### Università degli Studi di Milano - Bicocca   
+BSc in Economics
+
+## Experience
+
+#### SDG Group Italy   
+Financial Services Consultant
+
+#### Leonardo Assicurazioni   
+Data Analytics & BI Lead
+
+:::

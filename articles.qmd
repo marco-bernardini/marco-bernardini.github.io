@@ -1,0 +1,8 @@
+---
+title: "Articles"
+format: html
+---
+
+This section presents some of my original work, such as my dissertation (in Italian) and a selection of shorter pieces.  
+- [Dissertation](assets/Tesi%20Marco%20Bernardini.pdf)   
+- [Behavioural Macro](assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf)
