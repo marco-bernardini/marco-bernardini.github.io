@@ -1,11 +1,10 @@
 ---
-title: "Marco Bernardini"
 toc: false
 about:
   id: hero-heading
-  template: trestles
-  image: images/IMG_4101.jpeg
-  image-width: 17em
+  template: jolla
+  image: images/smoking.png
+  image-width: 13em
   links:
     - icon: linkedin
       text: Linkedin
@@ -17,22 +16,6 @@ about:
 
 :::{#hero-heading}
 
-Hi, I'm Marco, a macroeconomics researcher with a passion for data, math, and programming. I am currently working as a consultant, helping banks and insurance companies develop insightful ML and AI tools. When I'm not diving into data, you'll find me enjoying endurance sports, mountaineering, or spending quality time with my two poodles, [Joyce](images/joyce.jpg) and [Leyla](images/leyla.jpg).
-
-## Education
-
-#### University of Oxford 
-MPhil in Economics
-
-#### Università degli Studi di Milano - Bicocca   
-BSc in Economics
-
-## Experience
-
-#### SDG Group Italy   
-Financial Services Consultant
-
-#### Leonardo Assicurazioni   
-Data Analytics & BI Lead
+Hi, I’m Marco, a first-year MPhil student at the University of Oxford with a strong interest in mathematics, physics, and programming. Before Oxford, I worked as a data analytics lead at a major insurance company and as a project manager in IT consulting. Outside of data and models, you’ll usually find me in the erg room, in the mountains, or spending time with my two poodles, [Joyce](images/joyce.jpg) and [Leyla](images/leyla.jpg).
 
 :::
