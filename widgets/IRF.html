@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IRF Matrix Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, sans-serif; }
+    .matrix-cell { font-family: monospace; }
+  </style>
+</head>
+<body class="bg-gray-50 p-6">
+  <div class="max-w-6xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm p-6">
+      <h1 class="text-2xl font-semibold mb-4">Impulse Response Function (IRF) Visualizer</h1>
+
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between text-sm text-slate-600">
+            <div class="font-medium">Select horizon (h)</div>
+            <div class="font-mono" id="h-display">h = 0</div>
+          </div>
+          <input id="h-slider" type="range" min="0" max="19" value="0" class="w-full" />
+
+            <div class="rounded-2xl border bg-white p-4">
+          <div class="text-sm font-medium mb-3">Θ<sub>h</sub> matrix (2×2 MA coefficients)</div>
+          <div class="grid grid-cols-2 gap-2">
+            <div id="cell-0-0" class="matrix-cell rounded-xl border p-3 text-center"></div>
+            <div id="cell-0-1" class="matrix-cell rounded-xl border p-3 text-center"></div>
+            <div id="cell-1-0" class="matrix-cell rounded-xl border p-3 text-center"></div>
+            <div id="cell-1-1" class="matrix-cell rounded-xl border p-3 text-center"></div>
+          </div>
+          <!-- <div class="mt-4 text-xs text-slate-500">
+            Hover a cell to highlight the corresponding IRF in the plot.
+          </div> -->
+
+          <div class="rounded-2xl border bg-white p-4">
+            <div class="text-sm font-medium mb-3">Impulse responses (selected series highlighted)</div>
+            <svg id="chart" viewBox="0 0 600 250" class="w-full rounded-xl border bg-white"></svg>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const A = [
+      [[0.90, 0.18], [0.10, 0.82]],
+      [[0.62, 0.12], [0.18, 0.45]],
+      [[0.42, 0.08], [0.16, 0.24]],
+      [[0.28, 0.05], [0.11, 0.12]],
+      [[0.19, 0.03], [0.08, 0.05]],
+      [[0.13, 0.02], [0.05, 0.01]],
+      [[0.09, 0.01], [0.03, -0.01]],
+      [[0.06, 0.00], [0.02, -0.02]],
+      [[0.04, -0.01], [0.01, -0.02]],
+      [[0.03, -0.01], [0.01, -0.02]],
+      [[0.02, -0.01], [0.00, -0.01]],
+      [[0.015, -0.01], [0.00, -0.01]],
+      [[0.010, -0.008], [0.00, -0.008]],
+      [[0.008, -0.006], [0.00, -0.006]],
+      [[0.006, -0.005], [0.00, -0.005]],
+      [[0.004, -0.004], [0.00, -0.004]],
+      [[0.003, -0.003], [0.00, -0.003]],
+      [[0.002, -0.002], [0.00, -0.002]],
+      [[0.001, -0.001], [0.00, -0.001]],
+      [[0.000, 0.000], [0.00, 0.000]],
+    ];
+
+    const H = A.length;
+    const seriesMeta = [
+      { row: 0, col: 0, label: "x ← output shock", color: "#2563eb" },
+      { row: 1, col: 0, label: "π ← output shock", color: "#dc2626" },
+      { row: 0, col: 1, label: "x ← inflation shock", color: "#16a34a" },
+      { row: 1, col: 1, label: "π ← inflation shock", color: "#9333ea" },
+    ];
+
+    const slider = document.getElementById("h-slider");
+    const hDisplay = document.getElementById("h-display");
+    const chart = document.getElementById("chart");
+    const cells = {
+      "0-0": document.getElementById("cell-0-0"),
+      "0-1": document.getElementById("cell-0-1"),
+      "1-0": document.getElementById("cell-1-0"),
+      "1-1": document.getElementById("cell-1-1"),
+    };
+
+    let hovered = null;
+    let selectedH = 0;
+
+    function fmt(x, digits = 3) {
+      const y = Math.abs(x) < 1e-12 ? 0 : x;
+      return y.toFixed(digits);
+    }
+
+    function buildPath(values, width, height, ymin, ymax) {
+      const n = values.length;
+      const x = (i) => (n === 1 ? width / 2 : (i / (n - 1)) * width);
+      const y = (v) => {
+        if (Math.abs(ymax - ymin) < 1e-12) return height / 2;
+        return height - ((v - ymin) / (ymax - ymin)) * height;
+      };
+      return values.map((v, i) => `${i === 0 ? "M" : "L"} ${x(i)} ${y(v)}`).join(" ");
+    }
+
+    function computeSeries() {
+      const series = seriesMeta.map((m) => ({ ...m, values: [] }));
+      for (let h = 0; h < H; h += 1) {
+        for (const s of series) {
+          s.values.push(A[h][s.row][s.col]);
+        }
+      }
+      return series;
+    }
+
+    const allSeries = computeSeries();
+
+    function renderChart() {
+      const width = 600;
+      const height = 250;
+      const allValues = allSeries.flatMap((s) => s.values).concat(0);
+      const ymin = Math.min(...allValues);
+      const ymax = Math.max(...allValues);
+
+      const paths = allSeries
+        .map((s) => {
+          const path = buildPath(s.values, width, height, ymin, ymax);
+          const active = hovered && hovered.row === s.row && hovered.col === s.col;
+          const opacity = hovered && !active ? 0.25 : 1;
+          const strokeWidth = active ? 4 : 2.5;
+          return `
+            <path
+              d="${path}"
+              fill="none"
+              stroke="${s.color}"
+              stroke-width="${strokeWidth}"
+              opacity="${opacity}"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="cursor:pointer"
+              data-row="${s.row}"
+              data-col="${s.col}"
+            />
+          `;
+        })
+        .join("");
+
+      const y0 = Math.abs(ymax - ymin) < 1e-12 ? height / 2 : height - ((0 - ymin) / (ymax - ymin)) * height;
+
+      const gridLines = Array.from({ length: H }).
+        map((_, i) => {
+          const x = H === 1 ? width / 2 : (i / (H - 1)) * width;
+          return `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="#e5e7eb" stroke-width="1" />`;
+        })
+        .join("");
+
+      const hLineX = H === 1 ? width / 2 : (selectedH / (H - 1)) * width;
+
+      chart.innerHTML = `
+        <line x1="0" y1="${y0}" x2="${width}" y2="${y0}" stroke="#111827" stroke-width="1" opacity="0.6" />
+        ${gridLines}
+        <line x1="${hLineX}" y1="0" x2="${hLineX}" y2="${height}" stroke="#9ca3af" stroke-width="2" opacity="0.5" />
+        ${paths}
+        <g id="legend">
+          <circle cx="520" cy="20" r="2.5" fill="#2563eb" />
+          <text x="530" y="23" font-size="10" fill="#374151">x ← output</text>
+          
+          <circle cx="520" cy="40" r="2.5" fill="#16a34a" />
+          <text x="530" y="43" font-size="10" fill="#374151">x ← inflation</text>
+          
+          <circle cx="520" cy="60" r="2.5" fill="#dc2626" />
+          <text x="530" y="63" font-size="10" fill="#374151">π ← output</text>
+          
+          <circle cx="520" cy="80" r="2.5" fill="#9333ea" />
+          <text x="530" y="83" font-size="10" fill="#374151">π ← inflation</text>
+        </g>
+      `;
+
+      chart.querySelectorAll("path").forEach((path) => {
+        path.addEventListener("mouseenter", () => {
+          hovered = { row: Number(path.dataset.row), col: Number(path.dataset.col) };
+          update();
+        });
+        path.addEventListener("mouseleave", () => {
+          hovered = null;
+          update();
+        });
+      });
+    }
+
+    function renderMatrix() {
+      const M = A[selectedH];
+      for (let i = 0; i < 2; i += 1) {
+        for (let j = 0; j < 2; j += 1) {
+          const key = `${i}-${j}`;
+          const cell = cells[key];
+          const active = hovered && hovered.row === i && hovered.col === j;
+          cell.textContent = fmt(M[i][j]);
+          cell.style.borderColor = active ? seriesMeta.find((s) => s.row === i && s.col === j)?.color : "#d1d5db";
+          cell.style.boxShadow = active ? `0 0 0 1px ${seriesMeta.find((s) => s.row === i && s.col === j)?.color} inset` : "";
+          cell.style.backgroundColor = active ? `${seriesMeta.find((s) => s.row === i && s.col === j)?.color}1A` : "";
+          cell.onmouseenter = () => {
+            hovered = { row: i, col: j };
+            update();
+          };
+          cell.onmouseleave = () => {
+            hovered = null;
+            update();
+          };
+        }
+      }
+    }
+
+    function update() {
+      hDisplay.textContent = `h = ${selectedH}`;
+      renderChart();
+      renderMatrix();
+    }
+
+    slider.addEventListener("input", (e) => {
+      selectedH = Number(e.target.value);
+      update();
+    });
+
+    update();
+  </script>
+</body>
+</html>

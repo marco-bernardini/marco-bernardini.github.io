@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Empirical Macro Notes – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../macroeconomics.html"> 
+<span class="menu-text">MACROECONOMICS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data-analysis.html"> 
+<span class="menu-text">DATA ANALYSIS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles.html"> 
+<span class="menu-text">ARTICLES</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link active" data-scroll-target="#definitions">Definitions</a>
+  <ul class="collapse">
+  <li><a href="#variables-and-spaces" id="toc-variables-and-spaces" class="nav-link" data-scroll-target="#variables-and-spaces">Variables and Spaces</a></li>
+  <li><a href="#structural-shocks" id="toc-structural-shocks" class="nav-link" data-scroll-target="#structural-shocks">Structural shocks</a></li>
+  <li><a href="#vma-representation" id="toc-vma-representation" class="nav-link" data-scroll-target="#vma-representation">VMA representation</a></li>
+  <li><a href="#var-representation" id="toc-var-representation" class="nav-link" data-scroll-target="#var-representation">VAR representation</a></li>
+  <li><a href="#impulse-response-functions" id="toc-impulse-response-functions" class="nav-link" data-scroll-target="#impulse-response-functions">Impulse response functions</a></li>
+  <li><a href="#forecast-error-variance-decomposition" id="toc-forecast-error-variance-decomposition" class="nav-link" data-scroll-target="#forecast-error-variance-decomposition">Forecast error variance decomposition</a></li>
+  <li><a href="#historical-decomposition" id="toc-historical-decomposition" class="nav-link" data-scroll-target="#historical-decomposition">Historical decomposition</a></li>
+  <li><a href="#state-space-representation" id="toc-state-space-representation" class="nav-link" data-scroll-target="#state-space-representation">State-space representation</a></li>
+  <li><a href="#wold-decomposition" id="toc-wold-decomposition" class="nav-link" data-scroll-target="#wold-decomposition">Wold decomposition</a></li>
+  </ul></li>
+  <li><a href="#empirical-method" id="toc-empirical-method" class="nav-link" data-scroll-target="#empirical-method">Empirical method</a></li>
+  <li><a href="#invertibility" id="toc-invertibility" class="nav-link" data-scroll-target="#invertibility">Invertibility</a>
+  <ul class="collapse">
+  <li><a href="#failure-of-invertibility" id="toc-failure-of-invertibility" class="nav-link" data-scroll-target="#failure-of-invertibility">Failure of invertibility</a></li>
+  </ul></li>
+  <li><a href="#identification-issues" id="toc-identification-issues" class="nav-link" data-scroll-target="#identification-issues">Identification Issues</a>
+  <ul class="collapse">
+  <li><a href="#rotational-indeterminacy" id="toc-rotational-indeterminacy" class="nav-link" data-scroll-target="#rotational-indeterminacy">Rotational indeterminacy</a></li>
+  <li><a href="#dynamic-indeterminacy" id="toc-dynamic-indeterminacy" class="nav-link" data-scroll-target="#dynamic-indeterminacy">Dynamic indeterminacy</a></li>
+  <li><a href="#size-indeterminacy" id="toc-size-indeterminacy" class="nav-link" data-scroll-target="#size-indeterminacy">Size indeterminacy</a></li>
+  </ul></li>
+  <li><a href="#identification-methods" id="toc-identification-methods" class="nav-link" data-scroll-target="#identification-methods">Identification methods</a>
+  <ul class="collapse">
+  <li><a href="#short-run-restrictions" id="toc-short-run-restrictions" class="nav-link" data-scroll-target="#short-run-restrictions">Short run restrictions</a></li>
+  </ul></li>
+  <li><a href="#short-run-identification" id="toc-short-run-identification" class="nav-link" data-scroll-target="#short-run-identification">Short run identification</a>
+  <ul class="collapse">
+  <li><a href="#recursive-identification" id="toc-recursive-identification" class="nav-link" data-scroll-target="#recursive-identification">Recursive identification</a></li>
+  <li><a href="#non-recursive-impact-restrictions" id="toc-non-recursive-impact-restrictions" class="nav-link" data-scroll-target="#non-recursive-impact-restrictions">Non-recursive impact restrictions</a></li>
+  <li><a href="#sign-restrictions" id="toc-sign-restrictions" class="nav-link" data-scroll-target="#sign-restrictions">Sign restrictions</a></li>
+  </ul></li>
+  <li><a href="#long-run-zero-restrictions" id="toc-long-run-zero-restrictions" class="nav-link" data-scroll-target="#long-run-zero-restrictions">Long run zero restrictions</a></li>
+  <li><a href="#identification-with-instrumental-variables" id="toc-identification-with-instrumental-variables" class="nav-link" data-scroll-target="#identification-with-instrumental-variables">Identification with instrumental variables</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Empirical Macro Notes</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>These notes follow the structure of Professor Silvia Miranda-Agrippino’s Empirical Macro course at Oxford.</p>
+<p>Because I mainly state time-series concepts without developing them in detail, readers with little prior background in time series may find it useful to consult Hamilton (2005), especially Chapters 1–3 and 10–11.</p>
+<p>Readers who are less comfortable with linear algebra may also benefit from skimming one of Gilbert Strang’s textbooks.</p>
+<section id="definitions" class="level2">
+<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<section id="variables-and-spaces" class="level3">
+<h3 class="anchored" data-anchor-id="variables-and-spaces">Variables and Spaces</h3>
+<p>Throughout the text, we will use the following notation:</p>
+<ul>
+<li><p><span class="math inline">\(y_t \in \mathbb{R}^n\)</span>: vector of observable variables at time <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(\varepsilon_t \in \mathbb{R}^n\)</span>: vector of structural shocks at time <span class="math inline">\(t\)</span>.</p></li>
+<li><p><span class="math inline">\(u_t \in \mathbb{R}^n\)</span>: vector of reduced-form innovations at time <span class="math inline">\(t\)</span>.</p></li>
+</ul>
+<p>Now let</p>
+<p><span class="math display">\[
+\mathcal H_t^y \equiv \overline{\operatorname{span}}\{y_{t-j}: j=0,1,2,\dots\} \subset L^2
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\mathcal H_{t-1}^y \equiv \overline{\operatorname{span}}\{y_{t-j}: j=1,2,\dots\} \subset \mathcal H_t^y.
+\]</span></p>
+<p>Define the innovation space by</p>
+<p><span class="math display">\[
+\mathcal I_t^y \equiv \mathcal H_t^y \ominus \mathcal H_{t-1}^y
+= \mathcal H_t^y \cap \left(\mathcal H_{t-1}^y\right)^\perp.
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+\mathcal I_t^y \perp \mathcal H_{t-1}^y.
+\]</span></p>
+<p>Under the absence of a deterministic component,</p>
+<p><span class="math display">\[
+\bigcap_{t=-\infty}^{\infty} \mathcal H_t^y = \{0\},
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+\mathcal H_t^y
+=
+\mathcal I_t^y \oplus \mathcal I_{t-1}^y \oplus \mathcal I_{t-2}^y \oplus \cdots.
+\]</span></p>
+</section>
+<section id="structural-shocks" class="level3">
+<h3 class="anchored" data-anchor-id="structural-shocks">Structural shocks</h3>
+<p>Structural shocks are primitive exogenous disturbances, assumed to be mutually uncorrelated and to admit an economic interpretation.<br>
+From this definition it follows that shocks must possess these properties:</p>
+<ul>
+<li>exogeneity wrt to the variables of the model</li>
+<li>orthogonality between them</li>
+<li>orthogonality wrt to the span of lagged variables of the model</li>
+</ul>
+<p>For these reasons, we usually define the shocks as:</p>
+<p><span class="math display">\[
+\varepsilon_t \sim WN(0, I).
+\]</span></p>
+<p>If we define observed variables of interest as <span class="math inline">\(y_t\)</span>, then a structural representation may be written as:</p>
+<p><span class="math display">\[
+y_t = \Theta(L)\varepsilon_t,
+\]</span></p>
+<p>where <span class="math inline">\(\Theta(L)\)</span> is a matrix lag polynomial, which implies that</p>
+<p><span class="math display">\[
+y_t \in \mathcal H_t^\varepsilon.
+\]</span></p>
+<p>The representation above will not be derived here. Intuitively, it states that the realization of the variables of interest at time <span class="math inline">\(t\)</span> can be decomposed into the contemporaneous and lagged effects of structural shocks. In this sense, current observables are generated by the propagation over time of present and past shocks through the linear operator <span class="math inline">\(\Theta(L)\)</span>.</p>
+</section>
+<section id="vma-representation" class="level3">
+<h3 class="anchored" data-anchor-id="vma-representation">VMA representation</h3>
+<p>Define a vector moving-average representation as:</p>
+<p><span class="math display">\[
+y_t = \mu + \sum_{h=0}^{\infty} \Theta_h u_{t-h}, \quad u_t \sim W N(0, \Sigma) .
+\]</span></p>
+<p>We will also write:</p>
+<p><span class="math display">\[
+y_t= \mu + \Theta (L) u_t
+\]</span></p>
+<p>Notice that if we define:</p>
+<p><span class="math display">\[
+x_t \equiv y_t - \mu,
+\qquad
+\mu \equiv \mathbb E[y_t].
+\]</span></p>
+<p>the process becomes</p>
+<p><span class="math display">\[
+x_t = \Theta(L)\varepsilon_t
+=
+\sum_{j=0}^\infty \Theta_j \varepsilon_{t-j}.
+\]</span></p>
+<p>and so we can view the VMA as a projection:</p>
+<p><span class="math display">\[
+x_t \in \mathcal H_t^\varepsilon.
+\]</span></p>
+</section>
+<section id="var-representation" class="level3">
+<h3 class="anchored" data-anchor-id="var-representation">VAR representation</h3>
+<p>Define a vector auto regressive <span class="math inline">\(VAR(\infty)\)</span> representation as:</p>
+<p><span class="math display">\[
+y_t=\nu+\sum_{\ell=1}^{\infty} A_{\ell} y_{t-\ell}+u_t, \quad u_t \sim W N(0, \Sigma) .
+\]</span></p>
+<p>Note that this infinite order VAR can be approximated by a finite order <span class="math inline">\(VAR(p)\)</span>, provided that <span class="math inline">\(A(L)^{-1}\)</span> exists and is absolutely summable:</p>
+<p><span class="math display">\[
+y_t=\nu+\sum_{\ell=1}^p A_{\ell} y_{t-\ell}+u_t, \quad u_t \sim W N(0, \Sigma) .
+\]</span></p>
+<p>where <span class="math inline">\(p\)</span> represents the number of lags.</p>
+<p>We will also write:</p>
+<p><span class="math display">\[
+A(L) y_t=\nu+u_t
+\]</span></p>
+<p>Let <span class="math inline">\(x_t = y_t-\mu\)</span>. Under covariance stationarity, the mean satisfies</p>
+<p><span class="math display">\[
+\mu = c + A_1\mu + \cdots + A_p\mu,
+\]</span></p>
+<p>equivalently,</p>
+<p><span class="math display">\[
+(I-A_1-\cdots-A_p)\mu = c.
+\]</span></p>
+<p>if we define <span class="math inline">\(x_t = y_t-\mu\)</span>, it follows that</p>
+<p><span class="math display">\[
+x_t = A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t.
+\]</span></p>
+<p>Then again the fitted part</p>
+<p><span class="math display">\[
+A_1 x_{t-1} + \cdots + A_p x_{t-p}
+\]</span></p>
+<p>is the linear projection of <span class="math inline">\(x_t\)</span> onto its past, namely</p>
+<p><span class="math display">\[
+\operatorname{Proj}_{\mathcal H_{t-1}^x}(x_t).
+\]</span></p>
+<p>Hence the innovation is</p>
+<p><span class="math display">\[
+u_t
+=
+x_t - \operatorname{Proj}_{\mathcal H_{t-1}^x}(x_t),
+\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[
+u_t \perp \mathcal H_{t-1}^x.
+\]</span></p>
+</section>
+<section id="impulse-response-functions" class="level3">
+<h3 class="anchored" data-anchor-id="impulse-response-functions">Impulse response functions</h3>
+<p>The impulse response function measures the effect of a shock at time <span class="math inline">\(t\)</span> on future values of the observables <span class="math inline">\(y_t\)</span>.</p>
+<p>If</p>
+<p><span class="math display">\[
+y_t = \Theta(L)\varepsilon_t = \sum_{h=0}^{\infty} \Theta_h \varepsilon_{t-h},
+\]</span></p>
+<p>then the response of variable <span class="math inline">\(i\)</span> at horizon <span class="math inline">\(h\)</span> to shock <span class="math inline">\(j\)</span> is</p>
+<p><span class="math display">\[
+\operatorname{IRF}_{i,j}(h) = \frac{\partial y_{i,t+h}}{\partial \varepsilon_{j,t}} = \mathbb{E}_t[y_{i,t+h} \mid \varepsilon_{j,t}=1] - \mathbb{E}_t[y_{i,t+h} \mid \varepsilon_{j,t}=0] = \Theta_{h,i,j}
+\]</span></p>
+<p>IRFs are objects of great practical relevance, and are analysed qualitatively in most Macro papers.<br>
+Below is an example from Smets and Wouters (2003) describing the reaction of a collection of macroeconomic variables to a technology shock.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/sw2003.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></p>
+</figure>
+</div>
+<p>If the reader is approaching IRFs for the first time it could be helpful to briefly interact with the widget below, that shows the following process:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+x_t \\
+\pi_t
+\end{pmatrix}
+=
+\begin{pmatrix}
+0.90 &amp; 0.18 \\
+0.10 &amp; 0.82
+\end{pmatrix}
+\begin{pmatrix}
+\varepsilon^{x}_t \\
+\varepsilon^{\pi}_t
+\end{pmatrix}
++
+\begin{pmatrix}
+0.62 &amp; 0.12 \\
+0.18 &amp; 0.45
+\end{pmatrix}
+\begin{pmatrix}
+\varepsilon^{x}_{t-1} \\
+\varepsilon^{\pi}_{t-1}
+\end{pmatrix}
++
+\begin{pmatrix}
+0.42 &amp; 0.08 \\
+0.16 &amp; 0.24
+\end{pmatrix}
+\begin{pmatrix}
+\varepsilon^{x}_{t-2} \\
+\varepsilon^{\pi}_{t-2}
+\end{pmatrix}
++ \cdots
+\]</span></p>
+<iframe src="../widgets/IRF.html" width="100%" height="720" style="border:none; border-radius:12px;">
+</iframe>
+</section>
+<section id="forecast-error-variance-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="forecast-error-variance-decomposition">Forecast error variance decomposition</h3>
+<p>The forecast error variance decomposition allocates the variance of the <span class="math inline">\(h\)</span>-step-ahead forecast error across structural shocks.<br>
+Formally:</p>
+<p><span class="math display">\[
+\operatorname{FEVD}_{i,j}(h) = \frac{\operatorname{Var}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}, \{\varepsilon_{j,t+\ell}\}_{\ell=1}^h]}{\operatorname{Var}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}]} = \frac{\sum_{k=0}^{h-1} \Theta_{k,i,j}^2}{\sum_{j=1}^n \sum_{k=0}^{h-1} \Theta_{k,i,j}^2}
+\]</span></p>
+</section>
+<section id="historical-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="historical-decomposition">Historical decomposition</h3>
+<p>Historical decomposition expresses the realized path of <span class="math inline">\(y_t\)</span> as the sum of the contributions of the different shocks over time. Formally:</p>
+<p><span class="math display">\[
+\operatorname{HD}_{i,j}(t) = \mathbb{E}[y_{i,t} \mid \{\varepsilon_{j,t-\ell}\}_{\ell=0}^{\infty}] = \sum_{\ell=0}^{\infty} \Theta_{\ell,i,j} \varepsilon_{j,t-\ell}
+\]</span></p>
+<p>we will not focus on FEVD and HD in this course, but they are interesting objects often used in the literature.</p>
+</section>
+<section id="state-space-representation" class="level3">
+<h3 class="anchored" data-anchor-id="state-space-representation">State-space representation</h3>
+<p>A linear state-space system can be written as</p>
+<p><span class="math display">\[
+s_t = A s_{t-1} + B \varepsilon_t
+\]</span> <span class="math display">\[
+y_t = C s_t + D \varepsilon_t.
+\]</span></p>
+<p>Here:<br>
+- <span class="math inline">\(s_t\)</span> is the state vector,<br>
+- <span class="math inline">\(y_t\)</span> is the vector of observables,<br>
+- <span class="math inline">\(\varepsilon_t\)</span> is the vector of structural shocks.</p>
+<p>Clearly, if the system is stable, we can rewrite it as:</p>
+<p><span class="math display">\[
+y_t=D \varepsilon_t+C B \varepsilon_{t-1}+C A B \varepsilon_{t-2}+C A^2 B \varepsilon_{t-3}+\ldots=\sum_{\ell=0}^{\infty} \Theta_{\ell} \varepsilon_{t-\ell}
+\]</span></p>
+<p>This representation is a fundamental link between empirical models (one can think as an example of the workhorse 3-equation DSGE models and the SVMA representation introduced before). In this setting, we have abstracted from determinacy condition, but the interested reader can find more information in the seminal paper by Blanchard and Kahn (1980).</p>
+</section>
+<section id="wold-decomposition" class="level3">
+<h3 class="anchored" data-anchor-id="wold-decomposition">Wold decomposition</h3>
+<p>Let <span class="math inline">\(y_t\)</span> be covariance stationary. Then Wold’s theorem implies that <span class="math inline">\(y_t\)</span> admits the representation</p>
+<p><span class="math display">\[
+y_t=\underbrace{C(L)u_t}_{\text {part of } y_t \text { that is impossible to predict perfectly }}+\underbrace{\delta_t}_{\text {part of } y_t \text { that is perfectly predictable }}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\begin{aligned}
+C(L) &amp;= \sum_{h=0}^{\infty} C_h L^h, \\
+d_0 &amp;= 1, \qquad \sum_{j=0}^{\infty} d_j^2 &lt; \infty, \\
+\mathbb{E}[u_t^2] &amp;= \sigma_{u}^2, \\
+\mathbb{E}[u_t u_s] &amp;= 0 \qquad \text{for } t \neq s, \\
+\mathbb{E}[u_t] &amp;= 0, \\
+\mathbb{E}[\delta_t u_s] &amp;= 0 \qquad \text{for all } t,s, \\
+\operatorname{Proj}\!\left[\delta_{t+s} \mid y_{t-1}, y_{t-2}, \ldots \right] &amp;= \delta_{t+s}, \qquad s \geq 0.
+\end{aligned}
+\]</span></p>
+<p>And we have deefined the innovation by</p>
+<p><span class="math display">\[
+u_t:=y_t-\operatorname{Proj}(y_t\mid \mathcal H_{t-1}^y),
+\qquad u_t\perp \mathcal H_{t-1}^y.
+\]</span></p>
+<p>Then Wold states that every covariance-stationary process <span class="math inline">\(y_t\in L^2\)</span> admits the decomposition</p>
+<p><span class="math display">\[
+y_t=y_t^{d}+y_t^{nd},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+y_t^{d}\in \bigcap_{m\ge 1}\overline{\mathrm{span}}\{y_{t-m},y_{t-m-1},\dots\},
+\]</span></p>
+<p>so <span class="math inline">\(y_t^{d}\)</span> is completely determined by the infinite past, and</p>
+<p><span class="math display">\[
+y_t^{nd}=\sum_{h=0}^{\infty} C_h u_{t-h},
+\qquad c_0=1,
+\]</span></p>
+<p>with <span class="math inline">\(u_t\)</span> a white-noise innovation sequence generated by repeated orthogonal projection on the past.</p>
+<p>Hence the projection interpretation is</p>
+<p><span class="math display">\[
+\text{series}=\text{deterministic part}+\text{innovation-generated part}.
+\]</span></p>
+<p>If <span class="math inline">\(y_t\)</span> is purely nondeterministic, then</p>
+<p><span class="math display">\[
+y_t^{d}=0,
+\]</span></p>
+<p>here <span class="math inline">\(\delta_t\)</span> could for example be</p>
+<p><span class="math display">\[
+\eta_t=a \cos (\lambda t)+b \sin (\lambda t),
+\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> text is a fixed number and</p>
+<p><span class="math display">\[
+E a=E b=E a b=0, a, b \perp\left\{\u_t\right\} .
+\]</span></p>
+<p>From here onwards, we will always refer to <span class="math inline">\(u_t\)</span> as the Wold innovations, and to <span class="math inline">\(\varepsilon_t\)</span> as the structural shocks.</p>
+</section>
+</section>
+<section id="empirical-method" class="level2">
+<h2 class="anchored" data-anchor-id="empirical-method">Empirical method</h2>
+<p>Now that we have defined all the key mathematical concepts we will be working with, we are ready to dive into the working procedure.<br>
+Our main goal is to identify and estimate the coefficients of the polynomial <span class="math inline">\(\Theta(L)\)</span> in the structural VMA, which we do not observe directly:</p>
+<p><span class="math display">\[
+y_t = \Theta(L)\varepsilon_t,
+\]</span></p>
+<p>to do so, we will proceed as follows:</p>
+<ol type="1">
+<li>given the observables, we will estimate a finite-order VAR(p);</li>
+<li>we will treat this VAR(p) as an approximation to an infinite-order VAR;</li>
+<li>invert the VAR to recover the implied VMA Wold representation;</li>
+<li>we will try to connect the Wold representation (not economically meaningful) to the structural VMA defined above.</li>
+</ol>
+<p>Usually, point 1 and 2 shouldn’t create any issues, as long as the coefficients of the Wold representation are absolutely summable.<br>
+To invert the VAR, a necessary condition is that the process is stationary, i.e.&nbsp;given:</p>
+<p><span class="math display">\[
+  A(L)y_t=u_t
+\]</span></p>
+<p>all the roots of <span class="math inline">\(operatorname{det}(A(z))\)</span> must be outside the unit circle (see Hamilton (2005) for details).<br>
+The next step, therefore, will be trying to “connect” the Wold innovations to the structural shocks, abstracting from the deterministic component.</p>
+</section>
+<section id="invertibility" class="level2">
+<h2 class="anchored" data-anchor-id="invertibility">Invertibility</h2>
+<p>We say that a process <span class="math inline">\({y_t}\)</span> is invertible with respect to <span class="math inline">\({\varepsilon_t}\)</span> if:</p>
+<p><span class="math display">\[
+  \varepsilon_t \in \operatorname{span} \mathcal H_t^y
+\]</span></p>
+<p>Which literally indicates that the shocks are recoverable from a linear combination of the observables.</p>
+<p>Remember that from the Wold decomposition we have <span class="math inline">\(u_t \perp \mathcal H_{t-1}^y\)</span>.<br>
+From the definition of the shocks, we also have <span class="math inline">\(\varepsilon_t \perp \mathcal H_{t-1}^y\)</span>, then, if the process is invertible, it must be that <span class="math inline">\(\varepsilon_t \in \mathcal I_t^y\)</span>.<br>
+Now Assume that <span class="math inline">\(\varepsilon_t \in \mathbb R^n\)</span> and <span class="math inline">\(u_t \in \mathbb R^n\)</span>, and that their covariance matrices are full rank.<br>
+Then it must be both: <span class="math inline">\(u_t \in \mathcal I_t^y\)</span> and <span class="math inline">\(\varepsilon_t \in \mathcal I_t^y\)</span> and therefore we can write:</p>
+<p><span class="math display">\[
+  u_t = \Omega \varepsilon_t, \quad u_t \sim W N(0, \Sigma) \quad \varepsilon_t \sim W N(0, I)
+\]</span></p>
+<p>Notice:</p>
+<p><span class="math display">\[
+  \mathbb{V} u_t = \Sigma = \mathbb{V} \Omega \varepsilon_t = \Omega \Omega^{'}
+\]</span></p>
+<p>The coefficients in <span class="math inline">\(\Omega\)</span> are th econtemporaneous transmissione coefficients that relate changes in <span class="math inline">\(varepsilon_t\)</span> to contemporaneous changes in <span class="math inline">\(u_t\)</span>.</p>
+<section id="failure-of-invertibility" class="level3">
+<h3 class="anchored" data-anchor-id="failure-of-invertibility">Failure of invertibility</h3>
+<p>There are two important cases where invertibility does not hold.</p>
+<p>The first is when <span class="math inline">\(\varepsilon_t \in \mathbb R^m\)</span> and <span class="math inline">\(y_t \in \mathbb R^n\)</span>, with <span class="math inline">\(n&lt;m\)</span>: in these cases, we will not have enough equations to “disentangle” the different shocks. This case is quite trivial and will not be shown here.<br>
+The second case arises when the econometrician is not able to recover the hidden state from the history of the observables.<br>
+To clarify this point, consider a scalar state space system:</p>
+<p><span class="math display">\[
+s_t = a s_{t-1} + b \varepsilon_t,
+\qquad
+y_t = c s_{t-1} + d \varepsilon_t,
+\qquad d \neq 0.
+\]</span></p>
+<p>Since <span class="math inline">\(d \neq 0\)</span>, we can solve the observation equation for the structural shock: <span class="math display">\[
+\varepsilon_t = d^{-1}(y_t - c s_{t-1}).
+\]</span></p>
+<p>Substituting into the state equation gives <span class="math display">\[
+s_t
+= a s_{t-1} + b d^{-1}(y_t - c s_{t-1})
+= (a - b d^{-1} c)s_{t-1} + b d^{-1} y_t.
+\]</span></p>
+<p>Iterating backwards, <span class="math display">\[
+s_t
+= (a - b d^{-1} c)^t s_0 + \sum_{j=0}^{t-1} (a - b d^{-1} c)^j b d^{-1} x_{t-j}.
+\]</span></p>
+<p>This decomposition is the key to invertibility.</p>
+<p>If the “Poor Man Invertibility Condition” holds, i.e.&nbsp;if</p>
+<p><span class="math display">\[
+|a - b d^{-1} c| &lt; 1,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+(a - b d^{-1} c)^t s_0 \to 0
+\qquad \text{as } t \to \infty,
+\]</span></p>
+<p>so the effect of the unknown initial state disappears. Hence <span class="math inline">\(s_t\)</span> is asymptotically pinned down by the history of observables <span class="math inline">\(\{x_t,x_{t-1},\dots\}\)</span>, and therefore the shocks are recoverable via</p>
+<p><span class="math display">\[
+\varepsilon_t = d^{-1}(x_t - c s_{t-1}).
+\]</span></p>
+<p>If instead</p>
+<p><span class="math display">\[
+|a - b d^{-1} c| &gt; 1,
+\]</span></p>
+<p>then the term <span class="math inline">\((a - b d^{-1} c)^t s_0\)</span> does not vanish, so the unknown initial state continues to matter. In that case, the history of observables does not uniquely reveal the hidden state, and the model is non-invertible.</p>
+<p>to see how this connects to recovering the hidden state, let the econometrician’s information set be <span class="math inline">\(\mathcal F_t^y=\sigma(y_t,y_{t-1},\dots)\)</span> and remember:</p>
+<p><span class="math display">\[
+\begin{aligned}
+u_{t+1}=y_{t+1}-\mathbb{E}\left(y_{t+1} \mid \mathcal F_t^y\right) &amp; =y_{t+1}-c \mathbb{E}\left(s_t \mid \mathcal F_t^y\right) \\
+&amp; =c\left[s_t-\mathbb{E}\left(s_t \mid \mathcal F_t^y\right)\right]+d \varepsilon_{t+1}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+s_{t+1}=(a - b d^{-1} c)^{t+1}s_0+\sum_{j=0}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}.
+\]</span></p>
+<p>Taking conditional expectation, <span class="math display">\[
+\mathbb E[s_{t+1}\mid \mathcal F_t^x]
+=
+(a - b d^{-1} c)^{t+1}s_0
++
+\sum_{j=1}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}
++
+b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^x].
+\]</span></p>
+<p>Hence, if <span class="math display">\[
+(a - b d^{-1} c)^{t+1}s_0 \neq 0,
+\]</span> the forecast of <span class="math inline">\(s_{t+1}\)</span> still depends on the unobserved initial state <span class="math inline">\(s_0\)</span>. So the econometrician cannot recover <span class="math inline">\(s_{t+1}\)</span> from observables alone.</p>
+<p>Defining the part based only on observables as <span class="math display">\[
+\hat s_{t+1|t}
+=
+\sum_{j=1}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}
++
+b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^x],
+\]</span> the residual is <span class="math display">\[
+s_{t+1}-\hat s_{t+1|t}=(a - b d^{-1} c)^{t+1}s_0.
+\]</span></p>
+<p>Therefore, invertibility requires <span class="math display">\[
+(a - b d^{-1} c)^{t+1}s_0 \to 0,
+\]</span> so that the hidden initial condition disappears and the state becomes recoverable from the history of observables.</p>
+</section>
+</section>
+<section id="identification-issues" class="level2">
+<h2 class="anchored" data-anchor-id="identification-issues">Identification Issues</h2>
+<p>The reduced form alone does not identify structural shocks. We will analyse three problems that arise when trying to identify the matrix <span class="math inline">\(\Omega\)</span>.</p>
+<section id="rotational-indeterminacy" class="level3">
+<h3 class="anchored" data-anchor-id="rotational-indeterminacy">Rotational indeterminacy</h3>
+<p>Let’s say we were able to find a linear relationship between the structural shocks <span class="math inline">\(\varepsilon_t\)</span> and the Wold innovations <span class="math inline">\(u_t\)</span> of the form:</p>
+<p><span class="math display">\[
+u_t = \Omega \varepsilon_t, \quad u_t \sim W N(0, \Sigma) \quad \varepsilon_t \sim W N(0, I)
+\]</span></p>
+<p>where <span class="math inline">\(/Omega\)</span> is some linear map. Notice the following:</p>
+<p><span class="math display">\[
+  \mathbb{V}(u_t) = \mathbb{V}(\Omega \varepsilon_t) = \Omega I \Omega ' = \Sigma
+\]</span></p>
+<p>Follows that <span class="math inline">\(\Sigma = \Omega \Omega '\)</span>. From linear algebra we know that, for each orthonormal matrix <span class="math inline">\(Q\)</span> we can write: <span class="math inline">\(\Sigma = \Omega Q Q' \Omega ' = \Omega \Omega '\)</span>. Note that by definition, an orthonormal matrix preserves length and angles, hence observing <span class="math inline">\(\Sigma\)</span> alone is not sufficient to pin down a single <span class="math inline">\(\Omega\)</span>.<br>
+As an example, consider the orthonormal matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> and note:</p>
+<p><span class="math display">\[
+  \Omega P P' \Omega ' = \Omega I \Omega ' = \Omega Q Q' \Omega '
+\]</span></p>
+<p>If the reader has issues convincing themselves of the magnitude of this issue, the following widget could also be of help:</p>
+<iframe src="../widgets/rotation-widget.html" width="100%" height="770" style="border:none; border-radius:12px;">
+</iframe>
+<p>Notice that, since we are interested in recovering not only the span of the shocks, but also the magnitude of their effect on observed variables, that of rotational indeterminacy is a fundamental problem of great importance. We will therefore dedicate most of the rest of the text to pinning down a specific rotation of the matrix <span class="math inline">\(Q\)</span>.</p>
+</section>
+<section id="dynamic-indeterminacy" class="level3">
+<h3 class="anchored" data-anchor-id="dynamic-indeterminacy">Dynamic indeterminacy</h3>
+<p>Dynamic indeterminacy arises because different structural moving-average representations can imply the same reduced-form spectral density and the same second moments.<br>
+This is apparent when studying the covariance generating function of a scalar MA process, and can be easily generalised to the vector process. However, even if the same MA(q) can be represented in <span class="math inline">\(2^q\)</span> different ways just by flipping the roots, one can verify that only one such representation will be invertible. Therefore, assuming invertibility is sufficient to solve this identification issue.</p>
+</section>
+<section id="size-indeterminacy" class="level3">
+<h3 class="anchored" data-anchor-id="size-indeterminacy">Size indeterminacy</h3>
+<p>Size indeterminacy arises when the number of shocks is greater than the number of observables. A simple scalar example from professor Agrippino notes can clarify this concept.</p>
+<p>Suppose that the true model is the following MA(2) with <span class="math inline">\(n_y=n_{\varepsilon}=1\)</span> :</p>
+<p><span class="math display">\[
+y_t=\theta_0 \varepsilon_t+\theta_1 \varepsilon_{t-1}
+\]</span></p>
+<p>But we entertain the alternative two-shock process:</p>
+<p><span class="math display">\[
+y_t=\theta_{01} \varepsilon_{1, t}+\theta_{02} \varepsilon_{2, t}+\theta_{11} \varepsilon_{1, t-1}+\theta_{12} \varepsilon_{2, t-1}
+\]</span></p>
+<p>This process will imply the same second moments as the true one (i.e.&nbsp;it is observationally equivalent) as long as:</p>
+<p><span class="math display">\[
+\begin{gathered}
+\operatorname{Var}\left(y_t\right)=\theta_{01}^2+\theta_{02}^2+\theta_{11}^2+\theta_{12}^2=\theta_0^2+\theta_1^2 \\
+\operatorname{Cov}\left(y_t, y_{t-1}\right)=\theta_{01} \theta_{11}+\theta_{02} \theta_{12}=\theta_0 \theta_1
+\end{gathered}
+\]</span></p>
+<p>But of course it implies very different IRFs/FVDs/HDs</p>
+<p>Notice, however, than when we assume invertibility we require automatically the number of observables to be the same as the number of shocks, therefore we will not need to explicitly address this issue once assumed invertibility.</p>
+</section>
+</section>
+<section id="identification-methods" class="level2">
+<h2 class="anchored" data-anchor-id="identification-methods">Identification methods</h2>
+<section id="short-run-restrictions" class="level3">
+<h3 class="anchored" data-anchor-id="short-run-restrictions">Short run restrictions</h3>
+<p>Rembember that, under invertibility, we can write:</p>
+<p><span class="math display">\[
+  y_t = C(L)u_t = C(L) \Omega \varepsilon_t = C(L) \Omega Q \varepsilon_t = C(L) \Sigma^{1/2} Q \varepsilon_t
+\]</span></p>
+<p>for some orthonormal <span class="math inline">\(Q\)</span> conformable to <span class="math inline">\(\Omega\)</span>. The IRFs are defined as <span class="math inline">\(\Theta(L) = C(L) \Sigma^{1/2} Q\)</span>.<br>
+Remember now that <span class="math inline">\(C(0)\)</span> is defined as the identity matrix, and define the impact matrix <span class="math inline">\(\Theta_0\)</span> as:</p>
+<p><span class="math display">\[
+  \Theta_0 = \Omega Q
+\]</span></p>
+<p>Then we have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+u_t &amp; =\Theta_0 \varepsilon_t \\
+\operatorname{Var}\left(u_t\right) &amp; =\operatorname{Var}\left(\Theta_0 \varepsilon_t\right) \\
+\Sigma &amp; =\Theta_0 \Theta_0^{\prime}
+\end{aligned}
+\]</span></p>
+<p>Note that <span class="math inline">\(\Theta_0\)</span> has a total of <span class="math inline">\(n^2\)</span> parameters, while <span class="math inline">\(\Sigma\)</span> only has <span class="math inline">\(\frac{n(n+1)}{2}\)</span> (it suffices to notices the triangular structure of the matrix) - this means we have to impose <span class="math inline">\(n^2 - \frac{n(n+1)}{2} = \frac{n(n-1)}{2}\)</span> restrictions to <span class="math inline">\(\Theta_0\)</span> in order for the system to be determinate. A toy example can help clarify why. Define:</p>
+<p><span class="math display">\[
+\Sigma =
+\begin{pmatrix}
+\sigma_{11} &amp; \sigma_{12} \\
+\sigma_{12} &amp; \sigma_{22}
+\end{pmatrix},
+\quad
+\Theta_0 =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+\Theta_0 \Theta_0' =
+\begin{pmatrix}
+a^2 + b^2 &amp; ac + bd \\
+ac + bd &amp; c^2 + d^2
+\end{pmatrix}
+\]</span></p>
+<p>Equating entries gives:</p>
+<p><span class="math display">\[
+\Sigma = \Theta_0 \Theta_0'
+\;\Longleftrightarrow\;
+\begin{cases}
+\sigma_{11} = a^2 + b^2 \\
+\sigma_{12} = ac + bd \\
+\sigma_{22} = c^2 + d^2
+\end{cases}
+\]</span></p>
+<p>where we only have 3 equations for the 4 unknowns <span class="math inline">\(a, b, c, d\)</span>. In this example we need 1 restriction.</p>
+</section>
+</section>
+<section id="short-run-identification" class="level2">
+<h2 class="anchored" data-anchor-id="short-run-identification">Short run identification</h2>
+<p>Now we can approach 3 methods for short run identification. I will present them in order from the most “strict” to the more flexible.</p>
+<section id="recursive-identification" class="level3">
+<h3 class="anchored" data-anchor-id="recursive-identification">Recursive identification</h3>
+<p>Remember that a symmetric, positive-definite matrix <span class="math inline">\(\Sigma\)</span> can be decomposed as <span class="math inline">\(\Sigma = \Gamma \Gamma'\)</span> where <span class="math inline">\(\Gamma\)</span> is lower triangular. We can use the following notation: <span class="math inline">\(\Gamma = \operatorname{chol}(\Sigma)\)</span>.<br>
+Recursive identification assumes that:</p>
+<p><span class="math display">\[
+  \Theta_0 = \operatorname{chol}(\Sigma)
+\]</span></p>
+<p>For example, for <span class="math inline">\(n=3\)</span> we have:</p>
+<p><span class="math display">\[
+\underbrace{\left(\begin{array}{l}
+u_{1, t} \\
+u_{2, t} \\
+u_{3, t}
+\end{array}\right)}_{u_t}=\underbrace{\left(\begin{array}{ccc}
+\Theta_{0,11} &amp; 0 &amp; 0 \\
+\Theta_{0,21} &amp; \Theta_{0,22} &amp; 0 \\
+\Theta_{0,31} &amp; \Theta_{0,32} &amp; \Theta_{0,33}
+\end{array}\right)}_{\Theta_0} \underbrace{\left(\begin{array}{l}
+\varepsilon_{1, t} \\
+\varepsilon_{2, t} \\
+\varepsilon_{3, t}
+\end{array}\right)}_{\varepsilon_t}
+\]</span></p>
+<p>This, of course, imposes strong timing restrictions. In particular, the first variable only responds to <span class="math inline">\(varepsilon_{1, t}\)</span> on impact, while the third is affected by all shocks, on impact. Hence, the order in which the variables appear in the model is of great importance.<br>
+This method gives its name to the fact that we identify the shocks recursively, as we can see inverting the relationship</p>
+<p><span class="math display">\[
+\underbrace{\left(\begin{array}{l}
+\varepsilon_{1, t} \\
+\varepsilon_{2, t} \\
+\varepsilon_{3, t}
+\end{array}\right)}_{\varepsilon_t}
+=
+\underbrace{\left(\begin{array}{ccc}
+\frac{1}{\Theta_{0,11}} &amp; 0 &amp; 0 \\
+-\frac{\Theta_{0,21}}{\Theta_{0,11}\Theta_{0,22}} &amp; \frac{1}{\Theta_{0,22}} &amp; 0 \\
+\frac{\Theta_{0,21}\Theta_{0,32}-\Theta_{0,31}\Theta_{0,22}}{\Theta_{0,11}\Theta_{0,22}\Theta_{0,33}} &amp; -\frac{\Theta_{0,32}}{\Theta_{0,22}\Theta_{0,33}} &amp; \frac{1}{\Theta_{0,33}}
+\end{array}\right)}_{\Theta_0^{-1}}
+\underbrace{\left(\begin{array}{l}
+u_{1, t} \\
+u_{2, t} \\
+u_{3, t}
+\end{array}\right)}_{u_t}
+\]</span></p>
+<p>fancy notation aside, we can see that the first line identifies <span class="math inline">\(\varepsilon_{1, t}\)</span>, then the component of the innovations of the second variable <span class="math inline">\(u_{2, t}\)</span> that is orthogonal to the first identifies <span class="math inline">\(\varepsilon_{2, t}\)</span> and so on…<br>
+Interestingly, note the following:</p>
+<p><span class="math display">\[
+y_t = \sum_{h=0}^\infty \Psi_h u_{t-h}, \quad \Psi_0 = I
+\]</span></p>
+<p>by Wold. Therefore:</p>
+<p><span class="math display">\[
+u_t = \Theta_0 \varepsilon_t
+\;\Rightarrow\;
+\frac{\partial y_t}{\partial \varepsilon_t} = \Theta_0
+\]</span></p>
+<p>Hence identification on <span class="math inline">\(u_t\)</span> pins down impact effects on <span class="math inline">\(y_t\)</span>.<br>
+As you can argue, this recursive structure is not particularly realistic nor easily implementable. First, the lower the sampling frequency, the more unrealistic the timing assumptions become. Since this is quite obvious, I will not go further.<br>
+Second, the recursive causal ordering rules out contemporaneous feedback across variables.<br>
+To see this, for an ordering (y_{1t},,y_{nt}):</p>
+<p><span class="math display">\[
+u_{it} = \sum_{j \le i} \Theta_{0,ij}\,\varepsilon_{jt}
+\]</span></p>
+<p>so that shocks to variables ordered later cannot affect earlier variables on impact. As a consequence, the model excludes systems where contemporaneous interactions are simultaneous, i.e.&nbsp;where mutually endogenous variables respond to each other within the same period.</p>
+</section>
+<section id="non-recursive-impact-restrictions" class="level3">
+<h3 class="anchored" data-anchor-id="non-recursive-impact-restrictions">Non-recursive impact restrictions</h3>
+<p>This method allows for identification while maintaining a slightly more flexible structure than the previous one. In short, it entails imposing <span class="math inline">\(n(n-1)/2\)</span> independent restrictions, i.e.&nbsp;setting <span class="math inline">\(n(n-1)/2\)</span> entries of <span class="math inline">\(\Theta_0\)</span> equal to 0, in a way that allows do identify the shocks. Usually, these restrictions are informed by theory or previous knowledge.<br>
+Non-recursive zero restrictions must ensure that each structural shock has a distinct contemporaneous effect on the reduced-form innovations.</p>
+<p>Otherwise, different shocks become observationally indistinguishable, i.e.&nbsp;one column of <span class="math inline">\(\Theta_0\)</span> can be replicated by a linear combination of others, leading to underidentification as in the following example.</p>
+<p><span class="math display">\[
+\Theta_0 =
+\left(\begin{array}{ccc}
+\Theta_{0,11} &amp; 0 &amp; 0 \\
+0 &amp; \Theta_{0,22} &amp; \Theta_{0,23} \\
+\Theta_{0,31} &amp; \Theta_{0,32} &amp; \Theta_{0,33}
+\end{array}\right)
+\]</span></p>
+<p>when imposing this impact matrix, the econometrician can identify the first shock, but cannot separate the third from the second using observational data.</p>
+<p><span class="math display">\[
+\Theta_0 =
+\left(\begin{array}{ccc}
+\Theta_{0,11} &amp; \Theta_{0,12} &amp; 0 \\
+0 &amp; \Theta_{0,22} &amp; \Theta_{0,23} \\
+\Theta_{0,31} &amp; 0 &amp; \Theta_{0,33}
+\end{array}\right)
+\]</span></p>
+<p>here, on the other hand every shock has a unique “footprint”, so that we are able to distinguish them using data alone.</p>
+</section>
+<section id="sign-restrictions" class="level3">
+<h3 class="anchored" data-anchor-id="sign-restrictions">Sign restrictions</h3>
+<p>This method, defined agnostic by Uhlig, imposes constraints only on the sign of the responses. This way, <span class="math inline">\(Q\)</span> is not point identified, but rather set identified. AS before, sign restrictions are informed by theory or literature standards. Note that we can both impose restrictions on the impact matrix <span class="math inline">\(\Theta_0\)</span> and the matrices <span class="math inline">\(\Theta_h\)</span>, <span class="math inline">\(h=1,2,...,H\)</span> i.e.&nbsp;we are directly imposing signs on the IRFs.<br>
+Before presenting an example, it is interesting to sketch the algorithm used to calculate the IRFs:</p>
+<ol type="1">
+<li>Estimate the VAR</li>
+<li>Decompose <span class="math inline">\(\hat{\Sigma} = \Gamma \Gamma'\)</span><br>
+Repeat n times:<br>
+</li>
+<li>Draw <span class="math inline">\(Q^i\)</span> from the space of orthonormal matrices conformable to <span class="math inline">\(\Gamma\)</span></li>
+<li>Compute <span class="math inline">\(\Theta_h^i\)</span></li>
+<li>If all signs restrictions hold, keep the matrix, otherwise discard</li>
+</ol>
+<p>Note that is possible that the set of matrices <span class="math inline">\(Q\)</span> that are not discarded may be very tiny or almost empty. If this is the case, the restrictions could be too strong or even contradict the estimated dynamics.<br>
+We will now see how sign restrictions are applied in practice. Probably, the simplest example is the following:</p>
+<p><span class="math display">\[
+\left(\begin{array}{c}
+u^{x}_t \\
+u^{\pi}_t \\
+u^{i}_t
+\end{array}\right)=\left(\begin{array}{ccc}
++ &amp; - &amp; - \\
++ &amp; + &amp; - \\
++ &amp; + &amp; +
+\end{array}\right)\left(\begin{array}{c}
+\varepsilon_t^d \\
+\varepsilon_t^s \\
+\varepsilon_t^m
+\end{array}\right)
+\]</span></p>
+<p>Notice that in the previous example we are able to identify the shocks separately, as each one follows a different sign pattern. As a counterexample, consider the next matrix:</p>
+<p><span class="math display">\[
+\left(\begin{array}{c}
+x_t \\
+\pi_t \\
+i_t
+\end{array}\right)=\left(\begin{array}{ccc}
+- &amp; - &amp; + \\
++ &amp; + &amp; - \\
++ &amp; - &amp; +
+\end{array}\right)\left(\begin{array}{c}
+\varepsilon_t^d \\
+\varepsilon_t^s \\
+\varepsilon_t^m
+\end{array}\right)
+\]</span></p>
+<p>We can see here that the third shocks follows a unique pattern, and can therefore be distinguished from the first two. However, we will not be able to discern between a positive demand shock (<span class="math inline">\(\varepsilon_t^d\)</span>) and a negative supply shock (<span class="math inline">\(\varepsilon_t^s\)</span>), as they imply the same sign pattern.<br>
+To avoid this identification problem, note the following:<br>
+Let <span class="math inline">\(\Theta_{m n}\)</span> be an entry of <span class="math inline">\(\Theta\)</span>:<br>
+<span class="math inline">\(\forall j, k: j \neq k \quad \exists i: \operatorname{sign} \theta_{j i} = \operatorname{sign} \theta_{k i}\)</span><br>
+<span class="math inline">\(\forall j, k: j \neq k \quad \exists_i: \operatorname{sign} \theta_{j i} \neq \operatorname{sign} \theta_{k i}\)</span><br>
+are hecessary conditions for separating the shocks.<br>
+Beware of the fact that, even when we are able to separate the signs of the shocks, we can never avoid masquerading, which occurs when the imposed conditions on one shock can also be satisfied by a linear combinations of other shocks.<br>
+Lastly, I will report the IRFs from the seminal paper by Smets and Wouters (2003), which can be useful when making a choice for the signs appropriately informed by theory.</p>
+<p>IRFs to a monetary shock:<br>
+<img src="../images/irfmonetary.png" class="img-fluid quarto-figure quarto-figure-center" style="width:50.0%"></p>
+<p>IRFs to a productivity shock:<br>
+<img src="../images/irfproductivity.png" class="img-fluid quarto-figure quarto-figure-center" style="width:53.0%"></p>
+<p>IRFs to a price markup shock:<br>
+<img src="../images/irfpricemarkup.png" class="img-fluid quarto-figure quarto-figure-center" style="width:50.0%"></p>
+<p>IRFs to a government spending shock:<br>
+<img src="../images/irfgvmtspending.png" class="img-fluid quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</section>
+</section>
+<section id="long-run-zero-restrictions" class="level2">
+<h2 class="anchored" data-anchor-id="long-run-zero-restrictions">Long run zero restrictions</h2>
+<p>This method is similar in flavour to short run zero restrictions: the idea is that theoretical models impose certain restrictions on variables in the longs run (e.g.&nbsp;monetary neutrality). This suggests we can impose constraints on the response to shocks in the long run.<br>
+To see how, remember:</p>
+<p><span class="math display">\[
+  \Theta(L) = C(L) \Sigma^{1/2} Q
+\]</span></p>
+<p>Then, imposing a lung run restriction on the response of variable <span class="math inline">\(i\)</span> to shock <span class="math inline">\(j\)</span> means setting equal to zero the sum</p>
+<p><span class="math display">\[
+\sum_{\ell=0}^{\infty} \Theta_{i, j, \ell}=\Theta_{i, j, 0}+\Theta_{i, j, 1}+\Theta_{i, j, 2}+\ldots
+\]</span></p>
+<p>notice that, since we have set <span class="math inline">\(L=1\)</span> in the previous equation, we can use the shorthard <span class="math inline">\(\Theta(1)\)</span> as in:</p>
+<p><span class="math display">\[
+\Theta(1)=\sum_{\ell=0}^{\infty} \Theta_{\ell}=\Theta_0+\Theta_1+\Theta_2+\ldots
+\]</span></p>
+<p>Under invertibility <span class="math inline">\(u_t = \Omega \varepsilon_t\)</span> we have:</p>
+<p><span class="math display">\[
+\Theta(1)=C(1) \Sigma^{1 / 2} Q
+\]</span></p>
+<p>We call this object the long run multiplier.<br>
+To see how we can impose restrictions in practice, start from the Wold MA:</p>
+<p><span class="math display">\[
+y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell}, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma &amp; t=s \\ 0 &amp; t \neq s\end{cases}
+\]</span></p>
+<p>Now compute the variance:</p>
+<p><span class="math display">\[
+\mathbb{V}\left(y_t\right)=\mathbb{E}\left[y_t y_t^{\prime}\right]=\mathbb{E}\left[\left(\sum_j C_j u_{t-j}\right)\left(\sum_k C_k u_{t-k}\right)^{\prime}\right]
+\]</span></p>
+<p>Expand, noting that <span class="math inline">\(C_{\ell}\)</span> is non stochastic:</p>
+<p><span class="math display">\[
+\mathbb{V}\left(y_t\right) =\sum_j \sum_k C_j \mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right] C_k^{\prime}
+\]</span></p>
+<p>Due to the white noise assumption:</p>
+<p><span class="math display">\[
+\mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right]=0 \quad \text { for } j \neq k
+\]</span></p>
+<p>Follows that:</p>
+<p><span class="math display">\[
+\mathbb{V}\left(y_t\right)=\sum_{\ell=0}^{\infty} C_\ell \Sigma C_\ell^{\prime} = C(1) \Sigma C(1)'
+\]</span></p>
+<p>Notice now that <span class="math inline">\(\mathbb{V}\left(y_t\right)\)</span>, which we will call <span class="math inline">\(\Gamma\)</span>, can be written as <span class="math inline">\(\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'\)</span> i.e.&nbsp;<span class="math inline">\(\Theta(1) \Theta(1)'\)</span>. Again, notice that exists an orthonormal matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(\Theta(1) = \Gamma^{1/2} P\)</span> - hence the need to impose restrictions on (1).<br>
+A popular restriction is setting</p>
+<p><span class="math display">\[
+  \Theta(1) = \operatorname{chol}(\Gamma)
+\]</span></p>
+<p>Since the process can seem a bit obscure at first glance, it may be helpful to go through the steps:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \text { estimate VAR } \Rightarrow C(L), \Sigma_u \\
+&amp; \Rightarrow \Gamma=C(1) \Sigma C(1)^{\prime} \\
+&amp; \Rightarrow \Theta(1)P = \operatorname{chol}(\Gamma) \\
+&amp; \Rightarrow Q=\Sigma_u^{-1 / 2} C(1)^{-1} \Theta(1) \text {  fixed}
+\end{aligned}
+\]</span></p>
+<p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restrictio, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption n periods after the positive shock. To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percenage change.</p>
+</section>
+<section id="identification-with-instrumental-variables" class="level2">
+<h2 class="anchored" data-anchor-id="identification-with-instrumental-variables">Identification with instrumental variables</h2>
+<p>We will now present an identification mathod that does not rely on the assumption of invertibility, but instead can be implemented even under partial or no invertibility.<br>
+Usually, we are interested in identifying a structural shock, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> for simplicity. Under invertibility, an instrumental variable <span class="math inline">\(z_t\)</span> for <span class="math inline">\(\varepsilon_{1,t}\)</span> has to be:<br>
+1. Relevant for <span class="math inline">\(\varepsilon_{1,t}\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{1, t} z_t\right)=\alpha \neq 0\)</span><br>
+2. Contemporaneously exogenous with respect to the other shocks in the model, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{2: n, t} z_t\right)=0\)</span> where <span class="math inline">\(n\)</span> indicates the number of shocks in the model.<br>
+The instrumental variable we are looking for will act as a “filter”:</p>
+<p><img src="../images/lens.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%"><br>
+(chatgpt is being dramatic today)</p>
+<p>To see how IV identification works in practice, imagine as before we have assumed invertibility (<span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span>) and we are interested in knowing about <span class="math inline">\(\varepsilon_{t,1}\)</span> and we have found <span class="math inline">\(z_t\)</span> that respects our IV requirements:</p>
+<p><span class="math display">\[
+u_t
+=
+\begin{pmatrix}
+\theta_{0,11} \\
+\theta_{0,21} \\
+\vdots \\
+\theta_{0,n1}
+\end{pmatrix}
+\varepsilon_{t,1}
++
+\begin{pmatrix}
+\theta_{0,12} &amp; \cdots &amp; \theta_{0,1n} \\
+\theta_{0,22} &amp; \cdots &amp; \theta_{0,2n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+\theta_{0,n2} &amp; \cdots &amp; \theta_{0,nn}
+\end{pmatrix}
+\begin{pmatrix}
+\varepsilon_{t,2} \\
+\vdots \\
+\varepsilon_{t,n}
+\end{pmatrix}.
+\]</span></p>
+<p>Note that since <span class="math inline">\(\mathbb{V}\varepsilon_{t,1} = 1\)</span> and <span class="math inline">\(\mathbb{E}\left(\varepsilon_{2: n, t} z_t\right)=0\)</span> we have:</p>
+<p><span class="math display">\[
+\operatorname{Cov}(u_t, z_t)
+=
+\alpha \, \Theta_{0,\cdot 1},
+\]</span></p>
+<p>which is:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\operatorname{Cov}(u_{t,1}, z_t) \\
+\operatorname{Cov}(u_{t,2}, z_t) \\
+\vdots \\
+\operatorname{Cov}(u_{t,n}, z_t)
+\end{pmatrix}
+=
+\alpha
+\begin{pmatrix}
+\theta_{0,11} \\
+\theta_{0,21} \\
+\vdots \\
+\theta_{0,n1}
+\end{pmatrix}.
+\]</span></p>
+<p>Now, note that we have recovered the impact coefficients up to a scale <span class="math inline">\(\alpha\)</span>, so it’s now easy to recover the relative impact coefficients as:</p>
+<p><span class="math display">\[
+\frac{\operatorname{Cov}\left(u_{t, 2: n} z_t\right)}{\operatorname{Cov}\left(u_{t, 1} z_t\right)}
+\]</span></p>
+<p>where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> moves variable in position <span class="math inline">\(1\)</span> by <span class="math inline">\(25\)</span> basis points and we have calculated the aboe ratio with <span class="math inline">\(\operatorname{Cov}\left(u_{t, 1} z_t\right)\)</span> at the denominator. Knowing that the ratio for variable <span class="math inline">\(2\)</span> is equal to <span class="math inline">\(4\)</span> tells us that the response of that variable will be of <span class="math inline">\(100\)</span> basis points.</p>
+<p>What if we cannot assume invertibility? In that case <span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span> won’t hold, instead we have to rely on the SVMA equation <span class="math inline">\(y_t=\Theta(L) \varepsilon_t=\sum_{\ell=0}^{\infty} \Theta_{\ell} \varepsilon_{t-\ell}=\Theta_0 \varepsilon_t+\Theta_1 \varepsilon_{t-1}+\ldots\)</span> Say now we want to calculate, similarly as we did before, the ratio of the IRFs:</p>
+<p><span class="math display">\[
+\frac{\operatorname{Cov}\left(y_{t+\ell, i} z_t\right)}{\operatorname{Cov}\left(y_{1, t} z_t\right)} = \frac{\alpha \Theta_{i, 1, \ell}}{\alpha \Theta_{1, 1, \ell}}
+\]</span></p>
+<p>In this case we must, however, notice that in calculating the covariances we have to rule out not only the interactions between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{2: n, t}\)</span> but also between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{t+s} \forall s \neq 0\)</span>. This condition is referred as lead/lag exogeneity.<br>
+To see why, remember we have</p>
+<p><span class="math display">\[
+y_t = \sum_{\ell=0}^{\infty}\Theta_\ell \varepsilon_{t-\ell},
+\qquad
+z_t = \alpha \varepsilon_{1,t} + \nu_t.
+\]</span></p>
+<p>Take the <span class="math inline">\(i\)</span>-th component of <span class="math inline">\(y_{t+h}\)</span>: <span class="math display">\[
+y_{i,t+h}
+=
+\sum_{\ell=0}^{\infty}\Theta_{i,\cdot,\ell}\varepsilon_{t+h-\ell}.
+\]</span></p>
+<p>Now compute the covariance with the instrument: <span class="math display">\[
+\operatorname{Cov}(y_{i,t+h},z_t)
+=
+\operatorname{Cov}\!\left(
+\sum_{\ell=0}^{\infty}\Theta_{i,\cdot,\ell}\varepsilon_{t+h-\ell},
+\, z_t
+\right)
+=
+\sum_{\ell=0}^{\infty}
+\Theta_{i,\cdot,\ell}\,
+\operatorname{Cov}(\varepsilon_{t+h-\ell},z_t).
+\]</span></p>
+<p>We would like this to reduce to <span class="math display">\[
+\operatorname{Cov}(y_{i,t+h},z_t)=\alpha\,\Theta_{i,1,h},
+\]</span> because this identifies the IRF to shock <span class="math inline">\(1\)</span> at horizon <span class="math inline">\(h\)</span>.</p>
+<p>For this to happen, all terms must vanish except the one corresponding to the first shock at date <span class="math inline">\(t\)</span>, that is, the term with <span class="math inline">\(\ell=h\)</span> and shock index <span class="math inline">\(j=1\)</span>. Hence we need lead/lag exogeneity so that <span class="math display">\[
+\operatorname{Cov}(\varepsilon_{j,t+h-\ell},z_t)=0
+\qquad
+\text{for all } (j,\ell)\neq(1,h).
+\]</span></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

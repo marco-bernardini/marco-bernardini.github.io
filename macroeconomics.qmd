@@ -5,6 +5,9 @@ format: html
 
 This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.
 
+## Empirical macroeconomics
+- [Introductory course](latex/empirical.qmd)
+
 ## Corso introduttivo di Macroeconomia con Python
 ### A series of lectures on the principles of macroeconomics in italian
 - [Le variabili macroeconomiche](notebooks/Le variabili macroeconomiche.ipynb)  

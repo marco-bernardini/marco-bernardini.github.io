@@ -19,6 +19,7 @@ website:
 resources:
   - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf
   - assets/Tesi Marco Bernardini.pdf
+  - widgets/
     
 format:
   html:
