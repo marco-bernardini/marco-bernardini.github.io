@@ -400,7 +400,7 @@ $$
   A(L)y_t=u_t
 $$
 
-all the roots of $operatorname{det}(A(z))$ must be outside the unit circle (see Hamilton (2005) for details).  
+all the roots of $\operatorname{det}(A(z))$ must be outside the unit circle (see Hamilton (2005) for details).  
 The next step, therefore, will be trying to "connect" the Wold innovations to the structural shocks, abstracting from the deterministic component.
 
 ## Invertibility
@@ -887,35 +887,40 @@ We call this object the long run multiplier.
 To see how we can impose restrictions in practice, start from the Wold MA:
 
 $$
-y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell}, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma & t=s \\ 0 & t \neq s\end{cases}
+y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma & t=s \\ 0 & t \neq s\end{cases}, \quad {C_\ell}_{\ell = 0}^{\infty} \text {absolutely summable}
 $$
 
-
-Now compute the variance:
-
-$$
-\mathbb{V}\left(y_t\right)=\mathbb{E}\left[y_t y_t^{\prime}\right]=\mathbb{E}\left[\left(\sum_j C_j u_{t-j}\right)\left(\sum_k C_k u_{t-k}\right)^{\prime}\right]
-$$
-
-Expand, noting that $C_{\ell}$ is non stochastic:
+let:
 
 $$
-\mathbb{V}\left(y_t\right) =\sum_j \sum_k C_j \mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right] C_k^{\prime}
+  \Gamma_j = \mathbb{E}y_t y_{t-j}
 $$
 
-Due to the white noise assumption:
+Define the autocovariance generating function as:
 
 $$
-\mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right]=0 \quad \text { for } j \neq k
+  G_Y(z) = \sum_{j = -\infty}^{\infty} \Gamma_j z^j
 $$
 
-Follows that:
+For an $MA(\infty)$ process we have:
 
 $$
-\mathbb{V}\left(y_t\right)=\sum_{\ell=0}^{\infty} C_\ell \Sigma C_\ell^{\prime} = C(1) \Sigma C(1)'
+  G_Y(z) = C(z) \Sigma C(z)'
 $$
 
-Notice now that $\mathbb{V}\left(y_t\right)$, which we will call $\Gamma$, can be written as $\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'$ i.e. $\Theta(1) \Theta(1)'$. Again, notice that exists an orthonormal matrix $P$ such that $\Theta(1) = \Gamma^{1/2} P$ - hence the need to impose restrictions on \Theta(1).  
+Now, define the long variance as:
+
+$$
+  \mathbb{V}_{LR}(y) = \sum_{j = -\infty}^{\infty} \Gamma_j
+$$
+
+This is clearly $G_Y$ evaluated at $z=1$, so we can use the previous result to obtain
+
+$$
+  \mathbb{V}_{LR}(y) = C(1) \Sigma C(1)'
+$$
+
+Notice now that $C(1) \Sigma C(1)'$, which we will now call $\Gamma$ for simplicity, can be written as $\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'$ i.e. $\Theta(1) \Theta(1)'$ (remember that $\Sigma$ is PD and symmetric). Again, notice that exists an orthonormal matrix $P$ such that $\Theta(1) = \Gamma^{1/2} P$ - hence the need to impose restrictions on \Theta(1).  
 A popular restriction is setting
 
 $$
@@ -1006,6 +1011,31 @@ $$
 $$
 
 where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let's say $\varepsilon_{1,t}$ moves variable in position $1$ by $25$ basis points and we have calculated the aboe ratio with $\operatorname{Cov}\left(u_{t, 1} z_t\right)$ at the denominator. Knowing that the ratio for variable $2$ is equal to $4$ tells us that the response of that variable will be of $100$ basis points.  
+Notice now one technical but intereseting detail:
+
+$$
+\varepsilon_{1, t}=\underbrace{\left[\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} \operatorname{Cov}\left(z_t, u_t\right)^{\prime}\right]^{-1 / 2}}_{\text {scaling }} \underbrace{\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t}_{\alpha \varepsilon_{1, t}}
+$$
+
+The scaling part is not interesting, focus on the second. We have:
+
+$$
+  \operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t = \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t
+$$
+
+Rewrite $\Theta_{0,1} = e_1 \Theta_0$:
+
+$$
+  \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} = e_1' \Theta_0 ' (\Theta_0 ')^{-1} \Theta_0^{-1} = e_1' \Theta_0^{-1}
+$$
+
+Then
+
+$$
+  \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t = \alpha e_1' \Theta_0^{-1} u_t = \alpha e_1' \varepsilon_t = \alpha\varepsilon_{1,t}
+$$
+
+Which, in simple terms, highlights how identification via IV under the invertibility assumption is an indirect way of selecting a rotation $Q$, where we recover $varepsilon_{1,t}$ directly projecting the instrument on the span of the reduced-form innovations.   
 
 What if we cannot assume invertibility? In that case $u_t=\Theta_0 \varepsilon_t$ won't hold, instead we have to rely on the SVMA equation $y_t=\Theta(L) \varepsilon_t=\sum_{\ell=0}^{\infty} \Theta_{\ell} \varepsilon_{t-\ell}=\Theta_0 \varepsilon_t+\Theta_1 \varepsilon_{t-1}+\ldots$
 Say now we want to calculate, similarly as we did before, the ratio of the IRFs:
@@ -1051,8 +1081,17 @@ $$
 because this identifies the IRF to shock $1$ at horizon $h$.
 
 For this to happen, all terms must vanish except the one corresponding to the first shock at date $t$, that is, the term with $\ell=h$ and shock index $j=1$. Hence we need lead/lag exogeneity so that
+
 $$
 \operatorname{Cov}(\varepsilon_{j,t+h-\ell},z_t)=0
 \qquad
 \text{for all } (j,\ell)\neq(1,h).
 $$
+
+Notice that strict exogeneity of the instrument is a very strong assumption which, in a MA setting requires that it is impossible to predict the instrument using lagged observables. If lag exogeneity is not satisfied or simply not assumed, the problem is readily solved adding controls $w_i$ to the regression. The idea is an application of the Frisch-Vaugh-Lovell theorem: define $\tilde{z_t} = z_t - \operatorname{Proj}(z_t | \mathcal{H}_w)$ and, similarly $\tilde{\varepsilon_t}$ - then we need:
+
+1. $\mathbb{E}\left(\tilde{\varepsilon}_{1, t} \tilde{z}_t\right)=\alpha \neq 0$
+2. $\mathbb{E}\left(\tilde{\varepsilon}_{2: n, t} \tilde{z}_t\right)=0$
+3. $\mathbb{E}\left(\tilde{\varepsilon}_{t+j} \tilde{z}_t\right)=0 \quad \forall j \neq 0$
+
+For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.  

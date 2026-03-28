@@ -512,7 +512,7 @@ To invert the VAR, a necessary condition is that the process is stationary, i.e.
 <p><span class="math display">\[
   A(L)y_t=u_t
 \]</span></p>
-<p>all the roots of <span class="math inline">\(operatorname{det}(A(z))\)</span> must be outside the unit circle (see Hamilton (2005) for details).<br>
+<p>all the roots of <span class="math inline">\(\operatorname{det}(A(z))\)</span> must be outside the unit circle (see Hamilton (2005) for details).<br>
 The next step, therefore, will be trying to “connect” the Wold innovations to the structural shocks, abstracting from the deterministic component.</p>
 </section>
 <section id="invertibility" class="level2">
@@ -895,25 +895,29 @@ To see how, remember:</p>
 <p>We call this object the long run multiplier.<br>
 To see how we can impose restrictions in practice, start from the Wold MA:</p>
 <p><span class="math display">\[
-y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell}, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma &amp; t=s \\ 0 &amp; t \neq s\end{cases}
+y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma &amp; t=s \\ 0 &amp; t \neq s\end{cases}, \quad {C_\ell}_{\ell = 0}^{\infty} \text {absolutely summable}
 \]</span></p>
-<p>Now compute the variance:</p>
+<p>let:</p>
 <p><span class="math display">\[
-\mathbb{V}\left(y_t\right)=\mathbb{E}\left[y_t y_t^{\prime}\right]=\mathbb{E}\left[\left(\sum_j C_j u_{t-j}\right)\left(\sum_k C_k u_{t-k}\right)^{\prime}\right]
+  \Gamma_j = \mathbb{E}y_t y_{t-j}
 \]</span></p>
-<p>Expand, noting that <span class="math inline">\(C_{\ell}\)</span> is non stochastic:</p>
+<p>Define the autocovariance generating function as:</p>
 <p><span class="math display">\[
-\mathbb{V}\left(y_t\right) =\sum_j \sum_k C_j \mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right] C_k^{\prime}
+  G_Y(z) = \sum_{j = -\infty}^{\infty} \Gamma_j z^j
 \]</span></p>
-<p>Due to the white noise assumption:</p>
+<p>For an <span class="math inline">\(MA(\infty)\)</span> process we have:</p>
 <p><span class="math display">\[
-\mathbb{E}\left[u_{t-j} u_{t-k}^{\prime}\right]=0 \quad \text { for } j \neq k
+  G_Y(z) = C(z) \Sigma C(z)'
 \]</span></p>
-<p>Follows that:</p>
+<p>Now, define the long variance as:</p>
 <p><span class="math display">\[
-\mathbb{V}\left(y_t\right)=\sum_{\ell=0}^{\infty} C_\ell \Sigma C_\ell^{\prime} = C(1) \Sigma C(1)'
+  \mathbb{V}_{LR}(y) = \sum_{j = -\infty}^{\infty} \Gamma_j
 \]</span></p>
-<p>Notice now that <span class="math inline">\(\mathbb{V}\left(y_t\right)\)</span>, which we will call <span class="math inline">\(\Gamma\)</span>, can be written as <span class="math inline">\(\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'\)</span> i.e.&nbsp;<span class="math inline">\(\Theta(1) \Theta(1)'\)</span>. Again, notice that exists an orthonormal matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(\Theta(1) = \Gamma^{1/2} P\)</span> - hence the need to impose restrictions on (1).<br>
+<p>This is clearly <span class="math inline">\(G_Y\)</span> evaluated at <span class="math inline">\(z=1\)</span>, so we can use the previous result to obtain</p>
+<p><span class="math display">\[
+  \mathbb{V}_{LR}(y) = C(1) \Sigma C(1)'
+\]</span></p>
+<p>Notice now that <span class="math inline">\(C(1) \Sigma C(1)'\)</span>, which we will now call <span class="math inline">\(\Gamma\)</span> for simplicity, can be written as <span class="math inline">\(\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'\)</span> i.e.&nbsp;<span class="math inline">\(\Theta(1) \Theta(1)'\)</span> (remember that <span class="math inline">\(\Sigma\)</span> is PD and symmetric). Again, notice that exists an orthonormal matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(\Theta(1) = \Gamma^{1/2} P\)</span> - hence the need to impose restrictions on (1).<br>
 A popular restriction is setting</p>
 <p><span class="math display">\[
   \Theta(1) = \operatorname{chol}(\Gamma)
@@ -927,7 +931,7 @@ A popular restriction is setting</p>
 &amp; \Rightarrow Q=\Sigma_u^{-1 / 2} C(1)^{-1} \Theta(1) \text {  fixed}
 \end{aligned}
 \]</span></p>
-<p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restrictio, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption n periods after the positive shock. To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percenage change.</p>
+<p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restriction, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption <span class="math inline">\(n\)</span> periods after the positive shock (or even a tiny negative value for “many” periods after). To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percentage change.</p>
 </section>
 <section id="identification-with-instrumental-variables" class="level2">
 <h2 class="anchored" data-anchor-id="identification-with-instrumental-variables">Identification with instrumental variables</h2>
@@ -989,7 +993,24 @@ u_t
 <p><span class="math display">\[
 \frac{\operatorname{Cov}\left(u_{t, 2: n} z_t\right)}{\operatorname{Cov}\left(u_{t, 1} z_t\right)}
 \]</span></p>
-<p>where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> moves variable in position <span class="math inline">\(1\)</span> by <span class="math inline">\(25\)</span> basis points and we have calculated the aboe ratio with <span class="math inline">\(\operatorname{Cov}\left(u_{t, 1} z_t\right)\)</span> at the denominator. Knowing that the ratio for variable <span class="math inline">\(2\)</span> is equal to <span class="math inline">\(4\)</span> tells us that the response of that variable will be of <span class="math inline">\(100\)</span> basis points.</p>
+<p>where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> moves variable in position <span class="math inline">\(1\)</span> by <span class="math inline">\(25\)</span> basis points and we have calculated the aboe ratio with <span class="math inline">\(\operatorname{Cov}\left(u_{t, 1} z_t\right)\)</span> at the denominator. Knowing that the ratio for variable <span class="math inline">\(2\)</span> is equal to <span class="math inline">\(4\)</span> tells us that the response of that variable will be of <span class="math inline">\(100\)</span> basis points.<br>
+Notice now one technical but intereseting detail:</p>
+<p><span class="math display">\[
+\varepsilon_{1, t}=\underbrace{\left[\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} \operatorname{Cov}\left(z_t, u_t\right)^{\prime}\right]^{-1 / 2}}_{\text {scaling }} \underbrace{\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t}_{\alpha \varepsilon_{1, t}}
+\]</span></p>
+<p>The scaling part is not interesting, focus on the second. We have:</p>
+<p><span class="math display">\[
+  \operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t = \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t
+\]</span></p>
+<p>Rewrite <span class="math inline">\(\Theta_{0,1} = e_1 \Theta_0\)</span>:</p>
+<p><span class="math display">\[
+  \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} = e_1' \Theta_0 ' (\Theta_0 ')^{-1} \Theta_0^{-1} = e_1' \Theta_0^{-1}
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+  \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t = \alpha e_1' \Theta_0^{-1} u_t = \alpha e_1' \varepsilon_t = \alpha\varepsilon_{1,t}
+\]</span></p>
+<p>Which, in simple terms, highlights how identification via IV under the invertibility assumption is an indirect way of selecting a rotation <span class="math inline">\(Q\)</span>, where we recover <span class="math inline">\(varepsilon_{1,t}\)</span> directly projecting the instrument on the span of the reduced-form innovations.</p>
 <p>What if we cannot assume invertibility? In that case <span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span> won’t hold, instead we have to rely on the SVMA equation <span class="math inline">\(y_t=\Theta(L) \varepsilon_t=\sum_{\ell=0}^{\infty} \Theta_{\ell} \varepsilon_{t-\ell}=\Theta_0 \varepsilon_t+\Theta_1 \varepsilon_{t-1}+\ldots\)</span> Say now we want to calculate, similarly as we did before, the ratio of the IRFs:</p>
 <p><span class="math display">\[
 \frac{\operatorname{Cov}\left(y_{t+\ell, i} z_t\right)}{\operatorname{Cov}\left(y_{1, t} z_t\right)} = \frac{\alpha \Theta_{i, 1, \ell}}{\alpha \Theta_{1, 1, \ell}}
@@ -1021,11 +1042,19 @@ y_{i,t+h}
 <p>We would like this to reduce to <span class="math display">\[
 \operatorname{Cov}(y_{i,t+h},z_t)=\alpha\,\Theta_{i,1,h},
 \]</span> because this identifies the IRF to shock <span class="math inline">\(1\)</span> at horizon <span class="math inline">\(h\)</span>.</p>
-<p>For this to happen, all terms must vanish except the one corresponding to the first shock at date <span class="math inline">\(t\)</span>, that is, the term with <span class="math inline">\(\ell=h\)</span> and shock index <span class="math inline">\(j=1\)</span>. Hence we need lead/lag exogeneity so that <span class="math display">\[
+<p>For this to happen, all terms must vanish except the one corresponding to the first shock at date <span class="math inline">\(t\)</span>, that is, the term with <span class="math inline">\(\ell=h\)</span> and shock index <span class="math inline">\(j=1\)</span>. Hence we need lead/lag exogeneity so that</p>
+<p><span class="math display">\[
 \operatorname{Cov}(\varepsilon_{j,t+h-\ell},z_t)=0
 \qquad
 \text{for all } (j,\ell)\neq(1,h).
 \]</span></p>
+<p>Notice that strict exogeneity of the instrument is a very strong assumption which, in a MA setting requires that it is impossible to predict the instrument using lagged observables. If lag exogeneity is not satisfied or simply not assumed, the problem is readily solved adding controls <span class="math inline">\(w_i\)</span> to the regression. The idea is an application of the Frisch-Vaugh-Lovell theorem: define <span class="math inline">\(\tilde{z_t} = z_t - \operatorname{Proj}(z_t | \mathcal{H}_w)\)</span> and, similarly <span class="math inline">\(\tilde{\varepsilon_t}\)</span> - then we need:</p>
+<ol type="1">
+<li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{1, t} \tilde{z}_t\right)=\alpha \neq 0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{2: n, t} \tilde{z}_t\right)=0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{t+j} \tilde{z}_t\right)=0 \quad \forall j \neq 0\)</span></li>
+</ol>
+<p>For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.</p>
 
 
 </section>
