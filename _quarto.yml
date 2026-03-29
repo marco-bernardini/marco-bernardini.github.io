@@ -14,7 +14,7 @@ website:
       - href: data-analysis.qmd
         text: DATA ANALYSIS
       - href: articles.qmd
-        text: ARTICLES
+        text: RESEARCH
   
 resources:
   - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf
