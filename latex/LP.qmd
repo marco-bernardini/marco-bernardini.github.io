@@ -1,0 +1,420 @@
+# LOCAL PROJECTIONS
+
+This page serves as an introduction to local projections, following the lectures by Silvia Miranda Agrippino at the university of Oxford. The content is also based on papers by Jordà.
+
+## 1. INTRODUCTION
+
+Local projections are a method for estimating the IRF of an economic variable to a policy intervention or shock, without relying on the assumptions of a structural model. They have been introduced by Jordà (2005) and have become increasingly popular in empirical macroeconomics and finance.  
+To see how they work, let's start by defining $y_t$, the outcome variable, and $x_t$, the controls. The controls $x_t$ denote a vector of exogenous or pre-determined variables, including lags of the outcome and of the policy intervention, which we denote as $s_t$. In this context, the policy intervention can represent an exogenous shock, a structural shock, or a treatment. Denote by $z_t$ a vector of instruments for $s_t$, provided they are available.  
+Define and impulse response as:
+
+$$
+\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv E\left[y_{t+h} \mid s_t=s_0+\delta ; x_t\right]-E\left[y_{t+h} \mid s_t=s_0 ; x_t\right] ; \quad h=0,1, \ldots, H,
+$$
+
+where $\delta$ is the size of the shock, and $h$ is the horizon. Usually, we normalize the shock to one unit of choice, (e.g. one standard deviation), so that $\delta=1$. The value $s_0$ is the baseline value of the shock, which is usually set to zero in linear models. Finally note that, consistently with the definition given in the introductory course, we can interpret the limit for $\delta \to 0$ of $\mathcal{R}_{s \rightarrow y}(h, \delta) / \delta$ as a derivative.  
+Assuming linearity, the local projection of $y_{t+h}$ on $s_t$ can be estimated by the following regression:
+
+$$
+y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}, \quad h=0,1, \ldots, H,
+$$
+
+where $\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h$. In the simplest case, i.e. when $s_t$ is exogenous and $\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0$, the local projection can be estimated by OLS. If $s_t$ is endogenous, but an instrument $z_t$ is available, we can use instrumental variables (IV) to estimate the local projection.  
+
+Some ideas are worth exploring. First, though the linearity assumption can seem restrictive, notice that in fact we are approximating the conditional mean introduced earlier with a different regression model for each horizon $h$, rather than imposing a model that characterizes the full path of $y_t$, $s_t$ etc. Second, usually errors are in fact serially correlated, so inference usually relies on Newey-West typestandard errors. Third, local projections can be easily extended to non-linear models, by including non-linear transformations of the regressors, or by using non-parametric methods. Note however, that under linearity we have the very convenient properties that $\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)$, that $\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)$ and finally that $\mathcal{R}_{s \rightarrow y}(h,\delta) = \delta\mathcal{R}_{s \rightarrow y}(h,1) = \delta \beta_h$ which imlications should be pretty obvious.  
+Note that another interesting application of LP is the following:
+
+$$
+\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv P\left[y_{t+h}=1 \mid s_t=s_0+\delta ; \boldsymbol{x}_t\right]-P\left[y_{t+h}=1 \mid s_t=s_0 ; \boldsymbol{x}_t\right] ; \quad h=0,1, \ldots, H,
+$$
+
+where $y_{t+h}$ is a binary variable. In this case, we can estimate the local projection by using a non-linear model such as a logit or a probit.
+
+---
+
+## 2. LOCAL PROJECTIONS IN PRACTICE
+
+Suppose first that we can observe the shock $s_t$ directly, and that it is exogenous ($\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0$). In this case, we can estimate by OLS the following regression:
+
+$$
+y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}
+$$
+
+and we have that $\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h$.
+
+More generally though, we might not be able to observe the shock directly, or it might be endogenous. Imagine we are interested in the effect of a monetary policy shock on output, but we cannot observe the shock directly, and we only have access to a measure of $i_t$, such as the change in the federal funds rate, which we will use as a proxy for the shock. In this case, we can use an IV approach to estimate the local projection. The idea is to find a variable $z_t$ that is correlated with $s_t = i_t$, i.e. such that $\operatorname{Cov}(s_t, z_t \mid x_t) \neq 0$, but uncorrelated with the error term $v_{t+h}$ - $\operatorname{Cov}(v_{t+h}, z_t \mid x_t) = 0$. For example, we could use a measure of monetary policy surprises, such as the change in the federal funds rate around FOMC meetings, as an instrument for the monetary policy shock.  
+In this case, we run a first-stage regression of the form:
+
+$$
+s_t=\pi_0+\pi_1 z_t+\pi_2^{\prime} x_t+u_t
+$$
+
+and a second stage regression:
+
+$$
+y_{t+h}=\alpha_h+\beta_h \hat{s}_t+\gamma_h^{\prime} x_t+v_{t+h}
+$$
+
+so that we can recover the local projection as $\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h$ via
+
+$$
+    \hat{\beta}_h = \frac{\widehat{\operatorname{Cov}}\left(y_{t+h}, z_t \mid x_t\right)}{\widehat{\operatorname{Cov}}\left(s_t, z_t \mid x_t\right)}
+$$
+
+Provided that the instrument is valid and relevant.
+
+---
+
+## 3. LOCAL PROJECTIONS VS. VARS
+
+Consider a VAR(1):
+
+$$
+\Delta w_t=\Phi \Delta w_{t-1}+u_t ; \quad u_t \sim WN\left(0, \Omega_u\right) ; \quad\left|\lambda_l(\Phi)\right|<1 \quad \text { for } \quad l=1, \ldots, k,
+$$
+
+its Wold representation is given by:
+
+$$
+    \Delta w_t=\sum_{h=0}^{\infty} \Theta_h u_{t-h} ; \quad \Theta_0=I_k ; \quad \Theta_h=\Phi^h
+$$
+
+as we have already estabilished:
+
+$$
+\frac{\partial \Delta {w}_{t+h}}{\partial {u}_t}={\Phi}^h \quad \Longrightarrow \quad \frac{\partial \Delta w_{i, t+h}}{\partial u_{j t}}={e}_i \Phi^h {e}_j^{\prime} \equiv \phi_{i j}^{(h)} ; \quad h=0,1, \ldots, H,
+$$
+
+Follows that
+
+$$
+\mathcal{R}_{j \rightarrow i}(h, \delta)={e}_i {\Phi}^h {e}_j^{\prime} \delta=\phi_{i j}^{(h)} \delta, \quad h=0,1, \ldots, H .
+$$
+
+If we instead represent the system in levels, we have:
+
+$$
+{w}_t={u}_t+(\mathbf{I}+{\Phi}) {u}_{t-1}+\left(\mathbf{I}+{\Phi}+{\Phi}^2\right) {u}_{t-2}+\ldots,
+$$
+
+where clearly:
+
+$$
+\mathcal{R}_{j \rightarrow i}^c(h, \delta)={e}_i\left(\mathbf{I}+{\Phi}+\ldots+{\Phi}^h\right) {e}_j^{\prime} \delta=\left(1+\phi_{i j}^{(1)}+\ldots+\phi_{i j}^{(h)}\right) \delta, \quad h=0,1, \ldots, H,
+$$
+
+The same logic carries over to local projections. Suppose that, for each horizon $h$, we estimate the response of $\Delta w_{i,t+h}$ to a shock $s_t$ through the horizon-specific regression
+
+$$
+\Delta w_{i,t+h}=\alpha_{i,h}^{\Delta}+\beta_{ij,h}^{\Delta}s_t+{\gamma}_{i,h}^{\Delta\prime}x_t+v_{i,t+h}^{\Delta},
+\qquad h=0,1,\ldots,H.
+$$
+
+Here, $\beta_{ij,h}^{\Delta}$ denotes the local projection coefficient measuring the response of variable $i$ at horizon $h$ to shock $j$, as captured by $s_t$. Hence, under the usual identification assumptions,
+
+$$
+\mathcal{R}_{j\rightarrow i}(h,\delta)=\beta_{ij,h}^{\Delta}\delta.
+$$
+
+Now note that levels and differences satisfy the identity
+
+$$
+w_{i,t+h}=w_{i,t-1}+\sum_{\ell=0}^{h}\Delta w_{i,t+\ell}.
+$$
+
+Substituting the sequence of local projections for $\Delta w_{i,t+\ell}$ into this expression gives
+
+$$
+w_{i,t+h}
+=
+w_{i,t-1}
++
+\sum_{\ell=0}^{h}\alpha_{i,\ell}^{\Delta}
++
+\left(\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}\right)s_t
++
+\sum_{\ell=0}^{h}{\gamma}_{i,\ell}^{\Delta\prime}x_t
++
+\sum_{\ell=0}^{h}v_{i,t+\ell}^{\Delta}.
+$$
+
+Therefore, if we estimate instead a local projection in levels,
+
+$$
+w_{i,t+h}=\alpha_{i,h}^{L}+\beta_{ij,h}^{L}s_t+{\gamma}_{i,h}^{L\prime}x_t+v_{i,t+h}^{L},
+\qquad h=0,1,\ldots,H,
+$$
+
+the coefficient on $s_t$ satisfies
+
+$$
+\beta_{ij,h}^{L}=\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}.
+$$
+
+Thus, in local projections, the impulse response in levels is the cumulative sum of the impulse responses in differences:
+
+$$
+\mathcal{R}_{j\rightarrow i}^{c}(h,\delta)
+=
+\beta_{ij,h}^{L}\delta
+=
+\left(\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}\right)\delta.
+$$
+
+The two approaches estimate the same object through different routes.
+
+In the VAR(1), we have shown that
+
+$$
+\mathcal{R}_{j \rightarrow i}(h,\delta)
+=
+e_i \Phi^h e_j' \, \delta.
+$$
+
+In local projections, we estimate directly
+
+$$
+\mathcal{R}_{j \rightarrow i}(h,\delta)
+=
+\beta_{ij,h}^{\Delta}\,\delta.
+$$
+
+Hence, if the VAR is correctly specified and the shock is properly identified,
+
+$$
+\beta_{ij,h}^{\Delta}
+=
+e_i \Phi^h e_j'.
+$$
+
+Similarly, for cumulative effects,
+
+$$
+\beta_{ij,h}^{L}
+=
+\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}
+=
+e_i \left(I+\Phi+\cdots+\Phi^h\right) e_j'.
+$$
+
+The main difference is that VAR imposes the cross-horizon restriction
+
+$$
+\beta_{ij,h} = e_i \Phi^h e_j'
+$$
+
+for all $h$, i.e. the entire path is pinned down by a single matrix $\Phi$.
+
+Local projections impose no such restriction: each $\beta_{ij,h}$ is estimated independently.
+
+We now will show that, in the population, the shock isolated by local projections is the same as the shock isolated by a VAR, up to a normalization. To see this, let us denote by $w_t$ the vector of all variables in the system:
+
+$$
+w_t=
+\begin{pmatrix}
+r_t\\
+x_t\\
+y_t\\
+q_t
+\end{pmatrix},
+$$
+
+where:
+
+- $r_t$: predetermined variables
+- $x_t$: impulse variable
+- $y_t$: outcome variable
+- $q_t$: additional controls
+
+We are interested in the response of $y_t$ to a shock to $x_t$. The key point is that both LP and VAR isolate the **same unexpected component** of $x_t$, up to a normalization.
+
+For each horizon $h$, local projections estimate
+
+$$
+y_{t+h}
+=
+\mu_h+\beta_h^{LP}x_t+\varepsilon_h' r_t+\sum_{\ell=1}^{p}\vartheta_{h,\ell}' w_{t-\ell}+\varpi_{h,t}.
+$$
+
+By the Frisch-Waugh-Lovell theorem, the coefficient $\beta_h^{LP}$ is the same as in the regression
+
+$$
+y_{t+h}=\mu_h+\beta_h^{LP}\tilde x_t+\eta_{h,t},
+$$
+
+where
+
+$$
+\tilde x_t
+=
+x_t-\operatorname{Proj}\!\left(x_t \mid r_t,w_{t-1},\ldots,w_{t-p}\right).
+$$
+
+Hence,
+
+$$
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)}.
+$$
+
+So the LP shock is simply the component of $x_t$ orthogonal to the controls.
+
+Now estimate a VAR$(p)$ on the full vector $w_t$:
+
+$$
+w_t=c+\sum_{\ell=1}^{p}A_\ell w_{t-\ell}+u_t.
+$$
+
+Let $u_{x,t}$ denote the residual in the $x_t$ equation, and $u_{r,t}$ the residuals in the equations for the predetermined variables $r_t$. Under recursive identification, the Cholesky shock to $x_t$ is the residual of projecting $u_{x,t}$ on $u_{r,t}$:
+
+$$
+\tilde\varepsilon_{x,t}
+=
+u_{x,t}-\operatorname{Proj}(u_{x,t}\mid u_{r,t}).
+$$
+
+Follows the result:
+
+$$
+\tilde\varepsilon_{x,t}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t.
+$$
+
+Where we have divided by $\sqrt{E(\tilde x_t^2)}$ since VAR shocks are normalized. Thus the VAR shock is exactly the same object as the LP shock, rescaled to have unit variance.  
+To see why, I will follow a projection argument.  
+Abstract from time subscripts and let $w$ denote the vector of controls and $r$ the predetermined variables.  
+
+$$
+\tilde{x}
+=
+x - \operatorname{Proj}(x \mid w, r).
+$$
+
+
+$$
+u_x = x - \operatorname{Proj}(x \mid w),
+\qquad
+u_r = r - \operatorname{Proj}(r \mid w).
+$$
+
+
+$$
+\tilde{\varepsilon}_x
+=
+u_x - \operatorname{Proj}(u_x \mid u_r).
+$$
+
+We have the orthogonal decomposition
+
+$$
+\operatorname{span}(w, r)
+=
+\operatorname{span}(w)
+\oplus
+\operatorname{span}(u_r),
+$$
+
+hence
+
+$$
+\operatorname{Proj}(x \mid w, r)
+=
+\operatorname{Proj}(x \mid w)
++
+\operatorname{Proj}(x \mid u_r).
+$$
+
+And similarly:
+
+$$
+\operatorname{Proj}(x \mid u_r)
+=
+\operatorname{Proj}\big(x - \operatorname{Proj}(x \mid w) \mid u_r\big)
+=
+\operatorname{Proj}(u_x \mid u_r).
+$$
+
+Substituting in the expression for $\tilde{\varepsilon}_x$ gives
+
+$$
+\tilde{\varepsilon}_x
+=
+x - \operatorname{Proj}(x \mid w) - \operatorname{Proj}\big(x - \operatorname{Proj}(x \mid w) \mid u_r\big)
+=
+\tilde{x}.
+$$
+
+The equality above holds for the raw projection residuals. In VAR analysis, shocks are typically normalized to have unit variance, so that
+
+$$
+\varepsilon_x
+=
+\frac{1}{\sqrt{E(\tilde{x}^2)}} \tilde{x}.
+$$
+
+Note that I have trouble justifying this step without hand-waving, so I am open to suggestions.
+
+Now, compare the coefficients.  
+The LP coefficient is:
+
+$$
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)}.
+$$
+
+The VAR coefficient is
+
+$$
+\beta_h^{VAR}
+=
+\operatorname{Cov}(y_{t+h},\tilde\varepsilon_{x,t}).
+$$
+
+Substituting
+
+$$
+\tilde\varepsilon_{x,t}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t
+$$
+
+gives
+
+$$
+\beta_h^{VAR}
+=
+\operatorname{Cov}\!\left(
+y_{t+h},
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t
+\right).
+$$
+
+Pulling out the constant,
+
+$$
+\beta_h^{VAR}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}
+\operatorname{Cov}(y_{t+h},\tilde x_t).
+$$
+
+Using
+
+$$
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)},
+$$
+
+we obtain
+
+$$
+\beta_h^{VAR}
+=
+\sqrt{E(\tilde x_t^2)}\,\beta_h^{LP}.
+$$
+
+Therefore, LP and VAR estimate the same impulse response **up to a constant normalization**, which does not depend on $h$. If $\tilde x_t$ is normalized to have unit variance, the two coincide exactly.

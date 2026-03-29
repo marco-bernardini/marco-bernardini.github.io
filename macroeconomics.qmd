@@ -10,6 +10,7 @@ This section contains various resources related to macroeconomics and econometri
 
 ## Empirical Macroeconomics
 - [Introductory course](latex/empirical.qmd)
+- [Local Projections](latex/LP.qmd)
 
 ## Corso introduttivo di Macroeconomia con Python
 ### A series of lectures on the principles of macroeconomics in italian

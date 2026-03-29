@@ -9,7 +9,7 @@ Because I mainly state time-series concepts without developing them in detail, r
 
 Readers who are less comfortable with linear algebra may also benefit from skimming one of Gilbert Strang’s textbooks.
 
-## Definitions
+## 1. Definitions
 
 ### Variables and Spaces
 
@@ -377,7 +377,7 @@ $$
 
 From here onwards, we will always refer to $u_t$ as the Wold innovations, and to $\varepsilon_t$ as the structural shocks.
 
-## Empirical method
+## 2. Empirical method
 
 Now that we have defined all the key mathematical concepts we will be working with, we are ready to dive into the working procedure.  
 Our main goal is to identify and estimate the coefficients of the polynomial $\Theta(L)$ in the structural VMA, which we do not observe directly:
@@ -403,7 +403,7 @@ $$
 all the roots of $\operatorname{det}(A(z))$ must be outside the unit circle (see Hamilton (2005) for details).  
 The next step, therefore, will be trying to "connect" the Wold innovations to the structural shocks, abstracting from the deterministic component.
 
-## Invertibility
+## 3. Invertibility
 
 We say that a process ${y_t}$ is invertible with respect to ${\varepsilon_t}$ if:
 
@@ -541,7 +541,7 @@ $$
 $$
 so that the hidden initial condition disappears and the state becomes recoverable from the history of observables.  
 
-## Identification Issues
+## 4. Identification Issues
 
 The reduced form alone does not identify structural shocks. We will analyse three problems that arise when trying to identify the matrix $\Omega$.
 
@@ -611,7 +611,7 @@ But of course it implies very different IRFs/FVDs/HDs
 
 Notice, however, than when we assume invertibility we require automatically the number of observables to be the same as the number of shocks, therefore we will not need to explicitly address this issue once assumed invertibility.
 
-## Identification methods
+## 5. Identification methods
 
 ### Short run restrictions
 
@@ -677,9 +677,6 @@ $$
 $$
 
 where we only have 3 equations for the 4 unknowns $a, b, c, d$. In this example we need 1 restriction.  
-
-## Short run identification
-
 Now we can approach 3 methods for short run identification. I will present them in order from the most "strict" to the more flexible.  
 
 ### Recursive identification
@@ -856,7 +853,7 @@ IRFs to a price markup shock:
 IRFs to a government spending shock:  
 ![](../images/irfgvmtspending.png){fig-align="center" width="50%"}
 
-## Long run zero restrictions
+### Long run zero restrictions
 
 This method is similar in flavour to short run zero restrictions: the idea is that theoretical models impose certain restrictions on variables in the longs run (e.g. monetary neutrality). This suggests we can impose constraints on the response to shocks in the long run.  
 To see how, remember:
@@ -940,7 +937,7 @@ $$
 
 I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restriction, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption $n$ periods after the positive shock (or even a tiny negative value for "many" periods after). To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percentage change.
 
-## Identification with instrumental variables
+### Instrumental variables
 
 We will now present an identification mathod that does not rely on the assumption of invertibility, but instead can be implemented even under partial or no invertibility.  
 Usually, we are interested in identifying a structural shock, let's say $\varepsilon_{1,t}$ for simplicity. Under invertibility, an instrumental variable $z_t$ for $\varepsilon_{1,t}$ has to be:  
@@ -1095,3 +1092,12 @@ Notice that strict exogeneity of the instrument is a very strong assumption whic
 3. $\mathbb{E}\left(\tilde{\varepsilon}_{t+j} \tilde{z}_t\right)=0 \quad \forall j \neq 0$
 
 For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.  
+In the literature, there are two main methods for choosing instrumental variables: narrative and high frequency.
+
+#### Narrative IV
+
+Narrative IVs are based on the idea of using historical records to identify sources of exogenous variation.
+
+#### High Frequency IV
+
+High frequency IV are constructed using changes in prices measured at very high frequences around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.

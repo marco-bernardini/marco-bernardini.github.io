@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>lp – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../macroeconomics.html"> 
+<span class="menu-text">MACROECONOMICS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data-analysis.html"> 
+<span class="menu-text">DATA ANALYSIS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles.html"> 
+<span class="menu-text">RESEARCH</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#local-projections" id="toc-local-projections" class="nav-link active" data-scroll-target="#local-projections">LOCAL PROJECTIONS</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">INTRODUCTION</a></li>
+  <li><a href="#local-projections-in-practice" id="toc-local-projections-in-practice" class="nav-link" data-scroll-target="#local-projections-in-practice">LOCAL PROJECTIONS IN PRACTICE</a></li>
+  <li><a href="#local-projections-vs.-vars" id="toc-local-projections-vs.-vars" class="nav-link" data-scroll-target="#local-projections-vs.-vars">LOCAL PROJECTIONS VS. VARS</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="local-projections" class="level1">
+<h1>LOCAL PROJECTIONS</h1>
+<p>This page serves as an introduction to local projections, following the lectures by Silvia Miranda Agrippino at the university of Oxford. The content is also based on papers by Jordà.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">INTRODUCTION</h2>
+<p>Local projections are a method for estimating the IRF of an economic variable to a policy intervention or shock, without relying on the assumptions of a structural model. They have been introduced by Jordà (2005) and have become increasingly popular in empirical macroeconomics and finance.<br>
+To see how they work, let’s start by defining <span class="math inline">\(y_t\)</span>, the outcome variable, and <span class="math inline">\(x_t\)</span>, the controls. The controls <span class="math inline">\(x_t\)</span> denote a vector of exogenous or pre-determined variables, including lags of the outcome and of the policy intervention, which we denote as <span class="math inline">\(s_t\)</span>. In this context, the policy intervention can represent an exogenous shock, a structural shock, or a treatment. Denote by <span class="math inline">\(z_t\)</span> a vector of instruments for <span class="math inline">\(s_t\)</span>, provided they are available.<br>
+Define and impulse response as:</p>
+<p><span class="math display">\[
+\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv E\left[y_{t+h} \mid s_t=s_0+\delta ; x_t\right]-E\left[y_{t+h} \mid s_t=s_0 ; x_t\right] ; \quad h=0,1, \ldots, H,
+\]</span></p>
+<p>where <span class="math inline">\(\delta\)</span> is the size of the shock, and <span class="math inline">\(h\)</span> is the horizon. Usually, we normalize the shock to one unit of choice, (e.g.&nbsp;one standard deviation), so that <span class="math inline">\(\delta=1\)</span>. The value <span class="math inline">\(s_0\)</span> is the baseline value of the shock, which is usually set to zero in linear models. Finally note that, consistently with the definition given in the introductory course, we can interpret the limit for <span class="math inline">\(\delta \to 0\)</span> of <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h, \delta) / \delta\)</span> as a derivative.<br>
+Assuming linearity, the local projection of <span class="math inline">\(y_{t+h}\)</span> on <span class="math inline">\(s_t\)</span> can be estimated by the following regression:</p>
+<p><span class="math display">\[
+y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}, \quad h=0,1, \ldots, H,
+\]</span></p>
+<p>where <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h\)</span>. In the simplest case, i.e.&nbsp;when <span class="math inline">\(s_t\)</span> is exogenous and <span class="math inline">\(\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0\)</span>, the local projection can be estimated by OLS. If <span class="math inline">\(s_t\)</span> is endogenous, but an instrument <span class="math inline">\(z_t\)</span> is available, we can use instrumental variables (IV) to estimate the local projection.</p>
+<p>Some ideas are worth exploring. First, though the linearity assumption can seem restrictive, notice that in fact we are approximating the conditional mean introduced earlier with a different regression model for each horizon <span class="math inline">\(h\)</span>, rather than imposing a model that characterizes the full path of <span class="math inline">\(y_t\)</span>, <span class="math inline">\(s_t\)</span> etc. Second, usually errors are in fact serially correlated, so inference usually relies on Newey-West typestandard errors. Third, local projections can be easily extended to non-linear models, by including non-linear transformations of the regressors, or by using non-parametric methods. Note however, that under linearity we have the very convenient properties that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)\)</span>, that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)\)</span> and finally that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = \delta\mathcal{R}_{s \rightarrow y}(h,1) = \delta \beta_h\)</span> which imlications should be pretty obvious.<br>
+Note that another interesting application of LP is the following:</p>
+<p><span class="math display">\[
+\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv P\left[y_{t+h}=1 \mid s_t=s_0+\delta ; \boldsymbol{x}_t\right]-P\left[y_{t+h}=1 \mid s_t=s_0 ; \boldsymbol{x}_t\right] ; \quad h=0,1, \ldots, H,
+\]</span></p>
+<p>where <span class="math inline">\(y_{t+h}\)</span> is a binary variable. In this case, we can estimate the local projection by using a non-linear model such as a logit or a probit.</p>
+<hr>
+</section>
+<section id="local-projections-in-practice" class="level2">
+<h2 class="anchored" data-anchor-id="local-projections-in-practice">LOCAL PROJECTIONS IN PRACTICE</h2>
+<p>Suppose first that we can observe the shock <span class="math inline">\(s_t\)</span> directly, and that it is exogenous (<span class="math inline">\(\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0\)</span>). In this case, we can estimate by OLS the following regression:</p>
+<p><span class="math display">\[
+y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}
+\]</span></p>
+<p>and we have that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h\)</span>.</p>
+<p>More generally though, we might not be able to observe the shock directly, or it might be endogenous. Imagine we are interested in the effect of a monetary policy shock on output, but we cannot observe the shock directly, and we only have access to a measure of <span class="math inline">\(i_t\)</span>, such as the change in the federal funds rate, which we will use as a proxy for the shock. In this case, we can use an IV approach to estimate the local projection. The idea is to find a variable <span class="math inline">\(z_t\)</span> that is correlated with <span class="math inline">\(s_t = i_t\)</span>, i.e.&nbsp;such that <span class="math inline">\(\operatorname{Cov}(s_t, z_t \mid x_t) \neq 0\)</span>, but uncorrelated with the error term <span class="math inline">\(v_{t+h}\)</span> - <span class="math inline">\(\operatorname{Cov}(v_{t+h}, z_t \mid x_t) = 0\)</span>. For example, we could use a measure of monetary policy surprises, such as the change in the federal funds rate around FOMC meetings, as an instrument for the monetary policy shock.<br>
+In this case, we run a first-stage regression of the form:</p>
+<p><span class="math display">\[
+s_t=\pi_0+\pi_1 z_t+\pi_2^{\prime} x_t+u_t
+\]</span></p>
+<p>and a second stage regression:</p>
+<p><span class="math display">\[
+y_{t+h}=\alpha_h+\beta_h \hat{s}_t+\gamma_h^{\prime} x_t+v_{t+h}
+\]</span></p>
+<p>so that we can recover the local projection as <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h\)</span> via</p>
+<p><span class="math display">\[
+    \hat{\beta}_h = \frac{\widehat{\operatorname{Cov}}\left(y_{t+h}, z_t \mid x_t\right)}{\widehat{\operatorname{Cov}}\left(s_t, z_t \mid x_t\right)}
+\]</span></p>
+<p>Provided that the instrument is valid and relevant.</p>
+<hr>
+</section>
+<section id="local-projections-vs.-vars" class="level2">
+<h2 class="anchored" data-anchor-id="local-projections-vs.-vars">LOCAL PROJECTIONS VS. VARS</h2>
+<p>Consider a VAR(1):</p>
+<p><span class="math display">\[
+\Delta w_t=\Phi \Delta w_{t-1}+u_t ; \quad u_t \sim WN\left(0, \Omega_u\right) ; \quad\left|\lambda_l(\Phi)\right|&lt;1 \quad \text { for } \quad l=1, \ldots, k,
+\]</span></p>
+<p>its Wold representation is given by:</p>
+<p><span class="math display">\[
+    \Delta w_t=\sum_{h=0}^{\infty} \Theta_h u_{t-h} ; \quad \Theta_0=I_k ; \quad \Theta_h=\Phi^h
+\]</span></p>
+<p>as we have already estabilished:</p>
+<p><span class="math display">\[
+\frac{\partial \Delta {w}_{t+h}}{\partial {u}_t}={\Phi}^h \quad \Longrightarrow \quad \frac{\partial \Delta w_{i, t+h}}{\partial u_{j t}}={e}_i \Phi^h {e}_j^{\prime} \equiv \phi_{i j}^{(h)} ; \quad h=0,1, \ldots, H,
+\]</span></p>
+<p>Follows that</p>
+<p><span class="math display">\[
+\mathcal{R}_{j \rightarrow i}(h, \delta)={e}_i {\Phi}^h {e}_j^{\prime} \delta=\phi_{i j}^{(h)} \delta, \quad h=0,1, \ldots, H .
+\]</span></p>
+<p>If we instead represent the system in levels, we have:</p>
+<p><span class="math display">\[
+{w}_t={u}_t+(\mathbf{I}+{\Phi}) {u}_{t-1}+\left(\mathbf{I}+{\Phi}+{\Phi}^2\right) {u}_{t-2}+\ldots,
+\]</span></p>
+<p>where clearly:</p>
+<p><span class="math display">\[
+\mathcal{R}_{j \rightarrow i}^c(h, \delta)={e}_i\left(\mathbf{I}+{\Phi}+\ldots+{\Phi}^h\right) {e}_j^{\prime} \delta=\left(1+\phi_{i j}^{(1)}+\ldots+\phi_{i j}^{(h)}\right) \delta, \quad h=0,1, \ldots, H,
+\]</span></p>
+<p>The same logic carries over to local projections. Suppose that, for each horizon <span class="math inline">\(h\)</span>, we estimate the response of <span class="math inline">\(\Delta w_{i,t+h}\)</span> to a shock <span class="math inline">\(s_t\)</span> through the horizon-specific regression</p>
+<p><span class="math display">\[
+\Delta w_{i,t+h}=\alpha_{i,h}^{\Delta}+\beta_{ij,h}^{\Delta}s_t+{\gamma}_{i,h}^{\Delta\prime}x_t+v_{i,t+h}^{\Delta},
+\qquad h=0,1,\ldots,H.
+\]</span></p>
+<p>Here, <span class="math inline">\(\beta_{ij,h}^{\Delta}\)</span> denotes the local projection coefficient measuring the response of variable <span class="math inline">\(i\)</span> at horizon <span class="math inline">\(h\)</span> to shock <span class="math inline">\(j\)</span>, as captured by <span class="math inline">\(s_t\)</span>. Hence, under the usual identification assumptions,</p>
+<p><span class="math display">\[
+\mathcal{R}_{j\rightarrow i}(h,\delta)=\beta_{ij,h}^{\Delta}\delta.
+\]</span></p>
+<p>Now note that levels and differences satisfy the identity</p>
+<p><span class="math display">\[
+w_{i,t+h}=w_{i,t-1}+\sum_{\ell=0}^{h}\Delta w_{i,t+\ell}.
+\]</span></p>
+<p>Substituting the sequence of local projections for <span class="math inline">\(\Delta w_{i,t+\ell}\)</span> into this expression gives</p>
+<p><span class="math display">\[
+w_{i,t+h}
+=
+w_{i,t-1}
++
+\sum_{\ell=0}^{h}\alpha_{i,\ell}^{\Delta}
++
+\left(\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}\right)s_t
++
+\sum_{\ell=0}^{h}{\gamma}_{i,\ell}^{\Delta\prime}x_t
++
+\sum_{\ell=0}^{h}v_{i,t+\ell}^{\Delta}.
+\]</span></p>
+<p>Therefore, if we estimate instead a local projection in levels,</p>
+<p><span class="math display">\[
+w_{i,t+h}=\alpha_{i,h}^{L}+\beta_{ij,h}^{L}s_t+{\gamma}_{i,h}^{L\prime}x_t+v_{i,t+h}^{L},
+\qquad h=0,1,\ldots,H,
+\]</span></p>
+<p>the coefficient on <span class="math inline">\(s_t\)</span> satisfies</p>
+<p><span class="math display">\[
+\beta_{ij,h}^{L}=\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}.
+\]</span></p>
+<p>Thus, in local projections, the impulse response in levels is the cumulative sum of the impulse responses in differences:</p>
+<p><span class="math display">\[
+\mathcal{R}_{j\rightarrow i}^{c}(h,\delta)
+=
+\beta_{ij,h}^{L}\delta
+=
+\left(\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}\right)\delta.
+\]</span></p>
+<p>The two approaches estimate the same object through different routes.</p>
+<p>In the VAR(1), we have shown that</p>
+<p><span class="math display">\[
+\mathcal{R}_{j \rightarrow i}(h,\delta)
+=
+e_i \Phi^h e_j' \, \delta.
+\]</span></p>
+<p>In local projections, we estimate directly</p>
+<p><span class="math display">\[
+\mathcal{R}_{j \rightarrow i}(h,\delta)
+=
+\beta_{ij,h}^{\Delta}\,\delta.
+\]</span></p>
+<p>Hence, if the VAR is correctly specified and the shock is properly identified,</p>
+<p><span class="math display">\[
+\beta_{ij,h}^{\Delta}
+=
+e_i \Phi^h e_j'.
+\]</span></p>
+<p>Similarly, for cumulative effects,</p>
+<p><span class="math display">\[
+\beta_{ij,h}^{L}
+=
+\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}
+=
+e_i \left(I+\Phi+\cdots+\Phi^h\right) e_j'.
+\]</span></p>
+<p>The main difference is that VAR imposes the cross-horizon restriction</p>
+<p><span class="math display">\[
+\beta_{ij,h} = e_i \Phi^h e_j'
+\]</span></p>
+<p>for all <span class="math inline">\(h\)</span>, i.e.&nbsp;the entire path is pinned down by a single matrix <span class="math inline">\(\Phi\)</span>.</p>
+<p>Local projections impose no such restriction: each <span class="math inline">\(\beta_{ij,h}\)</span> is estimated independently.</p>
+<p>We now will show that, in the population, the shock isolated by local projections is the same as the shock isolated by a VAR, up to a normalization. To see this, let us denote by <span class="math inline">\(w_t\)</span> the vector of all variables in the system:</p>
+<p><span class="math display">\[
+w_t=
+\begin{pmatrix}
+r_t\\
+x_t\\
+y_t\\
+q_t
+\end{pmatrix},
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(r_t\)</span>: predetermined variables</li>
+<li><span class="math inline">\(x_t\)</span>: impulse variable</li>
+<li><span class="math inline">\(y_t\)</span>: outcome variable</li>
+<li><span class="math inline">\(q_t\)</span>: additional controls</li>
+</ul>
+<p>We are interested in the response of <span class="math inline">\(y_t\)</span> to a shock to <span class="math inline">\(x_t\)</span>. The key point is that both LP and VAR isolate the <strong>same unexpected component</strong> of <span class="math inline">\(x_t\)</span>, up to a normalization.</p>
+<p>For each horizon <span class="math inline">\(h\)</span>, local projections estimate</p>
+<p><span class="math display">\[
+y_{t+h}
+=
+\mu_h+\beta_h^{LP}x_t+\varepsilon_h' r_t+\sum_{\ell=1}^{p}\vartheta_{h,\ell}' w_{t-\ell}+\varpi_{h,t}.
+\]</span></p>
+<p>By the Frisch-Waugh-Lovell theorem, the coefficient <span class="math inline">\(\beta_h^{LP}\)</span> is the same as in the regression</p>
+<p><span class="math display">\[
+y_{t+h}=\mu_h+\beta_h^{LP}\tilde x_t+\eta_{h,t},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\tilde x_t
+=
+x_t-\operatorname{Proj}\!\left(x_t \mid r_t,w_{t-1},\ldots,w_{t-p}\right).
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)}.
+\]</span></p>
+<p>So the LP shock is simply the component of <span class="math inline">\(x_t\)</span> orthogonal to the controls.</p>
+<p>Now estimate a VAR<span class="math inline">\((p)\)</span> on the full vector <span class="math inline">\(w_t\)</span>:</p>
+<p><span class="math display">\[
+w_t=c+\sum_{\ell=1}^{p}A_\ell w_{t-\ell}+u_t.
+\]</span></p>
+<p>Let <span class="math inline">\(u_{x,t}\)</span> denote the residual in the <span class="math inline">\(x_t\)</span> equation, and <span class="math inline">\(u_{r,t}\)</span> the residuals in the equations for the predetermined variables <span class="math inline">\(r_t\)</span>. Under recursive identification, the Cholesky shock to <span class="math inline">\(x_t\)</span> is the residual of projecting <span class="math inline">\(u_{x,t}\)</span> on <span class="math inline">\(u_{r,t}\)</span>:</p>
+<p><span class="math display">\[
+\tilde\varepsilon_{x,t}
+=
+u_{x,t}-\operatorname{Proj}(u_{x,t}\mid u_{r,t}).
+\]</span></p>
+<p>Follows the result:</p>
+<p><span class="math display">\[
+\tilde\varepsilon_{x,t}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t.
+\]</span></p>
+<p>Where we have divided by <span class="math inline">\(\sqrt{E(\tilde x_t^2)}\)</span> since VAR shocks are normalized. Thus the VAR shock is exactly the same object as the LP shock, rescaled to have unit variance.<br>
+To see why, I will follow a projection argument.<br>
+Abstract from time subscripts and let <span class="math inline">\(w\)</span> denote the vector of controls and <span class="math inline">\(r\)</span> the predetermined variables.</p>
+<p><span class="math display">\[
+\tilde{x}
+=
+x - \operatorname{Proj}(x \mid w, r).
+\]</span></p>
+<p><span class="math display">\[
+u_x = x - \operatorname{Proj}(x \mid w),
+\qquad
+u_r = r - \operatorname{Proj}(r \mid w).
+\]</span></p>
+<p><span class="math display">\[
+\tilde{\varepsilon}_x
+=
+u_x - \operatorname{Proj}(u_x \mid u_r).
+\]</span></p>
+<p>We have the orthogonal decomposition</p>
+<p><span class="math display">\[
+\operatorname{span}(w, r)
+=
+\operatorname{span}(w)
+\oplus
+\operatorname{span}(u_r),
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
+\operatorname{Proj}(x \mid w, r)
+=
+\operatorname{Proj}(x \mid w)
++
+\operatorname{Proj}(x \mid u_r).
+\]</span></p>
+<p>And similarly:</p>
+<p><span class="math display">\[
+\operatorname{Proj}(x \mid u_r)
+=
+\operatorname{Proj}\big(x - \operatorname{Proj}(x \mid w) \mid u_r\big)
+=
+\operatorname{Proj}(u_x \mid u_r).
+\]</span></p>
+<p>Substituting in the expression for <span class="math inline">\(\tilde{\varepsilon}_x\)</span> gives</p>
+<p><span class="math display">\[
+\tilde{\varepsilon}_x
+=
+x - \operatorname{Proj}(x \mid w) - \operatorname{Proj}\big(x - \operatorname{Proj}(x \mid w) \mid u_r\big)
+=
+\tilde{x}.
+\]</span></p>
+<p>The equality above holds for the raw projection residuals. In VAR analysis, shocks are typically normalized to have unit variance, so that</p>
+<p><span class="math display">\[
+\varepsilon_x
+=
+\frac{1}{\sqrt{E(\tilde{x}^2)}} \tilde{x}.
+\]</span></p>
+<p>Note that I have trouble justifying this step without hand-waving, so I am open to suggestions.</p>
+<p>Now, compare the coefficients. The LP coefficient is:</p>
+<p><span class="math display">\[
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)}.
+\]</span></p>
+<p>The VAR coefficient is</p>
+<p><span class="math display">\[
+\beta_h^{VAR}
+=
+\operatorname{Cov}(y_{t+h},\tilde\varepsilon_{x,t}).
+\]</span></p>
+<p>Substituting</p>
+<p><span class="math display">\[
+\tilde\varepsilon_{x,t}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t
+\]</span></p>
+<p>gives</p>
+<p><span class="math display">\[
+\beta_h^{VAR}
+=
+\operatorname{Cov}\!\left(
+y_{t+h},
+\frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t
+\right).
+\]</span></p>
+<p>Pulling out the constant,</p>
+<p><span class="math display">\[
+\beta_h^{VAR}
+=
+\frac{1}{\sqrt{E(\tilde x_t^2)}}
+\operatorname{Cov}(y_{t+h},\tilde x_t).
+\]</span></p>
+<p>Using</p>
+<p><span class="math display">\[
+\beta_h^{LP}
+=
+\frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)},
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+\beta_h^{VAR}
+=
+\sqrt{E(\tilde x_t^2)}\,\beta_h^{LP}.
+\]</span></p>
+<p>Therefore, LP and VAR estimate the same impulse response <strong>up to a constant normalization</strong>, which does not depend on <span class="math inline">\(h\)</span>. If <span class="math inline">\(\tilde x_t\)</span> is normalized to have unit variance, the two coincide exactly. :contentReference<span data-index="3">oaicite:3</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

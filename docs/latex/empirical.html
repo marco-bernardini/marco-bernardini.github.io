@@ -150,7 +150,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#definitions" id="toc-definitions" class="nav-link active" data-scroll-target="#definitions">Definitions</a>
+  <li><a href="#definitions" id="toc-definitions" class="nav-link active" data-scroll-target="#definitions">1. Definitions</a>
   <ul class="collapse">
   <li><a href="#variables-and-spaces" id="toc-variables-and-spaces" class="nav-link" data-scroll-target="#variables-and-spaces">Variables and Spaces</a></li>
   <li><a href="#structural-shocks" id="toc-structural-shocks" class="nav-link" data-scroll-target="#structural-shocks">Structural shocks</a></li>
@@ -162,29 +162,26 @@ window.Quarto = {
   <li><a href="#state-space-representation" id="toc-state-space-representation" class="nav-link" data-scroll-target="#state-space-representation">State-space representation</a></li>
   <li><a href="#wold-decomposition" id="toc-wold-decomposition" class="nav-link" data-scroll-target="#wold-decomposition">Wold decomposition</a></li>
   </ul></li>
-  <li><a href="#empirical-method" id="toc-empirical-method" class="nav-link" data-scroll-target="#empirical-method">Empirical method</a></li>
-  <li><a href="#invertibility" id="toc-invertibility" class="nav-link" data-scroll-target="#invertibility">Invertibility</a>
+  <li><a href="#empirical-method" id="toc-empirical-method" class="nav-link" data-scroll-target="#empirical-method">2. Empirical method</a></li>
+  <li><a href="#invertibility" id="toc-invertibility" class="nav-link" data-scroll-target="#invertibility">3. Invertibility</a>
   <ul class="collapse">
   <li><a href="#failure-of-invertibility" id="toc-failure-of-invertibility" class="nav-link" data-scroll-target="#failure-of-invertibility">Failure of invertibility</a></li>
   </ul></li>
-  <li><a href="#identification-issues" id="toc-identification-issues" class="nav-link" data-scroll-target="#identification-issues">Identification Issues</a>
+  <li><a href="#identification-issues" id="toc-identification-issues" class="nav-link" data-scroll-target="#identification-issues">4. Identification Issues</a>
   <ul class="collapse">
   <li><a href="#rotational-indeterminacy" id="toc-rotational-indeterminacy" class="nav-link" data-scroll-target="#rotational-indeterminacy">Rotational indeterminacy</a></li>
   <li><a href="#dynamic-indeterminacy" id="toc-dynamic-indeterminacy" class="nav-link" data-scroll-target="#dynamic-indeterminacy">Dynamic indeterminacy</a></li>
   <li><a href="#size-indeterminacy" id="toc-size-indeterminacy" class="nav-link" data-scroll-target="#size-indeterminacy">Size indeterminacy</a></li>
   </ul></li>
-  <li><a href="#identification-methods" id="toc-identification-methods" class="nav-link" data-scroll-target="#identification-methods">Identification methods</a>
+  <li><a href="#identification-methods" id="toc-identification-methods" class="nav-link" data-scroll-target="#identification-methods">5. Identification methods</a>
   <ul class="collapse">
   <li><a href="#short-run-restrictions" id="toc-short-run-restrictions" class="nav-link" data-scroll-target="#short-run-restrictions">Short run restrictions</a></li>
-  </ul></li>
-  <li><a href="#short-run-identification" id="toc-short-run-identification" class="nav-link" data-scroll-target="#short-run-identification">Short run identification</a>
-  <ul class="collapse">
   <li><a href="#recursive-identification" id="toc-recursive-identification" class="nav-link" data-scroll-target="#recursive-identification">Recursive identification</a></li>
   <li><a href="#non-recursive-impact-restrictions" id="toc-non-recursive-impact-restrictions" class="nav-link" data-scroll-target="#non-recursive-impact-restrictions">Non-recursive impact restrictions</a></li>
   <li><a href="#sign-restrictions" id="toc-sign-restrictions" class="nav-link" data-scroll-target="#sign-restrictions">Sign restrictions</a></li>
-  </ul></li>
   <li><a href="#long-run-zero-restrictions" id="toc-long-run-zero-restrictions" class="nav-link" data-scroll-target="#long-run-zero-restrictions">Long run zero restrictions</a></li>
-  <li><a href="#identification-with-instrumental-variables" id="toc-identification-with-instrumental-variables" class="nav-link" data-scroll-target="#identification-with-instrumental-variables">Identification with instrumental variables</a></li>
+  <li><a href="#instrumental-variables" id="toc-instrumental-variables" class="nav-link" data-scroll-target="#instrumental-variables">Instrumental variables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -214,7 +211,7 @@ window.Quarto = {
 <p>Because I mainly state time-series concepts without developing them in detail, readers with little prior background in time series may find it useful to consult Hamilton (2005), especially Chapters 1–3 and 10–11.</p>
 <p>Readers who are less comfortable with linear algebra may also benefit from skimming one of Gilbert Strang’s textbooks.</p>
 <section id="definitions" class="level2">
-<h2 class="anchored" data-anchor-id="definitions">Definitions</h2>
+<h2 class="anchored" data-anchor-id="definitions">1. Definitions</h2>
 <section id="variables-and-spaces" class="level3">
 <h3 class="anchored" data-anchor-id="variables-and-spaces">Variables and Spaces</h3>
 <p>Throughout the text, we will use the following notation:</p>
@@ -494,7 +491,7 @@ E a=E b=E a b=0, a, b \perp\left\{\u_t\right\} .
 </section>
 </section>
 <section id="empirical-method" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-method">Empirical method</h2>
+<h2 class="anchored" data-anchor-id="empirical-method">2. Empirical method</h2>
 <p>Now that we have defined all the key mathematical concepts we will be working with, we are ready to dive into the working procedure.<br>
 Our main goal is to identify and estimate the coefficients of the polynomial <span class="math inline">\(\Theta(L)\)</span> in the structural VMA, which we do not observe directly:</p>
 <p><span class="math display">\[
@@ -516,7 +513,7 @@ To invert the VAR, a necessary condition is that the process is stationary, i.e.
 The next step, therefore, will be trying to “connect” the Wold innovations to the structural shocks, abstracting from the deterministic component.</p>
 </section>
 <section id="invertibility" class="level2">
-<h2 class="anchored" data-anchor-id="invertibility">Invertibility</h2>
+<h2 class="anchored" data-anchor-id="invertibility">3. Invertibility</h2>
 <p>We say that a process <span class="math inline">\({y_t}\)</span> is invertible with respect to <span class="math inline">\({\varepsilon_t}\)</span> if:</p>
 <p><span class="math display">\[
   \varepsilon_t \in \operatorname{span} \mathcal H_t^y
@@ -614,7 +611,7 @@ s_{t+1}-\hat s_{t+1|t}=(a - b d^{-1} c)^{t+1}s_0.
 </section>
 </section>
 <section id="identification-issues" class="level2">
-<h2 class="anchored" data-anchor-id="identification-issues">Identification Issues</h2>
+<h2 class="anchored" data-anchor-id="identification-issues">4. Identification Issues</h2>
 <p>The reduced form alone does not identify structural shocks. We will analyse three problems that arise when trying to identify the matrix <span class="math inline">\(\Omega\)</span>.</p>
 <section id="rotational-indeterminacy" class="level3">
 <h3 class="anchored" data-anchor-id="rotational-indeterminacy">Rotational indeterminacy</h3>
@@ -664,7 +661,7 @@ y_t=\theta_{01} \varepsilon_{1, t}+\theta_{02} \varepsilon_{2, t}+\theta_{11} \v
 </section>
 </section>
 <section id="identification-methods" class="level2">
-<h2 class="anchored" data-anchor-id="identification-methods">Identification methods</h2>
+<h2 class="anchored" data-anchor-id="identification-methods">5. Identification methods</h2>
 <section id="short-run-restrictions" class="level3">
 <h3 class="anchored" data-anchor-id="short-run-restrictions">Short run restrictions</h3>
 <p>Rembember that, under invertibility, we can write:</p>
@@ -716,12 +713,9 @@ ac + bd &amp; c^2 + d^2
 \sigma_{22} = c^2 + d^2
 \end{cases}
 \]</span></p>
-<p>where we only have 3 equations for the 4 unknowns <span class="math inline">\(a, b, c, d\)</span>. In this example we need 1 restriction.</p>
+<p>where we only have 3 equations for the 4 unknowns <span class="math inline">\(a, b, c, d\)</span>. In this example we need 1 restriction.<br>
+Now we can approach 3 methods for short run identification. I will present them in order from the most “strict” to the more flexible.</p>
 </section>
-</section>
-<section id="short-run-identification" class="level2">
-<h2 class="anchored" data-anchor-id="short-run-identification">Short run identification</h2>
-<p>Now we can approach 3 methods for short run identification. I will present them in order from the most “strict” to the more flexible.</p>
 <section id="recursive-identification" class="level3">
 <h3 class="anchored" data-anchor-id="recursive-identification">Recursive identification</h3>
 <p>Remember that a symmetric, positive-definite matrix <span class="math inline">\(\Sigma\)</span> can be decomposed as <span class="math inline">\(\Sigma = \Gamma \Gamma'\)</span> where <span class="math inline">\(\Gamma\)</span> is lower triangular. We can use the following notation: <span class="math inline">\(\Gamma = \operatorname{chol}(\Sigma)\)</span>.<br>
@@ -872,9 +866,8 @@ Lastly, I will report the IRFs from the seminal paper by Smets and Wouters (2003
 <p>IRFs to a government spending shock:<br>
 <img src="../images/irfgvmtspending.png" class="img-fluid quarto-figure quarto-figure-center" style="width:50.0%"></p>
 </section>
-</section>
-<section id="long-run-zero-restrictions" class="level2">
-<h2 class="anchored" data-anchor-id="long-run-zero-restrictions">Long run zero restrictions</h2>
+<section id="long-run-zero-restrictions" class="level3">
+<h3 class="anchored" data-anchor-id="long-run-zero-restrictions">Long run zero restrictions</h3>
 <p>This method is similar in flavour to short run zero restrictions: the idea is that theoretical models impose certain restrictions on variables in the longs run (e.g.&nbsp;monetary neutrality). This suggests we can impose constraints on the response to shocks in the long run.<br>
 To see how, remember:</p>
 <p><span class="math display">\[
@@ -933,8 +926,8 @@ A popular restriction is setting</p>
 \]</span></p>
 <p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restriction, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption <span class="math inline">\(n\)</span> periods after the positive shock (or even a tiny negative value for “many” periods after). To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percentage change.</p>
 </section>
-<section id="identification-with-instrumental-variables" class="level2">
-<h2 class="anchored" data-anchor-id="identification-with-instrumental-variables">Identification with instrumental variables</h2>
+<section id="instrumental-variables" class="level3">
+<h3 class="anchored" data-anchor-id="instrumental-variables">Instrumental variables</h3>
 <p>We will now present an identification mathod that does not rely on the assumption of invertibility, but instead can be implemented even under partial or no invertibility.<br>
 Usually, we are interested in identifying a structural shock, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> for simplicity. Under invertibility, an instrumental variable <span class="math inline">\(z_t\)</span> for <span class="math inline">\(\varepsilon_{1,t}\)</span> has to be:<br>
 1. Relevant for <span class="math inline">\(\varepsilon_{1,t}\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{1, t} z_t\right)=\alpha \neq 0\)</span><br>
@@ -1054,9 +1047,19 @@ y_{i,t+h}
 <li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{2: n, t} \tilde{z}_t\right)=0\)</span></li>
 <li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{t+j} \tilde{z}_t\right)=0 \quad \forall j \neq 0\)</span></li>
 </ol>
-<p>For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.</p>
+<p>For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.<br>
+In the literature, there are two main methods for choosing instrumental variables: narrative and high frequency.</p>
+<section id="narrative-iv" class="level4">
+<h4 class="anchored" data-anchor-id="narrative-iv">Narrative IV</h4>
+<p>Narrative IVs are based on the idea of using historical records to identify sources of exogenous variation.</p>
+</section>
+<section id="high-frequency-iv" class="level4">
+<h4 class="anchored" data-anchor-id="high-frequency-iv">High Frequency IV</h4>
+<p>High frequency IV are constructed using changes in prices measured at very high frequences around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.</p>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
