@@ -1,0 +1,1751 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>nk – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../macroeconomics.html"> 
+<span class="menu-text">MACROECONOMICS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../data-analysis.html"> 
+<span class="menu-text">DATA ANALYSIS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../articles.html"> 
+<span class="menu-text">ARTICLES</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-new-keynesian-model-logic-of-the-derivation" id="toc-the-new-keynesian-model-logic-of-the-derivation" class="nav-link active" data-scroll-target="#the-new-keynesian-model-logic-of-the-derivation">The New Keynesian Model: logic of the derivation</a></li>
+  <li><a href="#retailers-and-wholesalers" id="toc-retailers-and-wholesalers" class="nav-link" data-scroll-target="#retailers-and-wholesalers">1. Retailers and Wholesalers</a></li>
+  <li><a href="#retailers" id="toc-retailers" class="nav-link" data-scroll-target="#retailers">2. Retailers</a></li>
+  <li><a href="#wholesalers-why-markup-pricing-appears" id="toc-wholesalers-why-markup-pricing-appears" class="nav-link" data-scroll-target="#wholesalers-why-markup-pricing-appears">3. Wholesalers: why markup pricing appears</a></li>
+  <li><a href="#why-sticky-prices-are-introduced" id="toc-why-sticky-prices-are-introduced" class="nav-link" data-scroll-target="#why-sticky-prices-are-introduced">4. Why sticky prices are introduced</a></li>
+  <li><a href="#calvo-problem-and-optimal-reset-price" id="toc-calvo-problem-and-optimal-reset-price" class="nav-link" data-scroll-target="#calvo-problem-and-optimal-reset-price">5. Calvo problem and optimal reset price</a></li>
+  <li><a href="#aggregate-price-level-why-inflation-is-a-mix-of-old-and-new-prices" id="toc-aggregate-price-level-why-inflation-is-a-mix-of-old-and-new-prices" class="nav-link" data-scroll-target="#aggregate-price-level-why-inflation-is-a-mix-of-old-and-new-prices">6. Aggregate price level: why inflation is a mix of old and new prices</a></li>
+  <li><a href="#price-dispersion-why-sticky-prices-create-inefficiency" id="toc-price-dispersion-why-sticky-prices-create-inefficiency" class="nav-link" data-scroll-target="#price-dispersion-why-sticky-prices-create-inefficiency">7. Price dispersion: why sticky prices create inefficiency</a></li>
+  <li><a href="#households-why-demand-enters-the-model" id="toc-households-why-demand-enters-the-model" class="nav-link" data-scroll-target="#households-why-demand-enters-the-model">8. Households: why demand enters the model</a>
+  <ul class="collapse">
+  <li><a href="#euler-equation" id="toc-euler-equation" class="nav-link" data-scroll-target="#euler-equation">Euler equation</a></li>
+  <li><a href="#labor-supply" id="toc-labor-supply" class="nav-link" data-scroll-target="#labor-supply">Labor supply</a></li>
+  </ul></li>
+  <li><a href="#nonlinear-equilibrium-system" id="toc-nonlinear-equilibrium-system" class="nav-link" data-scroll-target="#nonlinear-equilibrium-system">9. Nonlinear equilibrium system</a></li>
+  <li><a href="#efficient-steady-state-why-we-compute-it" id="toc-efficient-steady-state-why-we-compute-it" class="nav-link" data-scroll-target="#efficient-steady-state-why-we-compute-it">10. Efficient steady state: why we compute it</a></li>
+  <li><a href="#log-linearization-why-we-approximate-around-the-efficient-steady-state" id="toc-log-linearization-why-we-approximate-around-the-efficient-steady-state" class="nav-link" data-scroll-target="#log-linearization-why-we-approximate-around-the-efficient-steady-state">11. Log-linearization: why we approximate around the efficient steady state</a></li>
+  <li><a href="#new-keynesian-phillips-curve" id="toc-new-keynesian-phillips-curve" class="nav-link" data-scroll-target="#new-keynesian-phillips-curve">12. New Keynesian Phillips Curve</a></li>
+  <li><a href="#dynamic-is-curve" id="toc-dynamic-is-curve" class="nav-link" data-scroll-target="#dynamic-is-curve">13. Dynamic IS curve</a></li>
+  <li><a href="#monetary-policy-rule" id="toc-monetary-policy-rule" class="nav-link" data-scroll-target="#monetary-policy-rule">14. Monetary policy rule</a></li>
+  <li><a href="#the-three-equation-new-keynesian-model" id="toc-the-three-equation-new-keynesian-model" class="nav-link" data-scroll-target="#the-three-equation-new-keynesian-model">15. The three-equation New Keynesian model</a>
+  <ul class="collapse">
+  <li><a href="#aggregate-supply" id="toc-aggregate-supply" class="nav-link" data-scroll-target="#aggregate-supply">Aggregate supply</a></li>
+  <li><a href="#aggregate-demand" id="toc-aggregate-demand" class="nav-link" data-scroll-target="#aggregate-demand">Aggregate demand</a></li>
+  <li><a href="#monetary-policy" id="toc-monetary-policy" class="nav-link" data-scroll-target="#monetary-policy">Monetary policy</a></li>
+  </ul></li>
+  <li><a href="#shocks-and-interpretation" id="toc-shocks-and-interpretation" class="nav-link" data-scroll-target="#shocks-and-interpretation">16. Shocks and interpretation</a>
+  <ul class="collapse">
+  <li><a href="#supply-side" id="toc-supply-side" class="nav-link" data-scroll-target="#supply-side">Supply side</a></li>
+  <li><a href="#demand-side" id="toc-demand-side" class="nav-link" data-scroll-target="#demand-side">Demand side</a></li>
+  <li><a href="#monetary-policy-1" id="toc-monetary-policy-1" class="nav-link" data-scroll-target="#monetary-policy-1">Monetary policy</a></li>
+  </ul></li>
+  <li><a href="#equilibrium-determinacy-and-the-taylor-principle" id="toc-equilibrium-determinacy-and-the-taylor-principle" class="nav-link" data-scroll-target="#equilibrium-determinacy-and-the-taylor-principle">17. Equilibrium determinacy and the Taylor principle</a></li>
+  <li><a href="#final-logic-of-the-whole-derivation" id="toc-final-logic-of-the-whole-derivation" class="nav-link" data-scroll-target="#final-logic-of-the-whole-derivation">18. Final logic of the whole derivation</a></li>
+  <li><a href="#minimal-summary" id="toc-minimal-summary" class="nav-link" data-scroll-target="#minimal-summary">19. Minimal summary</a></li>
+  <li><a href="#final-formulas-collected" id="toc-final-formulas-collected" class="nav-link" data-scroll-target="#final-formulas-collected">20. Final formulas collected</a>
+  <ul class="collapse">
+  <li><a href="#retail-demand" id="toc-retail-demand" class="nav-link" data-scroll-target="#retail-demand">Retail demand</a></li>
+  <li><a href="#marginal-cost-and-flexible-price-markup" id="toc-marginal-cost-and-flexible-price-markup" class="nav-link" data-scroll-target="#marginal-cost-and-flexible-price-markup">Marginal cost and flexible-price markup</a></li>
+  <li><a href="#reset-price-under-calvo" id="toc-reset-price-under-calvo" class="nav-link" data-scroll-target="#reset-price-under-calvo">Reset price under Calvo</a></li>
+  <li><a href="#aggregate-inflation" id="toc-aggregate-inflation" class="nav-link" data-scroll-target="#aggregate-inflation">Aggregate inflation</a></li>
+  <li><a href="#price-dispersion" id="toc-price-dispersion" class="nav-link" data-scroll-target="#price-dispersion">Price dispersion</a></li>
+  <li><a href="#household-block" id="toc-household-block" class="nav-link" data-scroll-target="#household-block">Household block</a></li>
+  <li><a href="#efficient-steady-state" id="toc-efficient-steady-state" class="nav-link" data-scroll-target="#efficient-steady-state">Efficient steady state</a></li>
+  <li><a href="#log-linear-equations" id="toc-log-linear-equations" class="nav-link" data-scroll-target="#log-linear-equations">Log-linear equations</a></li>
+  <li><a href="#taylor-principle" id="toc-taylor-principle" class="nav-link" data-scroll-target="#taylor-principle">Taylor principle</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="the-new-keynesian-model-logic-of-the-derivation" class="level2">
+<h2 class="anchored" data-anchor-id="the-new-keynesian-model-logic-of-the-derivation">The New Keynesian Model: logic of the derivation</h2>
+<p>This note reconstructs the baseline 3-equations New Keynesian model in the style of Jordi Galì, based on lectures by Andrea Ferrero. The aim is not just to report formulas, but to explain why each block is introduced and what job it does.</p>
+<p>The necessity for the model arises from the fact that in the classical RBC model money is neutral, and therefore monetary policy does not have any real effect. Clearly, in order to study the effect on such policy changes in the real economy, we need to construct a new model.<br>
+In doing so, we combine:<br>
+1. <strong>monopolistic competition</strong>, so firms set prices as a markup over marginal cost, and<br>
+2. <strong>nominal rigidity</strong>, so not all firms can reset prices every period.</p>
+<p>Without the first, there is no meaningful pricing problem. Without the second, monetary policy remains neutral.</p>
+<hr>
+</section>
+<section id="retailers-and-wholesalers" class="level2">
+<h2 class="anchored" data-anchor-id="retailers-and-wholesalers">1. Retailers and Wholesalers</h2>
+<p>We introduce two layers of production.</p>
+<ul>
+<li><strong>Retailers</strong> are perfectly competitive and combine differentiated intermediate goods into one final good.</li>
+<li><strong>Wholesalers</strong> produce the differentiated intermediate goods and have monopoly power.</li>
+</ul>
+<p>This split is not economically deep in itself. It is mainly a tractable way to generate a downward-sloping demand curve for each producer. One could equivalently put love for variety directly in household preferences, but the retailer layer is algebraically cleaner.</p>
+<p>We will proceed as follow</p>
+<ol type="1">
+<li>build a final-good aggregator,</li>
+<li>derive demand for each differentiated good,</li>
+<li>then let intermediate firms solve a price-setting problem.</li>
+</ol>
+<hr>
+</section>
+<section id="retailers" class="level2">
+<h2 class="anchored" data-anchor-id="retailers">2. Retailers</h2>
+<p>Retailers are competitive. They choose the bundle of differentiated goods <span class="math inline">\(Y_t(i)\)</span> to produce a final good <span class="math inline">\(Y_t\)</span>:</p>
+<p><span class="math display">\[
+Y_t=\left[\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}}\,di\right]^{\frac{\theta}{\theta-1}}, \qquad \theta&gt;1.
+\]</span></p>
+<p>They solve</p>
+<p><span class="math display">\[
+\min_{\{Y_t(i)\}} \int_0^1 P_t(i)Y_t(i)\,di
+\quad \text{s.t.} \quad
+Y_t=\left[\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}}\,di\right]^{\frac{\theta}{\theta-1}}.
+\]</span></p>
+<p>The economic role of this problem is simple: retailers do <strong>not</strong> set prices, they instead just choose the cheapest mix of varieties to produce one unit of the final good. The solution to their problem gives the demand curve faced by each wholesale firm.</p>
+<p>Define the price index</p>
+<p><span class="math display">\[
+P_t=\left[\int_0^1 P_t(i)^{1-\theta}\,di\right]^{\frac{1}{1-\theta}}.
+\]</span></p>
+<p>Then set the Lagrangian</p>
+<p><span class="math display">\[
+\mathcal{L}
+=
+\int_0^1 P_t(i) Y_t(i)\, di
++
+\Lambda_t \left[
+Y_t -
+\left( \int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}} di \right)^{\frac{\theta}{\theta-1}}
+\right]
+\]</span></p>
+<p><span class="math display">\[
+P_t(i) = \Lambda_t^{\frac{\theta-1}{\theta}} \, Y_t(i)^{-\frac{1}{\theta}}
+\]</span></p>
+<p><span class="math display">\[
+P_t(i)^{1-\theta}
+=
+\left(\Lambda_t^{\frac{\theta-1}{\theta}}\right)^{1-\theta}
+\, Y_t(i)^{\frac{\theta-1}{\theta}}
+\]</span></p>
+<p><span class="math display">\[
+\int_0^1 P_t(i)^{1-\theta} \, di
+=
+\left(\Lambda_t^{\frac{\theta-1}{\theta}}\right)^{1-\theta}
+\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}} \, di
+\]</span></p>
+<p><span class="math display">\[
+\int_0^1 P_t(i)^{1-\theta} \, di
+=
+\left(\Lambda_t^{\frac{\theta-1}{\theta}}\right)^{1-\theta}
+\, Y_t^{\frac{\theta-1}{\theta}}
+\]</span></p>
+<p><span class="math display">\[
+P_t
+=
+\left(\Lambda_t^{\frac{\theta-1}{\theta}}\right)
+\, Y_t^{-\frac{1}{\theta}}
+\]</span></p>
+<p><span class="math display">\[
+P_t
+=
+P_t(i)\, Y_t(i)^{\frac{1}{\theta}} \, Y_t^{-\frac{1}{\theta}}
+\]</span></p>
+<p><span class="math display">\[
+Y_t(i)
+=
+Y_t \left(\frac{P_t(i)}{P_t}\right)^{-\theta}
+\]</span></p>
+<p><span class="math display">\[
+\frac{d \log Y_t(i)}{d \log P_t(i)} = -\theta
+\]</span></p>
+<p>Then the standard CES demand system is</p>
+<p><span class="math display">\[
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>This is the first key object in the model.</p>
+<p>Interpretation:</p>
+<ul>
+<li>if firm <span class="math inline">\(i\)</span> raises its price relative to the aggregate price level, demand for its good falls;</li>
+<li>the elasticity of that fall is <span class="math inline">\(\theta\)</span>;</li>
+<li><span class="math inline">\(\theta\)</span> therefore controls market power.</li>
+</ul>
+<p>This is why the retailer problem exists at all.</p>
+<hr>
+</section>
+<section id="wholesalers-why-markup-pricing-appears" class="level2">
+<h2 class="anchored" data-anchor-id="wholesalers-why-markup-pricing-appears">3. Wholesalers: why markup pricing appears</h2>
+<p>Each wholesale firm <span class="math inline">\(i\)</span> produces with labor only:</p>
+<p><span class="math display">\[
+Y_t(i)=A_tN_t(i).
+\]</span></p>
+<p>So there is no capital here. That is deliberate: Ferrero wants the simplest environment in which monetary non-neutrality appears.</p>
+<p>Each firm faces the demand curve derived above:</p>
+<p><span class="math display">\[
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>Profits in real terms are</p>
+<p><span class="math display">\[
+\max_{P_t(i),N_t(i)}
+(1-\tau_t)\frac{P_t(i)}{P_t}Y_t(i)-\frac{W_t}{P_t}N_t(i)
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+Y_t(i)=A_tN_t(i),
+\qquad
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>The tax/subsidy term <span class="math inline">\(\tau_t\)</span> is useful because later it lets us offset monopoly distortions.</p>
+<p>From production,</p>
+<p><span class="math display">\[
+N_t(i)=\frac{Y_t(i)}{A_t}.
+\]</span></p>
+<p>Hence real marginal cost is</p>
+<p><span class="math display">\[
+MC_t=\frac{W_t}{A_tP_t}.
+\]</span></p>
+<p>So profits can be rewritten as</p>
+<p><span class="math display">\[
+\max_{P_t(i)}
+\left[
+(1-\tau_t)\frac{P_t(i)}{P_t}-MC_t
+\right]Y_t(i)
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>Substituting demand:</p>
+<p><span class="math display">\[
+\max_{P_t(i)}
+\left[
+(1-\tau_t)\frac{P_t(i)}{P_t}-MC_t
+\right]
+Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>Differentiating with respect to <span class="math inline">\(P_t(i)\)</span> gives</p>
+<p><span class="math display">\[
+\frac{P_t(i)}{P_t}
+=
+MC_t\frac{\theta}{(1-\tau_t)(\theta-1)}.
+\]</span></p>
+<p>Using</p>
+<p><span class="math display">\[
+\mu\equiv \frac{1}{\theta-1},
+\]</span></p>
+<p>this becomes</p>
+<p><span class="math display">\[
+\frac{P_t(i)}{P_t}
+=
+MC_t\frac{1+\mu}{1-\tau_t}.
+\]</span></p>
+<p>So the firm sets price as a <strong>markup over marginal cost</strong>.</p>
+<p>This is the second key economic idea of the model:</p>
+<ul>
+<li>monopolistic competition creates a wedge between price and marginal cost;</li>
+<li>but if prices are still flexible, money is still neutral;</li>
+<li>so markup pricing alone is <strong>not enough</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="why-sticky-prices-are-introduced" class="level2">
+<h2 class="anchored" data-anchor-id="why-sticky-prices-are-introduced">4. Why sticky prices are introduced</h2>
+<p>At this stage the model is more realistic than perfect competition, but monetary policy still has no real effect if all firms can adjust prices immediately.</p>
+<p>So the next step is exactly the one needed to break classical dichotomy:</p>
+<blockquote class="blockquote">
+<p>not all firms can reoptimize every period.</p>
+</blockquote>
+<p>Ferrero uses <strong>Calvo pricing</strong>. This is not because anyone thinks firms literally toss coins. It is because Calvo gives nominal rigidity without forcing us to track the full cross-sectional distribution of price vintages.</p>
+<p>Assumption:</p>
+<ul>
+<li>with probability <span class="math inline">\(1-\alpha\)</span>, a firm resets its price,</li>
+<li>with probability <span class="math inline">\(\alpha\)</span>, it keeps the old price.</li>
+</ul>
+<p>The crucial implication is dynamic pricing:</p>
+<ul>
+<li>when a firm resets today, it knows the price may remain in place for many future periods,</li>
+<li>so it chooses a price by trading off expected future demand and expected future marginal costs.</li>
+</ul>
+<hr>
+</section>
+<section id="calvo-problem-and-optimal-reset-price" class="level2">
+<h2 class="anchored" data-anchor-id="calvo-problem-and-optimal-reset-price">5. Calvo problem and optimal reset price</h2>
+<p>A firm resetting in period <span class="math inline">\(t\)</span> chooses <span class="math inline">\(\widetilde P_t(i)\)</span> to maximize the discounted present value of profits while its price remains fixed:</p>
+<p><span class="math display">\[
+\max_{\widetilde P_t(i)}
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left[
+(1-\tau_{t+j})\frac{\widetilde P_t(i)}{P_{t+j}}-MC_{t+j}
+\right]
+Y_{t+j|t}(i)
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+Y_{t+j|t}(i)=Y_{t+j}\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+M_{t,t+j}=\beta^j\left(\frac{C_{t+j}}{C_t}\right)^{-\sigma}.
+\]</span></p>
+<p>Substitute demand into the objective:</p>
+<p><span class="math display">\[
+\max_{\widetilde P_t(i)}
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left[
+(1-\tau_{t+j})\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{1-\theta}
+-
+MC_{t+j}\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta}
+\right]Y_{t+j}.
+\]</span></p>
+<p>FOC with respect to <span class="math inline">\(\widetilde P_t(i)\)</span>:</p>
+<p><span class="math display">\[
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})(1-\theta)
+\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta}
+\frac{Y_{t+j}}{P_{t+j}}
+\]</span></p>
+<p><span class="math display">\[
+\qquad
++
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}\theta MC_{t+j}
+\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta-1}
+\frac{Y_{t+j}}{P_{t+j}}
+=0.
+\]</span></p>
+<p>Rearranging yields the standard reset-price condition</p>
+<p><span class="math display">\[
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})
+\frac{\widetilde P_t(i)}{P_t}
+\left(\frac{P_{t+j}}{P_t}\right)^{\theta-1}
+Y_{t+j}
+\]</span></p>
+<p><span class="math display">\[
+=
+(1+\mu)
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left(\frac{P_{t+j}}{P_t}\right)^{\theta}
+MC_{t+j}Y_{t+j}.
+\]</span></p>
+<p>Define cumulative gross inflation between <span class="math inline">\(t\)</span> and <span class="math inline">\(t+j\)</span> as</p>
+<p><span class="math display">\[
+\Pi_{t+j,t}\equiv \frac{P_{t+j}}{P_t}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\frac{\widetilde P_t(i)}{P_t}
+=
+(1+\mu)
+\frac{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}\Pi_{t+j,t}^{\theta}MC_{t+j}Y_{t+j}
+}{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})\Pi_{t+j,t}^{\theta-1}Y_{t+j}
+}.
+\]</span></p>
+<p>In symmetric equilibrium all reoptimizing firms choose the same reset price, so write</p>
+<p><span class="math display">\[
+\frac{\widetilde P_t}{P_t}=\frac{X_{1t}}{X_{2t}},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+X_{1t}
+=
+(1+\mu)MC_tY_t
++
+\alpha E_t\left(M_{t,t+1}\Pi_{t+1}^{\theta}X_{1,t+1}\right),
+\]</span></p>
+<p><span class="math display">\[
+X_{2t}
+=
+(1-\tau_t)Y_t
++
+\alpha E_t\left(M_{t,t+1}\Pi_{t+1}^{\theta-1}X_{2,t+1}\right).
+\]</span></p>
+<p>This notation is not cosmetic. It isolates the two parts of the pricing problem:</p>
+<ul>
+<li><span class="math inline">\(X_{1t}\)</span>: discounted expected future costs,</li>
+<li><span class="math inline">\(X_{2t}\)</span>: discounted expected future demand/revenues.</li>
+</ul>
+<p>So the reset price is a dynamic markup formula:</p>
+<blockquote class="blockquote">
+<p>desired reset price = markup × discounted future marginal cost, normalized by discounted future demand conditions.</p>
+</blockquote>
+<hr>
+</section>
+<section id="aggregate-price-level-why-inflation-is-a-mix-of-old-and-new-prices" class="level2">
+<h2 class="anchored" data-anchor-id="aggregate-price-level-why-inflation-is-a-mix-of-old-and-new-prices">6. Aggregate price level: why inflation is a mix of old and new prices</h2>
+<p>Now we need to connect the reset price to aggregate inflation.</p>
+<p>By definition of the CES price index,</p>
+<p><span class="math display">\[
+P_t^{1-\theta}=\int_0^1 P_t(i)^{1-\theta}\,di.
+\]</span></p>
+<p>Under Calvo:</p>
+<ul>
+<li>a fraction <span class="math inline">\(\alpha\)</span> keeps last period’s price,</li>
+<li>a fraction <span class="math inline">\(1-\alpha\)</span> resets to <span class="math inline">\(\widetilde P_t\)</span>.</li>
+</ul>
+<p>Hence</p>
+<p><span class="math display">\[
+P_t^{1-\theta}
+=
+\alpha P_{t-1}^{1-\theta}
++
+(1-\alpha)\widetilde P_t^{\,1-\theta}.
+\]</span></p>
+<p>Dividing by <span class="math inline">\(P_t^{1-\theta}\)</span> gives</p>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta},
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\Pi_t\equiv \frac{P_t}{P_{t-1}}.
+\]</span></p>
+<p>Using <span class="math inline">\(\widetilde P_t/P_t=X_{1t}/X_{2t}\)</span>,</p>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta}.
+\]</span></p>
+<p>This is the nonlinear relation between reset pricing and inflation.</p>
+<p>The economic meaning is simple:</p>
+<ul>
+<li>inflation is high when new reset prices are high relative to old prices,</li>
+<li>but only the adjusting firms can move the aggregate price level immediately,</li>
+<li>so inflation is sluggish because many firms are mechanically stuck with yesterday’s price.</li>
+</ul>
+<p>That is the source of nominal inertia.</p>
+<hr>
+</section>
+<section id="price-dispersion-why-sticky-prices-create-inefficiency" class="level2">
+<h2 class="anchored" data-anchor-id="price-dispersion-why-sticky-prices-create-inefficiency">7. Price dispersion: why sticky prices create inefficiency</h2>
+<p>Sticky prices imply that identical firms charge different prices. Hence they sell different quantities even though they have the same technology.</p>
+<p>This creates <strong>price dispersion</strong>, which is a resource misallocation.</p>
+<p>Start from production:</p>
+<p><span class="math display">\[
+Y_t(i)=A_tN_t(i).
+\]</span></p>
+<p>Integrating across firms:</p>
+<p><span class="math display">\[
+\int_0^1 Y_t(i)\,di=A_t\int_0^1 N_t(i)\,di=A_tN_t.
+\]</span></p>
+<p>Using demand,</p>
+<p><span class="math display">\[
+\int_0^1 Y_t(i)\,di
+=
+\int_0^1 Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}di
+=
+Y_t\Delta_t,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\Delta_t\equiv \int_0^1 \left(\frac{P_t(i)}{P_t}\right)^{-\theta}di.
+\]</span></p>
+<p>So aggregate production becomes</p>
+<p><span class="math display">\[
+Y_t\Delta_t=A_tN_t.
+\]</span></p>
+<p>If all firms charged the same price, then <span class="math inline">\(\Delta_t=1\)</span>, and we would recover the efficient aggregate production relation <span class="math inline">\(Y_t=A_tN_t\)</span>. But with sticky prices, typically <span class="math inline">\(\Delta_t&gt;1\)</span>: the same aggregate labor input produces less effective aggregate output.</p>
+<p>To derive the law of motion of <span class="math inline">\(\Delta_t\)</span>, split firms into non-adjusters and adjusters:</p>
+<p><span class="math display">\[
+\Delta_t
+=
+\int_0^1 \left(\frac{P_t(i)}{P_t}\right)^{-\theta}di
+=
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_t}\right)^{-\theta}di
++
+\int_\alpha^1 \left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}di.
+\]</span></p>
+<p>The first term is</p>
+<p><span class="math display">\[
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_t}\right)^{-\theta}di
+=
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_{t-1}}\right)^{-\theta}
+\left(\frac{P_{t-1}}{P_t}\right)^{-\theta}di
+=
+\alpha \Pi_t^\theta \Delta_{t-1}.
+\]</span></p>
+<p>The second term is</p>
+<p><span class="math display">\[
+\int_\alpha^1 \left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}di
+=
+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}.
+\]</span></p>
+<p>From the price-index relation</p>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta},
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta}
+=
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha},
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
+\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}
+=
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+\]</span></p>
+<p>Therefore the law of motion for price dispersion is</p>
+<p><span class="math display">\[
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+\]</span></p>
+<p>This object matters because it is the extra inefficiency created by sticky prices, over and above monopoly power.</p>
+<hr>
+</section>
+<section id="households-why-demand-enters-the-model" class="level2">
+<h2 class="anchored" data-anchor-id="households-why-demand-enters-the-model">8. Households: why demand enters the model</h2>
+<p>We now close general equilibrium. Up to now, firms were solving pricing problems, but we still need aggregate demand.</p>
+<p>The representative household solves</p>
+<p><span class="math display">\[
+\max_{\{C_t,B_t,N_t\}}
+E_0\sum_{t=0}^{\infty}\beta^t
+\left(
+\frac{C_t^{1-\sigma}}{1-\sigma}
+-
+\frac{N_t^{1+\phi}}{1+\phi}
+\right)
+\]</span></p>
+<p>subject to the budget constraint</p>
+<p><span class="math display">\[
+P_tC_t+B_t=(1+i_t)B_{t-1}+W_tN_t+\text{profits}_t.
+\]</span></p>
+<p>FOCs:</p>
+<section id="euler-equation" class="level3">
+<h3 class="anchored" data-anchor-id="euler-equation">Euler equation</h3>
+<p><span class="math display">\[
+C_t^{-\sigma}
+=
+\beta E_t\left[
+C_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right].
+\]</span></p>
+</section>
+<section id="labor-supply" class="level3">
+<h3 class="anchored" data-anchor-id="labor-supply">Labor supply</h3>
+<p><span class="math display">\[
+\frac{W_t}{P_t}=N_t^\phi C_t^\sigma.
+\]</span></p>
+<p>Goods market clearing gives</p>
+<p><span class="math display">\[
+Y_t=C_t.
+\]</span></p>
+<p>Now combine labor supply with real marginal cost:</p>
+<p><span class="math display">\[
+MC_t=\frac{W_t}{A_tP_t}.
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+A_tMC_t=\frac{W_t}{P_t}=N_t^\phi C_t^\sigma.
+\]</span></p>
+<p>Using <span class="math inline">\(C_t=Y_t\)</span> and from <span class="math inline">\(Y_t\Delta_t=A_tN_t\)</span>,</p>
+<p><span class="math display">\[
+N_t=\frac{Y_t\Delta_t}{A_t}.
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+A_tMC_t
+=
+\left(\frac{Y_t\Delta_t}{A_t}\right)^\phi Y_t^\sigma,
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+A_t^{1+\phi}MC_t
+=
+Y_t^{\sigma+\phi}\Delta_t^\phi.
+\]</span></p>
+<p>This is a crucial link:</p>
+<blockquote class="blockquote">
+<p>demand affects output, output affects labor, labor affects wages, wages affect marginal cost, and marginal cost drives inflation.</p>
+</blockquote>
+<p>That is the transmission mechanism of the model in one line.</p>
+<hr>
+</section>
+</section>
+<section id="nonlinear-equilibrium-system" class="level2">
+<h2 class="anchored" data-anchor-id="nonlinear-equilibrium-system">9. Nonlinear equilibrium system</h2>
+<p>Given exogenous productivity <span class="math inline">\(A_t\)</span> and the policy rate <span class="math inline">\(i_t\)</span>, equilibrium is a sequence <span class="math inline">\(\{Y_t,MC_t,\Pi_t,\Delta_t,X_{1t},X_{2t}\}\)</span> satisfying</p>
+<p><span class="math display">\[
+Y_t^{-\sigma}
+=
+\beta E_t\left[
+Y_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right],
+\]</span></p>
+<p><span class="math display">\[
+A_t^{1+\phi}MC_t
+=
+Y_t^{\sigma+\phi}\Delta_t^\phi,
+\]</span></p>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta},
+\]</span></p>
+<p><span class="math display">\[
+X_{1t}
+=
+(1+\mu)MC_tY_t
++
+\alpha\beta E_t\left[
+\left(\frac{Y_{t+1}}{Y_t}\right)^{-\sigma}
+\Pi_{t+1}^{\theta}
+X_{1,t+1}
+\right],
+\]</span></p>
+<p><span class="math display">\[
+X_{2t}
+=
+(1-\tau_t)Y_t
++
+\alpha\beta E_t\left[
+\left(\frac{Y_{t+1}}{Y_t}\right)^{-\sigma}
+\Pi_{t+1}^{\theta-1}
+X_{2,t+1}
+\right],
+\]</span></p>
+<p><span class="math display">\[
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+\]</span></p>
+<p>This is the fully nonlinear NK model in this simple environment.</p>
+<hr>
+</section>
+<section id="efficient-steady-state-why-we-compute-it" class="level2">
+<h2 class="anchored" data-anchor-id="efficient-steady-state-why-we-compute-it">10. Efficient steady state: why we compute it</h2>
+<p>The model contains two distortions:</p>
+<ol type="1">
+<li>monopoly power, through the markup;</li>
+<li>sticky-price misallocation, through price dispersion.</li>
+</ol>
+<p>To define the <strong>output gap</strong>, we need a benchmark allocation. Ferrero chooses the <strong>efficient steady state</strong>: zero inflation, no price dispersion, and subsidy chosen to neutralize the monopoly wedge.</p>
+<p>Assume steady state:</p>
+<p><span class="math display">\[
+\Pi=1, \qquad \Delta=1.
+\]</span></p>
+<p>Then from the production block:</p>
+<p><span class="math display">\[
+Y=AN.
+\]</span></p>
+<p>From the inflation equation,</p>
+<p><span class="math display">\[
+1=\alpha +(1-\alpha)\left(\frac{X_1}{X_2}\right)^{1-\theta}
+\quad \Rightarrow \quad X_1=X_2.
+\]</span></p>
+<p>In steady state,</p>
+<p><span class="math display">\[
+X_1=(1+\mu)MC\,Y+\alpha\beta X_1,
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+X_1=\frac{(1+\mu)MC\,Y}{1-\alpha\beta}.
+\]</span></p>
+<p>Similarly,</p>
+<p><span class="math display">\[
+X_2=(1-\tau)Y+\alpha\beta X_2,
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+X_2=\frac{(1-\tau)Y}{1-\alpha\beta}.
+\]</span></p>
+<p>Since <span class="math inline">\(X_1=X_2\)</span>,</p>
+<p><span class="math display">\[
+\frac{(1+\mu)MC\,Y}{1-\alpha\beta}
+=
+\frac{(1-\tau)Y}{1-\alpha\beta},
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
+(1+\mu)MC=1-\tau.
+\]</span></p>
+<p>For the <strong>efficient</strong> steady state we want</p>
+<p><span class="math display">\[
+MC=1.
+\]</span></p>
+<p>So set the subsidy to remove the markup distortion:</p>
+<p><span class="math display">\[
+\tau=-\mu.
+\]</span></p>
+<p>This is why the tax/subsidy term was introduced earlier: it lets the flexible-price steady state coincide with the undistorted RBC allocation.</p>
+<p>Now use labor-market equilibrium. Since <span class="math inline">\(C=Y\)</span> and <span class="math inline">\(\Delta=1\)</span>,</p>
+<p><span class="math display">\[
+A\,MC=N^\phi C^\sigma.
+\]</span></p>
+<p>At the efficient steady state <span class="math inline">\(MC=1\)</span>, so</p>
+<p><span class="math display">\[
+A=N^\phi Y^\sigma.
+\]</span></p>
+<p>Since <span class="math inline">\(Y=AN\)</span>, we have <span class="math inline">\(N=Y/A\)</span>. Therefore</p>
+<p><span class="math display">\[
+A=\left(\frac{Y}{A}\right)^\phi Y^\sigma
+=
+Y^{\sigma+\phi}A^{-\phi}.
+\]</span></p>
+<p>Multiply by <span class="math inline">\(A^\phi\)</span>:</p>
+<p><span class="math display">\[
+A^{1+\phi}=Y^{\sigma+\phi}.
+\]</span></p>
+<p>Hence</p>
+<p><span class="math display">\[
+Y^*
+=
+A^{\frac{1+\phi}{\sigma+\phi}}.
+\]</span></p>
+<p>This is the natural or efficient level of output in this no-capital economy.</p>
+<p>So the efficient steady state matters because it gives the benchmark around which the model is approximated, and relative to which the output gap is defined.</p>
+<hr>
+</section>
+<section id="log-linearization-why-we-approximate-around-the-efficient-steady-state" class="level2">
+<h2 class="anchored" data-anchor-id="log-linearization-why-we-approximate-around-the-efficient-steady-state">11. Log-linearization: why we approximate around the efficient steady state</h2>
+<p>The nonlinear system cannot generally be solved in closed form. So we log-linearize around the efficient steady state:</p>
+<ul>
+<li>zero inflation: <span class="math inline">\(\Pi=1\)</span>,</li>
+<li>no price dispersion: <span class="math inline">\(\Delta=1\)</span>,</li>
+<li>monopoly distortion removed by subsidy.</li>
+</ul>
+<p>To first order, price dispersion drops out:</p>
+<p><span class="math display">\[
+\widehat\Delta_t=0.
+\]</span></p>
+<p>This is why the three-equation NK model looks so much cleaner than the nonlinear system. The ugly cross-sectional object is second order.</p>
+<hr>
+</section>
+<section id="new-keynesian-phillips-curve" class="level2">
+<h2 class="anchored" data-anchor-id="new-keynesian-phillips-curve">12. New Keynesian Phillips Curve</h2>
+<p>Start from</p>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta}.
+\]</span></p>
+<p>Log-linearizing around zero inflation steady state gives, after substituting the linearized <span class="math inline">\(X_{1t}\)</span> and <span class="math inline">\(X_{2t}\)</span> recursions,</p>
+<p><span class="math display">\[
+\pi_t
+=
+\frac{(1-\alpha)(1-\alpha\beta)}{\alpha}
+\left(mc_t+\widehat\tau_t\right)
++
+\beta E_t\pi_{t+1}.
+\]</span></p>
+<p>This is the baseline NK Phillips curve.</p>
+<p>Economic interpretation:</p>
+<ul>
+<li>inflation rises when current real marginal cost rises,</li>
+<li>inflation also rises when firms expect future marginal costs to be high,</li>
+<li>and cost-push disturbances can shift inflation even for a given output gap.</li>
+</ul>
+<p>Now relate marginal cost to output.</p>
+<p>From the log-linearized labor-cost relation around the efficient steady state,</p>
+<p><span class="math display">\[
+(1+\phi)a_t+mc_t=(\sigma+\phi)y_t.
+\]</span></p>
+<p>At the efficient allocation, <span class="math inline">\(mc_t^*=0\)</span>, so</p>
+<p><span class="math display">\[
+y_t^*=\frac{1+\phi}{\sigma+\phi}a_t.
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+mc_t=(\sigma+\phi)(y_t-y_t^*).
+\]</span></p>
+<p>Define the output gap</p>
+<p><span class="math display">\[
+x_t\equiv y_t-y_t^*.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+mc_t=(\sigma+\phi)x_t.
+\]</span></p>
+<p>Substitute into the Phillips curve:</p>
+<p><span class="math display">\[
+\pi_t
+=
+\frac{(1-\alpha)(1-\alpha\beta)(\sigma+\phi)}{\alpha}x_t
++
+\beta E_t\pi_{t+1}
++
+\frac{(1-\alpha)(1-\alpha\beta)}{\alpha}\widehat\tau_t.
+\]</span></p>
+<p>Define</p>
+<p><span class="math display">\[
+\kappa \equiv \frac{(1-\alpha)(1-\alpha\beta)(\sigma+\phi)}{\alpha},
+\]</span></p>
+<p>and let</p>
+<p><span class="math display">\[
+u_t \equiv \frac{(1-\alpha)(1-\alpha\beta)}{\alpha}\widehat\tau_t.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t.
+\]</span></p>
+<p>That is the <strong>New Keynesian Phillips Curve</strong>.</p>
+<p>The logic is decisive:</p>
+<ul>
+<li>sticky prices make inflation depend on desired price adjustment,</li>
+<li>desired price adjustment depends on marginal cost,</li>
+<li>marginal cost depends on the output gap.</li>
+</ul>
+<p>So inflation is ultimately pinned down by real activity and expectations.</p>
+<hr>
+</section>
+<section id="dynamic-is-curve" class="level2">
+<h2 class="anchored" data-anchor-id="dynamic-is-curve">13. Dynamic IS curve</h2>
+<p>Now log-linearize the Euler equation</p>
+<p><span class="math display">\[
+Y_t^{-\sigma}
+=
+\beta E_t\left[
+Y_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right].
+\]</span></p>
+<p>To first order this gives</p>
+<p><span class="math display">\[
+y_t
+=
+E_ty_{t+1}
+-
+\sigma^{-1}(i_t-E_t\pi_{t+1})
++
+\text{terms involving the natural level}.
+\]</span></p>
+<p>Rewrite in output-gap form. Since</p>
+<p><span class="math display">\[
+x_t=y_t-y_t^*,
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1},
+\]</span></p>
+<p>where the efficient real interest rate is</p>
+<p><span class="math display">\[
+r_t^* \equiv \sigma(E_ty_{t+1}^*-y_t^*).
+\]</span></p>
+<p>This is the <strong>dynamic IS curve</strong>.</p>
+<p>Interpretation:</p>
+<ul>
+<li>when the real interest rate <span class="math inline">\(i_t-E_t\pi_{t+1}\)</span> rises above the natural rate <span class="math inline">\(r_t^*\)</span>, households want to postpone consumption,</li>
+<li>demand falls,</li>
+<li>output falls below efficient output,</li>
+<li>so the output gap decreases.</li>
+</ul>
+<p>This is the demand side of the model.</p>
+<hr>
+</section>
+<section id="monetary-policy-rule" class="level2">
+<h2 class="anchored" data-anchor-id="monetary-policy-rule">14. Monetary policy rule</h2>
+<p>The model is closed with an interest-rate rule:</p>
+<p><span class="math display">\[
+i_t=\phi_\pi \pi_t+\phi_x x_t+\varepsilon_t.
+\]</span></p>
+<p>Interpretation:</p>
+<ul>
+<li>the central bank raises the nominal rate when inflation is high,</li>
+<li>it may also react to the output gap,</li>
+<li><span class="math inline">\(\varepsilon_t\)</span> is a monetary policy shock.</li>
+</ul>
+<p>This is why Ferrero can discuss monetary policy without modeling money explicitly: the policy instrument is the short nominal interest rate.</p>
+<hr>
+</section>
+<section id="the-three-equation-new-keynesian-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-three-equation-new-keynesian-model">15. The three-equation New Keynesian model</h2>
+<p>Putting the pieces together:</p>
+<section id="aggregate-supply" class="level3">
+<h3 class="anchored" data-anchor-id="aggregate-supply">Aggregate supply</h3>
+<p><span class="math display">\[
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t.
+\]</span></p>
+</section>
+<section id="aggregate-demand" class="level3">
+<h3 class="anchored" data-anchor-id="aggregate-demand">Aggregate demand</h3>
+<p><span class="math display">\[
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1}.
+\]</span></p>
+</section>
+<section id="monetary-policy" class="level3">
+<h3 class="anchored" data-anchor-id="monetary-policy">Monetary policy</h3>
+<p><span class="math display">\[
+i_t=\phi_\pi \pi_t+\phi_x x_t+\varepsilon_t.
+\]</span></p>
+<p>This is the famous three-equation system.</p>
+<p>But one should not think of it as three arbitrary equations dropped from heaven. Each equation comes from a specific block:</p>
+<ul>
+<li><strong>Phillips curve</strong>: optimal price setting under Calvo frictions;</li>
+<li><strong>IS curve</strong>: household Euler equation;</li>
+<li><strong>Taylor rule</strong>: central bank behavior.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="shocks-and-interpretation" class="level2">
+<h2 class="anchored" data-anchor-id="shocks-and-interpretation">16. Shocks and interpretation</h2>
+<p>A convenient representation is:</p>
+<section id="supply-side" class="level3">
+<h3 class="anchored" data-anchor-id="supply-side">Supply side</h3>
+<p><span class="math display">\[
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t,
+\qquad
+u_t=\rho_u u_{t-1}+\varepsilon_t^u.
+\]</span></p>
+</section>
+<section id="demand-side" class="level3">
+<h3 class="anchored" data-anchor-id="demand-side">Demand side</h3>
+<p><span class="math display">\[
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1},
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+r_t^*
+=
+\sigma(E_ty_{t+1}^*-y_t^*).
+\]</span></p>
+<p>If productivity follows</p>
+<p><span class="math display">\[
+a_t=\rho_a a_{t-1}+\varepsilon_t^a,
+\]</span></p>
+<p>then since</p>
+<p><span class="math display">\[
+y_t^*=\frac{1+\phi}{\sigma+\phi}a_t,
+\]</span></p>
+<p>it follows that</p>
+<p><span class="math display">\[
+r_t^*
+=
+\sigma\frac{1+\phi}{\sigma+\phi}(E_ta_{t+1}-a_t).
+\]</span></p>
+</section>
+<section id="monetary-policy-1" class="level3">
+<h3 class="anchored" data-anchor-id="monetary-policy-1">Monetary policy</h3>
+<p><span class="math display">\[
+i_t=\phi_\pi\pi_t+\phi_xx_t+\varepsilon_t,
+\qquad
+\varepsilon_t=\rho_\varepsilon \varepsilon_{t-1}+\varepsilon_t^m.
+\]</span></p>
+<p>So the model typically features:</p>
+<ul>
+<li><strong>cost-push shocks</strong> <span class="math inline">\(u_t\)</span>,</li>
+<li><strong>natural-rate / productivity shocks</strong> through <span class="math inline">\(r_t^*\)</span>,</li>
+<li><strong>monetary policy shocks</strong> <span class="math inline">\(\varepsilon_t\)</span>.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="equilibrium-determinacy-and-the-taylor-principle" class="level2">
+<h2 class="anchored" data-anchor-id="equilibrium-determinacy-and-the-taylor-principle">17. Equilibrium determinacy and the Taylor principle</h2>
+<p>Substitute the Taylor rule into the IS curve:</p>
+<p><span class="math display">\[
+x_t
+=
+-\sigma^{-1}
+\left(
+\phi_\pi\pi_t+\phi_xx_t+\varepsilon_t-E_t\pi_{t+1}-r_t^*
+\right)
++
+E_tx_{t+1}.
+\]</span></p>
+<p>Together with</p>
+<p><span class="math display">\[
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t,
+\]</span></p>
+<p>this gives a forward-looking <span class="math inline">\(2\times 2\)</span> system in <span class="math inline">\((x_t,\pi_t)\)</span>.</p>
+<p>In matrix form one can write</p>
+<p><span class="math display">\[
+A_0
+\begin{pmatrix}
+E_tx_{t+1}\\
+E_t\pi_{t+1}
+\end{pmatrix}
+=
+A_1
+\begin{pmatrix}
+x_t\\
+\pi_t
+\end{pmatrix}
++
+Bv_t,
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+A_0=
+\begin{pmatrix}
+\sigma &amp; 1\\
+0 &amp; \beta
+\end{pmatrix},
+\qquad
+A_1=
+\begin{pmatrix}
+\sigma+\phi_x &amp; \phi_\pi\\
+\kappa &amp; 1
+\end{pmatrix}.
+\]</span></p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+E_tz_{t+1}=A z_t + \widetilde B v_t,
+\qquad
+A=A_0^{-1}A_1.
+\]</span></p>
+<p>Determinacy requires the Blanchard-Kahn condition: the number of unstable eigenvalues must equal the number of forward-looking variables.</p>
+<p>In this two-equation purely forward-looking setup, this becomes the requirement that both eigenvalues of <span class="math inline">\(A\)</span> lie outside the unit circle. This yields the familiar restriction</p>
+<p><span class="math display">\[
+\phi_\pi &gt; 1-\frac{(1-\beta)\phi_x}{\kappa}.
+\]</span></p>
+<p>In the special case <span class="math inline">\(\phi_x=0\)</span>, this reduces to</p>
+<p><span class="math display">\[
+\phi_\pi&gt;1.
+\]</span></p>
+<p>That is the <strong>Taylor principle</strong>.</p>
+<p>Its economic meaning is not mysterious:</p>
+<blockquote class="blockquote">
+<p>when inflation rises, the central bank must raise the nominal rate by more than one-for-one, so that the real rate rises.</p>
+</blockquote>
+<p>If not, inflationary expectations can become self-fulfilling. Human beings do love building systems that explode unless someone promises to overreact in exactly the right way.</p>
+<hr>
+</section>
+<section id="final-logic-of-the-whole-derivation" class="level2">
+<h2 class="anchored" data-anchor-id="final-logic-of-the-whole-derivation">18. Final logic of the whole derivation</h2>
+<p>The derivation is best read as a chain:</p>
+<ol type="1">
+<li><strong>Retailers</strong> are introduced to generate a clean CES demand system for differentiated goods.</li>
+<li><strong>Wholesalers</strong> have monopoly power, so they choose prices as markups over marginal cost.</li>
+<li>With <strong>flexible prices</strong>, this is still basically an RBC world with a static monopoly distortion.</li>
+<li>So we introduce <strong>Calvo pricing</strong>, which makes price-setting forward-looking and gives inflation inertia.</li>
+<li>Sticky prices create <strong>price dispersion</strong>, hence inefficient allocation across firms.</li>
+<li><strong>Households</strong> provide the Euler equation and labor supply, linking demand to marginal cost.</li>
+<li>The <strong>efficient steady state</strong> is computed to remove the monopoly distortion and define a clean benchmark.</li>
+<li>Log-linearization around that benchmark yields:
+<ul>
+<li>the <strong>NK Phillips curve</strong> from pricing,</li>
+<li>the <strong>dynamic IS curve</strong> from intertemporal choice,</li>
+<li>and the <strong>Taylor rule</strong> from policy.</li>
+</ul></li>
+<li>The model then explains how monetary policy affects output and inflation in the short run, while preserving long-run monetary neutrality.</li>
+</ol>
+<p>So the conceptual core is:</p>
+<blockquote class="blockquote">
+<p>a forward-looking demand equation + a forward-looking pricing equation + an interest-rate rule.</p>
+</blockquote>
+<p>Everything else is scaffolding to derive those objects cleanly.</p>
+<hr>
+</section>
+<section id="minimal-summary" class="level2">
+<h2 class="anchored" data-anchor-id="minimal-summary">19. Minimal summary</h2>
+<p>The New Keynesian model is an RBC-style economy without capital, but with two crucial departures:</p>
+<ul>
+<li>firms have market power,</li>
+<li>and prices are sticky.</li>
+</ul>
+<p>Because of market power, firms care about markups.<br>
+Because of sticky prices, they cannot always adjust.<br>
+Therefore inflation becomes a forward-looking object tied to expected marginal costs.<br>
+And because households smooth consumption intertemporally, the real interest rate affects demand and hence the output gap.</p>
+<p>That is why monetary policy has real effects in the short run.</p>
+<hr>
+</section>
+<section id="final-formulas-collected" class="level2">
+<h2 class="anchored" data-anchor-id="final-formulas-collected">20. Final formulas collected</h2>
+<section id="retail-demand" class="level3">
+<h3 class="anchored" data-anchor-id="retail-demand">Retail demand</h3>
+<p><span class="math display">\[
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta},
+\qquad
+P_t=\left[\int_0^1 P_t(i)^{1-\theta}di\right]^{\frac{1}{1-\theta}}.
+\]</span></p>
+</section>
+<section id="marginal-cost-and-flexible-price-markup" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-cost-and-flexible-price-markup">Marginal cost and flexible-price markup</h3>
+<p><span class="math display">\[
+MC_t=\frac{W_t}{A_tP_t},
+\qquad
+\frac{P_t(i)}{P_t}=MC_t\frac{1+\mu}{1-\tau_t},
+\qquad
+\mu=\frac{1}{\theta-1}.
+\]</span></p>
+</section>
+<section id="reset-price-under-calvo" class="level3">
+<h3 class="anchored" data-anchor-id="reset-price-under-calvo">Reset price under Calvo</h3>
+<p><span class="math display">\[
+\frac{\widetilde P_t}{P_t}
+=
+\frac{X_{1t}}{X_{2t}},
+\]</span></p>
+<p><span class="math display">\[
+X_{1t}
+=
+(1+\mu)MC_tY_t
++
+\alpha E_t\left(M_{t,t+1}\Pi_{t+1}^{\theta}X_{1,t+1}\right),
+\]</span></p>
+<p><span class="math display">\[
+X_{2t}
+=
+(1-\tau_t)Y_t
++
+\alpha E_t\left(M_{t,t+1}\Pi_{t+1}^{\theta-1}X_{2,t+1}\right).
+\]</span></p>
+</section>
+<section id="aggregate-inflation" class="level3">
+<h3 class="anchored" data-anchor-id="aggregate-inflation">Aggregate inflation</h3>
+<p><span class="math display">\[
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta}.
+\]</span></p>
+</section>
+<section id="price-dispersion" class="level3">
+<h3 class="anchored" data-anchor-id="price-dispersion">Price dispersion</h3>
+<p><span class="math display">\[
+Y_t\Delta_t=A_tN_t,
+\qquad
+\Delta_t\equiv \int_0^1\left(\frac{P_t(i)}{P_t}\right)^{-\theta}di,
+\]</span></p>
+<p><span class="math display">\[
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+\]</span></p>
+</section>
+<section id="household-block" class="level3">
+<h3 class="anchored" data-anchor-id="household-block">Household block</h3>
+<p><span class="math display">\[
+Y_t^{-\sigma}
+=
+\beta E_t\left[
+Y_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right],
+\]</span></p>
+<p><span class="math display">\[
+A_t^{1+\phi}MC_t
+=
+Y_t^{\sigma+\phi}\Delta_t^\phi.
+\]</span></p>
+</section>
+<section id="efficient-steady-state" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-steady-state">Efficient steady state</h3>
+<p><span class="math display">\[
+\Pi=1, \qquad \Delta=1, \qquad X_1=X_2,
+\]</span></p>
+<p><span class="math display">\[
+(1+\mu)MC=1-\tau,
+\]</span></p>
+<p><span class="math display">\[
+MC=1 \Rightarrow \tau=-\mu,
+\]</span></p>
+<p><span class="math display">\[
+Y^*=A^{\frac{1+\phi}{\sigma+\phi}}.
+\]</span></p>
+</section>
+<section id="log-linear-equations" class="level3">
+<h3 class="anchored" data-anchor-id="log-linear-equations">Log-linear equations</h3>
+<p><span class="math display">\[
+mc_t=(\sigma+\phi)x_t,
+\qquad
+x_t\equiv y_t-y_t^*,
+\]</span></p>
+<p><span class="math display">\[
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t,
+\qquad
+\kappa=\frac{(1-\alpha)(1-\alpha\beta)(\sigma+\phi)}{\alpha},
+\]</span></p>
+<p><span class="math display">\[
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1},
+\]</span></p>
+<p><span class="math display">\[
+r_t^*=\sigma(E_ty_{t+1}^*-y_t^*),
+\]</span></p>
+<p><span class="math display">\[
+i_t=\phi_\pi\pi_t+\phi_xx_t+\varepsilon_t.
+\]</span></p>
+</section>
+<section id="taylor-principle" class="level3">
+<h3 class="anchored" data-anchor-id="taylor-principle">Taylor principle</h3>
+<p><span class="math display">\[
+\phi_\pi &gt; 1-\frac{(1-\beta)\phi_x}{\kappa}.
+\]</span></p>
+<p>If <span class="math inline">\(\phi_x=0\)</span>, this becomes</p>
+<p><span class="math display">\[
+\phi_\pi&gt;1.
+\]</span></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

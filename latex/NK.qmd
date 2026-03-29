@@ -1,0 +1,1153 @@
+## The New Keynesian Model: logic of the derivation
+
+This note reconstructs the baseline 3-equations New Keynesian model in the style of Jordi Galì, based on lectures by Andrea Ferrero. The aim is not just to report formulas, but to explain why each block is introduced and what job it does.
+
+The necessity for the model arises from the fact that in the classical RBC model money is neutral, and therefore monetary policy does not have any real effect. Clearly, in order to study the effect on such policy changes in the real economy, we need to construct a new model.   
+In doing so, we combine:  
+1. **monopolistic competition**, so firms set prices as a markup over marginal cost, and  
+2. **nominal rigidity**, so not all firms can reset prices every period.
+
+Without the first, there is no meaningful pricing problem. Without the second, monetary policy remains neutral.
+
+---
+
+## 1. Retailers and Wholesalers
+
+We introduce two layers of production.
+
+- **Retailers** are perfectly competitive and combine differentiated intermediate goods into one final good.
+- **Wholesalers** produce the differentiated intermediate goods and have monopoly power.
+
+This split is not economically deep in itself. It is mainly a tractable way to generate a downward-sloping demand curve for each producer. One could equivalently put love for variety directly in household preferences, but the retailer layer is algebraically cleaner.
+
+We will proceed as follow
+
+1. build a final-good aggregator,
+2. derive demand for each differentiated good,
+3. then let intermediate firms solve a price-setting problem.
+
+---
+
+## 2. Retailers
+
+Retailers are competitive. They choose the bundle of differentiated goods $Y_t(i)$ to produce a final good $Y_t$:
+
+$$
+Y_t=\left[\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}}\,di\right]^{\frac{\theta}{\theta-1}}, \qquad \theta>1.
+$$
+
+Where usually $\theta \in (1,\infty)$ where for $\theta \to 1$ goods are completely diversified, for $\theta \to \infty$ goods are perfect substitutes. 
+They solve:
+
+$$
+\min_{\{Y_t(i)\}} \int_0^1 P_t(i)Y_t(i)\,di
+\quad \text{s.t.} \quad
+Y_t=\left[\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}}\,di\right]^{\frac{\theta}{\theta-1}}.
+$$
+
+The economic role of this problem is simple: retailers do **not** set prices, they instead just choose the cheapest mix of varieties to produce one unit of the final good. The solution to their problem gives the demand curve faced by each wholesale firm.
+
+Define the price index
+
+$$
+P_t=\left[\int_0^1 P_t(i)^{1-\theta}\,di\right]^{\frac{1}{1-\theta}}.
+$$
+
+Then set the Lagrangian
+
+$$
+\mathcal{L}
+=
+\int_0^1 P_t(i) Y_t(i)\, di
++
+\Lambda_t \left[
+Y_t^{\frac{\theta}{\theta-1}} -
+\left( \int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}} di \right)
+\right]
+$$
+
+$$
+P_t(i) = \Lambda_t \frac{\theta-1}{\theta}, Y_t(i)^{-\frac{1}{\theta}}
+$$
+
+$$
+P_t(i)^{1-\theta}
+=
+\left(\Lambda_t \frac{\theta-1}{\theta}\right)^{1-\theta}
+\, Y_t(i)^{\frac{\theta-1}{\theta}}
+$$
+
+$$
+\int_0^1 P_t(i)^{1-\theta} \, di
+=
+\left(\Lambda_t \frac{\theta-1}{\theta}\right)^{1-\theta}
+\int_0^1 Y_t(i)^{\frac{\theta-1}{\theta}} \, di
+$$
+
+Using the definition of the agrgegator fot he final good:
+
+$$
+\int_0^1 P_t(i)^{1-\theta} \, di
+=
+\left(\Lambda_t \frac{\theta-1}{\theta}\right)^{1-\theta}
+\, Y_t^{\frac{\theta-1}{\theta}}
+$$
+
+Using the defition of the price index:
+
+$$
+P_t
+=
+\left(\Lambda_t \frac{\theta-1}{\theta}\right)
+\, Y_t^{-\frac{1}{\theta}}
+$$
+
+Using the FOC:
+
+$$
+P_t
+=
+P_t(i)\, Y_t(i)^{\frac{1}{\theta}} \, Y_t^{-\frac{1}{\theta}}
+$$
+
+$$
+Y_t(i)
+=
+Y_t \left(\frac{P_t(i)}{P_t}\right)^{-\theta}
+$$
+
+Where
+
+$$
+\frac{d \log Y_t(i)}{d \log P_t(i)} = -\theta
+$$
+
+Then the standard CES demand system is
+
+$$
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+$$
+
+Therefore, if firm $i$ raises its price relative to the aggregate price level, demand for its good falls and the elasticity of that fall is $\theta$.  
+It may be helpful to immediately define the markup $\mu$ as:
+
+$$
+   \mu \equiv \frac{1}{\theta-1}.
+$$
+
+from the expression we can see that the markup is decreasing in the elasticity of substitution between varieties: the more substitutable the goods, the less market power each firm has, and the lower the markup.
+
+---
+
+## 3. Wholesalers
+
+Each wholesale firm $i$ produces with labor only (we abstract from the presence of capital and investment in this model):
+
+$$
+Y_t(i)=A_tN_t(i).
+$$
+
+Each firm faces the demand curve derived above:
+
+$$
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+$$
+
+If we define $\tau$ as the tax/subsidy rate, then the problem of the wholesaler is to maximise profits:
+
+$$
+\max_{P_t(i),N_t(i)}
+(1-\tau_t)\frac{P_t(i)}{P_t}Y_t(i)-\frac{W_t}{P_t}N_t(i)
+$$
+
+subject to
+
+$$
+Y_t(i)=A_tN_t(i),
+\qquad
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+$$
+
+Notice that, from the production function,
+
+$$
+N_t(i)=\frac{Y_t(i)}{A_t}.
+$$
+
+Hence real marginal cost is
+
+$$
+MC_t=\frac{W_t}{A_tP_t}.
+$$
+
+So the problem of the firm can be rewritten as
+
+$$
+\max_{P_t(i)}
+\left[
+(1-\tau_t)\frac{P_t(i)}{P_t}-MC_t
+\right]Y_t(i)
+$$
+
+with
+
+$$
+Y_t(i)=Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+$$
+
+Substituting:
+
+$$
+\max_{P_t(i)}
+\left[
+(1-\tau_t)\frac{P_t(i)}{P_t}-MC_t
+\right]
+Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}.
+$$
+
+Differentiating with respect to $P_t(i)$ gives the FOC:
+
+$$
+   (1-\tau_t)(1-\theta)\left(\frac{P_t(i)}{P_t}\right)^{-\theta}\frac{Y_t}{P_t}+MC_t\theta\left(\frac{P_t(i)}{P_t}\right)^{-\theta-1}\frac{Y_t}{P_t}=0.
+$$
+
+Follows after rearranging:
+
+$$
+\frac{P_t(i)}{P_t}
+=
+MC_t\frac{\theta}{(1-\tau_t)(\theta-1)}.
+$$
+
+Then, using the definition of the markup $\mu$, this becomes
+
+$$
+\frac{P_t(i)}{P_t}
+=
+MC_t\frac{1+\mu}{1-\tau_t}.
+$$
+
+So the firm sets price as a markup over marginal cost.
+
+This is the second key economic idea of the model: monopolistic competition creates a wedge between price and marginal cost, but if prices are still flexible, money is still neutral, so markup pricing alone is not enough.
+
+---
+
+## 4. Sticky prices
+
+At this stage the model is more realistic than perfect competition, but monetary policy still has no real effect if all firms can adjust prices immediately.
+
+So the next step is exactly the one needed to break classical dichotomy: not all firms can reoptimize every period.
+
+Ferrero uses Calvo pricing, which assumes that:
+
+- with probability $1-\alpha$, a firm resets its price in period $t$ - we will call this new price $\widetilde P_t(i)$,
+- with probability $\alpha$, it keeps the old price ($P_{t-1}$).
+
+The crucial implication is dynamic pricing, for when a firm resets today, it knows the price may remain in place for many future periods, so it chooses a price by trading off expected future demand and expected future marginal costs.
+
+---
+
+## 5. Calvo problem
+
+A firm resetting in period $t$ chooses $\widetilde P_t(i)$ to maximize the discounted present value of profits while its price remains fixed:
+
+$$
+\max_{\widetilde P_t(i)}
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left[
+(1-\tau_{t+j})\frac{\widetilde P_t(i)}{P_{t+j}}-MC_{t+j}
+\right]
+Y_{t+j|t}(i)
+$$
+
+subject to
+
+$$
+Y_{t+j|t}(i)=Y_{t+j}\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta},
+$$
+
+and
+
+$$
+M_{t,t+j}=\beta^j\left(\frac{C_{t+j}}{C_t}\right)^{-\sigma}.
+$$
+
+Substitute demand into the objective:
+
+$$
+\max_{\widetilde P_t(i)}
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left[
+(1-\tau_{t+j})\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{1-\theta}
+-
+MC_{t+j}\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta}
+\right]Y_{t+j}.
+$$
+
+FOC with respect to $\widetilde P_t(i)$:
+
+$$
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})(1-\theta)
+\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta}
+\frac{Y_{t+j}}{P_{t+j}}
++
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}\theta MC_{t+j}
+\left(\frac{\widetilde P_t(i)}{P_{t+j}}\right)^{-\theta-1}
+\frac{Y_{t+j}}{P_{t+j}}
+=0.
+$$
+
+Multiplying each side by $P_t^{-\theta}$ and rearranging yields the standard reset-price condition
+
+$$
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})
+\frac{\widetilde P_t(i)}{P_t}
+\left(\frac{P_{t+j}}{P_t}\right)^{\theta-1}
+Y_{t+j}
+=
+(1+\mu)
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}
+\left(\frac{P_{t+j}}{P_t}\right)^{\theta}
+MC_{t+j}Y_{t+j}.
+$$
+
+Define cumulative gross inflation between $t$ and $t+j$ as
+
+$$
+\Pi_{t+j,t}\equiv \frac{P_{t+j}}{P_t}.
+$$
+
+Then
+
+$$
+\frac{\widetilde P_t(i)}{P_t}
+=
+(1+\mu)
+\frac{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}\Pi_{t+j,t}^{\theta}MC_{t+j}Y_{t+j}
+}{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})\Pi_{t+j,t}^{\theta-1}Y_{t+j}
+}.
+$$
+
+We now focus on the symmetric equilibrium in which all reoptimizing firms choose the same reset price (i.e. $\widetilde P_t(i)=\widetilde P_t$ for all $i$), so write:
+
+$$
+\frac{\widetilde P_t}{P_t}=
+(1+\mu)
+\frac{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}\Pi_{t+j,t}^{\theta}MC_{t+j}Y_{t+j}
+}{
+E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})\Pi_{t+j,t}^{\theta-1}Y_{t+j}
+}=\frac{X_{1t}}{X_{2t}},
+$$
+
+The notation isolates the two parts of the pricing problem:
+
+- $X_{1t}$: discounted expected future costs,
+- $X_{2t}$: discounted expected future demand/revenues.
+
+---
+
+## 6. Aggregate price level
+
+Now we need to connect the reset price to aggregate inflation.
+
+By definition of the CES price index,
+
+$$
+P_t^{1-\theta}=\int_0^1 P_t(i)^{1-\theta}\,di.
+$$
+
+Under Calvo:
+
+- a fraction $\alpha$ keeps last period’s price,
+- a fraction $1-\alpha$ resets to $\widetilde P_t$.
+
+Hence
+
+$$
+P_t^{1-\theta}
+=
+\int_0^1 P_t(i)^{1-\theta} \, di
+=
+\int_0^\alpha P_{t-1}(i)^{1-\theta} \, di
++
+\int_\alpha^1 \tilde{P}_t(i)^{1-\theta} \, di
+$$
+
+$$
+=
+\alpha \, P_{t-1}^{1-\theta}
++
+\int_\alpha^1 \tilde{P}_t(i)^{1-\theta} \, di
+$$
+
+Follows 
+
+$$
+P_t^{1-\theta}
+=
+\alpha P_{t-1}^{1-\theta}
++
+(1-\alpha)\widetilde P_t^{\,1-\theta}.
+$$
+
+Dividing by $P_t^{1-\theta}$ gives
+
+$$
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta},
+$$
+
+Using $\widetilde P_t/P_t=X_{1t}/X_{2t}$,
+
+$$
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta}.
+$$
+
+This is the nonlinear relation between reset pricing and inflation.
+
+The economic meaning is simple: inflation is high when new reset prices are high relative to old prices, but only the adjusting firms can move the aggregate price level immediately, so inflation is sluggish because a fraction $\alpha$ of firms are mechanically stuck with yesterday’s price.
+
+---
+
+## 7. Price dispersion
+
+Sticky prices imply that identical firms charge different prices. Hence they sell different quantities even though they have the same technology. This creates price dispersion, which is a resource misallocation.
+
+To compute it, start from production:
+
+$$
+Y_t(i)=A_tN_t(i).
+$$
+
+Integrating across firms:
+
+$$
+\int_0^1 Y_t(i)\,di=A_t\int_0^1 N_t(i)\,di=A_tN_t.
+$$
+
+Using demand,
+
+$$
+\int_0^1 Y_t(i)\,di
+=
+\int_0^1 Y_t\left(\frac{P_t(i)}{P_t}\right)^{-\theta}di
+=
+Y_t\Delta_t,
+$$
+
+where
+
+$$
+\Delta_t\equiv \int_0^1 \left(\frac{P_t(i)}{P_t}\right)^{-\theta}di.
+$$
+
+So aggregate production becomes
+
+$$
+Y_t\Delta_t=A_tN_t.
+$$
+
+If all firms charged the same price, then $\Delta_t=1$, and we would recover the efficient aggregate production relation $Y_t=A_tN_t$. But with sticky prices, typically $\Delta_t>1$: the same aggregate labor input produces less effective aggregate output.
+
+To derive the law of motion of $\Delta_t$, split firms into non-adjusters and adjusters:
+
+$$
+\Delta_t
+=
+\int_0^1 \left(\frac{P_t(i)}{P_t}\right)^{-\theta}di
+=
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_t}\right)^{-\theta}di
++
+\int_\alpha^1 \left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}di.
+$$
+
+The first term is
+
+$$
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_t}\right)^{-\theta}di
+=
+\int_0^\alpha \left(\frac{P_{t-1}(i)}{P_{t-1}}\right)^{-\theta}
+\left(\frac{P_{t-1}}{P_t}\right)^{-\theta}di
+=
+\alpha \Pi_t^\theta \Delta_{t-1}.
+$$
+
+The second term is
+
+$$
+\int_\alpha^1 \left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}di
+=
+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}.
+$$
+
+Thus
+
+$$
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}.
+$$
+
+From the price-index relation
+
+$$
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta},
+$$
+
+we obtain
+
+$$
+\left(\frac{\widetilde P_t}{P_t}\right)^{1-\theta}
+=
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha},
+$$
+
+hence
+
+$$
+\left(\frac{\widetilde P_t}{P_t}\right)^{-\theta}
+=
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+$$
+
+Substituting back, we obtain the law of motion for price dispersion:
+
+$$
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+$$
+
+---
+
+## 8. Households
+
+We now close general equilibrium. Up to now, firms were solving pricing problems, but we still need aggregate demand.
+
+The representative household solves
+
+$$
+\max_{\{C_t,B_t,N_t\}}
+E_0\sum_{t=0}^{\infty}\beta^t
+\left(
+\frac{C_t^{1-\sigma}}{1-\sigma}
+-
+\frac{N_t^{1+\varphi}}{1+\varphi}
+\right)
+$$
+
+subject to the budget constraint
+
+$$
+P_tC_t+B_t=(1+i_t)B_{t-1}+W_tN_t
+$$
+
+FOCs:
+
+Euler equation:
+
+$$
+C_t^{-\sigma}
+=
+\beta E_t\left[
+C_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right].
+$$
+
+Labor supply
+
+$$
+\frac{W_t}{P_t}=N_t^\varphi C_t^\sigma.
+$$
+
+Goods market clearing gives
+
+$$
+Y_t=C_t.
+$$
+
+Now combine labor supply with real marginal cost:
+
+$$
+MC_t=\frac{W_t}{A_tP_t}.
+$$
+
+Thus
+
+$$
+A_tMC_t=\frac{W_t}{P_t}=N_t^\varphi C_t^\sigma.
+$$
+
+i.e. demand directly affects marginal cost.  
+Using $C_t=Y_t$ and from $Y_t\Delta_t=A_tN_t$,
+
+$$
+N_t=\frac{Y_t\Delta_t}{A_t}.
+$$
+
+Hence
+
+$$
+A_tMC_t
+=
+\left(\frac{Y_t\Delta_t}{A_t}\right)^\varphi Y_t^\sigma,
+$$
+
+so
+
+$$
+A_t^{1+\varphi}MC_t
+=
+Y_t^{\sigma+\varphi}\Delta_t^\varphi.
+$$
+
+This can also be read as: demand affects output, output affects labor, labor affects wages, wages affect marginal cost, and marginal cost drives inflation.
+
+---
+
+## 9. Nonlinear equilibrium
+
+Given exogenous productivity $A_t$ and the policy rate $i_t$, equilibrium is a sequence
+$\{Y_t,MC_t,\Pi_t,\Delta_t,X_{1t},X_{2t}\}$ satisfying
+
+$$
+Y_t^{-\sigma}
+=
+\beta E_t\left[
+Y_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right],
+$$
+
+Where we have substituted $C_t=Y_t$ in the Euler equation,
+
+$$
+A_t^{1+\varphi}MC_t
+=
+Y_t^{\sigma+\varphi}\Delta_t^\varphi,
+$$
+
+$$
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta},
+$$
+
+$$
+X_{1t}
+=
+(1+\mu)MC_tY_t
++
+\alpha\beta E_t\left[
+\left(\frac{Y_{t+1}}{Y_t}\right)^{-\sigma}
+\Pi_{t+1}^{\theta}
+X_{1,t+1}
+\right],
+$$
+
+$$
+X_{2t}
+=
+(1-\tau_t)Y_t
++
+\alpha\beta E_t\left[
+\left(\frac{Y_{t+1}}{Y_t}\right)^{-\sigma}
+\Pi_{t+1}^{\theta-1}
+X_{2,t+1}
+\right],
+$$
+
+$$
+\Delta_t
+=
+\alpha \Pi_t^\theta \Delta_{t-1}
++
+(1-\alpha)
+\left(
+\frac{1-\alpha \Pi_t^{\theta-1}}{1-\alpha}
+\right)^{\frac{\theta}{\theta-1}}.
+$$
+
+---
+
+## 10. Efficient steady state
+
+We need now to define a measure of economic activity that is relevant for monetary policy. The natural candidate is the output gap: the difference between actual output and the level of output that would prevail in the absence of nominal rigidities.  
+Remember that the model contains two distortions:
+
+1. monopoly power, through the markup;
+2. sticky-price misallocation, through price dispersion.
+
+To define the output gap, we need a benchmark allocation. We choose here the efficient steady state: zero inflation, no price dispersion, and subsidy $\tau$ chosen to neutralize the monopoly wedge.
+
+Assume thatm in steady state:
+
+$$
+\Pi=1, \qquad \Delta=1 \qquad MC=1.
+$$
+
+Then from the production block:
+
+$$
+Y=AN.
+$$
+
+From the inflation equation,
+
+$$
+1=\alpha +(1-\alpha)\left(\frac{X_1}{X_2}\right)^{1-\theta}
+\quad \Rightarrow \quad X_1=X_2.
+$$
+
+Remember the definitions of X1 and X2: in steady state,
+
+$$
+X_1=(1+\mu)MC\,Y+\alpha\beta X_1,
+$$
+
+so
+
+$$
+X_1=\frac{(1+\mu)MC\,Y}{1-\alpha\beta}.
+$$
+
+Similarly,
+
+$$
+X_2=(1-\tau)Y+\alpha\beta X_2,
+$$
+
+so
+
+$$
+X_2=\frac{(1-\tau)Y}{1-\alpha\beta}.
+$$
+
+Since $X_1=X_2$,
+
+$$
+\frac{(1+\mu)MC\,Y}{1-\alpha\beta}
+=
+\frac{(1-\tau)Y}{1-\alpha\beta},
+$$
+
+hence
+
+$$
+(1+\mu)MC=1-\tau.
+$$
+
+Since in steady state we need $MC=1$, we set the subsidy to remove the markup distortion:
+
+$$
+\tau=-\mu.
+$$
+
+This is why the tax/subsidy term was introduced earlier: it lets the flexible-price steady state coincide with the undistorted RBC allocation.
+
+Now use labor-market equilibrium. Since $C=Y$, $\Delta=1$ and $MC=1$:
+
+$$
+A=N^\varphi Y^\sigma.
+$$
+
+Since $Y=AN$, we have $N=Y/A$. Therefore
+
+$$
+A=\left(\frac{Y}{A}\right)^\varphi Y^\sigma
+=
+Y^{\sigma+\varphi}A^{-\varphi}.
+$$
+
+Hence
+
+$$
+Y^*
+=
+A^{\frac{1+\varphi}{\sigma+\varphi}}.
+$$
+
+This is the efficient level of output in this no-capital economy.
+
+
+---
+
+## 11. Log-linearization
+
+The nonlinear system cannot generally be solved in closed form. So we log-linearize around the efficient steady state:
+Notice that to first order, price dispersion drops out:
+
+$$
+\widehat\Delta_t=0.
+$$
+
+This is why the three-equation NK model looks so much cleaner than the nonlinear system. The cross-sectional object $\Delta_t$ is second order.  
+Note that, following Ferrero, we will refer to lowercase letters as log-deviations from the efficient steady state, where $\hat{\tau}_t$ is an exception, since it was already represented by a lowercase letter in the nonlinear system.
+
+---
+
+## 12. New Keynesian Phillips Curve
+
+Start from
+
+$$
+1=\alpha \Pi_t^{\theta-1}+(1-\alpha)\left(\frac{X_{1t}}{X_{2t}}\right)^{1-\theta}.
+$$
+
+Log-linearizing around zero inflation steady state gives, after substituting the linearized $X_{1t}$ and $X_{2t}$ recursions,
+
+$$
+\pi_t
+=
+\frac{(1-\alpha)(1-\alpha\beta)}{\alpha}
+\left(mc_t+\widehat\tau_t\right)
++
+\beta E_t\pi_{t+1}.
+$$
+
+This is the baseline NK Phillips curve.  
+Economic interpretation: inflation rises when current real marginal cost rises or when firms expect future marginal costs to be high.
+
+Now relate marginal cost to output.
+
+From the log-linearized labor-cost relation around the steady state,
+
+$$
+(1+\varphi)a_t+mc_t=(\sigma+\varphi)y_t.
+$$
+
+At the efficient allocation, $mc_t^*=0$, so
+
+$$
+y_t^*=\frac{1+\varphi}{\sigma+\varphi}a_t.
+$$
+
+Therefore
+
+$$
+mc_t=(\sigma+\varphi)(y_t-y_t^*).
+$$
+
+Define the output gap
+
+$$
+x_t\equiv y_t-y_t^*.
+$$
+
+Substitute into the Phillips curve:
+
+$$
+\pi_t
+=
+\frac{(1-\alpha)(1-\alpha\beta)(\sigma+\varphi)}{\alpha}x_t
++
+\beta E_t\pi_{t+1}
++
+\frac{(1-\alpha)(1-\alpha\beta)}{\alpha}\widehat\tau_t.
+$$
+
+Define
+
+$$
+\kappa \equiv \frac{(1-\alpha)(1-\alpha\beta)(\sigma+\varphi)}{\alpha},
+$$
+
+and let the cost-push shock be:
+
+$$
+u_t \equiv \frac{(1-\alpha)(1-\alpha\beta)}{\alpha}\widehat\tau_t.
+$$
+
+Then
+
+$$
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t.
+$$
+
+That is the New Keynesian Phillips Curve.  
+Here, inflation is ultimately pinned down by real activity and expectations.
+
+---
+
+## 13. Demand curve
+
+Now log-linearize the Euler equation
+
+$$
+Y_t^{-\sigma}
+=
+\beta E_t\left[
+Y_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\right].
+$$
+
+To first order this gives
+
+$$
+y_t
+=
+E_ty_{t+1}
+-
+\sigma^{-1}(i_t-E_t\pi_{t+1})
+.
+$$
+
+Rewrite in output-gap form. Since
+
+$$
+x_t=y_t-y_t^*,
+$$
+
+we obtain
+
+$$
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1},
+$$
+
+where the efficient real interest rate is
+
+$$
+r_t^* \equiv \sigma(E_ty_{t+1}^*-y_t^*).
+$$
+
+If we define the real interest rate as:
+
+$$
+r_t \equiv i_t - E_t\pi_{t+1},
+$$
+
+Then we can rewrite the demand curve as
+$$x_t
+=     
+-\sigma^{-1}(r_t-r_t^*)
++                    
+E_tx_{t+1}.
+$$ 
+
+
+The interpretation relies heavility on the Euler equation: when the real interest rate $i_t-E_t\pi_{t+1}$ rises above the natural rate $r_t^*$, households want to postpone consumption, so demand falls, output falls below efficient output and the output gap decreases.
+
+---
+
+## 14. Monetary policy rule
+
+The model is closed with an interest-rate rule:
+
+$$
+i_t=\phi_\pi \pi_t+\phi_x x_t+\varepsilon_t.
+$$
+
+In our simple setup, the central bank sets the nominal interest rate as a linear function of inflation and the output gap. The parameters $\phi_\pi$ and $\phi_x$ capture the strength of the central bank’s response to inflation and output, respectively. The shock $\varepsilon_t$ captures unexpected changes in monetary policy. We will later discuss the implications of different values of $\phi_\pi$ and $\phi_x$ for the determinacy of equilibrium.
+
+---
+
+## 15. The three-equation New Keynesian model
+
+Putting the pieces together:
+
+Aggregate supply
+
+$$
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t.
+$$
+
+Aggregate demand
+
+$$
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1}.
+$$
+
+Monetary policy
+
+$$
+i_t=\phi_\pi \pi_t+\phi_x x_t+\varepsilon_t.
+$$
+
+This is the famous three-equation system.
+
+---
+
+## 16. Shocks and interpretation
+
+A convenient representation is:
+
+Supply side
+
+$$
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t,
+\qquad
+u_t=\rho_u u_{t-1}+\varepsilon_t^u.
+$$
+
+Demand side
+
+$$
+x_t
+=
+-\sigma^{-1}(i_t-E_t\pi_{t+1}-r_t^*)
++
+E_tx_{t+1},
+$$
+
+with
+
+$$
+r_t^*
+=
+\sigma(E_ty_{t+1}^*-y_t^*).
+$$
+
+If productivity follows
+
+$$
+a_t=\rho_a a_{t-1}+\varepsilon_t^a,
+$$
+
+then since
+
+$$
+y_t^*=\frac{1+\varphi}{\sigma+\varphi}a_t,
+$$
+
+it follows that
+
+$$
+r_t^*
+=
+\sigma\frac{1+\varphi}{\sigma+\varphi}(E_ta_{t+1}-a_t).
+$$
+
+Monetary policy
+
+$$
+i_t=\phi_\pi\pi_t+\phi_xx_t+\varepsilon_t,
+\qquad
+\varepsilon_t=\rho_\varepsilon \varepsilon_{t-1}+\varepsilon_t^m.
+$$
+
+So the model typically features:
+
+- cost-push shocks $u_t$,
+- natural-rate / productivity shocks through $r_t^*$,
+- monetary policy shocks $\varepsilon_t$.
+
+---
+
+## 17. Equilibrium determinacy and the Taylor principle
+
+Substitute the Taylor rule into the IS curve:
+
+$$
+x_t
+=
+-\sigma^{-1}
+\left(
+\phi_\pi\pi_t+\phi_xx_t+\varepsilon_t-E_t\pi_{t+1}-r_t^*
+\right)
++
+E_tx_{t+1}.
+$$
+
+Together with
+
+$$
+\pi_t=\kappa x_t+\beta E_t\pi_{t+1}+u_t,
+$$
+
+this gives a forward-looking $2\times 2$ system in $(x_t,\pi_t)$.
+
+In matrix form one can write
+
+$$
+A_0
+\begin{pmatrix}
+E_tx_{t+1}\\
+E_t\pi_{t+1}
+\end{pmatrix}
+=
+A_1
+\begin{pmatrix}
+x_t\\
+\pi_t
+\end{pmatrix}
++
+Bv_t,
+$$
+
+with
+
+$$
+A_0=
+\begin{pmatrix}
+\sigma & 1\\
+0 & \beta
+\end{pmatrix},
+\qquad
+A_1=
+\begin{pmatrix}
+\sigma+\phi_x & \phi_\pi\\
+\kappa & 1
+\end{pmatrix}.
+$$
+
+Equivalently,
+
+$$
+E_tz_{t+1}=A z_t + \widetilde B v_t,
+\qquad
+A=A_0^{-1}A_1.
+$$
+
+Determinacy requires that $A$ satisfies the Blanchard-Kahn condition: the number of unstable eigenvalues must equal the number of forward-looking variables.
+
+In this two-equation purely forward-looking setup, this becomes the requirement that both eigenvalues of $A$ lie outside the unit circle. This (after computing trace and determinant of $A$ and confronting them with the Blanchard-Kahn conditions) yields the familiar restriction
+
+$$
+\phi_\pi > 1-\frac{(1-\beta)\phi_x}{\kappa}.
+$$
+
+In the special case $\phi_x=0$, this reduces to
+
+$$
+\phi_\pi>1.
+$$
+
+That is the Taylor principle: when inflation rises, the central bank must raise the nominal rate by more than one-for-one, so that the real rate rises. If not, inflationary expectations can become self-fulfilling.
+
+---
+
+## 18. Final logic of the whole derivation
+
+The derivation is best read as a chain:
+
+1. **Retailers** are introduced to generate a clean CES demand system for differentiated goods.
+2. **Wholesalers** have monopoly power, so they choose prices as markups over marginal cost.
+3. With **flexible prices**, this is still basically an RBC world with a static monopoly distortion.
+4. So we introduce **Calvo pricing**, which makes price-setting forward-looking and gives inflation inertia.
+5. Sticky prices create **price dispersion**, hence inefficient allocation across firms.
+6. **Households** provide the Euler equation and labor supply, linking demand to marginal cost.
+7. The **efficient steady state** is computed to remove the monopoly distortion and define a clean benchmark.
+8. Log-linearization around that benchmark yields:
+   - the **NK Phillips curve** from pricing,
+   - the **dynamic IS curve** from intertemporal choice,
+   - and the **Taylor rule** from policy.
+9. The model then explains how monetary policy affects output and inflation in the short run, while preserving long-run monetary neutrality.
+
+Have fun.

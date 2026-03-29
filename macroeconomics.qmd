@@ -5,7 +5,10 @@ format: html
 
 This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.
 
-## Empirical macroeconomics
+## Graduate Macro
+- [The New Keynesian Model](latex/NK.qmd)
+
+## Empirical Macroeconomics
 - [Introductory course](latex/empirical.qmd)
 
 ## Corso introduttivo di Macroeconomia con Python
