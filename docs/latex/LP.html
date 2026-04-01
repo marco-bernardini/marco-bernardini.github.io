@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>lp – Marco Bernardini</title>
+<title>Local Projections – Marco Bernardini</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,29 +150,41 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#local-projections" id="toc-local-projections" class="nav-link active" data-scroll-target="#local-projections">LOCAL PROJECTIONS</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">INTRODUCTION</a></li>
-  <li><a href="#local-projections-in-practice" id="toc-local-projections-in-practice" class="nav-link" data-scroll-target="#local-projections-in-practice">LOCAL PROJECTIONS IN PRACTICE</a></li>
-  <li><a href="#local-projections-vs.-vars" id="toc-local-projections-vs.-vars" class="nav-link" data-scroll-target="#local-projections-vs.-vars">LOCAL PROJECTIONS VS. VARS</a></li>
-  </ul></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#local-projections-in-practice" id="toc-local-projections-in-practice" class="nav-link" data-scroll-target="#local-projections-in-practice">2. Local projections in practice</a></li>
+  <li><a href="#local-projections-vs-vars" id="toc-local-projections-vs-vars" class="nav-link" data-scroll-target="#local-projections-vs-vars">3. Local projections vs VARs</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Local Projections</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="local-projections" class="level1">
-<h1>LOCAL PROJECTIONS</h1>
-<p>This page serves as an introduction to local projections, following the lectures by Silvia Miranda Agrippino at the university of Oxford. The content is also based on papers by Jordà.</p>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This page serves as an introduction to local projections, following the lectures by Silvia Miranda Agrippino at the University of Oxford. The content is also based on papers and slides by Jordà.</p>
+<hr>
 <section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">INTRODUCTION</h2>
+<h2 class="anchored" data-anchor-id="introduction">1. Introduction</h2>
 <p>Local projections are a method for estimating the IRF of an economic variable to a policy intervention or shock, without relying on the assumptions of a structural model. They have been introduced by Jordà (2005) and have become increasingly popular in empirical macroeconomics and finance.<br>
-To see how they work, let’s start by defining <span class="math inline">\(y_t\)</span>, the outcome variable, and <span class="math inline">\(x_t\)</span>, the controls. The controls <span class="math inline">\(x_t\)</span> denote a vector of exogenous or pre-determined variables, including lags of the outcome and of the policy intervention, which we denote as <span class="math inline">\(s_t\)</span>. In this context, the policy intervention can represent an exogenous shock, a structural shock, or a treatment. Denote by <span class="math inline">\(z_t\)</span> a vector of instruments for <span class="math inline">\(s_t\)</span>, provided they are available.<br>
-Define and impulse response as:</p>
+To see how they work, let’s start by defining <span class="math inline">\(y_t\)</span>, the outcome variable, and <span class="math inline">\(x_t\)</span>, the controls. The controls <span class="math inline">\(x_t\)</span> denote a vector of exogenous or pre-determined variables, eventually including lags of the outcome and of the policy intervention, which we denote as <span class="math inline">\(s_t\)</span>. In this context, the policy intervention can represent an exogenous shock, a structural shock, or a treatment. Denote by <span class="math inline">\(z_t\)</span> a vector of instruments (informative and valid) for <span class="math inline">\(s_t\)</span>, provided they are available.<br>
+Define an impulse response of <span class="math inline">\(y_t\)</span> to <span class="math inline">\(s_t\)</span> as:</p>
 <p><span class="math display">\[
 \mathcal{R}_{s \rightarrow y}(h, \delta) \equiv E\left[y_{t+h} \mid s_t=s_0+\delta ; x_t\right]-E\left[y_{t+h} \mid s_t=s_0 ; x_t\right] ; \quad h=0,1, \ldots, H,
 \]</span></p>
@@ -182,22 +194,25 @@ Assuming linearity, the local projection of <span class="math inline">\(y_{t+h}\
 y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}, \quad h=0,1, \ldots, H,
 \]</span></p>
 <p>where <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h\)</span>. In the simplest case, i.e.&nbsp;when <span class="math inline">\(s_t\)</span> is exogenous and <span class="math inline">\(\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0\)</span>, the local projection can be estimated by OLS. If <span class="math inline">\(s_t\)</span> is endogenous, but an instrument <span class="math inline">\(z_t\)</span> is available, we can use instrumental variables (IV) to estimate the local projection.</p>
-<p>Some ideas are worth exploring. First, though the linearity assumption can seem restrictive, notice that in fact we are approximating the conditional mean introduced earlier with a different regression model for each horizon <span class="math inline">\(h\)</span>, rather than imposing a model that characterizes the full path of <span class="math inline">\(y_t\)</span>, <span class="math inline">\(s_t\)</span> etc. Second, usually errors are in fact serially correlated, so inference usually relies on Newey-West typestandard errors. Third, local projections can be easily extended to non-linear models, by including non-linear transformations of the regressors, or by using non-parametric methods. Note however, that under linearity we have the very convenient properties that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)\)</span>, that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)\)</span> and finally that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = \delta\mathcal{R}_{s \rightarrow y}(h,1) = \delta \beta_h\)</span> which imlications should be pretty obvious.<br>
-Note that another interesting application of LP is the following:</p>
+<p>Some ideas are worth exploring.<br>
+First, though the linearity assumption can seem restrictive, notice that in fact we are approximating the conditional mean introduced earlier with a different regression model for each horizon <span class="math inline">\(h\)</span>, rather than imposing a model that characterizes the full path of <span class="math inline">\(y_t\)</span>, <span class="math inline">\(s_t\)</span>.<br>
+Second, usually errors are in fact serially correlated, so inference relies on Newey-West typestandard errors.<br>
+Third, local projections can be easily extended to non-linear models, by including non-linear transformations of the regressors, or by using non-parametric methods. Note however, that under linearity we have the very convenient properties that: - <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = -\mathcal{R}_{s \rightarrow y}(h,-\delta)\)</span>, - <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta \mid x_t) = \mathcal{R}_{s \rightarrow y}(h,\delta)\)</span>, - <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,\delta) = \delta\mathcal{R}_{s \rightarrow y}(h,1) = \delta \beta_h\)</span> Where the first point explicits symmetry, the second states that the response is not affected by the state of the economy (i.e.&nbsp;recent history), the third that the response is proportional to the size of the intervention.</p>
+<p>Note that another interesting application of LP is the following:</p>
 <p><span class="math display">\[
-\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv P\left[y_{t+h}=1 \mid s_t=s_0+\delta ; \boldsymbol{x}_t\right]-P\left[y_{t+h}=1 \mid s_t=s_0 ; \boldsymbol{x}_t\right] ; \quad h=0,1, \ldots, H,
+\mathcal{R}_{s \rightarrow y}(h, \delta) \equiv P\left[y_{t+h}=1 \mid s_t=s_0+\delta ; {x}_t\right]-P\left[y_{t+h}=1 \mid s_t=s_0 ; {x}_t\right] ; \quad h=0,1, \ldots, H,
 \]</span></p>
 <p>where <span class="math inline">\(y_{t+h}\)</span> is a binary variable. In this case, we can estimate the local projection by using a non-linear model such as a logit or a probit.</p>
 <hr>
 </section>
 <section id="local-projections-in-practice" class="level2">
-<h2 class="anchored" data-anchor-id="local-projections-in-practice">LOCAL PROJECTIONS IN PRACTICE</h2>
-<p>Suppose first that we can observe the shock <span class="math inline">\(s_t\)</span> directly, and that it is exogenous (<span class="math inline">\(\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0\)</span>). In this case, we can estimate by OLS the following regression:</p>
+<h2 class="anchored" data-anchor-id="local-projections-in-practice">2. Local projections in practice</h2>
+<p>Suppose first that we can observe the shock <span class="math inline">\(s_t\)</span> directly, and that it is exogenous conditional on recent history (<span class="math inline">\(\operatorname{Cov}(s_t, v_{t+h} \mid x_t) = 0\)</span>). In this case, we can estimate by OLS the following regression:</p>
 <p><span class="math display">\[
 y_{t+h}=\alpha_h+\beta_h s_t+\gamma_h^{\prime} x_t+v_{t+h}
 \]</span></p>
 <p>and we have that <span class="math inline">\(\mathcal{R}_{s \rightarrow y}(h,1) = \beta_h\)</span>.</p>
-<p>More generally though, we might not be able to observe the shock directly, or it might be endogenous. Imagine we are interested in the effect of a monetary policy shock on output, but we cannot observe the shock directly, and we only have access to a measure of <span class="math inline">\(i_t\)</span>, such as the change in the federal funds rate, which we will use as a proxy for the shock. In this case, we can use an IV approach to estimate the local projection. The idea is to find a variable <span class="math inline">\(z_t\)</span> that is correlated with <span class="math inline">\(s_t = i_t\)</span>, i.e.&nbsp;such that <span class="math inline">\(\operatorname{Cov}(s_t, z_t \mid x_t) \neq 0\)</span>, but uncorrelated with the error term <span class="math inline">\(v_{t+h}\)</span> - <span class="math inline">\(\operatorname{Cov}(v_{t+h}, z_t \mid x_t) = 0\)</span>. For example, we could use a measure of monetary policy surprises, such as the change in the federal funds rate around FOMC meetings, as an instrument for the monetary policy shock.<br>
+<p>More generally though, we might not be able to observe the shock directly, or it might be endogenous. As an illustration, imagine we are interested in the effect of a monetary policy shock on output, but we cannot observe the shock directly, and we only have access to a measure of <span class="math inline">\(i_t\)</span>, such as the change in the federal funds rate - which we will use as a proxy for the shock. In this case, we can use an IV approach to estimate the local projection. The idea is to find a variable <span class="math inline">\(z_t\)</span> that is correlated with <span class="math inline">\(s_t = i_t\)</span>, i.e.&nbsp;such that <span class="math inline">\(\operatorname{Cov}(s_t, z_t \mid x_t) \neq 0\)</span>, but uncorrelated with the error term <span class="math inline">\(v_{t+h}\)</span> - <span class="math inline">\(\operatorname{Cov}(v_{t+h}, z_t \mid x_t) = 0\)</span>. For example, we could use a measure of monetary policy surprises, such as the change in the federal funds rate around FOMC meetings, as an instrument for the monetary policy shock.<br>
 In this case, we run a first-stage regression of the form:</p>
 <p><span class="math display">\[
 s_t=\pi_0+\pi_1 z_t+\pi_2^{\prime} x_t+u_t
@@ -213,29 +228,29 @@ y_{t+h}=\alpha_h+\beta_h \hat{s}_t+\gamma_h^{\prime} x_t+v_{t+h}
 <p>Provided that the instrument is valid and relevant.</p>
 <hr>
 </section>
-<section id="local-projections-vs.-vars" class="level2">
-<h2 class="anchored" data-anchor-id="local-projections-vs.-vars">LOCAL PROJECTIONS VS. VARS</h2>
-<p>Consider a VAR(1):</p>
+<section id="local-projections-vs-vars" class="level2">
+<h2 class="anchored" data-anchor-id="local-projections-vs-vars">3. Local projections vs VARs</h2>
+<p>Consider an invertible VAR(1), where we express the system in differences:</p>
 <p><span class="math display">\[
 \Delta w_t=\Phi \Delta w_{t-1}+u_t ; \quad u_t \sim WN\left(0, \Omega_u\right) ; \quad\left|\lambda_l(\Phi)\right|&lt;1 \quad \text { for } \quad l=1, \ldots, k,
 \]</span></p>
 <p>its Wold representation is given by:</p>
 <p><span class="math display">\[
-    \Delta w_t=\sum_{h=0}^{\infty} \Theta_h u_{t-h} ; \quad \Theta_0=I_k ; \quad \Theta_h=\Phi^h
+    \Delta w_t=\sum_{h=0}^{\infty} \Theta_h u_{t-h} ; \quad \Theta_0=I ; \quad \Theta_h=\Phi^h
 \]</span></p>
 <p>as we have already estabilished:</p>
 <p><span class="math display">\[
 \frac{\partial \Delta {w}_{t+h}}{\partial {u}_t}={\Phi}^h \quad \Longrightarrow \quad \frac{\partial \Delta w_{i, t+h}}{\partial u_{j t}}={e}_i \Phi^h {e}_j^{\prime} \equiv \phi_{i j}^{(h)} ; \quad h=0,1, \ldots, H,
 \]</span></p>
-<p>Follows that</p>
+<p>By definition of IRF, we have that</p>
 <p><span class="math display">\[
 \mathcal{R}_{j \rightarrow i}(h, \delta)={e}_i {\Phi}^h {e}_j^{\prime} \delta=\phi_{i j}^{(h)} \delta, \quad h=0,1, \ldots, H .
 \]</span></p>
-<p>If we instead represent the system in levels, we have:</p>
+<p>If we instead represent the same system in levels, we have:</p>
 <p><span class="math display">\[
 {w}_t={u}_t+(\mathbf{I}+{\Phi}) {u}_{t-1}+\left(\mathbf{I}+{\Phi}+{\Phi}^2\right) {u}_{t-2}+\ldots,
 \]</span></p>
-<p>where clearly:</p>
+<p>where, using a similar logic as before, we can show that the IRF in levels is given by:</p>
 <p><span class="math display">\[
 \mathcal{R}_{j \rightarrow i}^c(h, \delta)={e}_i\left(\mathbf{I}+{\Phi}+\ldots+{\Phi}^h\right) {e}_j^{\prime} \delta=\left(1+\phi_{i j}^{(1)}+\ldots+\phi_{i j}^{(h)}\right) \delta, \quad h=0,1, \ldots, H,
 \]</span></p>
@@ -283,8 +298,8 @@ w_{i,t+h}=\alpha_{i,h}^{L}+\beta_{ij,h}^{L}s_t+{\gamma}_{i,h}^{L\prime}x_t+v_{i,
 =
 \left(\sum_{\ell=0}^{h}\beta_{ij,\ell}^{\Delta}\right)\delta.
 \]</span></p>
-<p>The two approaches estimate the same object through different routes.</p>
-<p>In the VAR(1), we have shown that</p>
+<p>Thus, in the population, the two approaches estimate the same object through different routes.<br>
+To see this more explicitly, remember that in a VAR(1) setting we have shown:</p>
 <p><span class="math display">\[
 \mathcal{R}_{j \rightarrow i}(h,\delta)
 =
@@ -316,7 +331,7 @@ e_i \left(I+\Phi+\cdots+\Phi^h\right) e_j'.
 \]</span></p>
 <p>for all <span class="math inline">\(h\)</span>, i.e.&nbsp;the entire path is pinned down by a single matrix <span class="math inline">\(\Phi\)</span>.</p>
 <p>Local projections impose no such restriction: each <span class="math inline">\(\beta_{ij,h}\)</span> is estimated independently.</p>
-<p>We now will show that, in the population, the shock isolated by local projections is the same as the shock isolated by a VAR, up to a normalization. To see this, let us denote by <span class="math inline">\(w_t\)</span> the vector of all variables in the system:</p>
+<p>We now will show formally that, in the population, the shock isolated by local projections is the same as the shock isolated by a VAR, up to a normalization. To see this, let us denote by <span class="math inline">\(w_t\)</span> the vector of all variables in the system:</p>
 <p><span class="math display">\[
 w_t=
 \begin{pmatrix}
@@ -326,19 +341,19 @@ y_t\\
 q_t
 \end{pmatrix},
 \]</span></p>
-<p>where:</p>
+<p>please be aware of the fact that we use slight different notation than before:</p>
 <ul>
 <li><span class="math inline">\(r_t\)</span>: predetermined variables</li>
 <li><span class="math inline">\(x_t\)</span>: impulse variable</li>
 <li><span class="math inline">\(y_t\)</span>: outcome variable</li>
 <li><span class="math inline">\(q_t\)</span>: additional controls</li>
 </ul>
-<p>We are interested in the response of <span class="math inline">\(y_t\)</span> to a shock to <span class="math inline">\(x_t\)</span>. The key point is that both LP and VAR isolate the <strong>same unexpected component</strong> of <span class="math inline">\(x_t\)</span>, up to a normalization.</p>
+<p>We are interested in the response of <span class="math inline">\(y_t\)</span> to a shock to <span class="math inline">\(x_t\)</span>. The key point that we want to show is that both LP and VAR isolate the same unexpected component of <span class="math inline">\(x_t\)</span>, up to a normalization.</p>
 <p>For each horizon <span class="math inline">\(h\)</span>, local projections estimate</p>
 <p><span class="math display">\[
 y_{t+h}
 =
-\mu_h+\beta_h^{LP}x_t+\varepsilon_h' r_t+\sum_{\ell=1}^{p}\vartheta_{h,\ell}' w_{t-\ell}+\varpi_{h,t}.
+\mu_h+\beta_h^{LP}x_t+\gamma_h' r_t+\sum_{\ell=1}^{p}\zeta_{h,\ell}' w_{t-\ell}+\eta_{h,t}.
 \]</span></p>
 <p>By the Frisch-Waugh-Lovell theorem, the coefficient <span class="math inline">\(\beta_h^{LP}\)</span> is the same as in the regression</p>
 <p><span class="math display">\[
@@ -357,9 +372,9 @@ x_t-\operatorname{Proj}\!\left(x_t \mid r_t,w_{t-1},\ldots,w_{t-p}\right).
 \frac{\operatorname{Cov}(y_{t+h},\tilde x_t)}{E(\tilde x_t^2)}.
 \]</span></p>
 <p>So the LP shock is simply the component of <span class="math inline">\(x_t\)</span> orthogonal to the controls.</p>
-<p>Now estimate a VAR<span class="math inline">\((p)\)</span> on the full vector <span class="math inline">\(w_t\)</span>:</p>
+<p>Now estimate a VAR<span class="math inline">\((P)\)</span> on the full vector <span class="math inline">\(w_t\)</span>:</p>
 <p><span class="math display">\[
-w_t=c+\sum_{\ell=1}^{p}A_\ell w_{t-\ell}+u_t.
+w_t=c+\sum_{\ell=1}^{P}A_\ell w_{t-\ell}+u_t.
 \]</span></p>
 <p>Let <span class="math inline">\(u_{x,t}\)</span> denote the residual in the <span class="math inline">\(x_t\)</span> equation, and <span class="math inline">\(u_{r,t}\)</span> the residuals in the equations for the predetermined variables <span class="math inline">\(r_t\)</span>. Under recursive identification, the Cholesky shock to <span class="math inline">\(x_t\)</span> is the residual of projecting <span class="math inline">\(u_{x,t}\)</span> on <span class="math inline">\(u_{r,t}\)</span>:</p>
 <p><span class="math display">\[
@@ -373,9 +388,17 @@ u_{x,t}-\operatorname{Proj}(u_{x,t}\mid u_{r,t}).
 =
 \frac{1}{\sqrt{E(\tilde x_t^2)}}\,\tilde x_t.
 \]</span></p>
-<p>Where we have divided by <span class="math inline">\(\sqrt{E(\tilde x_t^2)}\)</span> since VAR shocks are normalized. Thus the VAR shock is exactly the same object as the LP shock, rescaled to have unit variance.<br>
+<p>Where we have divided by <span class="math inline">\(\sqrt{E(\tilde x_t^2)}\)</span> since VAR shocks are normalized.</p>
+<p>Remember:</p>
+<p><span class="math display">\[
+\beta_h^{VAR}
+=
+\operatorname{Cov}(y_{t+h},\tilde\varepsilon_{x,t}).
+\]</span></p>
+<p>Thus the VAR shock is exactly the same object as the LP shock, rescaled to have unit variance.<br>
 To see why, I will follow a projection argument.<br>
-Abstract from time subscripts and let <span class="math inline">\(w\)</span> denote the vector of controls and <span class="math inline">\(r\)</span> the predetermined variables.</p>
+Abstract from time subscripts and let <span class="math inline">\(w\)</span> denote the vector of controls and <span class="math inline">\(r\)</span> the predetermined variables.<br>
+Define:</p>
 <p><span class="math display">\[
 \tilde{x}
 =
@@ -425,7 +448,7 @@ x - \operatorname{Proj}(x \mid w) - \operatorname{Proj}\big(x - \operatorname{Pr
 \]</span></p>
 <p>The equality above holds for the raw projection residuals. In VAR analysis, shocks are typically normalized to have unit variance, so that</p>
 <p><span class="math display">\[
-\varepsilon_x
+\tilde{\varepsilon}_x
 =
 \frac{1}{\sqrt{E(\tilde{x}^2)}} \tilde{x}.
 \]</span></p>
@@ -477,10 +500,15 @@ y_{t+h},
 =
 \sqrt{E(\tilde x_t^2)}\,\beta_h^{LP}.
 \]</span></p>
-<p>Therefore, LP and VAR estimate the same impulse response <strong>up to a constant normalization</strong>, which does not depend on <span class="math inline">\(h\)</span>. If <span class="math inline">\(\tilde x_t\)</span> is normalized to have unit variance, the two coincide exactly.</p>
+<p>Therefore, LP and VAR estimate the same impulse response up to a constant normalization, which does not depend on <span class="math inline">\(h\)</span>. If <span class="math inline">\(\tilde x_t\)</span> is normalized to have unit variance, the two coincide exactly.</p>
+<p><br><br><br></p>
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="../images/poodles_2.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="width:30.0%"></p>
+</figure>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
