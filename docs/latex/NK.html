@@ -174,6 +174,12 @@ window.Quarto = {
   <li><a href="#the-three-equation-new-keynesian-model" id="toc-the-three-equation-new-keynesian-model" class="nav-link" data-scroll-target="#the-three-equation-new-keynesian-model">7. The three-equation New Keynesian model</a></li>
   <li><a href="#shocks-and-interpretation" id="toc-shocks-and-interpretation" class="nav-link" data-scroll-target="#shocks-and-interpretation">8. Shocks and interpretation</a></li>
   <li><a href="#equilibrium-determinacy-and-the-taylor-principle" id="toc-equilibrium-determinacy-and-the-taylor-principle" class="nav-link" data-scroll-target="#equilibrium-determinacy-and-the-taylor-principle">9. Equilibrium determinacy and the Taylor principle</a></li>
+  <li><a href="#introducing-government-spending" id="toc-introducing-government-spending" class="nav-link" data-scroll-target="#introducing-government-spending">10. Introducing government spending</a>
+  <ul class="collapse">
+  <li><a href="#efficient-allocation-and-output-gap" id="toc-efficient-allocation-and-output-gap" class="nav-link" data-scroll-target="#efficient-allocation-and-output-gap">Efficient allocation and output gap</a></li>
+  <li><a href="#is-curve-with-government-spending" id="toc-is-curve-with-government-spending" class="nav-link" data-scroll-target="#is-curve-with-government-spending">IS curve with government spending</a></li>
+  <li><a href="#phillips-curve-with-government-spending" id="toc-phillips-curve-with-government-spending" class="nav-link" data-scroll-target="#phillips-curve-with-government-spending">Phillips curve with government spending</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -1050,6 +1056,267 @@ A=A_0^{-1}A_1.
 \phi_\pi&gt;1.
 \]</span></p>
 <p>That is the Taylor principle: when inflation rises, the central bank must raise the nominal rate by more than one-for-one, so that the real rate rises. If not, inflationary expectations can become self-fulfilling.</p>
+<hr>
+</section>
+<section id="introducing-government-spending" class="level2">
+<h2 class="anchored" data-anchor-id="introducing-government-spending">10. Introducing government spending</h2>
+<p>We will now introduce government spending <span class="math inline">\(g_t\)</span> into the model, starting from the linearized system. For the time being, <span class="math inline">\(g_t\)</span> will be trated as exogenous.<br>
+Note that, even though this may seem like a tedious exercise, it actually highlights the procedure we should follow in order to solve NK models with more complex features.<br>
+For out purpose, we need the following equations, which should be faimiliar by now:</p>
+<p>Euler equation:</p>
+<p><span class="math display">\[
+c_t = E_t c_{t+1} - \sigma^{-1}(i_t - E_t \pi_{t+1})
+\]</span></p>
+<p>Marginal cost:</p>
+<p><span class="math display">\[
+mc_t = \sigma c_t + \varphi n_t - a_t
+\]</span></p>
+<p>Production function:</p>
+<p><span class="math display">\[
+y_t = a_t + n_t
+\]</span></p>
+<p>Phillips curve:</p>
+<p><span class="math display">\[
+\pi_t = \beta E_t \pi_{t+1} + \kappa mc_t
+\]</span></p>
+<p>Monetary policy rule:</p>
+<p><span class="math display">\[
+i_t = \phi_\pi \pi_t + \phi_x x_t
+\]</span></p>
+<p>Definition of the output gap:</p>
+<p><span class="math display">\[
+x_t \equiv y_t - y_t^*
+\]</span></p>
+<p>The new equation is the resource constraint, which now includes government spending: <span class="math display">\[
+y_t = s_c c_t + s_g g_t
+\]</span></p>
+<p>note that this is just a linearized version of the resource constraint <span class="math inline">\(Y_t = C_t + G_t\)</span>.</p>
+<section id="efficient-allocation-and-output-gap" class="level3">
+<h3 class="anchored" data-anchor-id="efficient-allocation-and-output-gap">Efficient allocation and output gap</h3>
+<p>We start from deriving the efficient allocation in order to define the output gap. In the efficient allocation, we have zero inflation and no price dispersion, so the Phillips curve gives:</p>
+<p><span class="math display">\[
+mc_t^* = 0
+\]</span></p>
+<p>From the marginal cost relation, this implies</p>
+<p><span class="math display">\[
+0 = \sigma c_t^* + \varphi n_t^* - a_t
+\]</span></p>
+<p>the production function gives</p>
+<p><span class="math display">\[
+n_t^* = y_t^* - a_t
+\]</span></p>
+<p>substituting back into the marginal cost relation gives</p>
+<p><span class="math display">\[
+\sigma c_t^* + \varphi y_t^* = (1+\varphi)a_t
+\]</span></p>
+<p>the resource constraint gives</p>
+<p><span class="math display">\[
+c_t^* = \frac{y_t^* - s_g g_t}{s_c}
+\]</span></p>
+<p>substituting back into the previous equation gives</p>
+<p><span class="math display">\[
+\sigma \frac{y_t^* - s_g g_t}{s_c} + \varphi y_t^* = (1+\varphi)a_t
+\]</span></p>
+<p>rearranging:</p>
+<p><span class="math display">\[
+\left(\frac{\sigma}{s_c} + \varphi \right) y_t^*
+=
+(1+\varphi)a_t + \frac{\sigma s_g}{s_c} g_t
+\]</span></p>
+<p>finally:</p>
+<p><span class="math display">\[
+y_t^*
+=
+\frac{s_c(1+\varphi)}{\sigma + \varphi s_c} a_t
++
+\frac{\sigma s_g}{\sigma + \varphi s_c} g_t
+\]</span></p>
+<p>now define:</p>
+<p><span class="math display">\[
+\alpha \equiv \frac{s_c(1+\varphi)}{\sigma + \varphi s_c},
+\quad
+\gamma \equiv \frac{\sigma s_g}{\sigma + \varphi s_c}
+\]</span></p>
+<p>we have the expression for the efficient level of output:</p>
+<p><span class="math display">\[
+y_t^* = \alpha a_t + \gamma g_t
+\]</span></p>
+</section>
+<section id="is-curve-with-government-spending" class="level3">
+<h3 class="anchored" data-anchor-id="is-curve-with-government-spending">IS curve with government spending</h3>
+<p>Remember:</p>
+<p><span class="math display">\[
+c_t = \frac{y_t - s_g g_t}{s_c}
+\]</span></p>
+<p>substituting into the Euler equation gives</p>
+<p><span class="math display">\[
+\frac{y_t - s_g g_t}{s_c}
+=
+E_t \left( \frac{y_{t+1} - s_g g_{t+1}}{s_c} \right)
+-
+\sigma^{-1}(i_t - E_t \pi_{t+1})
+\]</span></p>
+<p>follows</p>
+<p><span class="math display">\[
+y_t
+=
+E_t y_{t+1}
+-
+\frac{s_c}{\sigma}(i_t - E_t \pi_{t+1})
+-
+s_g (E_t g_{t+1} - g_t)
+\]</span></p>
+<p>Rewrite in output-gap form:</p>
+<p><span class="math display">\[
+x_t
+=
+E_t x_{t+1}
+-
+\frac{s_c}{\sigma}(i_t - E_t \pi_{t+1})
++
+(E_t y_{t+1}^* - y_t^*)
+-
+s_g (E_t g_{t+1} - g_t)
+\]</span></p>
+<p>Now notice, from the expression for the efficient level of output,</p>
+<p><span class="math display">\[
+E_t y_{t+1}^* - y_t^*
+=
+\alpha (E_t a_{t+1} - a_t)
++
+\gamma (E_t g_{t+1} - g_t)
+\]</span></p>
+<p>substituting back gives</p>
+<p><span class="math display">\[
+x_t
+=
+E_t x_{t+1}
+-
+\frac{s_c}{\sigma}(i_t - E_t \pi_{t+1})
++
+\alpha (E_t a_{t+1} - a_t)
++
+(\gamma - s_g)(E_t g_{t+1} - g_t)
+\]</span></p>
+<p>expanding <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\gamma\)</span> gives</p>
+<p><span class="math display">\[
+x_t
+=
+E_t x_{t+1}
+-
+\frac{s_c}{\sigma}(i_t - E_t \pi_{t+1})
++
+\frac{s_c(1+\varphi)}{\sigma + \varphi s_c}(E_t a_{t+1} - a_t)
+-
+\frac{\varphi s_c s_g}{\sigma + \varphi s_c}(E_t g_{t+1} - g_t)
+\]</span></p>
+<p>Define:</p>
+<p><span class="math display">\[
+x_t
+=
+E_t x_{t+1}
+-
+\frac{s_c}{\sigma}
+\bigl(i_t - E_t \pi_{t+1} - r_t^*\bigr)
+\]</span></p>
+<p>Match terms:</p>
+<p><span class="math display">\[
+r_t^*
+=
+\frac{\sigma}{s_c}
+\left[
+\frac{s_c(1+\varphi)}{\sigma + \varphi s_c}(E_t a_{t+1} - a_t)
+-
+\frac{\varphi s_c s_g}{\sigma + \varphi s_c}(E_t g_{t+1} - g_t)
+\right]
+\]</span></p>
+<p>Simplify:</p>
+<p><span class="math display">\[
+r_t^*
+=
+\frac{\sigma(1+\varphi)}{\sigma + \varphi s_c}(E_t a_{t+1} - a_t)
+-
+\frac{\sigma \varphi s_g}{\sigma + \varphi s_c}(E_t g_{t+1} - g_t)
+\]</span></p>
+</section>
+<section id="phillips-curve-with-government-spending" class="level3">
+<h3 class="anchored" data-anchor-id="phillips-curve-with-government-spending">Phillips curve with government spending</h3>
+<p>We will use the following equations:</p>
+<p><span class="math display">\[
+\pi_t = \beta E_t \pi_{t+1} + \kappa mc_t
+\]</span></p>
+<p><span class="math display">\[
+mc_t = \sigma c_t + \varphi n_t - a_t
+\]</span></p>
+<p><span class="math display">\[
+c_t = \frac{y_t - s_g g_t}{s_c}
+\]</span></p>
+<p><span class="math display">\[
+n_t = y_t - a_t
+\]</span></p>
+<p>substituting the last two into the marginal cost relation gives</p>
+<p><span class="math display">\[
+mc_t
+=
+\sigma \frac{y_t - s_g g_t}{s_c}
++
+\varphi (y_t - a_t)
+-
+a_t
+\]</span></p>
+<p>rearranging:</p>
+<p><span class="math display">\[
+mc_t
+=
+\left( \frac{\sigma}{s_c} + \varphi \right) y_t
+-
+\frac{\sigma s_g}{s_c} g_t
+-
+(1+\varphi)a_t
+\]</span></p>
+<p>it should be pretty obvious by now that we are just repeating the same steps we followed to derive the efficient level of output, but now without restricting <span class="math inline">\(mc_t\)</span> to zero.<br>
+Remember that the efficient level of output is given by:</p>
+<p><span class="math display">\[
+y_t^*
+=
+\frac{s_c(1+\varphi)}{\sigma + \varphi s_c} a_t
++
+\frac{\sigma s_g}{\sigma + \varphi s_c} g_t
+\]</span></p>
+<p>Just divide the expression for <span class="math inline">\(mc_t\)</span> by <span class="math inline">\(\frac{\sigma}{s_c} + \varphi\)</span>:</p>
+<p><span class="math display">\[
+\left( \frac{\sigma}{s_c} + \varphi \right)^{-1}mc_t
+=
+y_t
+-
+\left(
+   \frac{s_c(1+\varphi)}{\sigma + \varphi s_c} a_t
++
+\frac{\sigma s_g}{\sigma + \varphi s_c} g_t
+\right)
+\]</span></p>
+<p>the term in parentheses is just the efficient level of output, so we can write</p>
+<p><span class="math display">\[
+mc_t
+=
+\left(\frac{\sigma}{s_c}+\varphi\right)(y_t - y_t^*)
+\]</span></p>
+<p>which is:</p>
+<p><span class="math display">\[
+mc_t
+=
+\left(\frac{\sigma}{s_c}+\varphi\right) x_t
+=
+\frac{\sigma + \varphi s_c}{s_c} x_t
+\]</span></p>
+<p>substituting into the Phillips curve gives</p>
+<p><span class="math display">\[
+\pi_t
+=
+\beta E_t \pi_{t+1}
++
+\kappa \frac{\sigma + \varphi s_c}{s_c} x_t
+\]</span></p>
 <p><br><br><br></p>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
@@ -1058,6 +1325,7 @@ A=A_0^{-1}A_1.
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
