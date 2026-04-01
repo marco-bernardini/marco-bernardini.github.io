@@ -210,11 +210,12 @@ window.Quarto = {
 <p>These notes follow the structure of Professor Silvia Miranda-Agrippino’s Empirical Macro course at Oxford.</p>
 <p>Because I mainly state time-series concepts without developing them in detail, readers with little prior background in time series may find it useful to consult Hamilton (2005), especially Chapters 1–3 and 10–11.</p>
 <p>Readers who are less comfortable with linear algebra may also benefit from skimming one of Gilbert Strang’s textbooks.</p>
+<hr>
 <section id="definitions" class="level2">
 <h2 class="anchored" data-anchor-id="definitions">1. Definitions</h2>
 <section id="variables-and-spaces" class="level3">
 <h3 class="anchored" data-anchor-id="variables-and-spaces">Variables and Spaces</h3>
-<p>Throughout the text, we will use the following notation:</p>
+<p>Throughout the course, we will use the following notation:</p>
 <ul>
 <li><p><span class="math inline">\(y_t \in \mathbb{R}^n\)</span>: vector of observable variables at time <span class="math inline">\(t\)</span>.</p></li>
 <li><p><span class="math inline">\(\varepsilon_t \in \mathbb{R}^n\)</span>: vector of structural shocks at time <span class="math inline">\(t\)</span>.</p></li>
@@ -289,13 +290,13 @@ x_t \equiv y_t - \mu,
 \]</span></p>
 <p>the process becomes</p>
 <p><span class="math display">\[
-x_t = \Theta(L)\varepsilon_t
+x_t = \Theta(L)u_t
 =
-\sum_{j=0}^\infty \Theta_j \varepsilon_{t-j}.
+\sum_{j=0}^\infty \Theta_j u_{t-j}.
 \]</span></p>
 <p>and so we can view the VMA as a projection:</p>
 <p><span class="math display">\[
-x_t \in \mathcal H_t^\varepsilon.
+x_t \in \mathcal H_t^u.
 \]</span></p>
 </section>
 <section id="var-representation" class="level3">
@@ -306,10 +307,10 @@ y_t=\nu+\sum_{\ell=1}^{\infty} A_{\ell} y_{t-\ell}+u_t, \quad u_t \sim W N(0, \S
 \]</span></p>
 <p>Note that this infinite order VAR can be approximated by a finite order <span class="math inline">\(VAR(p)\)</span>, provided that <span class="math inline">\(A(L)^{-1}\)</span> exists and is absolutely summable:</p>
 <p><span class="math display">\[
-y_t=\nu+\sum_{\ell=1}^p A_{\ell} y_{t-\ell}+u_t, \quad u_t \sim W N(0, \Sigma) .
+y_t=\nu+\sum_{\ell=1}^p A_{\ell} y_{t-\ell}+\upsilon_t, \quad \upsilon_t \sim W N(0, \Sigma) .
 \]</span></p>
 <p>where <span class="math inline">\(p\)</span> represents the number of lags.</p>
-<p>We will also write:</p>
+<p>To represent the infinite process, we will also write:</p>
 <p><span class="math display">\[
 A(L) y_t=\nu+u_t
 \]</span></p>
@@ -317,11 +318,7 @@ A(L) y_t=\nu+u_t
 <p><span class="math display">\[
 \mu = c + A_1\mu + \cdots + A_p\mu,
 \]</span></p>
-<p>equivalently,</p>
-<p><span class="math display">\[
-(I-A_1-\cdots-A_p)\mu = c.
-\]</span></p>
-<p>if we define <span class="math inline">\(x_t = y_t-\mu\)</span>, it follows that</p>
+<p>Follows</p>
 <p><span class="math display">\[
 x_t = A_1 x_{t-1} + \cdots + A_p x_{t-p} + u_t.
 \]</span></p>
@@ -349,7 +346,7 @@ u_t \perp \mathcal H_{t-1}^x.
 <p>The impulse response function measures the effect of a shock at time <span class="math inline">\(t\)</span> on future values of the observables <span class="math inline">\(y_t\)</span>.</p>
 <p>If</p>
 <p><span class="math display">\[
-y_t = \Theta(L)\varepsilon_t = \sum_{h=0}^{\infty} \Theta_h \varepsilon_{t-h},
+y_t = \Theta(L)\varepsilon_t = \sum_{h=0}^{\infty} \Theta_h \varepsilon_{t-h} \qquad \varepsilon_t \sim WN(0, I),
 \]</span></p>
 <p>then the response of variable <span class="math inline">\(i\)</span> at horizon <span class="math inline">\(h\)</span> to shock <span class="math inline">\(j\)</span> is</p>
 <p><span class="math display">\[
@@ -405,7 +402,7 @@ x_t \\
 <p>The forecast error variance decomposition allocates the variance of the <span class="math inline">\(h\)</span>-step-ahead forecast error across structural shocks.<br>
 Formally:</p>
 <p><span class="math display">\[
-\operatorname{FEVD}_{i,j}(h) = \frac{\operatorname{Var}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}, \{\varepsilon_{j,t+\ell}\}_{\ell=1}^h]}{\operatorname{Var}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}]} = \frac{\sum_{k=0}^{h-1} \Theta_{k,i,j}^2}{\sum_{j=1}^n \sum_{k=0}^{h-1} \Theta_{k,i,j}^2}
+\operatorname{FEVD}_{i,j}(h) = \frac{\mathbb{V}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}, \{\varepsilon_{j,t+\ell}\}_{\ell=1}^h]}{\mathbb{V}[y_{t+h} - y_{t+h} \mid \{\varepsilon_{t-\ell}\}_{\ell=0}^{\infty}]} = \frac{\sum_{k=0}^{h-1} \Theta_{k,i,j}^2}{\sum_{j=1}^n \sum_{k=0}^{h-1} \Theta_{k,i,j}^2}
 \]</span></p>
 </section>
 <section id="historical-decomposition" class="level3">
@@ -443,16 +440,16 @@ y_t=\underbrace{C(L)u_t}_{\text {part of } y_t \text { that is impossible to pre
 <p>where</p>
 <p><span class="math display">\[
 \begin{aligned}
-C(L) &amp;= \sum_{h=0}^{\infty} C_h L^h, \\
-d_0 &amp;= 1, \qquad \sum_{j=0}^{\infty} d_j^2 &lt; \infty, \\
+C(L) &amp;= \sum_{\ell=0}^{\infty} C_\ell L^\ell, \\
+C_0 &amp;= I, \qquad \sum_{\ell=0}^{\infty} C_\ell^2 &lt; \infty, \\
+\mathbb{E}[u_t] &amp;= 0, \\
 \mathbb{E}[u_t^2] &amp;= \sigma_{u}^2, \\
 \mathbb{E}[u_t u_s] &amp;= 0 \qquad \text{for } t \neq s, \\
-\mathbb{E}[u_t] &amp;= 0, \\
 \mathbb{E}[\delta_t u_s] &amp;= 0 \qquad \text{for all } t,s, \\
 \operatorname{Proj}\!\left[\delta_{t+s} \mid y_{t-1}, y_{t-2}, \ldots \right] &amp;= \delta_{t+s}, \qquad s \geq 0.
 \end{aligned}
 \]</span></p>
-<p>And we have deefined the innovation by</p>
+<p>And we have defined the innovation by</p>
 <p><span class="math display">\[
 u_t:=y_t-\operatorname{Proj}(y_t\mid \mathcal H_{t-1}^y),
 \qquad u_t\perp \mathcal H_{t-1}^y.
@@ -467,8 +464,7 @@ y_t^{d}\in \bigcap_{m\ge 1}\overline{\mathrm{span}}\{y_{t-m},y_{t-m-1},\dots\},
 \]</span></p>
 <p>so <span class="math inline">\(y_t^{d}\)</span> is completely determined by the infinite past, and</p>
 <p><span class="math display">\[
-y_t^{nd}=\sum_{h=0}^{\infty} C_h u_{t-h},
-\qquad c_0=1,
+y_t^{nd}=\sum_{\ell=0}^{\infty} C_\ell u_{t-\ell}
 \]</span></p>
 <p>with <span class="math inline">\(u_t\)</span> a white-noise innovation sequence generated by repeated orthogonal projection on the past.</p>
 <p>Hence the projection interpretation is</p>
@@ -479,15 +475,16 @@ y_t^{nd}=\sum_{h=0}^{\infty} C_h u_{t-h},
 <p><span class="math display">\[
 y_t^{d}=0,
 \]</span></p>
-<p>here <span class="math inline">\(\delta_t\)</span> could for example be</p>
+<p>An example of <span class="math inline">\(\delta_t\)</span> could be:</p>
 <p><span class="math display">\[
 \eta_t=a \cos (\lambda t)+b \sin (\lambda t),
 \]</span></p>
-<p>where <span class="math inline">\(\lambda\)</span> text is a fixed number and</p>
+<p>where <span class="math inline">\(\lambda\)</span> is a fixed number and</p>
 <p><span class="math display">\[
-E a=E b=E a b=0, a, b \perp\left\{\u_t\right\} .
+E a=E b=E a b=0, \qquad a, b \perp\left\{u_t\right\} .
 \]</span></p>
 <p>From here onwards, we will always refer to <span class="math inline">\(u_t\)</span> as the Wold innovations, and to <span class="math inline">\(\varepsilon_t\)</span> as the structural shocks.</p>
+<hr>
 </section>
 </section>
 <section id="empirical-method" class="level2">
@@ -511,6 +508,7 @@ To invert the VAR, a necessary condition is that the process is stationary, i.e.
 \]</span></p>
 <p>all the roots of <span class="math inline">\(\operatorname{det}(A(z))\)</span> must be outside the unit circle (see Hamilton (2005) for details).<br>
 The next step, therefore, will be trying to “connect” the Wold innovations to the structural shocks, abstracting from the deterministic component.</p>
+<hr>
 </section>
 <section id="invertibility" class="level2">
 <h2 class="anchored" data-anchor-id="invertibility">3. Invertibility</h2>
@@ -530,11 +528,11 @@ Then it must be both: <span class="math inline">\(u_t \in \mathcal I_t^y\)</span
 <p><span class="math display">\[
   \mathbb{V} u_t = \Sigma = \mathbb{V} \Omega \varepsilon_t = \Omega \Omega^{'}
 \]</span></p>
-<p>The coefficients in <span class="math inline">\(\Omega\)</span> are th econtemporaneous transmissione coefficients that relate changes in <span class="math inline">\(varepsilon_t\)</span> to contemporaneous changes in <span class="math inline">\(u_t\)</span>.</p>
+<p>The coefficients in <span class="math inline">\(\Omega\)</span> are the contemporaneous transmission coefficients that relate changes in <span class="math inline">\(\varepsilon_t\)</span> to contemporaneous changes in <span class="math inline">\(u_t\)</span>.</p>
 <section id="failure-of-invertibility" class="level3">
 <h3 class="anchored" data-anchor-id="failure-of-invertibility">Failure of invertibility</h3>
 <p>There are two important cases where invertibility does not hold.</p>
-<p>The first is when <span class="math inline">\(\varepsilon_t \in \mathbb R^m\)</span> and <span class="math inline">\(y_t \in \mathbb R^n\)</span>, with <span class="math inline">\(n&lt;m\)</span>: in these cases, we will not have enough equations to “disentangle” the different shocks. This case is quite trivial and will not be shown here.<br>
+<p>The first is when <span class="math inline">\(\varepsilon_t \in \mathbb R^m\)</span> and <span class="math inline">\(y_t \in \mathbb R^n\)</span>, with <span class="math inline">\(n&lt;m\)</span>: in these cases, we will not have enough equations to “disentangle” the different shocks. This case is quite trivial thus we will not go into detail here.<br>
 The second case arises when the econometrician is not able to recover the hidden state from the history of the observables.<br>
 To clarify this point, consider a scalar state space system:</p>
 <p><span class="math display">\[
@@ -553,7 +551,7 @@ s_t
 \]</span></p>
 <p>Iterating backwards, <span class="math display">\[
 s_t
-= (a - b d^{-1} c)^t s_0 + \sum_{j=0}^{t-1} (a - b d^{-1} c)^j b d^{-1} x_{t-j}.
+= (a - b d^{-1} c)^t s_0 + \sum_{j=0}^{t-1} (a - b d^{-1} c)^j b d^{-1} y_{t-j}.
 \]</span></p>
 <p>This decomposition is the key to invertibility.</p>
 <p>If the “Poor Man Invertibility Condition” holds, i.e.&nbsp;if</p>
@@ -565,16 +563,16 @@ s_t
 (a - b d^{-1} c)^t s_0 \to 0
 \qquad \text{as } t \to \infty,
 \]</span></p>
-<p>so the effect of the unknown initial state disappears. Hence <span class="math inline">\(s_t\)</span> is asymptotically pinned down by the history of observables <span class="math inline">\(\{x_t,x_{t-1},\dots\}\)</span>, and therefore the shocks are recoverable via</p>
+<p>so the effect of the unknown initial state disappears. Hence <span class="math inline">\(s_t\)</span> is asymptotically pinned down by the history of observables <span class="math inline">\(\{y_t,y_{t-1},\dots\}\)</span>, and therefore the shocks are recoverable via</p>
 <p><span class="math display">\[
-\varepsilon_t = d^{-1}(x_t - c s_{t-1}).
+\varepsilon_t = d^{-1}(y_t - c s_{t-1}).
 \]</span></p>
 <p>If instead</p>
 <p><span class="math display">\[
 |a - b d^{-1} c| &gt; 1,
 \]</span></p>
 <p>then the term <span class="math inline">\((a - b d^{-1} c)^t s_0\)</span> does not vanish, so the unknown initial state continues to matter. In that case, the history of observables does not uniquely reveal the hidden state, and the model is non-invertible.</p>
-<p>to see how this connects to recovering the hidden state, let the econometrician’s information set be <span class="math inline">\(\mathcal F_t^y=\sigma(y_t,y_{t-1},\dots)\)</span> and remember:</p>
+<p>To see how this connects to recovering the hidden state, let the econometrician’s information set be <span class="math inline">\(\mathcal F_t^y=\sigma(y_t,y_{t-1},\dots)\)</span> and remember:</p>
 <p><span class="math display">\[
 \begin{aligned}
 u_{t+1}=y_{t+1}-\mathbb{E}\left(y_{t+1} \mid \mathcal F_t^y\right) &amp; =y_{t+1}-c \mathbb{E}\left(s_t \mid \mathcal F_t^y\right) \\
@@ -585,13 +583,13 @@ u_{t+1}=y_{t+1}-\mathbb{E}\left(y_{t+1} \mid \mathcal F_t^y\right) &amp; =y_{t+1
 s_{t+1}=(a - b d^{-1} c)^{t+1}s_0+\sum_{j=0}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}.
 \]</span></p>
 <p>Taking conditional expectation, <span class="math display">\[
-\mathbb E[s_{t+1}\mid \mathcal F_t^x]
+\mathbb E[s_{t+1}\mid \mathcal F_t^y]
 =
 (a - b d^{-1} c)^{t+1}s_0
 +
 \sum_{j=1}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}
 +
-b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^x].
+b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^y].
 \]</span></p>
 <p>Hence, if <span class="math display">\[
 (a - b d^{-1} c)^{t+1}s_0 \neq 0,
@@ -601,13 +599,14 @@ b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^x].
 =
 \sum_{j=1}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t+1-j}
 +
-b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^x],
+b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^y],
 \]</span> the residual is <span class="math display">\[
 s_{t+1}-\hat s_{t+1|t}=(a - b d^{-1} c)^{t+1}s_0.
 \]</span></p>
 <p>Therefore, invertibility requires <span class="math display">\[
 (a - b d^{-1} c)^{t+1}s_0 \to 0,
 \]</span> so that the hidden initial condition disappears and the state becomes recoverable from the history of observables.</p>
+<hr>
 </section>
 </section>
 <section id="identification-issues" class="level2">
@@ -619,19 +618,19 @@ s_{t+1}-\hat s_{t+1|t}=(a - b d^{-1} c)^{t+1}s_0.
 <p><span class="math display">\[
 u_t = \Omega \varepsilon_t, \quad u_t \sim W N(0, \Sigma) \quad \varepsilon_t \sim W N(0, I)
 \]</span></p>
-<p>where <span class="math inline">\(/Omega\)</span> is some linear map. Notice the following:</p>
+<p>where <span class="math inline">\(\Omega\)</span> is some linear map. Notice the following:</p>
 <p><span class="math display">\[
-  \mathbb{V}(u_t) = \mathbb{V}(\Omega \varepsilon_t) = \Omega I \Omega ' = \Sigma
+  \mathbb{V}u_t = \mathbb{V}\Omega \varepsilon_t = \Omega I \Omega ' = \Sigma
 \]</span></p>
 <p>Follows that <span class="math inline">\(\Sigma = \Omega \Omega '\)</span>. From linear algebra we know that, for each orthonormal matrix <span class="math inline">\(Q\)</span> we can write: <span class="math inline">\(\Sigma = \Omega Q Q' \Omega ' = \Omega \Omega '\)</span>. Note that by definition, an orthonormal matrix preserves length and angles, hence observing <span class="math inline">\(\Sigma\)</span> alone is not sufficient to pin down a single <span class="math inline">\(\Omega\)</span>.<br>
 As an example, consider the orthonormal matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> and note:</p>
 <p><span class="math display">\[
   \Omega P P' \Omega ' = \Omega I \Omega ' = \Omega Q Q' \Omega '
 \]</span></p>
-<p>If the reader has issues convincing themselves of the magnitude of this issue, the following widget could also be of help:</p>
+<p>If the reader has issues convincing themselves of the magnitude of this issue, the following widget could also be of help (work in progress):</p>
 <iframe src="../widgets/rotation-widget.html" width="100%" height="770" style="border:none; border-radius:12px;">
 </iframe>
-<p>Notice that, since we are interested in recovering not only the span of the shocks, but also the magnitude of their effect on observed variables, that of rotational indeterminacy is a fundamental problem of great importance. We will therefore dedicate most of the rest of the text to pinning down a specific rotation of the matrix <span class="math inline">\(Q\)</span>.</p>
+<p>Notice that, since we are interested in recovering not only the span of the shocks, but also the magnitude of their effect on observed variables, that of rotational indeterminacy is a problem of great importance. We will therefore dedicate most of the rest of the course to pinning down a specific rotation of the matrix <span class="math inline">\(Q\)</span>.</p>
 </section>
 <section id="dynamic-indeterminacy" class="level3">
 <h3 class="anchored" data-anchor-id="dynamic-indeterminacy">Dynamic indeterminacy</h3>
@@ -652,12 +651,13 @@ y_t=\theta_{01} \varepsilon_{1, t}+\theta_{02} \varepsilon_{2, t}+\theta_{11} \v
 <p>This process will imply the same second moments as the true one (i.e.&nbsp;it is observationally equivalent) as long as:</p>
 <p><span class="math display">\[
 \begin{gathered}
-\operatorname{Var}\left(y_t\right)=\theta_{01}^2+\theta_{02}^2+\theta_{11}^2+\theta_{12}^2=\theta_0^2+\theta_1^2 \\
+\mathbb{V}\left(y_t\right)=\theta_{01}^2+\theta_{02}^2+\theta_{11}^2+\theta_{12}^2=\theta_0^2+\theta_1^2 \\
 \operatorname{Cov}\left(y_t, y_{t-1}\right)=\theta_{01} \theta_{11}+\theta_{02} \theta_{12}=\theta_0 \theta_1
 \end{gathered}
 \]</span></p>
 <p>But of course it implies very different IRFs/FVDs/HDs</p>
-<p>Notice, however, than when we assume invertibility we require automatically the number of observables to be the same as the number of shocks, therefore we will not need to explicitly address this issue once assumed invertibility.</p>
+<p>Notice, however, than when we assume invertibility we require automatically the number of observables to be the same as the number of shocks, therefore we will not need to explicitly address this issue.</p>
+<hr>
 </section>
 </section>
 <section id="identification-methods" class="level2">
@@ -677,7 +677,7 @@ Remember now that <span class="math inline">\(C(0)\)</span> is defined as the id
 <p><span class="math display">\[
 \begin{aligned}
 u_t &amp; =\Theta_0 \varepsilon_t \\
-\operatorname{Var}\left(u_t\right) &amp; =\operatorname{Var}\left(\Theta_0 \varepsilon_t\right) \\
+\mathbb{V}\left(u_t\right) &amp; =\mathbb{V}\left(\Theta_0 \varepsilon_t\right) \\
 \Sigma &amp; =\Theta_0 \Theta_0^{\prime}
 \end{aligned}
 \]</span></p>
@@ -714,7 +714,7 @@ ac + bd &amp; c^2 + d^2
 \end{cases}
 \]</span></p>
 <p>where we only have 3 equations for the 4 unknowns <span class="math inline">\(a, b, c, d\)</span>. In this example we need 1 restriction.<br>
-Now we can approach 3 methods for short run identification. I will present them in order from the most “strict” to the more flexible.</p>
+Now we can approach 3 methods for short run identification. I will present them in order from the most restrictive to the more flexible.</p>
 </section>
 <section id="recursive-identification" class="level3">
 <h3 class="anchored" data-anchor-id="recursive-identification">Recursive identification</h3>
@@ -739,7 +739,7 @@ u_{3, t}
 \varepsilon_{3, t}
 \end{array}\right)}_{\varepsilon_t}
 \]</span></p>
-<p>This, of course, imposes strong timing restrictions. In particular, the first variable only responds to <span class="math inline">\(varepsilon_{1, t}\)</span> on impact, while the third is affected by all shocks, on impact. Hence, the order in which the variables appear in the model is of great importance.<br>
+<p>This, of course, imposes strong timing restrictions. In particular, the first variable only responds to <span class="math inline">\(\varepsilon_{1, t}\)</span> on impact, while the third is affected by all shocks, on impact. Hence, the order in which the variables appear in the model is of great importance.<br>
 This method gives its name to the fact that we identify the shocks recursively, as we can see inverting the relationship</p>
 <p><span class="math display">\[
 \underbrace{\left(\begin{array}{l}
@@ -759,7 +759,7 @@ u_{2, t} \\
 u_{3, t}
 \end{array}\right)}_{u_t}
 \]</span></p>
-<p>fancy notation aside, we can see that the first line identifies <span class="math inline">\(\varepsilon_{1, t}\)</span>, then the component of the innovations of the second variable <span class="math inline">\(u_{2, t}\)</span> that is orthogonal to the first identifies <span class="math inline">\(\varepsilon_{2, t}\)</span> and so on…<br>
+<p>We can see that the first line identifies <span class="math inline">\(\varepsilon_{1, t}\)</span>, then the component of the innovations of the second variable <span class="math inline">\(u_{2, t}\)</span> that is orthogonal to the first identifies <span class="math inline">\(\varepsilon_{2, t}\)</span> and so on…<br>
 Interestingly, note the following:</p>
 <p><span class="math display">\[
 y_t = \sum_{h=0}^\infty \Psi_h u_{t-h}, \quad \Psi_0 = I
@@ -771,9 +771,9 @@ u_t = \Theta_0 \varepsilon_t
 \frac{\partial y_t}{\partial \varepsilon_t} = \Theta_0
 \]</span></p>
 <p>Hence identification on <span class="math inline">\(u_t\)</span> pins down impact effects on <span class="math inline">\(y_t\)</span>.<br>
-As you can argue, this recursive structure is not particularly realistic nor easily implementable. First, the lower the sampling frequency, the more unrealistic the timing assumptions become. Since this is quite obvious, I will not go further.<br>
+Arguably, this recursive structure is not particularly realistic nor easily implementable. First, the lower the sampling frequency, the more unrealistic the timing assumptions become. Since this is quite obvious, I will not go further.<br>
 Second, the recursive causal ordering rules out contemporaneous feedback across variables.<br>
-To see this, for an ordering (y_{1t},,y_{nt}):</p>
+To see this, for an ordering <span class="math inline">\(y_{t,1},\dots,y_{n,t}\)</span>)$:</p>
 <p><span class="math display">\[
 u_{it} = \sum_{j \le i} \Theta_{0,ij}\,\varepsilon_{jt}
 \]</span></p>
@@ -781,7 +781,7 @@ u_{it} = \sum_{j \le i} \Theta_{0,ij}\,\varepsilon_{jt}
 </section>
 <section id="non-recursive-impact-restrictions" class="level3">
 <h3 class="anchored" data-anchor-id="non-recursive-impact-restrictions">Non-recursive impact restrictions</h3>
-<p>This method allows for identification while maintaining a slightly more flexible structure than the previous one. In short, it entails imposing <span class="math inline">\(n(n-1)/2\)</span> independent restrictions, i.e.&nbsp;setting <span class="math inline">\(n(n-1)/2\)</span> entries of <span class="math inline">\(\Theta_0\)</span> equal to 0, in a way that allows do identify the shocks. Usually, these restrictions are informed by theory or previous knowledge.<br>
+<p>This method allows for identification while maintaining a slightly more flexible structure than the previous one. In short, it entails imposing <span class="math inline">\(n(n-1)/2\)</span> independent restrictions, i.e.&nbsp;setting <span class="math inline">\(n(n-1)/2\)</span> entries of <span class="math inline">\(\Theta_0\)</span> equal to 0, in a way that allows do identify the shocks. Usually, these restrictions are informed by theory or literature standards.<br>
 Non-recursive zero restrictions must ensure that each structural shock has a distinct contemporaneous effect on the reduced-form innovations.</p>
 <p>Otherwise, different shocks become observationally indistinguishable, i.e.&nbsp;one column of <span class="math inline">\(\Theta_0\)</span> can be replicated by a linear combination of others, leading to underidentification as in the following example.</p>
 <p><span class="math display">\[
@@ -792,7 +792,8 @@ Non-recursive zero restrictions must ensure that each structural shock has a dis
 \Theta_{0,31} &amp; \Theta_{0,32} &amp; \Theta_{0,33}
 \end{array}\right)
 \]</span></p>
-<p>when imposing this impact matrix, the econometrician can identify the first shock, but cannot separate the third from the second using observational data.</p>
+<p>when imposing this impact matrix, the econometrician can identify the first shock, but cannot separate the third from the second using observational data.<br>
+On the other hand, if we impose the following structure:</p>
 <p><span class="math display">\[
 \Theta_0 =
 \left(\begin{array}{ccc}
@@ -801,11 +802,11 @@ Non-recursive zero restrictions must ensure that each structural shock has a dis
 \Theta_{0,31} &amp; 0 &amp; \Theta_{0,33}
 \end{array}\right)
 \]</span></p>
-<p>here, on the other hand every shock has a unique “footprint”, so that we are able to distinguish them using data alone.</p>
+<p>every shock has a unique “footprint”, so that we are able to distinguish them using data alone.</p>
 </section>
 <section id="sign-restrictions" class="level3">
 <h3 class="anchored" data-anchor-id="sign-restrictions">Sign restrictions</h3>
-<p>This method, defined agnostic by Uhlig, imposes constraints only on the sign of the responses. This way, <span class="math inline">\(Q\)</span> is not point identified, but rather set identified. AS before, sign restrictions are informed by theory or literature standards. Note that we can both impose restrictions on the impact matrix <span class="math inline">\(\Theta_0\)</span> and the matrices <span class="math inline">\(\Theta_h\)</span>, <span class="math inline">\(h=1,2,...,H\)</span> i.e.&nbsp;we are directly imposing signs on the IRFs.<br>
+<p>This method, defined as agnostic by Uhlig, imposes constraints only on the sign of the responses. This way, <span class="math inline">\(Q\)</span> is not point identified, but rather set identified. As before, sign restrictions are informed by theory or literature standards (more on this later). Note that we can both impose restrictions on the impact matrix <span class="math inline">\(\Theta_0\)</span> and the matrices <span class="math inline">\(\Theta_h\)</span>, <span class="math inline">\(h=1,2,...,H\)</span> i.e.&nbsp;we are directly imposing signs on the IRFs.<br>
 Before presenting an example, it is interesting to sketch the algorithm used to calculate the IRFs:</p>
 <ol type="1">
 <li>Estimate the VAR</li>
@@ -816,8 +817,8 @@ Repeat n times:<br>
 <li>Compute <span class="math inline">\(\Theta_h^i\)</span></li>
 <li>If all signs restrictions hold, keep the matrix, otherwise discard</li>
 </ol>
-<p>Note that is possible that the set of matrices <span class="math inline">\(Q\)</span> that are not discarded may be very tiny or almost empty. If this is the case, the restrictions could be too strong or even contradict the estimated dynamics.<br>
-We will now see how sign restrictions are applied in practice. Probably, the simplest example is the following:</p>
+<p>Note that is possible that the set of matrices <span class="math inline">\(Q\)</span> that are not discarded may be very tiny or almost empty. If this is the case, the imposed restrictions could be too strong or even contradict the estimated dynamics.<br>
+We will now see how sign restrictions are applied in practice. Probably, the more natural example is the following:</p>
 <p><span class="math display">\[
 \left(\begin{array}{c}
 u^{x}_t \\
@@ -851,9 +852,9 @@ i_t
 \]</span></p>
 <p>We can see here that the third shocks follows a unique pattern, and can therefore be distinguished from the first two. However, we will not be able to discern between a positive demand shock (<span class="math inline">\(\varepsilon_t^d\)</span>) and a negative supply shock (<span class="math inline">\(\varepsilon_t^s\)</span>), as they imply the same sign pattern.<br>
 To avoid this identification problem, note the following:<br>
-Let <span class="math inline">\(\Theta_{m n}\)</span> be an entry of <span class="math inline">\(\Theta\)</span>:<br>
+Let <span class="math inline">\(\Theta_{j k}\)</span> be an entry of <span class="math inline">\(\Theta\)</span>:<br>
 <span class="math inline">\(\forall j, k: j \neq k \quad \exists i: \operatorname{sign} \theta_{j i} = \operatorname{sign} \theta_{k i}\)</span><br>
-<span class="math inline">\(\forall j, k: j \neq k \quad \exists_i: \operatorname{sign} \theta_{j i} \neq \operatorname{sign} \theta_{k i}\)</span><br>
+<span class="math inline">\(\forall j, k: j \neq k \quad \exists i: \operatorname{sign} \theta_{j i} \neq \operatorname{sign} \theta_{k i}\)</span><br>
 are hecessary conditions for separating the shocks.<br>
 Beware of the fact that, even when we are able to separate the signs of the shocks, we can never avoid masquerading, which occurs when the imposed conditions on one shock can also be satisfied by a linear combinations of other shocks.<br>
 Lastly, I will report the IRFs from the seminal paper by Smets and Wouters (2003), which can be useful when making a choice for the signs appropriately informed by theory.</p>
@@ -888,7 +889,7 @@ To see how, remember:</p>
 <p>We call this object the long run multiplier.<br>
 To see how we can impose restrictions in practice, start from the Wold MA:</p>
 <p><span class="math display">\[
-y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma &amp; t=s \\ 0 &amp; t \neq s\end{cases}, \quad {C_\ell}_{\ell = 0}^{\infty} \text {absolutely summable}
+y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[u_t u_s^{\prime}\right]= \begin{cases}\Sigma &amp; t=s \\ 0 &amp; t \neq s\end{cases}, \quad C(L) \quad \text {absolutely summable}
 \]</span></p>
 <p>let:</p>
 <p><span class="math display">\[
@@ -898,11 +899,11 @@ y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[
 <p><span class="math display">\[
   G_Y(z) = \sum_{j = -\infty}^{\infty} \Gamma_j z^j
 \]</span></p>
-<p>For an <span class="math inline">\(MA(\infty)\)</span> process we have:</p>
+<p>For an <span class="math inline">\(MA(\infty)\)</span> process we have (for the tedious proof, see Hamilton (2005)):</p>
 <p><span class="math display">\[
   G_Y(z) = C(z) \Sigma C(z)'
 \]</span></p>
-<p>Now, define the long variance as:</p>
+<p>Now, define the long run variance as:</p>
 <p><span class="math display">\[
   \mathbb{V}_{LR}(y) = \sum_{j = -\infty}^{\infty} \Gamma_j
 \]</span></p>
@@ -910,7 +911,7 @@ y_t=\sum_{\ell=0}^{\infty} C_{\ell} u_{t-\ell} = C(L)u_t, \quad \mathbb{E}\left[
 <p><span class="math display">\[
   \mathbb{V}_{LR}(y) = C(1) \Sigma C(1)'
 \]</span></p>
-<p>Notice now that <span class="math inline">\(C(1) \Sigma C(1)'\)</span>, which we will now call <span class="math inline">\(\Gamma\)</span> for simplicity, can be written as <span class="math inline">\(\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'\)</span> i.e.&nbsp;<span class="math inline">\(\Theta(1) \Theta(1)'\)</span> (remember that <span class="math inline">\(\Sigma\)</span> is PD and symmetric). Again, notice that exists an orthonormal matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(\Theta(1) = \Gamma^{1/2} P\)</span> - hence the need to impose restrictions on (1).<br>
+<p>Notice now that <span class="math inline">\(C(1) \Sigma C(1)'\)</span>, which we will now call <span class="math inline">\(\Gamma\)</span> for simplicity, can be written as <span class="math inline">\(\Gamma = C(1)\Sigma^{1/2} Q Q' (\Sigma^{1/2})' C(1)'\)</span> i.e.&nbsp;<span class="math inline">\(\Theta(1) \Theta(1)'\)</span> for some orthonormal matrix <span class="math inline">\(Q\)</span> (remember that <span class="math inline">\(\Sigma\)</span> is positive definite and symmetric). Again, to avoid rotational indeterminacy, we need to impose restrictions on <span class="math inline">\(\Theta(1)\)</span>.<br>
 A popular restriction is setting</p>
 <p><span class="math display">\[
   \Theta(1) = \operatorname{chol}(\Gamma)
@@ -918,24 +919,28 @@ A popular restriction is setting</p>
 <p>Since the process can seem a bit obscure at first glance, it may be helpful to go through the steps:</p>
 <p><span class="math display">\[
 \begin{aligned}
-&amp; \text { estimate VAR } \Rightarrow C(L), \Sigma_u \\
+&amp; \text { VAR } \Rightarrow \text { Wold } \\
+&amp; \text { Wold } \Rightarrow C(L), \Sigma \\
 &amp; \Rightarrow \Gamma=C(1) \Sigma C(1)^{\prime} \\
-&amp; \Rightarrow \Theta(1)P = \operatorname{chol}(\Gamma) \\
-&amp; \Rightarrow Q=\Sigma_u^{-1 / 2} C(1)^{-1} \Theta(1) \text {  fixed}
+&amp; \Rightarrow \Theta(1) = \operatorname{chol}(\Gamma) \\
+&amp; \Rightarrow Q=\Sigma_u^{-1 / 2} C(1)^{-1} \Theta(1)
 \end{aligned}
 \]</span></p>
-<p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restriction, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption <span class="math inline">\(n\)</span> periods after the positive shock (or even a tiny negative value for “many” periods after). To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percentage change.</p>
+<p>I will conclude with an observation: it should be clear that imposing long run zero restrictions strongly affects the shape of the IRFs. To clarify this point, imagine imposing a long run zero restriction on the IRF of the level of consumption to a productivity shock: intuitively, to respect the zero restriction, an initial positive effect will have to be compensated by a future negative effect of the same magnitude. But it makes very little sense to expect a huge drop in consumption some <span class="math inline">\(\tau\)</span> periods after the positive shock (or even a tiny negative value for “many” periods after). To avoid this problem, we can simply impose the zero restriction on the percentage change of consumption: this way, we will obtain a hump-shaped IRF for the level of consumption, whose (unique) max will coincide with the zero of the response of the percentage change.</p>
 </section>
 <section id="instrumental-variables" class="level3">
 <h3 class="anchored" data-anchor-id="instrumental-variables">Instrumental variables</h3>
-<p>We will now present an identification mathod that does not rely on the assumption of invertibility, but instead can be implemented even under partial or no invertibility.<br>
-Usually, we are interested in identifying a structural shock, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> for simplicity. Under invertibility, an instrumental variable <span class="math inline">\(z_t\)</span> for <span class="math inline">\(\varepsilon_{1,t}\)</span> has to be:<br>
-1. Relevant for <span class="math inline">\(\varepsilon_{1,t}\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{1, t} z_t\right)=\alpha \neq 0\)</span><br>
-2. Contemporaneously exogenous with respect to the other shocks in the model, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{2: n, t} z_t\right)=0\)</span> where <span class="math inline">\(n\)</span> indicates the number of shocks in the model.<br>
-The instrumental variable we are looking for will act as a “filter”:</p>
-<p><img src="../images/lens.png" class="img-fluid quarto-figure quarto-figure-center" style="width:75.0%"><br>
-(chatgpt is being dramatic today)</p>
-<p>To see how IV identification works in practice, imagine as before we have assumed invertibility (<span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span>) and we are interested in knowing about <span class="math inline">\(\varepsilon_{t,1}\)</span> and we have found <span class="math inline">\(z_t\)</span> that respects our IV requirements:</p>
+<p>We will now present an identification method that does not rely on the assumption of invertibility, but instead can be implemented even under partial or no invertibility.<br>
+Usually, we are interested in identifying a structural shock, let’s say <span class="math inline">\(\varepsilon_{t,1}\)</span> for simplicity. Under invertibility, an instrumental variable <span class="math inline">\(z_t\)</span> for <span class="math inline">\(\varepsilon_{t,1}\)</span> has to be:<br>
+1. Relevant for <span class="math inline">\(\varepsilon_{t,1}\)</span>, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{1, t} z_t\right)=\alpha \neq 0\)</span><br>
+2. Contemporaneously exogenous with respect to the other shocks in the model, i.e.&nbsp;<span class="math inline">\(\mathbb{E}\left(\varepsilon_{t, 2:n} z_t\right)=0\)</span> where <span class="math inline">\(n\)</span> indicates the number of shocks in the model.<br>
+The instrumental variable we are looking for will act as a “filter” for the shock of interest:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/lens.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:50.0%"></p>
+</figure>
+</div>
+<p>To see how IV identification works in practice, imagine as before we have assumed invertibility (<span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span>) and we are interested in knowing about <span class="math inline">\(\varepsilon_{t,1}\)</span> and we have found <span class="math inline">\(z_t\)</span> that respects our IV requirements. Isolate the first column of <span class="math inline">\(\Theta_0\)</span> and the shock <span class="math inline">\(\varepsilon_{t,1}\)</span>:</p>
 <p><span class="math display">\[
 u_t
 =
@@ -959,7 +964,7 @@ u_t
 \varepsilon_{t,n}
 \end{pmatrix}.
 \]</span></p>
-<p>Note that since <span class="math inline">\(\mathbb{V}\varepsilon_{t,1} = 1\)</span> and <span class="math inline">\(\mathbb{E}\left(\varepsilon_{2: n, t} z_t\right)=0\)</span> we have:</p>
+<p>Note that since <span class="math inline">\(\mathbb{V}\varepsilon_{t,1} = 1\)</span> and <span class="math inline">\(\mathbb{E}\left(\varepsilon_{t, 2:n} z_t\right)=0\)</span> we have:</p>
 <p><span class="math display">\[
 \operatorname{Cov}(u_t, z_t)
 =
@@ -982,18 +987,18 @@ u_t
 \theta_{0,n1}
 \end{pmatrix}.
 \]</span></p>
-<p>Now, note that we have recovered the impact coefficients up to a scale <span class="math inline">\(\alpha\)</span>, so it’s now easy to recover the relative impact coefficients as:</p>
+<p>Now, note that since we have recovered the impact coefficients up to a scale <span class="math inline">\(\alpha\)</span>, it is now easy to recover the relative impact coefficients as:</p>
 <p><span class="math display">\[
 \frac{\operatorname{Cov}\left(u_{t, 2: n} z_t\right)}{\operatorname{Cov}\left(u_{t, 1} z_t\right)}
 \]</span></p>
-<p>where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let’s say <span class="math inline">\(\varepsilon_{1,t}\)</span> moves variable in position <span class="math inline">\(1\)</span> by <span class="math inline">\(25\)</span> basis points and we have calculated the aboe ratio with <span class="math inline">\(\operatorname{Cov}\left(u_{t, 1} z_t\right)\)</span> at the denominator. Knowing that the ratio for variable <span class="math inline">\(2\)</span> is equal to <span class="math inline">\(4\)</span> tells us that the response of that variable will be of <span class="math inline">\(100\)</span> basis points.<br>
+<p>where we have computed the responses with respect to the effect on the first variable. What we are really computing here is the effect on a vector of variables of a shock that moves one single variable (the one at the denominator) by a certain amount on impact. As an example, let’s say <span class="math inline">\(\varepsilon_{t,1}\)</span> moves variable in position <span class="math inline">\(1\)</span> by <span class="math inline">\(25\)</span> basis points and we have calculated the above ratio with <span class="math inline">\(\operatorname{Cov}\left(u_{t, 1} z_t\right)\)</span> at the denominator. Knowing that the ratio for variable <span class="math inline">\(2\)</span> is equal to <span class="math inline">\(4\)</span> tells us that the response of that variable will be of <span class="math inline">\(100\)</span> basis points.<br>
 Notice now one technical but intereseting detail:</p>
 <p><span class="math display">\[
-\varepsilon_{1, t}=\underbrace{\left[\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} \operatorname{Cov}\left(z_t, u_t\right)^{\prime}\right]^{-1 / 2}}_{\text {scaling }} \underbrace{\operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t}_{\alpha \varepsilon_{1, t}}
+\varepsilon_{1, t}=\underbrace{\left[\operatorname{Cov}\left(z_t, u_t\right) \mathbb{V}\left(u_t\right)^{-1} \operatorname{Cov}\left(z_t, u_t\right)^{\prime}\right]^{-1 / 2}}_{\text {scaling }} \underbrace{\operatorname{Cov}\left(z_t, u_t\right) \mathbb{V}\left(u_t\right)^{-1} u_t}_{\alpha \varepsilon_{1, t}}
 \]</span></p>
-<p>The scaling part is not interesting, focus on the second. We have:</p>
+<p>The scaling part is not interesting, focus on the second term. We have:</p>
 <p><span class="math display">\[
-  \operatorname{Cov}\left(z_t, u_t\right) \operatorname{Var}\left(u_t\right)^{-1} u_t = \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t
+  \operatorname{Cov}\left(z_t, u_t\right) \mathbb{V}\left(u_t\right)^{-1} u_t = \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t
 \]</span></p>
 <p>Rewrite <span class="math inline">\(\Theta_{0,1} = e_1 \Theta_0\)</span>:</p>
 <p><span class="math display">\[
@@ -1001,19 +1006,19 @@ Notice now one technical but intereseting detail:</p>
 \]</span></p>
 <p>Then</p>
 <p><span class="math display">\[
-  \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t = \alpha e_1' \Theta_0^{-1} u_t = \alpha e_1' \varepsilon_t = \alpha\varepsilon_{1,t}
+  \alpha \Theta_{0,1}' ( \Theta_0 \Theta_0 ' )^{-1} u_t = \alpha e_1' \Theta_0^{-1} u_t = \alpha e_1' \varepsilon_t = \alpha\varepsilon_{t,1}
 \]</span></p>
-<p>Which, in simple terms, highlights how identification via IV under the invertibility assumption is an indirect way of selecting a rotation <span class="math inline">\(Q\)</span>, where we recover <span class="math inline">\(varepsilon_{1,t}\)</span> directly projecting the instrument on the span of the reduced-form innovations.</p>
+<p>Which, in simple terms, highlights how identification via IV under the invertibility assumption is an indirect way of selecting a rotation <span class="math inline">\(Q\)</span>, where we recover <span class="math inline">\(varepsilon_{t,1}\)</span> directly projecting the instrument on the span of the reduced-form innovations.</p>
 <p>What if we cannot assume invertibility? In that case <span class="math inline">\(u_t=\Theta_0 \varepsilon_t\)</span> won’t hold, instead we have to rely on the SVMA equation <span class="math inline">\(y_t=\Theta(L) \varepsilon_t=\sum_{\ell=0}^{\infty} \Theta_{\ell} \varepsilon_{t-\ell}=\Theta_0 \varepsilon_t+\Theta_1 \varepsilon_{t-1}+\ldots\)</span> Say now we want to calculate, similarly as we did before, the ratio of the IRFs:</p>
 <p><span class="math display">\[
 \frac{\operatorname{Cov}\left(y_{t+\ell, i} z_t\right)}{\operatorname{Cov}\left(y_{1, t} z_t\right)} = \frac{\alpha \Theta_{i, 1, \ell}}{\alpha \Theta_{1, 1, \ell}}
 \]</span></p>
-<p>In this case we must, however, notice that in calculating the covariances we have to rule out not only the interactions between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{2: n, t}\)</span> but also between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{t+s} \forall s \neq 0\)</span>. This condition is referred as lead/lag exogeneity.<br>
+<p>In this case we must, however, notice that in calculating the covariances we have to rule out not only the interactions between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{t, 2:n}\)</span> but also between <span class="math inline">\(z_t\)</span> and <span class="math inline">\(\varepsilon_{t+s}, \forall s \neq 0\)</span>. This condition is referred as lead/lag exogeneity.<br>
 To see why, remember we have</p>
 <p><span class="math display">\[
 y_t = \sum_{\ell=0}^{\infty}\Theta_\ell \varepsilon_{t-\ell},
 \qquad
-z_t = \alpha \varepsilon_{1,t} + \nu_t.
+z_t = \alpha \varepsilon_{t,1} + \nu_t.
 \]</span></p>
 <p>Take the <span class="math inline">\(i\)</span>-th component of <span class="math inline">\(y_{t+h}\)</span>: <span class="math display">\[
 y_{i,t+h}
@@ -1034,17 +1039,18 @@ y_{i,t+h}
 \]</span></p>
 <p>We would like this to reduce to <span class="math display">\[
 \operatorname{Cov}(y_{i,t+h},z_t)=\alpha\,\Theta_{i,1,h},
-\]</span> because this identifies the IRF to shock <span class="math inline">\(1\)</span> at horizon <span class="math inline">\(h\)</span>.</p>
+\]</span></p>
+<p>because this identifies the IRF to shock <span class="math inline">\(1\)</span> at horizon <span class="math inline">\(h\)</span>.</p>
 <p>For this to happen, all terms must vanish except the one corresponding to the first shock at date <span class="math inline">\(t\)</span>, that is, the term with <span class="math inline">\(\ell=h\)</span> and shock index <span class="math inline">\(j=1\)</span>. Hence we need lead/lag exogeneity so that</p>
 <p><span class="math display">\[
 \operatorname{Cov}(\varepsilon_{j,t+h-\ell},z_t)=0
 \qquad
 \text{for all } (j,\ell)\neq(1,h).
 \]</span></p>
-<p>Notice that strict exogeneity of the instrument is a very strong assumption which, in a MA setting requires that it is impossible to predict the instrument using lagged observables. If lag exogeneity is not satisfied or simply not assumed, the problem is readily solved adding controls <span class="math inline">\(w_i\)</span> to the regression. The idea is an application of the Frisch-Vaugh-Lovell theorem: define <span class="math inline">\(\tilde{z_t} = z_t - \operatorname{Proj}(z_t | \mathcal{H}_w)\)</span> and, similarly <span class="math inline">\(\tilde{\varepsilon_t}\)</span> - then we need:</p>
+<p>Notice that strict exogeneity of the instrument is a very strong assumption which, in a MA setting, implies that it is impossible to predict the instrument using lagged observables. If lag exogeneity is not satisfied or simply not assumed, the problem is solved adding controls <span class="math inline">\(w_i\)</span> to the regression. The idea is an application of the Frisch-Waugh-Lovell theorem: define <span class="math inline">\(\tilde{z_t} = z_t - \operatorname{Proj}(z_t | \mathcal{H}_w)\)</span> and, similarly <span class="math inline">\(\tilde{\varepsilon_t}\)</span> - then we need:</p>
 <ol type="1">
 <li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{1, t} \tilde{z}_t\right)=\alpha \neq 0\)</span></li>
-<li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{2: n, t} \tilde{z}_t\right)=0\)</span></li>
+<li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{t, 2:n} \tilde{z}_t\right)=0\)</span></li>
 <li><span class="math inline">\(\mathbb{E}\left(\tilde{\varepsilon}_{t+j} \tilde{z}_t\right)=0 \quad \forall j \neq 0\)</span></li>
 </ol>
 <p>For this reasons, we should choose controls that span all the space of the shocks correlated with the instrument.<br>
@@ -1056,6 +1062,12 @@ In the literature, there are two main methods for choosing instrumental variable
 <section id="high-frequency-iv" class="level4">
 <h4 class="anchored" data-anchor-id="high-frequency-iv">High Frequency IV</h4>
 <p>High frequency IV are constructed using changes in prices measured at very high frequences around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.</p>
+<p><br><br><br></p>
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="../images/poodles_2.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="width:30.0%"></p>
+</figure>
+</div>
 
 
 </section>
