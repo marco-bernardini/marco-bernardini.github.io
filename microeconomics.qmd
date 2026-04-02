@@ -1,0 +1,12 @@
+---
+title: "Microeconomics"
+format: html
+---
+
+Some micro notes, mainly for my own reference.
+
+## Contracts and bargaining
+- [Hidden Information and Self-Selection](latex/hidden_info_self_selection.qmd)
+
+## Auctions
+- [A gentle introduction to auction theory](latex/auctions.qmd)

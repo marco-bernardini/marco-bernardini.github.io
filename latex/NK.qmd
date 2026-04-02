@@ -1461,6 +1461,51 @@ $$
 \kappa \frac{\sigma + \varphi s_c}{s_c} x_t
 $$
 
+## 11. Adding preference shocks
+
+This one is actually easy. We start from the same equations as before, but now we add a preference shock $\Xi_t$ to the utility function. The problem of the household becomes:
+
+$$
+\max_{\{C_t,B_t,N_t\}}
+E_0\sum_{t=0}^{\infty}\beta^t\Xi_t
+\left(
+\frac{C_t^{1-\sigma}}{1-\sigma}
+-
+\frac{N_t^{1+\varphi}}{1+\varphi}
+\right)
+$$
+
+subject to the budget constraint
+
+$$
+P_tC_t+B_t=(1+i_{t-1})B_{t-1}+W_tN_t
+$$
+
+the Euler equation is now:
+
+$$
+C_t^{-\sigma}
+=
+\beta E_t\left[
+C_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\frac{\Xi_{t+1}}{\Xi_t}
+\right].
+$$
+
+Log-linearizing gives
+
+$$
+c_t=-\sigma^{-1}(i_t - E_t \pi_{t+1} + E_t \xi_{t+1} - \xi_t) + E_t c_{t+1}
+$$
+
+where $\xi_t$ is the log-deviation of $\Xi_t$ from its steady state. Define now $\delta_t \equiv E_t \xi_{t+1} - \xi_t$. Then the Euler equation becomes:
+
+$$
+c_t=-\sigma^{-1}(i_t - E_t \pi_{t+1} + \delta_t) + E_t c_{t+1}
+$$
+
+Eventually, we can incorporate $\delta_t$ inside the definition of $r_t^*$
+
 <br><br><br>
 
 ![](../images/poodles_2.png){fig-align="right" width="30%"}

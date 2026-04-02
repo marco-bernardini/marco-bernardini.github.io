@@ -1,0 +1,308 @@
+---
+title: "Hidden Information and Self-Selection"
+format: html
+---
+
+This section is not intended for the public. 
+
+## OPTIMAL CONTRACTING
+
+Principal $P$ / Agent $A$ problem  
+
+$x$ = output  
+$t$ = payment  
+$s$ = type  
+
+Agent maximises:
+$$
+U(x,t,s) = t - C(x,s)
+$$
+
+Principal maximises:
+
+$$
+V(x,t) = R(x) - t
+$$
+
+### Timing
+
+- $A$ observes $s$  
+- $P$ believes $s \sim D(\cdot)$  
+- $P$ offers a contract  
+- $A$ accepts or rejects  
+- $A$ chooses output, then $P$ pays $A$
+
+### Full information benchmark
+
+Let the reservation utility be zero. Then, if $P$ observes $s$, the optimal contract solves:
+
+$$
+\max_{x,t} \; R(x) - t
+$$
+
+s.t. no rent for $A$:
+
+$$
+t - C(x,s) = 0
+$$
+
+$$
+\Rightarrow R'(x^*) = C_x(x^*, s), \quad t^* = C(x^*, s)
+$$
+
+### Delegation approach
+
+$P$ commits to a contract $t = T(x)$
+
+If $s \in \{L,H\}$, then $T(x)$ is defined at two values.
+
+### Revelation approach
+
+$P$ offers a DRM:
+
+$$
+\{x(\hat{s}), t(\hat{s})\}
+$$
+
+Agent solves:
+
+$$
+\max_{\hat{s}} \; t(\hat{s}) - C(x(\hat{s}), s)
+$$
+
+Truthful DRM:
+
+$$
+\hat{s} = s
+$$
+
+### Revelation principle
+
+Given any contract $t = T(x)$ or DRM, there exists a truthful DRM yielding the same $(x,t)$.
+
+### P-A model
+
+$s \in \{L,H\}$ where s enters the cost of production, with $L < H$.
+
+$$
+P(s=H)=q, \quad P(s=L)=1-q
+$$
+
+Principal solves:
+
+$$
+\max_{x_H,x_L,t_H,t_L} \; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)
+$$
+
+s.t.
+
+$$
+t_H - C(x_H,H) = 0 \qquad\text{(P for $H$)}
+$$
+
+$$
+t_L - C(x_L,L) \ge 0 \qquad\text{(P for $L$ - always satisfied)}
+$$
+
+$$
+t_H - C(x_H,H) \ge t_L - C(x_L,H) \qquad\text{(IC for $H$ - never bites)}
+$$
+
+$$
+t_L - C(x_L,L) = t_H - C(x_H,L) \qquad\text{(IC for $L$)}
+$$
+
+### Full information benchmark
+
+$$
+R'(x_s^*) = C_x(x_s^*, s), \quad t_s^* = C(x_s^*, s)
+$$
+
+### Hidden information solution
+
+We have the following:
+
+- $\hat{x}_L = x_L^*$ (L's output is efficient)
+- $\hat{t}_L - C(\hat{x}_L,L) \ge 0$ (L earns positive rent)
+- $\hat{x}_H < x_H^*$ (H's output is inefficient)
+- $\hat{t}_H - C(\hat{x}_H,H) = 0$ (H does not earn rent)
+- $\hat{x}_H < \hat{x}_L$ (H produces less than L)
+- $\frac{\hat{t}_H}{\hat{x}_H} > \frac{\hat{t}_L}{\hat{x}_L}$ (H is paid more per unit of output than L)
+
+### Social planner
+
+The social planner solves:
+
+$$
+\max_{x_H,x_L} \; q\big(R(x_H)-C(x_H,H)\big) + (1-q)\big(R(x_L)-C(x_L,L)\big)
+$$
+
+s.t. participation and IC
+
+$$
+R'(x_s^*) = C_x(x_s^*, s)
+$$
+
+## SIGNALLING
+
+One informed agent, multiple uninformed principals. The agent always moves first. Differences with respect to optimal contracting (OC):  
+- S: the type enters the P's utility function
+- OC: one principal, one agent; S: multiple principals, one agent
+- OC: principal moves first; S: agent moves first
+- OC: unique equilibrium; S: multiple equilibria
+- OC: good type envies bad; S: bad type envies good
+
+Agent:
+
+$$
+U(w,e,n) = w - C(e,n)
+$$
+
+Principal:
+
+$$
+\pi = y(n,e) - w
+$$
+
+where  
+
+$w$ = wage  
+$n$ = ability (type)  
+$e$ = education  
+$y$ = output  
+
+### Timing
+
+- $A$ observes $n$  
+- $P$ has prior $P(n=H)=q$  
+- $A$ chooses $e$  
+- $P$ offers $w$  
+- $A$ accepts or rejects  
+
+### Strategies
+
+$$
+A: e(n), \quad P: w(e)
+$$
+
+Beliefs:
+
+$$
+\mu(H|e)
+$$
+
+### Full information benchmark
+
+As as consequence of perfect competition, $\pi=0$ and $w(e) = \mu(H|e) y(H,e) + (1-\mu(H|e)) y(L,e)$. Follows:
+
+$$
+w(e) = y(n,e)
+$$
+
+The agent solves:
+
+$$
+\max_e \; y(n,e) - C(e,n)
+$$
+
+Define envy as the situation in which the agent of type $L$ prefers the full-information contract designed for type $H$:
+$$
+y(H,e^*(H)) - C(e^*(H),L) > y(L,e^*(L)) - C(e^*(L),L)
+$$
+
+### Pooling
+
+By definition:
+
+$$
+e(H) = e(L) = e_p
+$$
+
+$$
+\mu(H|e_p) = q
+$$
+
+The it must be:
+
+$$
+w(e_p) = q y(H,e_p) + (1-q) y(L,e_p)
+$$
+
+usually pooling equilibria are enforced with strong off-patch beliefs.
+
+### Intuitive criterion
+
+Set beliefs:
+
+$$
+\mu(H|e') = 0
+$$
+
+for deviations that are never profitable for $H$
+
+### Separating equilibria:
+
+No envy: $\mu(H|e) = 1$ for $e \ge e^*(H)$, $\mu(H|e) = 0$ for $e < e^*(H)$
+
+$$
+e(L) = e^*(L), \quad e(H) = e^*(H)
+$$
+
+Envy: $\mu(H|e) = 1$ for $e \ge e^s$, $\mu(H|e) = 0$ for $e < e^s$: H overinvest in education to separate from L
+
+$$
+    e(L) = e^*(L), \quad e(H) = e^s > e^*(H)
+$$
+
+where $e^s$ is such that L is indifferent between its full-information contract and the one designed for H:
+
+$$
+    y(H,e^s) - C(e^s,L) = y(L,e^*(L)) - C(e^*(L),L)
+$$
+
+---
+
+## SCREENING
+
+Multiple competing uninformed principals move first, then one informed agent moves.
+
+### Timing
+
+- $A$ observes $n \in \{L,H\}$
+- $P$ has prior $P(n=H)=q$
+- $P$ offers contract $(w,e)$
+- $A$ accepts or rejects
+- $A$ acquires e and receives w
+
+### Strategies
+
+$$
+P_i: (w_i,e_i), \quad A: (w,e) \in \{(w_i,e_i)\}
+$$
+
+### Results
+
+- Any contract yields zero profits due to competition
+- No pooling is possible: let $P_i$ offer a pooling contract $(w_p,e_p)$, then any $P_j$ can offer a slightly better contract $(w_p+\epsilon,e_p)$ to attract only the high type and make positive profits (cream skimming).
+
+### Uniqueness
+
+L always chooses $(w(L)^*, e(L)^*)$ since every contract of the type $(w(L)^*-\varepsilon, e(L)^*)$ could generate a profit for some $P_i$.
+
+No envy: H chooses $(w(H)^*, e(H)^*)$ for a similar reason.
+
+Envy: H chooses $(y(H,e^s), e^s)$ since any contract of the type $(y(H,e^s)+\varepsilon, e^s)$ could generate a profit for some $P_i$ while only attracting the high type.
+
+### Existence
+
+No envy: PBE always exists  
+
+Envy: $\exists \; \hat{q} = \frac{U_H - U_L}{y_H - y_L}$ such that
+
+$$
+q \le \hat{q} \Rightarrow \text{unique PBE}
+$$
+
+$$
+q > \hat{q} \Rightarrow \text{no PBE}
+$$

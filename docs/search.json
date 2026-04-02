@@ -614,5 +614,222 @@
     "title": "Marco Bernardini",
     "section": "10. Introducing government spending",
     "text": "10. Introducing government spending\nWe will now introduce government spending \\(g_t\\) into the model, starting from the linearized system. For the time being, \\(g_t\\) will be trated as exogenous.\nNote that, even though this may seem like a tedious exercise, it actually highlights the procedure we should follow in order to solve NK models with more complex features.\nFor out purpose, we need the following equations, which should be faimiliar by now:\nEuler equation:\n\\[\nc_t = E_t c_{t+1} - \\sigma^{-1}(i_t - E_t \\pi_{t+1})\n\\]\nMarginal cost:\n\\[\nmc_t = \\sigma c_t + \\varphi n_t - a_t\n\\]\nProduction function:\n\\[\ny_t = a_t + n_t\n\\]\nPhillips curve:\n\\[\n\\pi_t = \\beta E_t \\pi_{t+1} + \\kappa mc_t\n\\]\nMonetary policy rule:\n\\[\ni_t = \\phi_\\pi \\pi_t + \\phi_x x_t\n\\]\nDefinition of the output gap:\n\\[\nx_t \\equiv y_t - y_t^*\n\\]\nThe new equation is the resource constraint, which now includes government spending: \\[\ny_t = s_c c_t + s_g g_t\n\\]\nnote that this is just a linearized version of the resource constraint \\(Y_t = C_t + G_t\\).\n\nEfficient allocation and output gap\nWe start from deriving the efficient allocation in order to define the output gap. In the efficient allocation, we have zero inflation and no price dispersion, so the Phillips curve gives:\n\\[\nmc_t^* = 0\n\\]\nFrom the marginal cost relation, this implies\n\\[\n0 = \\sigma c_t^* + \\varphi n_t^* - a_t\n\\]\nthe production function gives\n\\[\nn_t^* = y_t^* - a_t\n\\]\nsubstituting back into the marginal cost relation gives\n\\[\n\\sigma c_t^* + \\varphi y_t^* = (1+\\varphi)a_t\n\\]\nthe resource constraint gives\n\\[\nc_t^* = \\frac{y_t^* - s_g g_t}{s_c}\n\\]\nsubstituting back into the previous equation gives\n\\[\n\\sigma \\frac{y_t^* - s_g g_t}{s_c} + \\varphi y_t^* = (1+\\varphi)a_t\n\\]\nrearranging:\n\\[\n\\left(\\frac{\\sigma}{s_c} + \\varphi \\right) y_t^*\n=\n(1+\\varphi)a_t + \\frac{\\sigma s_g}{s_c} g_t\n\\]\nfinally:\n\\[\ny_t^*\n=\n\\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c} a_t\n+\n\\frac{\\sigma s_g}{\\sigma + \\varphi s_c} g_t\n\\]\nnow define:\n\\[\n\\alpha \\equiv \\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c},\n\\quad\n\\gamma \\equiv \\frac{\\sigma s_g}{\\sigma + \\varphi s_c}\n\\]\nwe have the expression for the efficient level of output:\n\\[\ny_t^* = \\alpha a_t + \\gamma g_t\n\\]\n\n\nIS curve with government spending\nRemember:\n\\[\nc_t = \\frac{y_t - s_g g_t}{s_c}\n\\]\nsubstituting into the Euler equation gives\n\\[\n\\frac{y_t - s_g g_t}{s_c}\n=\nE_t \\left( \\frac{y_{t+1} - s_g g_{t+1}}{s_c} \\right)\n-\n\\sigma^{-1}(i_t - E_t \\pi_{t+1})\n\\]\nfollows\n\\[\ny_t\n=\nE_t y_{t+1}\n-\n\\frac{s_c}{\\sigma}(i_t - E_t \\pi_{t+1})\n-\ns_g (E_t g_{t+1} - g_t)\n\\]\nRewrite in output-gap form:\n\\[\nx_t\n=\nE_t x_{t+1}\n-\n\\frac{s_c}{\\sigma}(i_t - E_t \\pi_{t+1})\n+\n(E_t y_{t+1}^* - y_t^*)\n-\ns_g (E_t g_{t+1} - g_t)\n\\]\nNow notice, from the expression for the efficient level of output,\n\\[\nE_t y_{t+1}^* - y_t^*\n=\n\\alpha (E_t a_{t+1} - a_t)\n+\n\\gamma (E_t g_{t+1} - g_t)\n\\]\nsubstituting back gives\n\\[\nx_t\n=\nE_t x_{t+1}\n-\n\\frac{s_c}{\\sigma}(i_t - E_t \\pi_{t+1})\n+\n\\alpha (E_t a_{t+1} - a_t)\n+\n(\\gamma - s_g)(E_t g_{t+1} - g_t)\n\\]\nexpanding \\(\\alpha\\) and \\(\\gamma\\) gives\n\\[\nx_t\n=\nE_t x_{t+1}\n-\n\\frac{s_c}{\\sigma}(i_t - E_t \\pi_{t+1})\n+\n\\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c}(E_t a_{t+1} - a_t)\n-\n\\frac{\\varphi s_c s_g}{\\sigma + \\varphi s_c}(E_t g_{t+1} - g_t)\n\\]\nDefine:\n\\[\nx_t\n=\nE_t x_{t+1}\n-\n\\frac{s_c}{\\sigma}\n\\bigl(i_t - E_t \\pi_{t+1} - r_t^*\\bigr)\n\\]\nMatch terms:\n\\[\nr_t^*\n=\n\\frac{\\sigma}{s_c}\n\\left[\n\\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c}(E_t a_{t+1} - a_t)\n-\n\\frac{\\varphi s_c s_g}{\\sigma + \\varphi s_c}(E_t g_{t+1} - g_t)\n\\right]\n\\]\nSimplify:\n\\[\nr_t^*\n=\n\\frac{\\sigma(1+\\varphi)}{\\sigma + \\varphi s_c}(E_t a_{t+1} - a_t)\n-\n\\frac{\\sigma \\varphi s_g}{\\sigma + \\varphi s_c}(E_t g_{t+1} - g_t)\n\\]\n\n\nPhillips curve with government spending\nWe will use the following equations:\n\\[\n\\pi_t = \\beta E_t \\pi_{t+1} + \\kappa mc_t\n\\]\n\\[\nmc_t = \\sigma c_t + \\varphi n_t - a_t\n\\]\n\\[\nc_t = \\frac{y_t - s_g g_t}{s_c}\n\\]\n\\[\nn_t = y_t - a_t\n\\]\nsubstituting the last two into the marginal cost relation gives\n\\[\nmc_t\n=\n\\sigma \\frac{y_t - s_g g_t}{s_c}\n+\n\\varphi (y_t - a_t)\n-\na_t\n\\]\nrearranging:\n\\[\nmc_t\n=\n\\left( \\frac{\\sigma}{s_c} + \\varphi \\right) y_t\n-\n\\frac{\\sigma s_g}{s_c} g_t\n-\n(1+\\varphi)a_t\n\\]\nit should be pretty obvious by now that we are just repeating the same steps we followed to derive the efficient level of output, but now without restricting \\(mc_t\\) to zero.\nRemember that the efficient level of output is given by:\n\\[\ny_t^*\n=\n\\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c} a_t\n+\n\\frac{\\sigma s_g}{\\sigma + \\varphi s_c} g_t\n\\]\nJust divide the expression for \\(mc_t\\) by \\(\\frac{\\sigma}{s_c} + \\varphi\\):\n\\[\n\\left( \\frac{\\sigma}{s_c} + \\varphi \\right)^{-1}mc_t\n=\ny_t\n-\n\\left(\n   \\frac{s_c(1+\\varphi)}{\\sigma + \\varphi s_c} a_t\n+\n\\frac{\\sigma s_g}{\\sigma + \\varphi s_c} g_t\n\\right)\n\\]\nthe term in parentheses is just the efficient level of output, so we can write\n\\[\nmc_t\n=\n\\left(\\frac{\\sigma}{s_c}+\\varphi\\right)(y_t - y_t^*)\n\\]\nwhich is:\n\\[\nmc_t\n=\n\\left(\\frac{\\sigma}{s_c}+\\varphi\\right) x_t\n=\n\\frac{\\sigma + \\varphi s_c}{s_c} x_t\n\\]\nsubstituting into the Phillips curve gives\n\\[\n\\pi_t\n=\n\\beta E_t \\pi_{t+1}\n+\n\\kappa \\frac{\\sigma + \\varphi s_c}{s_c} x_t\n\\]"
+  },
+  {
+    "objectID": "latex/NK.html#adding-preference-shocks",
+    "href": "latex/NK.html#adding-preference-shocks",
+    "title": "Marco Bernardini",
+    "section": "11. Adding preference shocks",
+    "text": "11. Adding preference shocks\nThis one is actually easy. We start from the same equations as before, but now we add a preference shock \\(\\Xi_t\\) to the utility function. The problem of the household becomes:\n\\[\n\\max_{\\{C_t,B_t,N_t\\}}\nE_0\\sum_{t=0}^{\\infty}\\beta^t\\Xi_t\n\\left(\n\\frac{C_t^{1-\\sigma}}{1-\\sigma}\n-\n\\frac{N_t^{1+\\varphi}}{1+\\varphi}\n\\right)\n\\]\nsubject to the budget constraint\n\\[\nP_tC_t+B_t=(1+i_{t-1})B_{t-1}+W_tN_t\n\\]\nthe Euler equation is now:\n\\[\nC_t^{-\\sigma}\n=\n\\beta E_t\\left[\nC_{t+1}^{-\\sigma}\\frac{1+i_t}{\\Pi_{t+1}}\n\\frac{\\Xi_{t+1}}{\\Xi_t}\n\\right].\n\\]\nLog-linearizing gives\n\\[\nc_t=-\\sigma^{-1}(i_t - E_t \\pi_{t+1} + E_t \\xi_{t+1} - \\xi_t) + E_t c_{t+1}\n\\]\nwhere \\(\\xi_t\\) is the log-deviation of \\(\\Xi_t\\) from its steady state. Define now \\(\\delta_t \\equiv E_t \\xi_{t+1} - \\xi_t\\). Then the Euler equation becomes:\n\\[\nc_t=-\\sigma^{-1}(i_t - E_t \\pi_{t+1} + \\delta_t) + E_t c_{t+1}\n\\]\nEventually, we can incorporate \\(\\delta_t\\) inside the definition of \\(r_t^*\\)"
+  },
+  {
+    "objectID": "microeconomics.html",
+    "href": "microeconomics.html",
+    "title": "Microeconomics",
+    "section": "",
+    "text": "Some micro notes, mainly for my own reference."
+  },
+  {
+    "objectID": "microeconomics.html#contracts-and-bargaining",
+    "href": "microeconomics.html#contracts-and-bargaining",
+    "title": "Microeconomics",
+    "section": "Contracts and bargaining",
+    "text": "Contracts and bargaining\n\nHidden Information and Self-Selection"
+  },
+  {
+    "objectID": "microeconomics.html#auctions",
+    "href": "microeconomics.html#auctions",
+    "title": "Microeconomics",
+    "section": "Auctions",
+    "text": "Auctions\n\nA gentle introduction to auction theory"
+  },
+  {
+    "objectID": "latex/auctions.html",
+    "href": "latex/auctions.html",
+    "title": "Marco Bernardini",
+    "section": "",
+    "text": "There is a single indivisible object and \\(n\\) risk-neutral bidders indexed by \\(i\\).\nEach bidder \\(i\\) has valuation \\(v_i\\) drawn i.i.d. from a distribution \\(F\\) with support \\[\nv \\in [\\underline v, \\overline v],\n\\] where \\(F\\) is strictly increasing and admits density \\(f\\).\nThe type of bidder \\(i\\) is \\[\nt_i := v_i\n\\]\nA bidding strategy is a function \\[\nb : [\\underline v, \\overline v] \\to \\mathbb{R}\n\\]\n\n\n\nConsider a first-price auction. The realised surplus of bidder \\(i\\) is \\[\nS(v_i) =\n\\begin{cases}\nv_i - b(v_i), & \\text{if bidder $i$ wins},\\\\\n0, & \\text{otherwise}.\n\\end{cases}\n\\]\nThe expected surplus is \\[\nS(v_i) = (v_i - b(v_i)) F(v_i)^{n-1}\n\\]\n\n\n\nConsider a bidder with true valuation \\(v_i\\) who mimics a generic type \\(\\tilde v\\). The expected surplus from mimicking is \\[\nS(v_i;\\tilde v) = (v_i - b(\\tilde v)) F(\\tilde v)^{n-1}\n\\]\nMaximising with respect to \\(\\tilde v\\), the first-order condition is \\[\n\\frac{\\partial S(v_i;\\tilde v)}{\\partial \\tilde v}\n=\n(v_i - b(\\tilde v))(n-1)F(\\tilde v)^{n-2}f(\\tilde v)\n- b'(\\tilde v)F(\\tilde v)^{n-1}\n\\]\nSetting this equal to zero and imposing symmetry (\\(\\tilde v = v_i\\)) yields \\[\nb'(v_i)\n=\n(v_i - b(v_i))(n-1)\\frac{f(v_i)}{F(v_i)}\n\\]\nTo solve the differential equation define: \\[\nx(v) := v - b(v),\n\\quad\\text{so that}\\quad\nb'(v) = 1 - x'(v)\n\\]\nSubstituting gives \\[\n1 - x'(v) = x(v)(n-1)\\frac{f(v)}{F(v)}\n\\]\nRearranging, \\[\nx'(v) + x(v)(n-1)\\frac{f(v)}{F(v)} = 1\n\\]\nMultiplying by \\(F(v)^{n-1}\\), \\[\n\\frac{d}{dv}\\bigl[x(v)F(v)^{n-1}\\bigr] = F(v)^{n-1}\n\\]\nIntegrating, \\[\nx(v)F(v)^{n-1} = \\int_{\\underline v}^v F(t)^{n-1}\\,dt + C\n\\]\nUsing the boundary condition \\(b(\\underline v)=\\underline v\\), we have \\(x(\\underline v)=0\\), hence \\(C=0\\).\nTherefore, \\[\nb(v)\n=\nv - \\frac{\\displaystyle\\int_{\\underline v}^v F(t)^{n-1}\\,dt}{F(v)^{n-1}}\n\\]\nOr, even better: \\[\nb(v)\n=\nv - \\displaystyle\\int_{\\underline v}^v \\left(\\frac{F(t)}{F(v)}\\right)^{n-1}\\,dt\n\\]\nIt now is useful to recall that \\[\nS(v_i;\\tilde v) = (v_i - b(\\tilde v))F(\\tilde v)^{n-1}\n\\]\nUsing the expression for the bidding function, we obtain \\[\nS(v_i;\\tilde v)\n=\n\\left(\nv_i - \\tilde v\n+\n\\int_{\\underline v}^{\\tilde v}\n\\left\\{\n\\frac{F(t)}{F(\\tilde v)}\n\\right\\}^{n-1}\ndt\n\\right)\nF(\\tilde v)^{n-1}\n\\]\nRearranging, \\[\nS(v_i;\\tilde v)\n=\n(v_i - \\tilde v)F(\\tilde v)^{n-1}\n+\n\\int_{\\underline v}^{\\tilde v} F(t)^{n-1}\\,dt\n\\]\nNotice that \\[\nS(v_i)\n=\n(v_i - b(v_i))F(v_i)^{n-1}\n=\n\\int_{\\underline v}^{v_i} F(t)^{n-1}\\,dt\n\\]\nHence, \\[\nS(v_i) - S(v_i;\\tilde v)\n=\n(\\tilde v - v_i)F(\\tilde v)^{n-1}\n-\n\\int_{v_i}^{\\tilde v} F(t)^{n-1}\\,dt \\ge 0\n\\]\nSince \\(F(t)\\) is strictly increasing, the right-hand side is always non-negative, and therefore deviations from one’s own type are never profitable (one can also convince themselves of this statement by drawing a chart).\n\n\n\nNow, note that the expected surplus of player of type \\(\\tilde v\\) is: \\[\nS(\\tilde v) = \\int_{\\underline v}^{\\tilde v} F(t)^{n-1}\\,dt\n\\]\nThis allows us to rewrite \\[\nS(v_i) - S(v_i;\\tilde v)\n=\nS(v_i)\n-\n\\left[\n(v_i - \\tilde v)F(\\tilde v)^{n-1}\n+\nS(\\tilde v)\n\\right]\n\\ge 0\n\\]\nHence, \\[\nS(v_i) \\ge S(\\tilde v) + (v_i - \\tilde v)F(\\tilde v)^{n-1}\n\\]\nIf we drop the indices and let \\(P(v)\\) denote the probability of receiving the object in equilibrium given type \\(v\\), we obtain the more general statement: \\[\nS(v) \\ge S(\\tilde v) + (v - \\tilde v)P(\\tilde v)\n\\]\nLet \\(\\tilde v = v + dv\\). Then is must be that both \\[\n\\frac{S(v+dv)-S(v)}{dv} \\ge P(v),\n\\quad\n\\frac{S(v+dv)-S(v)}{dv} \\le P(v+dv)\n\\]\nAs \\(dv \\to 0\\), \\[\n\\frac{dS(v)}{dv} = P(v)\n\\]\nIntegrating, \\[\nS(v) = \\int_{\\underline v}^v P(t)\\,dt + C\n\\]\nSince clearly \\(C = S(\\underline v)\\), we obtain \\[\nS(v) = S(\\underline v) + \\int_{\\underline v}^v P(t)\\,dt\n\\]\nTherefore, any two mechanisms with the same allocation rule \\(P(v)\\) and the same S() generate the same surplus function."
+  },
+  {
+    "objectID": "latex/auctions.html#informal-introduction-to-auction-theory",
+    "href": "latex/auctions.html#informal-introduction-to-auction-theory",
+    "title": "Marco Bernardini",
+    "section": "",
+    "text": "There is a single indivisible object and \\(n\\) risk-neutral bidders indexed by \\(i\\).\nEach bidder \\(i\\) has valuation \\(v_i\\) drawn i.i.d. from a distribution \\(F\\) with support \\[\nv \\in [\\underline v, \\overline v],\n\\] where \\(F\\) is strictly increasing and admits density \\(f\\).\nThe type of bidder \\(i\\) is \\[\nt_i := v_i\n\\]\nA bidding strategy is a function \\[\nb : [\\underline v, \\overline v] \\to \\mathbb{R}\n\\]\n\n\n\nConsider a first-price auction. The realised surplus of bidder \\(i\\) is \\[\nS(v_i) =\n\\begin{cases}\nv_i - b(v_i), & \\text{if bidder $i$ wins},\\\\\n0, & \\text{otherwise}.\n\\end{cases}\n\\]\nThe expected surplus is \\[\nS(v_i) = (v_i - b(v_i)) F(v_i)^{n-1}\n\\]\n\n\n\nConsider a bidder with true valuation \\(v_i\\) who mimics a generic type \\(\\tilde v\\). The expected surplus from mimicking is \\[\nS(v_i;\\tilde v) = (v_i - b(\\tilde v)) F(\\tilde v)^{n-1}\n\\]\nMaximising with respect to \\(\\tilde v\\), the first-order condition is \\[\n\\frac{\\partial S(v_i;\\tilde v)}{\\partial \\tilde v}\n=\n(v_i - b(\\tilde v))(n-1)F(\\tilde v)^{n-2}f(\\tilde v)\n- b'(\\tilde v)F(\\tilde v)^{n-1}\n\\]\nSetting this equal to zero and imposing symmetry (\\(\\tilde v = v_i\\)) yields \\[\nb'(v_i)\n=\n(v_i - b(v_i))(n-1)\\frac{f(v_i)}{F(v_i)}\n\\]\nTo solve the differential equation define: \\[\nx(v) := v - b(v),\n\\quad\\text{so that}\\quad\nb'(v) = 1 - x'(v)\n\\]\nSubstituting gives \\[\n1 - x'(v) = x(v)(n-1)\\frac{f(v)}{F(v)}\n\\]\nRearranging, \\[\nx'(v) + x(v)(n-1)\\frac{f(v)}{F(v)} = 1\n\\]\nMultiplying by \\(F(v)^{n-1}\\), \\[\n\\frac{d}{dv}\\bigl[x(v)F(v)^{n-1}\\bigr] = F(v)^{n-1}\n\\]\nIntegrating, \\[\nx(v)F(v)^{n-1} = \\int_{\\underline v}^v F(t)^{n-1}\\,dt + C\n\\]\nUsing the boundary condition \\(b(\\underline v)=\\underline v\\), we have \\(x(\\underline v)=0\\), hence \\(C=0\\).\nTherefore, \\[\nb(v)\n=\nv - \\frac{\\displaystyle\\int_{\\underline v}^v F(t)^{n-1}\\,dt}{F(v)^{n-1}}\n\\]\nOr, even better: \\[\nb(v)\n=\nv - \\displaystyle\\int_{\\underline v}^v \\left(\\frac{F(t)}{F(v)}\\right)^{n-1}\\,dt\n\\]\nIt now is useful to recall that \\[\nS(v_i;\\tilde v) = (v_i - b(\\tilde v))F(\\tilde v)^{n-1}\n\\]\nUsing the expression for the bidding function, we obtain \\[\nS(v_i;\\tilde v)\n=\n\\left(\nv_i - \\tilde v\n+\n\\int_{\\underline v}^{\\tilde v}\n\\left\\{\n\\frac{F(t)}{F(\\tilde v)}\n\\right\\}^{n-1}\ndt\n\\right)\nF(\\tilde v)^{n-1}\n\\]\nRearranging, \\[\nS(v_i;\\tilde v)\n=\n(v_i - \\tilde v)F(\\tilde v)^{n-1}\n+\n\\int_{\\underline v}^{\\tilde v} F(t)^{n-1}\\,dt\n\\]\nNotice that \\[\nS(v_i)\n=\n(v_i - b(v_i))F(v_i)^{n-1}\n=\n\\int_{\\underline v}^{v_i} F(t)^{n-1}\\,dt\n\\]\nHence, \\[\nS(v_i) - S(v_i;\\tilde v)\n=\n(\\tilde v - v_i)F(\\tilde v)^{n-1}\n-\n\\int_{v_i}^{\\tilde v} F(t)^{n-1}\\,dt \\ge 0\n\\]\nSince \\(F(t)\\) is strictly increasing, the right-hand side is always non-negative, and therefore deviations from one’s own type are never profitable (one can also convince themselves of this statement by drawing a chart).\n\n\n\nNow, note that the expected surplus of player of type \\(\\tilde v\\) is: \\[\nS(\\tilde v) = \\int_{\\underline v}^{\\tilde v} F(t)^{n-1}\\,dt\n\\]\nThis allows us to rewrite \\[\nS(v_i) - S(v_i;\\tilde v)\n=\nS(v_i)\n-\n\\left[\n(v_i - \\tilde v)F(\\tilde v)^{n-1}\n+\nS(\\tilde v)\n\\right]\n\\ge 0\n\\]\nHence, \\[\nS(v_i) \\ge S(\\tilde v) + (v_i - \\tilde v)F(\\tilde v)^{n-1}\n\\]\nIf we drop the indices and let \\(P(v)\\) denote the probability of receiving the object in equilibrium given type \\(v\\), we obtain the more general statement: \\[\nS(v) \\ge S(\\tilde v) + (v - \\tilde v)P(\\tilde v)\n\\]\nLet \\(\\tilde v = v + dv\\). Then is must be that both \\[\n\\frac{S(v+dv)-S(v)}{dv} \\ge P(v),\n\\quad\n\\frac{S(v+dv)-S(v)}{dv} \\le P(v+dv)\n\\]\nAs \\(dv \\to 0\\), \\[\n\\frac{dS(v)}{dv} = P(v)\n\\]\nIntegrating, \\[\nS(v) = \\int_{\\underline v}^v P(t)\\,dt + C\n\\]\nSince clearly \\(C = S(\\underline v)\\), we obtain \\[\nS(v) = S(\\underline v) + \\int_{\\underline v}^v P(t)\\,dt\n\\]\nTherefore, any two mechanisms with the same allocation rule \\(P(v)\\) and the same S() generate the same surplus function."
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html",
+    "href": "latex/hidden_info_self_selection.html",
+    "title": "Hidden Information and Self-Selection",
+    "section": "",
+    "text": "This section is not intended for the public."
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#optimal-contracting",
+    "href": "latex/hidden_info_self_selection.html#optimal-contracting",
+    "title": "Hidden Information and Self-Selection",
+    "section": "OPTIMAL CONTRACTING",
+    "text": "OPTIMAL CONTRACTING\nPrincipal \\(P\\) / Agent \\(A\\) problem\n\\(x\\) = output\n\\(t\\) = payment\n\\(s\\) = type\nAgent maximises: \\[\nU(x,t,s) = t - C(x,s)\n\\]\nPrincipal maximises:\n\\[\nV(x,t) = R(x) - t\n\\]\n\nTiming\n\n\\(A\\) observes \\(s\\)\n\n\\(P\\) believes \\(s \\sim D(\\cdot)\\)\n\n\\(P\\) offers a contract\n\n\\(A\\) accepts or rejects\n\n\\(A\\) chooses output, then \\(P\\) pays \\(A\\)\n\n\n\nFull information benchmark\nLet the reservation utility be zero. Then, if \\(P\\) observes \\(s\\), the optimal contract solves:\n\\[\n\\max_{x,t} \\; R(x) - t\n\\]\ns.t. no rent for \\(A\\):\n\\[\nt - C(x,s) = 0\n\\]\n\\[\n\\Rightarrow R'(x^*) = C_x(x^*, s), \\quad t^* = C(x^*, s)\n\\]\n\n\nDelegation approach\n\\(P\\) commits to a contract \\(t = T(x)\\)\nIf \\(s \\in \\{L,H\\}\\), then \\(T(x)\\) is defined at two values.\n\n\nRevelation approach\n\\(P\\) offers a DRM:\n\\[\n\\{x(\\hat{s}), t(\\hat{s})\\}\n\\]\nAgent solves:\n\\[\n\\max_{\\hat{s}} \\; t(\\hat{s}) - C(x(\\hat{s}), s)\n\\]\nTruthful DRM:\n\\[\n\\hat{s} = s\n\\]\n\n\nRevelation principle\nGiven any contract \\(t = T(x)\\) or DRM, there exists a truthful DRM yielding the same \\((x,t)\\).\n\n\nP-A model\n\\(s \\in \\{L,H\\}\\) where s enters the cost of production, with \\(L &lt; H\\).\n\\[\nP(s=H)=q, \\quad P(s=L)=1-q\n\\]\nPrincipal solves:\n\\[\n\\max_{x_H,x_L,t_H,t_L} \\; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)\n\\]\ns.t.\n\\[\nt_H - C(x_H,H) = 0 \\qquad\\text{(P for $H$)}\n\\]\n\\[\nt_L - C(x_L,L) \\ge 0 \\qquad\\text{(P for $L$ - always satisfied)}\n\\]\n\\[\nt_H - C(x_H,H) \\ge t_L - C(x_L,H) \\qquad\\text{(IC for $H$ - never bites)}\n\\]\n\\[\nt_L - C(x_L,L) = t_H - C(x_H,L) \\qquad\\text{(IC for $L$)}\n\\]\n\n\nFull information benchmark\n\\[\nR'(x_s^*) = C_x(x_s^*, s), \\quad t_s^* = C(x_s^*, s)\n\\]\n\n\nHidden information solution\nWe have the following:\n\n\\(\\hat{x}_L = x_L^*\\) (L’s output is efficient)\n\\(\\hat{t}_L - C(\\hat{x}_L,L) \\ge 0\\) (L earns positive rent)\n\\(\\hat{x}_H &lt; x_H^*\\) (H’s output is inefficient)\n\\(\\hat{t}_H - C(\\hat{x}_H,H) = 0\\) (H does not earn rent)\n\\(\\hat{x}_H &lt; \\hat{x}_L\\) (H produces less than L)\n\\(\\frac{\\hat{t}_H}{\\hat{x}_H} &gt; \\frac{\\hat{t}_L}{\\hat{x}_L}\\) (H is paid more per unit of output than L)\n\n\n\nSocial planner\nThe social planner solves:\n\\[\n\\max_{x_H,x_L} \\; q\\big(R(x_H)-C(x_H,H)\\big) + (1-q)\\big(R(x_L)-C(x_L,L)\\big)\n\\]\ns.t. participation and IC\n\\[\nR'(x_s^*) = C_x(x_s^*, s)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#delegation-approach",
+    "href": "latex/hidden_info_self_selection.html#delegation-approach",
+    "title": "Hidden Information and Self-Selection",
+    "section": "DELEGATION APPROACH",
+    "text": "DELEGATION APPROACH\n\\(P\\) commits to a contract \\(t = T(x)\\)\nIf \\(s \\in \\{L,H\\}\\), then \\(T(x)\\) is defined at two values."
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#revelation-approach",
+    "href": "latex/hidden_info_self_selection.html#revelation-approach",
+    "title": "Hidden Information and Self-Selection",
+    "section": "REVELATION APPROACH",
+    "text": "REVELATION APPROACH\n\\(P\\) offers a DRM:\n\\[\n\\{x(\\hat{s}), t(\\hat{s})\\}\n\\]\nAgent solves:\n\\[\n\\max_{\\hat{s}} \\; t(\\hat{s}) - C(x(\\hat{s}), s)\n\\]\nTruthful DRM:\n\\[\n\\hat{s} = s\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#revelation-principle",
+    "href": "latex/hidden_info_self_selection.html#revelation-principle",
+    "title": "Hidden Information and Self-Selection",
+    "section": "REVELATION PRINCIPLE",
+    "text": "REVELATION PRINCIPLE\nGiven any contract \\(t = T(x)\\) or DRM, there exists a truthful DRM yielding the same \\((x,t)\\)."
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#p-a-model-one-principal-one-agent",
+    "href": "latex/hidden_info_self_selection.html#p-a-model-one-principal-one-agent",
+    "title": "Hidden Information and Self-Selection",
+    "section": "P-A MODEL (one principal, one agent)",
+    "text": "P-A MODEL (one principal, one agent)\n\\(s \\in \\{L,H\\}\\)\n\\[\nP(s=H)=q, \\quad P(s=L)=1-q\n\\]\nPrincipal solves:\n\\[\n\\max_{x_H,x_L,t_H,t_L} \\; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)\n\\]\ns.t.\n\\[\nt_H - C(x_H,H) = 0\n\\]\n\\[\nt_L - C(x_L,L) \\ge 0\n\\]\n\\[\nt_H - C(x_H,H) \\ge t_L - C(x_L,H)\n\\]\n\\[\nt_L - C(x_L,L) \\ge t_H - C(x_H,L)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#full-information-solution",
+    "href": "latex/hidden_info_self_selection.html#full-information-solution",
+    "title": "Hidden Information and Self-Selection",
+    "section": "FULL INFORMATION SOLUTION",
+    "text": "FULL INFORMATION SOLUTION\n\\[\nR'(x_s^*) = C_x(x_s^*, s), \\quad t_s^* = C(x_s^*, s)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#example",
+    "href": "latex/hidden_info_self_selection.html#example",
+    "title": "Hidden Information and Self-Selection",
+    "section": "EXAMPLE",
+    "text": "EXAMPLE\n\\[\nC(x,s) = s x\n\\]\n\\[\nR(x) =\n\\begin{cases}\np x & x \\le \\bar{x} \\\\\np \\bar{x} & x &gt; \\bar{x}\n\\end{cases}\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#second-best",
+    "href": "latex/hidden_info_self_selection.html#second-best",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SECOND BEST",
+    "text": "SECOND BEST\n\\[\n\\max \\; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)\n\\]\ns.t.\n\\[\nt_H - H x_H = 0\n\\]\n\\[\nt_L - L x_L \\ge t_H - L x_H\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#social-planner",
+    "href": "latex/hidden_info_self_selection.html#social-planner",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SOCIAL PLANNER",
+    "text": "SOCIAL PLANNER\n\\[\n\\max_{x_H,x_L} \\; q\\big(R(x_H)-C(x_H,H)\\big) + (1-q)\\big(R(x_L)-C(x_L,L)\\big)\n\\]\ns.t. participation and IC\n\\[\nR'(x_s^*) = C_x(x_s^*, s)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#signaling",
+    "href": "latex/hidden_info_self_selection.html#signaling",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SIGNALING",
+    "text": "SIGNALING\nAgent:\n\\[\nU(w,e,n) = w - C(e,n)\n\\]\nPrincipal:\n\\[\n\\pi = y(n,e) - w\n\\]\nwhere\n\\(w\\) = wage\n\\(n\\) = ability (type)\n\\(e\\) = education\n\\(y\\) = output\nTiming\n\n\\(A\\) observes \\(n\\)\n\n\\(P\\) has prior \\(P(n=H)=q\\)\n\n\\(A\\) chooses \\(e\\)\n\n\\(P\\) offers \\(w\\)\n\n\\(A\\) accepts or rejects"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#strategies",
+    "href": "latex/hidden_info_self_selection.html#strategies",
+    "title": "Hidden Information and Self-Selection",
+    "section": "STRATEGIES",
+    "text": "STRATEGIES\n\\[\nA: e(n), \\quad P: w(e)\n\\]\nBeliefs:\n\\[\n\\mu(H|e)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#full-information-benchmark-1",
+    "href": "latex/hidden_info_self_selection.html#full-information-benchmark-1",
+    "title": "Hidden Information and Self-Selection",
+    "section": "FULL INFORMATION BENCHMARK",
+    "text": "FULL INFORMATION BENCHMARK\n\\[\nw(e) = y(n,e)\n\\]\n\\[\n\\max_e \\; y(n,e) - C(e,n)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#pooling",
+    "href": "latex/hidden_info_self_selection.html#pooling",
+    "title": "Hidden Information and Self-Selection",
+    "section": "POOLING",
+    "text": "POOLING\n\\[\ne(H) = e(L) = e_p\n\\]\n\\[\n\\mu(H|e_p) = q\n\\]\n\\[\nw(e_p) = q y(H,e_p) + (1-q) y(L,e_p)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#separating",
+    "href": "latex/hidden_info_self_selection.html#separating",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SEPARATING",
+    "text": "SEPARATING\nNo envy:\n\\[\ne(L) = e^*(L), \\quad e(H) \\ge e^*(H)\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#intuitive-criterion",
+    "href": "latex/hidden_info_self_selection.html#intuitive-criterion",
+    "title": "Hidden Information and Self-Selection",
+    "section": "INTUITIVE CRITERION",
+    "text": "INTUITIVE CRITERION\nSet beliefs:\n\\[\n\\mu(H|e') = 0\n\\]\nfor deviations that are not profitable for \\(H\\)"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#observation",
+    "href": "latex/hidden_info_self_selection.html#observation",
+    "title": "Hidden Information and Self-Selection",
+    "section": "OBSERVATION",
+    "text": "OBSERVATION\nSignaling: bad type envies good\nOptimal contracting: good type envies bad"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#screening",
+    "href": "latex/hidden_info_self_selection.html#screening",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SCREENING",
+    "text": "SCREENING\nMultiple competing uninformed principals move first, then one informed agent moves.\n\nTiming\n\n\\(A\\) observes \\(n \\in \\{L,H\\}\\)\n\\(P\\) has prior \\(P(n=H)=q\\)\n\\(P\\) offers contract \\((w,e)\\)\n\\(A\\) accepts or rejects\n\\(A\\) acquires e and receives w\n\n\n\nStrategies\n\\[\nP_i: (w_i,e_i), \\quad A: (w,e) \\in \\{(w_i,e_i)\\}\n\\]\n\n\nResults\n\nAny contract yields zero profits due to competition\nNo pooling is possible: let \\(P_i\\) offer a pooling contract \\((w_p,e_p)\\), then any \\(P_j\\) can offer a slightly better contract \\((w_p+\\epsilon,e_p)\\) to attract only the high type and make positive profits (cream skimming).\n\n\n\nUniqueness\nL always chooses \\((w(L)^*, e(L)^*)\\) since every contract of the type \\((w(L)^*-\\varepsilon, e(L)^*)\\) could generate a profit for some \\(P_i\\).\nNo envy: H chooses \\((w(H)^*, e(H)^*)\\) for a similar reason.\nEnvy: H chooses \\((y(H,e^s), e^s)\\) since any contract of the type \\((y(H,e^s)+\\varepsilon, e^s)\\) could generate a profit for some \\(P_i\\) while only attracting the high type.\n\n\nExistence\nNo envy: PBE always exists\nEnvy: $ = $ such that\n\\[\nq \\le \\hat{q} \\Rightarrow \\text{unique PBE}\n\\]\n\\[\nq &gt; \\hat{q} \\Rightarrow \\text{no PBE}\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#strategies-1",
+    "href": "latex/hidden_info_self_selection.html#strategies-1",
+    "title": "Hidden Information and Self-Selection",
+    "section": "STRATEGIES",
+    "text": "STRATEGIES\n\\[\nP_i: (w_i,e_i), \\quad A: (w,e) \\in \\{(w_i,e_i)\\}\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#result",
+    "href": "latex/hidden_info_self_selection.html#result",
+    "title": "Hidden Information and Self-Selection",
+    "section": "RESULT",
+    "text": "RESULT\nAny contract yields zero profits (competition)\nNo pooling\nCream skimming:\nOffering slightly better contract attracts only high type and yields profits."
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#equilibrium",
+    "href": "latex/hidden_info_self_selection.html#equilibrium",
+    "title": "Hidden Information and Self-Selection",
+    "section": "EQUILIBRIUM",
+    "text": "EQUILIBRIUM\nNo envy:\n\\[\n(w^*(H), e^*(H))\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#existence",
+    "href": "latex/hidden_info_self_selection.html#existence",
+    "title": "Hidden Information and Self-Selection",
+    "section": "EXISTENCE",
+    "text": "EXISTENCE\nNo envy: PBE always exists\nEnvy:\n\\[\n\\exists \\; \\hat{q}\n\\]\nsuch that\n\\[\nq \\le \\hat{q} \\Rightarrow \\text{unique PBE}\n\\]\n\\[\nq &gt; \\hat{q} \\Rightarrow \\text{no PBE}\n\\]\n\\[\n\\hat{q} = \\frac{U_H - U_L}{y_H - y_L}\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#p-a-model",
+    "href": "latex/hidden_info_self_selection.html#p-a-model",
+    "title": "Hidden Information and Self-Selection",
+    "section": "P-A MODEL",
+    "text": "P-A MODEL\n\\(s \\in \\{L,H\\}\\) where s enters the cost of production, with \\(L &lt; H\\).\n\\[\nP(s=H)=q, \\quad P(s=L)=1-q\n\\]\nPrincipal solves:\n\\[\n\\max_{x_H,x_L,t_H,t_L} \\; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)\n\\]\ns.t.\n\\[\nt_H - C(x_H,H) = 0 \\qquad\\text{(P for $H$)}\n\\]\n\\[\nt_L - C(x_L,L) \\ge 0 \\qquad\\text{(P for $L$ - always satisfied)}\n\\]\n\\[\nt_H - C(x_H,H) \\ge t_L - C(x_L,H) \\qquad\\text{(IC for $H$ - never bites)}\n\\]\n\\[\nt_L - C(x_L,L) = t_H - C(x_H,L) \\qquad\\text{(IC for $L$)}\n\\]"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#hidden-information-solution",
+    "href": "latex/hidden_info_self_selection.html#hidden-information-solution",
+    "title": "Hidden Information and Self-Selection",
+    "section": "HIDDEN INFORMATION SOLUTION",
+    "text": "HIDDEN INFORMATION SOLUTION\nWe have the following:\n\n\\(\\hat{x}_L = x_L^*\\) (L’s output is efficient)\n\\(\\hat{t}_L - C(\\hat{x}_L,L) \\ge 0\\) (L earns positive rent)\n\\(\\hat{x}_H &lt; x_H^*\\) (H’s output is inefficient)\n\\(\\hat{t}_H - C(\\hat{x}_H,H) = 0\\) (H does not earn rent)\n\\(\\hat{x}_H &lt; \\hat{x}_L\\) (H produces less than L)\n\\(\\frac{\\hat{t}_H}{\\hat{x}_H} &gt; \\frac{\\hat{t}_L}{\\hat{x}_L}\\) (H is paid more per unit of output than L)"
+  },
+  {
+    "objectID": "latex/hidden_info_self_selection.html#signalling",
+    "href": "latex/hidden_info_self_selection.html#signalling",
+    "title": "Hidden Information and Self-Selection",
+    "section": "SIGNALLING",
+    "text": "SIGNALLING\nOne informed agent, multiple uninformed principals. The agent always moves first. Differences with respect to optimal contracting (OC):\n- S: the type enters the P’s utility function - OC: one principal, one agent; S: multiple principals, one agent - OC: principal moves first; S: agent moves first - OC: unique equilibrium; S: multiple equilibria - OC: good type envies bad; S: bad type envies good\nAgent:\n\\[\nU(w,e,n) = w - C(e,n)\n\\]\nPrincipal:\n\\[\n\\pi = y(n,e) - w\n\\]\nwhere\n\\(w\\) = wage\n\\(n\\) = ability (type)\n\\(e\\) = education\n\\(y\\) = output\n\nTiming\n\n\\(A\\) observes \\(n\\)\n\n\\(P\\) has prior \\(P(n=H)=q\\)\n\n\\(A\\) chooses \\(e\\)\n\n\\(P\\) offers \\(w\\)\n\n\\(A\\) accepts or rejects\n\n\n\nStrategies\n\\[\nA: e(n), \\quad P: w(e)\n\\]\nBeliefs:\n\\[\n\\mu(H|e)\n\\]\n\n\nFull information benchmark\nAs as consequence of perfect competition, \\(\\pi=0\\) and \\(w(e) = \\mu(H|e) y(H,e) + (1-\\mu(H|e)) y(L,e)\\). Follows:\n\\[\nw(e) = y(n,e)\n\\]\nThe agent solves:\n\\[\n\\max_e \\; y(n,e) - C(e,n)\n\\]\nDefine envy as the situation in which the agent of type \\(L\\) prefers the full-information contract designed for type \\(H\\): \\[\ny(H,e^*(H)) - C(e^*(H),L) &gt; y(L,e^*(L)) - C(e^*(L),L)\n\\]\n\n\nPooling\nBy definition:\n\\[\ne(H) = e(L) = e_p\n\\]\n\\[\n\\mu(H|e_p) = q\n\\]\nThe it must be:\n\\[\nw(e_p) = q y(H,e_p) + (1-q) y(L,e_p)\n\\]\nusually pooling equilibria are enforced with strong off-patch beliefs.\n\n\nIntuitive criterion\nSet beliefs:\n\\[\n\\mu(H|e') = 0\n\\]\nfor deviations that are never profitable for \\(H\\)\n\n\nSeparating equilibria:\nNo envy: \\(\\mu(H|e) = 1\\) for \\(e \\ge e^*(H)\\), \\(\\mu(H|e) = 0\\) for \\(e &lt; e^*(H)\\)\n\\[\ne(L) = e^*(L), \\quad e(H) = e^*(H)\n\\]\nEnvy: \\(\\mu(H|e) = 1\\) for \\(e \\ge e^s\\), \\(\\mu(H|e) = 0\\) for \\(e &lt; e^s\\): H overinvest in education to separate from L\n\\[\n    e(L) = e^*(L), \\quad e(H) = e^s &gt; e^*(H)\n\\]\nwhere \\(e^s\\) is such that L is indifferent between its full-information contract and the one designed for H:\n\\[\n    y(H,e^s) - C(e^s,L) = y(L,e^*(L)) - C(e^*(L),L)\n\\]"
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Macroeconomics – Marco Bernardini</title>
+<title>Hidden Information and Self-Selection – Marco Bernardini</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marco Bernardini</span>
     </a>
   </div>
@@ -90,23 +119,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cv.html"> 
+    <a class="nav-link" href="../cv.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./macroeconomics.html" aria-current="page"> 
+    <a class="nav-link" href="../macroeconomics.html"> 
 <span class="menu-text">MACRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./microeconomics.html"> 
+    <a class="nav-link" href="../microeconomics.html"> 
 <span class="menu-text">MICRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data-analysis.html"> 
+    <a class="nav-link" href="../data-analysis.html"> 
 <span class="menu-text">DATA ANALYSIS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./articles.html"> 
+    <a class="nav-link" href="../articles.html"> 
 <span class="menu-text">RESEARCH</span></a>
   </li>  
 </ul>
@@ -125,11 +154,34 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#graduate-macro" id="toc-graduate-macro" class="nav-link active" data-scroll-target="#graduate-macro">Graduate Macro</a></li>
-  <li><a href="#empirical-macroeconomics" id="toc-empirical-macroeconomics" class="nav-link" data-scroll-target="#empirical-macroeconomics">Empirical Macroeconomics</a></li>
-  <li><a href="#corso-introduttivo-di-macroeconomia-con-python" id="toc-corso-introduttivo-di-macroeconomia-con-python" class="nav-link" data-scroll-target="#corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</a>
+  <li><a href="#optimal-contracting" id="toc-optimal-contracting" class="nav-link active" data-scroll-target="#optimal-contracting">OPTIMAL CONTRACTING</a>
   <ul class="collapse">
-  <li><a href="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" id="toc-a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="nav-link" data-scroll-target="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</a></li>
+  <li><a href="#timing" id="toc-timing" class="nav-link" data-scroll-target="#timing">Timing</a></li>
+  <li><a href="#full-information-benchmark" id="toc-full-information-benchmark" class="nav-link" data-scroll-target="#full-information-benchmark">Full information benchmark</a></li>
+  <li><a href="#delegation-approach" id="toc-delegation-approach" class="nav-link" data-scroll-target="#delegation-approach">Delegation approach</a></li>
+  <li><a href="#revelation-approach" id="toc-revelation-approach" class="nav-link" data-scroll-target="#revelation-approach">Revelation approach</a></li>
+  <li><a href="#revelation-principle" id="toc-revelation-principle" class="nav-link" data-scroll-target="#revelation-principle">Revelation principle</a></li>
+  <li><a href="#p-a-model" id="toc-p-a-model" class="nav-link" data-scroll-target="#p-a-model">P-A model</a></li>
+  <li><a href="#full-information-benchmark-1" id="toc-full-information-benchmark-1" class="nav-link" data-scroll-target="#full-information-benchmark-1">Full information benchmark</a></li>
+  <li><a href="#hidden-information-solution" id="toc-hidden-information-solution" class="nav-link" data-scroll-target="#hidden-information-solution">Hidden information solution</a></li>
+  <li><a href="#social-planner" id="toc-social-planner" class="nav-link" data-scroll-target="#social-planner">Social planner</a></li>
+  </ul></li>
+  <li><a href="#signalling" id="toc-signalling" class="nav-link" data-scroll-target="#signalling">SIGNALLING</a>
+  <ul class="collapse">
+  <li><a href="#timing-1" id="toc-timing-1" class="nav-link" data-scroll-target="#timing-1">Timing</a></li>
+  <li><a href="#strategies" id="toc-strategies" class="nav-link" data-scroll-target="#strategies">Strategies</a></li>
+  <li><a href="#full-information-benchmark-2" id="toc-full-information-benchmark-2" class="nav-link" data-scroll-target="#full-information-benchmark-2">Full information benchmark</a></li>
+  <li><a href="#pooling" id="toc-pooling" class="nav-link" data-scroll-target="#pooling">Pooling</a></li>
+  <li><a href="#intuitive-criterion" id="toc-intuitive-criterion" class="nav-link" data-scroll-target="#intuitive-criterion">Intuitive criterion</a></li>
+  <li><a href="#separating-equilibria" id="toc-separating-equilibria" class="nav-link" data-scroll-target="#separating-equilibria">Separating equilibria:</a></li>
+  </ul></li>
+  <li><a href="#screening" id="toc-screening" class="nav-link" data-scroll-target="#screening">SCREENING</a>
+  <ul class="collapse">
+  <li><a href="#timing-2" id="toc-timing-2" class="nav-link" data-scroll-target="#timing-2">Timing</a></li>
+  <li><a href="#strategies-1" id="toc-strategies-1" class="nav-link" data-scroll-target="#strategies-1">Strategies</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#uniqueness" id="toc-uniqueness" class="nav-link" data-scroll-target="#uniqueness">Uniqueness</a></li>
+  <li><a href="#existence" id="toc-existence" class="nav-link" data-scroll-target="#existence">Existence</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -139,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Macroeconomics</h1>
+<h1 class="title">Hidden Information and Self-Selection</h1>
 </div>
 
 
@@ -156,40 +208,263 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.</p>
-<section id="graduate-macro" class="level2">
-<h2 class="anchored" data-anchor-id="graduate-macro">Graduate Macro</h2>
+<p>This section is not intended for the public.</p>
+<section id="optimal-contracting" class="level2">
+<h2 class="anchored" data-anchor-id="optimal-contracting">OPTIMAL CONTRACTING</h2>
+<p>Principal <span class="math inline">\(P\)</span> / Agent <span class="math inline">\(A\)</span> problem</p>
+<p><span class="math inline">\(x\)</span> = output<br>
+<span class="math inline">\(t\)</span> = payment<br>
+<span class="math inline">\(s\)</span> = type</p>
+<p>Agent maximises: <span class="math display">\[
+U(x,t,s) = t - C(x,s)
+\]</span></p>
+<p>Principal maximises:</p>
+<p><span class="math display">\[
+V(x,t) = R(x) - t
+\]</span></p>
+<section id="timing" class="level3">
+<h3 class="anchored" data-anchor-id="timing">Timing</h3>
 <ul>
-<li><a href="./latex/NK.html">The New Keynesian Model</a></li>
+<li><span class="math inline">\(A\)</span> observes <span class="math inline">\(s\)</span><br>
+</li>
+<li><span class="math inline">\(P\)</span> believes <span class="math inline">\(s \sim D(\cdot)\)</span><br>
+</li>
+<li><span class="math inline">\(P\)</span> offers a contract<br>
+</li>
+<li><span class="math inline">\(A\)</span> accepts or rejects<br>
+</li>
+<li><span class="math inline">\(A\)</span> chooses output, then <span class="math inline">\(P\)</span> pays <span class="math inline">\(A\)</span></li>
 </ul>
 </section>
-<section id="empirical-macroeconomics" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-macroeconomics">Empirical Macroeconomics</h2>
+<section id="full-information-benchmark" class="level3">
+<h3 class="anchored" data-anchor-id="full-information-benchmark">Full information benchmark</h3>
+<p>Let the reservation utility be zero. Then, if <span class="math inline">\(P\)</span> observes <span class="math inline">\(s\)</span>, the optimal contract solves:</p>
+<p><span class="math display">\[
+\max_{x,t} \; R(x) - t
+\]</span></p>
+<p>s.t. no rent for <span class="math inline">\(A\)</span>:</p>
+<p><span class="math display">\[
+t - C(x,s) = 0
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow R'(x^*) = C_x(x^*, s), \quad t^* = C(x^*, s)
+\]</span></p>
+</section>
+<section id="delegation-approach" class="level3">
+<h3 class="anchored" data-anchor-id="delegation-approach">Delegation approach</h3>
+<p><span class="math inline">\(P\)</span> commits to a contract <span class="math inline">\(t = T(x)\)</span></p>
+<p>If <span class="math inline">\(s \in \{L,H\}\)</span>, then <span class="math inline">\(T(x)\)</span> is defined at two values.</p>
+</section>
+<section id="revelation-approach" class="level3">
+<h3 class="anchored" data-anchor-id="revelation-approach">Revelation approach</h3>
+<p><span class="math inline">\(P\)</span> offers a DRM:</p>
+<p><span class="math display">\[
+\{x(\hat{s}), t(\hat{s})\}
+\]</span></p>
+<p>Agent solves:</p>
+<p><span class="math display">\[
+\max_{\hat{s}} \; t(\hat{s}) - C(x(\hat{s}), s)
+\]</span></p>
+<p>Truthful DRM:</p>
+<p><span class="math display">\[
+\hat{s} = s
+\]</span></p>
+</section>
+<section id="revelation-principle" class="level3">
+<h3 class="anchored" data-anchor-id="revelation-principle">Revelation principle</h3>
+<p>Given any contract <span class="math inline">\(t = T(x)\)</span> or DRM, there exists a truthful DRM yielding the same <span class="math inline">\((x,t)\)</span>.</p>
+</section>
+<section id="p-a-model" class="level3">
+<h3 class="anchored" data-anchor-id="p-a-model">P-A model</h3>
+<p><span class="math inline">\(s \in \{L,H\}\)</span> where s enters the cost of production, with <span class="math inline">\(L &lt; H\)</span>.</p>
+<p><span class="math display">\[
+P(s=H)=q, \quad P(s=L)=1-q
+\]</span></p>
+<p>Principal solves:</p>
+<p><span class="math display">\[
+\max_{x_H,x_L,t_H,t_L} \; q(R(x_H)-t_H) + (1-q)(R(x_L)-t_L)
+\]</span></p>
+<p>s.t.</p>
+<p><span class="math display">\[
+t_H - C(x_H,H) = 0 \qquad\text{(P for $H$)}
+\]</span></p>
+<p><span class="math display">\[
+t_L - C(x_L,L) \ge 0 \qquad\text{(P for $L$ - always satisfied)}
+\]</span></p>
+<p><span class="math display">\[
+t_H - C(x_H,H) \ge t_L - C(x_L,H) \qquad\text{(IC for $H$ - never bites)}
+\]</span></p>
+<p><span class="math display">\[
+t_L - C(x_L,L) = t_H - C(x_H,L) \qquad\text{(IC for $L$)}
+\]</span></p>
+</section>
+<section id="full-information-benchmark-1" class="level3">
+<h3 class="anchored" data-anchor-id="full-information-benchmark-1">Full information benchmark</h3>
+<p><span class="math display">\[
+R'(x_s^*) = C_x(x_s^*, s), \quad t_s^* = C(x_s^*, s)
+\]</span></p>
+</section>
+<section id="hidden-information-solution" class="level3">
+<h3 class="anchored" data-anchor-id="hidden-information-solution">Hidden information solution</h3>
+<p>We have the following:</p>
 <ul>
-<li><a href="./latex/empirical.html">Introductory course</a></li>
-<li><a href="./latex/LP.html">Local Projections</a></li>
+<li><span class="math inline">\(\hat{x}_L = x_L^*\)</span> (L’s output is efficient)</li>
+<li><span class="math inline">\(\hat{t}_L - C(\hat{x}_L,L) \ge 0\)</span> (L earns positive rent)</li>
+<li><span class="math inline">\(\hat{x}_H &lt; x_H^*\)</span> (H’s output is inefficient)</li>
+<li><span class="math inline">\(\hat{t}_H - C(\hat{x}_H,H) = 0\)</span> (H does not earn rent)</li>
+<li><span class="math inline">\(\hat{x}_H &lt; \hat{x}_L\)</span> (H produces less than L)</li>
+<li><span class="math inline">\(\frac{\hat{t}_H}{\hat{x}_H} &gt; \frac{\hat{t}_L}{\hat{x}_L}\)</span> (H is paid more per unit of output than L)</li>
 </ul>
 </section>
-<section id="corso-introduttivo-di-macroeconomia-con-python" class="level2">
-<h2 class="anchored" data-anchor-id="corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</h2>
-<section id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="level3">
-<h3 class="anchored" data-anchor-id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</h3>
+<section id="social-planner" class="level3">
+<h3 class="anchored" data-anchor-id="social-planner">Social planner</h3>
+<p>The social planner solves:</p>
+<p><span class="math display">\[
+\max_{x_H,x_L} \; q\big(R(x_H)-C(x_H,H)\big) + (1-q)\big(R(x_L)-C(x_L,L)\big)
+\]</span></p>
+<p>s.t. participation and IC</p>
+<p><span class="math display">\[
+R'(x_s^*) = C_x(x_s^*, s)
+\]</span></p>
+</section>
+</section>
+<section id="signalling" class="level2">
+<h2 class="anchored" data-anchor-id="signalling">SIGNALLING</h2>
+<p>One informed agent, multiple uninformed principals. The agent always moves first. Differences with respect to optimal contracting (OC):<br>
+- S: the type enters the P’s utility function - OC: one principal, one agent; S: multiple principals, one agent - OC: principal moves first; S: agent moves first - OC: unique equilibrium; S: multiple equilibria - OC: good type envies bad; S: bad type envies good</p>
+<p>Agent:</p>
+<p><span class="math display">\[
+U(w,e,n) = w - C(e,n)
+\]</span></p>
+<p>Principal:</p>
+<p><span class="math display">\[
+\pi = y(n,e) - w
+\]</span></p>
+<p>where</p>
+<p><span class="math inline">\(w\)</span> = wage<br>
+<span class="math inline">\(n\)</span> = ability (type)<br>
+<span class="math inline">\(e\)</span> = education<br>
+<span class="math inline">\(y\)</span> = output</p>
+<section id="timing-1" class="level3">
+<h3 class="anchored" data-anchor-id="timing-1">Timing</h3>
 <ul>
-<li><a href="./notebooks/Le variabili macroeconomiche.html">Le variabili macroeconomiche</a><br>
-A notebook exploring macroeconomic variables and their applications.</li>
-<li><a href="./notebooks/La curva di Phillips.html">La curva di Phillips</a><br>
-A notebook exploring the relationship between inflation and unemployment</li>
-<li><a href="./notebooks/La legge di Okun.html">La legge di Okun</a><br>
-A notebook diving into the relationship between unemployment and output</li>
-<li><a href="./D3/money.html">Il mercato della moneta</a><br>
-Financial markets 1 - money</li>
-<li><a href="./notebooks/La regola di Taylor.html">La regola di Taylor</a><br>
-A notebook showing a practical application of the Taylor Rule</li>
-<li><a href="./D3/IS-TR.html">Il modello IS-TR</a><br>
-Tools to experiment and interact with the IS-TR model</li>
-<li><a href="./D3/Mundell-Fleming.html">Il modello Mundell-Fleming (work in progress)</a><br>
-Tools to experiment and interact with the Mundell-Fleming model</li>
+<li><span class="math inline">\(A\)</span> observes <span class="math inline">\(n\)</span><br>
+</li>
+<li><span class="math inline">\(P\)</span> has prior <span class="math inline">\(P(n=H)=q\)</span><br>
+</li>
+<li><span class="math inline">\(A\)</span> chooses <span class="math inline">\(e\)</span><br>
+</li>
+<li><span class="math inline">\(P\)</span> offers <span class="math inline">\(w\)</span><br>
+</li>
+<li><span class="math inline">\(A\)</span> accepts or rejects</li>
 </ul>
+</section>
+<section id="strategies" class="level3">
+<h3 class="anchored" data-anchor-id="strategies">Strategies</h3>
+<p><span class="math display">\[
+A: e(n), \quad P: w(e)
+\]</span></p>
+<p>Beliefs:</p>
+<p><span class="math display">\[
+\mu(H|e)
+\]</span></p>
+</section>
+<section id="full-information-benchmark-2" class="level3">
+<h3 class="anchored" data-anchor-id="full-information-benchmark-2">Full information benchmark</h3>
+<p>As as consequence of perfect competition, <span class="math inline">\(\pi=0\)</span> and <span class="math inline">\(w(e) = \mu(H|e) y(H,e) + (1-\mu(H|e)) y(L,e)\)</span>. Follows:</p>
+<p><span class="math display">\[
+w(e) = y(n,e)
+\]</span></p>
+<p>The agent solves:</p>
+<p><span class="math display">\[
+\max_e \; y(n,e) - C(e,n)
+\]</span></p>
+<p>Define envy as the situation in which the agent of type <span class="math inline">\(L\)</span> prefers the full-information contract designed for type <span class="math inline">\(H\)</span>: <span class="math display">\[
+y(H,e^*(H)) - C(e^*(H),L) &gt; y(L,e^*(L)) - C(e^*(L),L)
+\]</span></p>
+</section>
+<section id="pooling" class="level3">
+<h3 class="anchored" data-anchor-id="pooling">Pooling</h3>
+<p>By definition:</p>
+<p><span class="math display">\[
+e(H) = e(L) = e_p
+\]</span></p>
+<p><span class="math display">\[
+\mu(H|e_p) = q
+\]</span></p>
+<p>The it must be:</p>
+<p><span class="math display">\[
+w(e_p) = q y(H,e_p) + (1-q) y(L,e_p)
+\]</span></p>
+<p>usually pooling equilibria are enforced with strong off-patch beliefs.</p>
+</section>
+<section id="intuitive-criterion" class="level3">
+<h3 class="anchored" data-anchor-id="intuitive-criterion">Intuitive criterion</h3>
+<p>Set beliefs:</p>
+<p><span class="math display">\[
+\mu(H|e') = 0
+\]</span></p>
+<p>for deviations that are never profitable for <span class="math inline">\(H\)</span></p>
+</section>
+<section id="separating-equilibria" class="level3">
+<h3 class="anchored" data-anchor-id="separating-equilibria">Separating equilibria:</h3>
+<p>No envy: <span class="math inline">\(\mu(H|e) = 1\)</span> for <span class="math inline">\(e \ge e^*(H)\)</span>, <span class="math inline">\(\mu(H|e) = 0\)</span> for <span class="math inline">\(e &lt; e^*(H)\)</span></p>
+<p><span class="math display">\[
+e(L) = e^*(L), \quad e(H) = e^*(H)
+\]</span></p>
+<p>Envy: <span class="math inline">\(\mu(H|e) = 1\)</span> for <span class="math inline">\(e \ge e^s\)</span>, <span class="math inline">\(\mu(H|e) = 0\)</span> for <span class="math inline">\(e &lt; e^s\)</span>: H overinvest in education to separate from L</p>
+<p><span class="math display">\[
+    e(L) = e^*(L), \quad e(H) = e^s &gt; e^*(H)
+\]</span></p>
+<p>where <span class="math inline">\(e^s\)</span> is such that L is indifferent between its full-information contract and the one designed for H:</p>
+<p><span class="math display">\[
+    y(H,e^s) - C(e^s,L) = y(L,e^*(L)) - C(e^*(L),L)
+\]</span></p>
+<hr>
+</section>
+</section>
+<section id="screening" class="level2">
+<h2 class="anchored" data-anchor-id="screening">SCREENING</h2>
+<p>Multiple competing uninformed principals move first, then one informed agent moves.</p>
+<section id="timing-2" class="level3">
+<h3 class="anchored" data-anchor-id="timing-2">Timing</h3>
+<ul>
+<li><span class="math inline">\(A\)</span> observes <span class="math inline">\(n \in \{L,H\}\)</span></li>
+<li><span class="math inline">\(P\)</span> has prior <span class="math inline">\(P(n=H)=q\)</span></li>
+<li><span class="math inline">\(P\)</span> offers contract <span class="math inline">\((w,e)\)</span></li>
+<li><span class="math inline">\(A\)</span> accepts or rejects</li>
+<li><span class="math inline">\(A\)</span> acquires e and receives w</li>
+</ul>
+</section>
+<section id="strategies-1" class="level3">
+<h3 class="anchored" data-anchor-id="strategies-1">Strategies</h3>
+<p><span class="math display">\[
+P_i: (w_i,e_i), \quad A: (w,e) \in \{(w_i,e_i)\}
+\]</span></p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<ul>
+<li>Any contract yields zero profits due to competition</li>
+<li>No pooling is possible: let <span class="math inline">\(P_i\)</span> offer a pooling contract <span class="math inline">\((w_p,e_p)\)</span>, then any <span class="math inline">\(P_j\)</span> can offer a slightly better contract <span class="math inline">\((w_p+\epsilon,e_p)\)</span> to attract only the high type and make positive profits (cream skimming).</li>
+</ul>
+</section>
+<section id="uniqueness" class="level3">
+<h3 class="anchored" data-anchor-id="uniqueness">Uniqueness</h3>
+<p>L always chooses <span class="math inline">\((w(L)^*, e(L)^*)\)</span> since every contract of the type <span class="math inline">\((w(L)^*-\varepsilon, e(L)^*)\)</span> could generate a profit for some <span class="math inline">\(P_i\)</span>.</p>
+<p>No envy: H chooses <span class="math inline">\((w(H)^*, e(H)^*)\)</span> for a similar reason.</p>
+<p>Envy: H chooses <span class="math inline">\((y(H,e^s), e^s)\)</span> since any contract of the type <span class="math inline">\((y(H,e^s)+\varepsilon, e^s)\)</span> could generate a profit for some <span class="math inline">\(P_i\)</span> while only attracting the high type.</p>
+</section>
+<section id="existence" class="level3">
+<h3 class="anchored" data-anchor-id="existence">Existence</h3>
+<p>No envy: PBE always exists</p>
+<p>Envy: $ = $ such that</p>
+<p><span class="math display">\[
+q \le \hat{q} \Rightarrow \text{unique PBE}
+\]</span></p>
+<p><span class="math display">\[
+q &gt; \hat{q} \Rightarrow \text{no PBE}
+\]</span></p>
 
 
 </section>

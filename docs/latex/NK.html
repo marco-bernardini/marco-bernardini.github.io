@@ -180,6 +180,7 @@ window.Quarto = {
   <li><a href="#is-curve-with-government-spending" id="toc-is-curve-with-government-spending" class="nav-link" data-scroll-target="#is-curve-with-government-spending">IS curve with government spending</a></li>
   <li><a href="#phillips-curve-with-government-spending" id="toc-phillips-curve-with-government-spending" class="nav-link" data-scroll-target="#phillips-curve-with-government-spending">Phillips curve with government spending</a></li>
   </ul></li>
+  <li><a href="#adding-preference-shocks" id="toc-adding-preference-shocks" class="nav-link" data-scroll-target="#adding-preference-shocks">11. Adding preference shocks</a></li>
   </ul>
 </nav>
     </div>
@@ -1317,6 +1318,42 @@ mc_t
 +
 \kappa \frac{\sigma + \varphi s_c}{s_c} x_t
 \]</span></p>
+</section>
+</section>
+<section id="adding-preference-shocks" class="level2">
+<h2 class="anchored" data-anchor-id="adding-preference-shocks">11. Adding preference shocks</h2>
+<p>This one is actually easy. We start from the same equations as before, but now we add a preference shock <span class="math inline">\(\Xi_t\)</span> to the utility function. The problem of the household becomes:</p>
+<p><span class="math display">\[
+\max_{\{C_t,B_t,N_t\}}
+E_0\sum_{t=0}^{\infty}\beta^t\Xi_t
+\left(
+\frac{C_t^{1-\sigma}}{1-\sigma}
+-
+\frac{N_t^{1+\varphi}}{1+\varphi}
+\right)
+\]</span></p>
+<p>subject to the budget constraint</p>
+<p><span class="math display">\[
+P_tC_t+B_t=(1+i_{t-1})B_{t-1}+W_tN_t
+\]</span></p>
+<p>the Euler equation is now:</p>
+<p><span class="math display">\[
+C_t^{-\sigma}
+=
+\beta E_t\left[
+C_{t+1}^{-\sigma}\frac{1+i_t}{\Pi_{t+1}}
+\frac{\Xi_{t+1}}{\Xi_t}
+\right].
+\]</span></p>
+<p>Log-linearizing gives</p>
+<p><span class="math display">\[
+c_t=-\sigma^{-1}(i_t - E_t \pi_{t+1} + E_t \xi_{t+1} - \xi_t) + E_t c_{t+1}
+\]</span></p>
+<p>where <span class="math inline">\(\xi_t\)</span> is the log-deviation of <span class="math inline">\(\Xi_t\)</span> from its steady state. Define now <span class="math inline">\(\delta_t \equiv E_t \xi_{t+1} - \xi_t\)</span>. Then the Euler equation becomes:</p>
+<p><span class="math display">\[
+c_t=-\sigma^{-1}(i_t - E_t \pi_{t+1} + \delta_t) + E_t c_{t+1}
+\]</span></p>
+<p>Eventually, we can incorporate <span class="math inline">\(\delta_t\)</span> inside the definition of <span class="math inline">\(r_t^*\)</span></p>
 <p><br><br><br></p>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
@@ -1325,7 +1362,6 @@ mc_t
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

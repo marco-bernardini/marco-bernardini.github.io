@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Macroeconomics – Marco Bernardini</title>
+<title>auctions – Marco Bernardini</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marco Bernardini</span>
     </a>
   </div>
@@ -90,23 +119,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cv.html"> 
+    <a class="nav-link" href="../cv.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./macroeconomics.html" aria-current="page"> 
+    <a class="nav-link" href="../macroeconomics.html"> 
 <span class="menu-text">MACRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./microeconomics.html"> 
+    <a class="nav-link" href="../microeconomics.html"> 
 <span class="menu-text">MICRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data-analysis.html"> 
+    <a class="nav-link" href="../data-analysis.html"> 
 <span class="menu-text">DATA ANALYSIS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./articles.html"> 
+    <a class="nav-link" href="../articles.html"> 
 <span class="menu-text">RESEARCH</span></a>
   </li>  
 </ul>
@@ -125,71 +154,172 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#graduate-macro" id="toc-graduate-macro" class="nav-link active" data-scroll-target="#graduate-macro">Graduate Macro</a></li>
-  <li><a href="#empirical-macroeconomics" id="toc-empirical-macroeconomics" class="nav-link" data-scroll-target="#empirical-macroeconomics">Empirical Macroeconomics</a></li>
-  <li><a href="#corso-introduttivo-di-macroeconomia-con-python" id="toc-corso-introduttivo-di-macroeconomia-con-python" class="nav-link" data-scroll-target="#corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</a>
+  <li><a href="#informal-introduction-to-auction-theory" id="toc-informal-introduction-to-auction-theory" class="nav-link active" data-scroll-target="#informal-introduction-to-auction-theory">Informal Introduction to Auction Theory</a>
   <ul class="collapse">
-  <li><a href="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" id="toc-a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="nav-link" data-scroll-target="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#payoff-and-expected-surplus" id="toc-payoff-and-expected-surplus" class="nav-link" data-scroll-target="#payoff-and-expected-surplus">Payoff and Expected Surplus</a></li>
+  <li><a href="#deviation-and-incentive-compatibility" id="toc-deviation-and-incentive-compatibility" class="nav-link" data-scroll-target="#deviation-and-incentive-compatibility">Deviation and Incentive Compatibility</a></li>
+  <li><a href="#revenue-equivalence-theorem" id="toc-revenue-equivalence-theorem" class="nav-link" data-scroll-target="#revenue-equivalence-theorem">Revenue Equivalence Theorem</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Macroeconomics</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.</p>
-<section id="graduate-macro" class="level2">
-<h2 class="anchored" data-anchor-id="graduate-macro">Graduate Macro</h2>
-<ul>
-<li><a href="./latex/NK.html">The New Keynesian Model</a></li>
-</ul>
+<section id="informal-introduction-to-auction-theory" class="level2">
+<h2 class="anchored" data-anchor-id="informal-introduction-to-auction-theory">Informal Introduction to Auction Theory</h2>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">Setup</h3>
+<p>There is a single indivisible object and <span class="math inline">\(n\)</span> risk-neutral bidders indexed by <span class="math inline">\(i\)</span>.</p>
+<p>Each bidder <span class="math inline">\(i\)</span> has valuation <span class="math inline">\(v_i\)</span> drawn i.i.d. from a distribution <span class="math inline">\(F\)</span> with support <span class="math display">\[
+v \in [\underline v, \overline v],
+\]</span> where <span class="math inline">\(F\)</span> is strictly increasing and admits density <span class="math inline">\(f\)</span>.</p>
+<p>The type of bidder <span class="math inline">\(i\)</span> is <span class="math display">\[
+t_i := v_i
+\]</span></p>
+<p>A bidding strategy is a function <span class="math display">\[
+b : [\underline v, \overline v] \to \mathbb{R}
+\]</span></p>
 </section>
-<section id="empirical-macroeconomics" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-macroeconomics">Empirical Macroeconomics</h2>
-<ul>
-<li><a href="./latex/empirical.html">Introductory course</a></li>
-<li><a href="./latex/LP.html">Local Projections</a></li>
-</ul>
+<section id="payoff-and-expected-surplus" class="level3">
+<h3 class="anchored" data-anchor-id="payoff-and-expected-surplus">Payoff and Expected Surplus</h3>
+<p>Consider a first-price auction. The realised surplus of bidder <span class="math inline">\(i\)</span> is <span class="math display">\[
+S(v_i) =
+\begin{cases}
+v_i - b(v_i), &amp; \text{if bidder $i$ wins},\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>The expected surplus is <span class="math display">\[
+S(v_i) = (v_i - b(v_i)) F(v_i)^{n-1}
+\]</span></p>
 </section>
-<section id="corso-introduttivo-di-macroeconomia-con-python" class="level2">
-<h2 class="anchored" data-anchor-id="corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</h2>
-<section id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="level3">
-<h3 class="anchored" data-anchor-id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</h3>
-<ul>
-<li><a href="./notebooks/Le variabili macroeconomiche.html">Le variabili macroeconomiche</a><br>
-A notebook exploring macroeconomic variables and their applications.</li>
-<li><a href="./notebooks/La curva di Phillips.html">La curva di Phillips</a><br>
-A notebook exploring the relationship between inflation and unemployment</li>
-<li><a href="./notebooks/La legge di Okun.html">La legge di Okun</a><br>
-A notebook diving into the relationship between unemployment and output</li>
-<li><a href="./D3/money.html">Il mercato della moneta</a><br>
-Financial markets 1 - money</li>
-<li><a href="./notebooks/La regola di Taylor.html">La regola di Taylor</a><br>
-A notebook showing a practical application of the Taylor Rule</li>
-<li><a href="./D3/IS-TR.html">Il modello IS-TR</a><br>
-Tools to experiment and interact with the IS-TR model</li>
-<li><a href="./D3/Mundell-Fleming.html">Il modello Mundell-Fleming (work in progress)</a><br>
-Tools to experiment and interact with the Mundell-Fleming model</li>
-</ul>
+<section id="deviation-and-incentive-compatibility" class="level3">
+<h3 class="anchored" data-anchor-id="deviation-and-incentive-compatibility">Deviation and Incentive Compatibility</h3>
+<p>Consider a bidder with true valuation <span class="math inline">\(v_i\)</span> who mimics a generic type <span class="math inline">\(\tilde v\)</span>. The expected surplus from mimicking is <span class="math display">\[
+S(v_i;\tilde v) = (v_i - b(\tilde v)) F(\tilde v)^{n-1}
+\]</span></p>
+<p>Maximising with respect to <span class="math inline">\(\tilde v\)</span>, the first-order condition is <span class="math display">\[
+\frac{\partial S(v_i;\tilde v)}{\partial \tilde v}
+=
+(v_i - b(\tilde v))(n-1)F(\tilde v)^{n-2}f(\tilde v)
+- b'(\tilde v)F(\tilde v)^{n-1}
+\]</span></p>
+<p>Setting this equal to zero and imposing symmetry (<span class="math inline">\(\tilde v = v_i\)</span>) yields <span class="math display">\[
+b'(v_i)
+=
+(v_i - b(v_i))(n-1)\frac{f(v_i)}{F(v_i)}
+\]</span></p>
+<p>To solve the differential equation define: <span class="math display">\[
+x(v) := v - b(v),
+\quad\text{so that}\quad
+b'(v) = 1 - x'(v)
+\]</span></p>
+<p>Substituting gives <span class="math display">\[
+1 - x'(v) = x(v)(n-1)\frac{f(v)}{F(v)}
+\]</span></p>
+<p>Rearranging, <span class="math display">\[
+x'(v) + x(v)(n-1)\frac{f(v)}{F(v)} = 1
+\]</span></p>
+<p>Multiplying by <span class="math inline">\(F(v)^{n-1}\)</span>, <span class="math display">\[
+\frac{d}{dv}\bigl[x(v)F(v)^{n-1}\bigr] = F(v)^{n-1}
+\]</span></p>
+<p>Integrating, <span class="math display">\[
+x(v)F(v)^{n-1} = \int_{\underline v}^v F(t)^{n-1}\,dt + C
+\]</span></p>
+<p>Using the boundary condition <span class="math inline">\(b(\underline v)=\underline v\)</span>, we have <span class="math inline">\(x(\underline v)=0\)</span>, hence <span class="math inline">\(C=0\)</span>.</p>
+<p>Therefore, <span class="math display">\[
+b(v)
+=
+v - \frac{\displaystyle\int_{\underline v}^v F(t)^{n-1}\,dt}{F(v)^{n-1}}
+\]</span></p>
+<p>Or, even better: <span class="math display">\[
+b(v)
+=
+v - \displaystyle\int_{\underline v}^v \left(\frac{F(t)}{F(v)}\right)^{n-1}\,dt
+\]</span></p>
+<p>It now is useful to recall that <span class="math display">\[
+S(v_i;\tilde v) = (v_i - b(\tilde v))F(\tilde v)^{n-1}
+\]</span></p>
+<p>Using the expression for the bidding function, we obtain <span class="math display">\[
+S(v_i;\tilde v)
+=
+\left(
+v_i - \tilde v
++
+\int_{\underline v}^{\tilde v}
+\left\{
+\frac{F(t)}{F(\tilde v)}
+\right\}^{n-1}
+dt
+\right)
+F(\tilde v)^{n-1}
+\]</span></p>
+<p>Rearranging, <span class="math display">\[
+S(v_i;\tilde v)
+=
+(v_i - \tilde v)F(\tilde v)^{n-1}
++
+\int_{\underline v}^{\tilde v} F(t)^{n-1}\,dt
+\]</span></p>
+<p>Notice that <span class="math display">\[
+S(v_i)
+=
+(v_i - b(v_i))F(v_i)^{n-1}
+=
+\int_{\underline v}^{v_i} F(t)^{n-1}\,dt
+\]</span></p>
+<p>Hence, <span class="math display">\[
+S(v_i) - S(v_i;\tilde v)
+=
+(\tilde v - v_i)F(\tilde v)^{n-1}
+-
+\int_{v_i}^{\tilde v} F(t)^{n-1}\,dt \ge 0
+\]</span></p>
+<p>Since <span class="math inline">\(F(t)\)</span> is strictly increasing, the right-hand side is always non-negative, and therefore deviations from one’s own type are never profitable (one can also convince themselves of this statement by drawing a chart).</p>
+</section>
+<section id="revenue-equivalence-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="revenue-equivalence-theorem">Revenue Equivalence Theorem</h3>
+<p>Now, note that the expected surplus of player of type <span class="math inline">\(\tilde v\)</span> is: <span class="math display">\[
+S(\tilde v) = \int_{\underline v}^{\tilde v} F(t)^{n-1}\,dt
+\]</span></p>
+<p>This allows us to rewrite <span class="math display">\[
+S(v_i) - S(v_i;\tilde v)
+=
+S(v_i)
+-
+\left[
+(v_i - \tilde v)F(\tilde v)^{n-1}
++
+S(\tilde v)
+\right]
+\ge 0
+\]</span></p>
+<p>Hence, <span class="math display">\[
+S(v_i) \ge S(\tilde v) + (v_i - \tilde v)F(\tilde v)^{n-1}
+\]</span></p>
+<p>If we drop the indices and let <span class="math inline">\(P(v)\)</span> denote the probability of receiving the object in equilibrium given type <span class="math inline">\(v\)</span>, we obtain the more general statement: <span class="math display">\[
+S(v) \ge S(\tilde v) + (v - \tilde v)P(\tilde v)
+\]</span></p>
+<p>Let <span class="math inline">\(\tilde v = v + dv\)</span>. Then is must be that both <span class="math display">\[
+\frac{S(v+dv)-S(v)}{dv} \ge P(v),
+\quad
+\frac{S(v+dv)-S(v)}{dv} \le P(v+dv)
+\]</span></p>
+<p>As <span class="math inline">\(dv \to 0\)</span>, <span class="math display">\[
+\frac{dS(v)}{dv} = P(v)
+\]</span></p>
+<p>Integrating, <span class="math display">\[
+S(v) = \int_{\underline v}^v P(t)\,dt + C
+\]</span></p>
+<p>Since clearly <span class="math inline">\(C = S(\underline v)\)</span>, we obtain <span class="math display">\[
+S(v) = S(\underline v) + \int_{\underline v}^v P(t)\,dt
+\]</span></p>
+<p>Therefore, any two mechanisms with the same allocation rule <span class="math inline">\(P(v)\)</span> and the same S() generate the same surplus function.</p>
 
 
 </section>

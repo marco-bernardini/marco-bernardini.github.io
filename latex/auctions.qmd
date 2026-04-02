@@ -1,0 +1,211 @@
+## Informal Introduction to Auction Theory
+
+### Setup
+
+There is a single indivisible object and $n$ risk-neutral bidders indexed by $i$.
+
+Each bidder $i$ has valuation $v_i$ drawn i.i.d. from a distribution $F$ with support
+$$
+v \in [\underline v, \overline v],
+$$
+where $F$ is strictly increasing and admits density $f$.
+
+The type of bidder $i$ is
+$$
+t_i := v_i
+$$
+
+A bidding strategy is a function
+$$
+b : [\underline v, \overline v] \to \mathbb{R}
+$$
+
+### Payoff and Expected Surplus
+
+Consider a first-price auction. The realised surplus of bidder $i$ is
+$$
+S(v_i) =
+\begin{cases}
+v_i - b(v_i), & \text{if bidder $i$ wins},\\
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+The expected surplus is
+$$
+S(v_i) = (v_i - b(v_i)) F(v_i)^{n-1}
+$$
+
+### Deviation and Incentive Compatibility
+
+Consider a bidder with true valuation $v_i$ who mimics a generic type $\tilde v$.
+The expected surplus from mimicking is
+$$
+S(v_i;\tilde v) = (v_i - b(\tilde v)) F(\tilde v)^{n-1}
+$$
+
+Maximising with respect to $\tilde v$, the first-order condition is
+$$
+\frac{\partial S(v_i;\tilde v)}{\partial \tilde v}
+=
+(v_i - b(\tilde v))(n-1)F(\tilde v)^{n-2}f(\tilde v)
+- b'(\tilde v)F(\tilde v)^{n-1}
+$$
+
+Setting this equal to zero and imposing symmetry ($\tilde v = v_i$) yields
+$$
+b'(v_i)
+=
+(v_i - b(v_i))(n-1)\frac{f(v_i)}{F(v_i)}
+$$
+
+To solve the differential equation define:
+$$
+x(v) := v - b(v),
+\quad\text{so that}\quad
+b'(v) = 1 - x'(v)
+$$
+
+Substituting gives
+$$
+1 - x'(v) = x(v)(n-1)\frac{f(v)}{F(v)}
+$$
+
+Rearranging,
+$$
+x'(v) + x(v)(n-1)\frac{f(v)}{F(v)} = 1
+$$
+
+Multiplying by $F(v)^{n-1}$,
+$$
+\frac{d}{dv}\bigl[x(v)F(v)^{n-1}\bigr] = F(v)^{n-1}
+$$
+
+Integrating,
+$$
+x(v)F(v)^{n-1} = \int_{\underline v}^v F(t)^{n-1}\,dt + C
+$$
+
+Using the boundary condition $b(\underline v)=\underline v$, we have $x(\underline v)=0$, hence $C=0$.
+
+Therefore,
+$$
+b(v)
+=
+v - \frac{\displaystyle\int_{\underline v}^v F(t)^{n-1}\,dt}{F(v)^{n-1}}
+$$
+
+Or, even better:
+$$
+b(v)
+=
+v - \displaystyle\int_{\underline v}^v \left(\frac{F(t)}{F(v)}\right)^{n-1}\,dt
+$$
+
+It now is useful to recall that
+$$
+S(v_i;\tilde v) = (v_i - b(\tilde v))F(\tilde v)^{n-1}
+$$
+
+Using the expression for the bidding function, we obtain
+$$
+S(v_i;\tilde v)
+=
+\left(
+v_i - \tilde v
++
+\int_{\underline v}^{\tilde v}
+\left\{
+\frac{F(t)}{F(\tilde v)}
+\right\}^{n-1}
+dt
+\right)
+F(\tilde v)^{n-1}
+$$
+
+Rearranging,
+$$
+S(v_i;\tilde v)
+=
+(v_i - \tilde v)F(\tilde v)^{n-1}
++
+\int_{\underline v}^{\tilde v} F(t)^{n-1}\,dt
+$$
+
+Notice that
+$$
+S(v_i)
+=
+(v_i - b(v_i))F(v_i)^{n-1}
+=
+\int_{\underline v}^{v_i} F(t)^{n-1}\,dt
+$$
+
+Hence,
+$$
+S(v_i) - S(v_i;\tilde v)
+=
+(\tilde v - v_i)F(\tilde v)^{n-1}
+-
+\int_{v_i}^{\tilde v} F(t)^{n-1}\,dt \ge 0
+$$
+
+Since $F(t)$ is strictly increasing, the right-hand side is always
+non-negative, and therefore deviations from one’s own type are never
+profitable (one can also convince themselves of this statement by drawing a chart).
+
+### Revenue Equivalence Theorem
+
+Now, note that the expected surplus of player of type $\tilde v$ is:
+$$
+S(\tilde v) = \int_{\underline v}^{\tilde v} F(t)^{n-1}\,dt
+$$
+
+This allows us to rewrite
+$$
+S(v_i) - S(v_i;\tilde v)
+=
+S(v_i)
+-
+\left[
+(v_i - \tilde v)F(\tilde v)^{n-1}
++
+S(\tilde v)
+\right]
+\ge 0
+$$
+
+Hence,
+$$
+S(v_i) \ge S(\tilde v) + (v_i - \tilde v)F(\tilde v)^{n-1}
+$$
+
+If we drop the indices and let $P(v)$ denote the probability of receiving the object in
+equilibrium given type $v$, we obtain the more general statement:
+$$
+S(v) \ge S(\tilde v) + (v - \tilde v)P(\tilde v)
+$$
+
+Let $\tilde v = v + dv$. Then is must be that both
+$$
+\frac{S(v+dv)-S(v)}{dv} \ge P(v),
+\quad
+\frac{S(v+dv)-S(v)}{dv} \le P(v+dv)
+$$
+
+As $dv \to 0$,
+$$
+\frac{dS(v)}{dv} = P(v)
+$$
+
+Integrating,
+$$
+S(v) = \int_{\underline v}^v P(t)\,dt + C
+$$
+
+Since clearly $C = S(\underline v)$, we obtain
+$$
+S(v) = S(\underline v) + \int_{\underline v}^v P(t)\,dt
+$$
+
+Therefore, any two mechanisms with the same allocation rule $P(v)$ and the same S(\underline v) generate the same surplus function.
