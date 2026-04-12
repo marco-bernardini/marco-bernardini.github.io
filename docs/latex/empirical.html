@@ -124,7 +124,11 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../macroeconomics.html"> 
-<span class="menu-text">MACROECONOMICS</span></a>
+<span class="menu-text">MACRO</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../microeconomics.html"> 
+<span class="menu-text">MICRO</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../data-analysis.html"> 
@@ -528,13 +532,26 @@ Then it must be both: <span class="math inline">\(u_t \in \mathcal I_t^y\)</span
 <p><span class="math display">\[
   \mathbb{V} u_t = \Sigma = \mathbb{V} \Omega \varepsilon_t = \Omega \Omega^{'}
 \]</span></p>
-<p>The coefficients in <span class="math inline">\(\Omega\)</span> are the contemporaneous transmission coefficients that relate changes in <span class="math inline">\(\varepsilon_t\)</span> to contemporaneous changes in <span class="math inline">\(u_t\)</span>.</p>
+<p>The coefficients in <span class="math inline">\(\Omega\)</span> are the contemporaneous transmission coefficients that relate changes in <span class="math inline">\(\varepsilon_t\)</span> to contemporaneous changes in <span class="math inline">\(u_t\)</span>.<br>
+Notice that <span class="math inline">\(\Omega \Omega' = \Sigma\)</span> defines a set: <span class="math inline">\(\left\{\Omega: \Omega \Omega' = \Sigma\right\} = \left\{Q'\Sigma^{\frac{1}{2}}\right\}\)</span>.<br>
+This is very interesting if we write:</p>
+<p><span class="math display">\[
+  \varepsilon_t = \Omega^{-1} u_t = Q' \Sigma^{-1/2} u_t
+\]</span></p>
+<p>hence</p>
+<p><span class="math display">\[
+  Q \varepsilon_t = \Sigma^{-1/2} u_t
+\]</span></p>
+<p>which means that we are choosing a basis (i.e.&nbsp;a rotation) for the shocks.</p>
 <section id="failure-of-invertibility" class="level3">
 <h3 class="anchored" data-anchor-id="failure-of-invertibility">Failure of invertibility</h3>
 <p>There are two important cases where invertibility does not hold.</p>
 <p>The first is when <span class="math inline">\(\varepsilon_t \in \mathbb R^m\)</span> and <span class="math inline">\(y_t \in \mathbb R^n\)</span>, with <span class="math inline">\(n&lt;m\)</span>: in these cases, we will not have enough equations to “disentangle” the different shocks. This case is quite trivial thus we will not go into detail here.<br>
 The second case arises when the econometrician is not able to recover the hidden state from the history of the observables.<br>
-To clarify this point, consider a scalar state space system:</p>
+This is very clear in two cases:<br>
+- agents foresight: if agents base their current decisions on the expected future path of the variables<br>
+- policy makers foresight: if the central bank or the government use forecasts of the future path of the variables to set their current policy<br>
+To clarify this point algebraically, consider a scalar state space system:</p>
 <p><span class="math display">\[
 s_t = a s_{t-1} + b \varepsilon_t,
 \qquad
@@ -591,9 +608,6 @@ s_{t+1}=(a - b d^{-1} c)^{t+1}s_0+\sum_{j=0}^{t}(a - b d^{-1} c)^j b d^{-1} y_{t
 +
 b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^y].
 \]</span></p>
-<p>Hence, if <span class="math display">\[
-(a - b d^{-1} c)^{t+1}s_0 \neq 0,
-\]</span> the forecast of <span class="math inline">\(s_{t+1}\)</span> still depends on the unobserved initial state <span class="math inline">\(s_0\)</span>. So the econometrician cannot recover <span class="math inline">\(s_{t+1}\)</span> from observables alone.</p>
 <p>Defining the part based only on observables as <span class="math display">\[
 \hat s_{t+1|t}
 =
@@ -627,9 +641,6 @@ As an example, consider the orthonormal matrices <span class="math inline">\(P\)
 <p><span class="math display">\[
   \Omega P P' \Omega ' = \Omega I \Omega ' = \Omega Q Q' \Omega '
 \]</span></p>
-<p>If the reader has issues convincing themselves of the magnitude of this issue, the following widget could also be of help (work in progress):</p>
-<iframe src="../widgets/rotation-widget.html" width="100%" height="770" style="border:none; border-radius:12px;">
-</iframe>
 <p>Notice that, since we are interested in recovering not only the span of the shocks, but also the magnitude of their effect on observed variables, that of rotational indeterminacy is a problem of great importance. We will therefore dedicate most of the rest of the course to pinning down a specific rotation of the matrix <span class="math inline">\(Q\)</span>.</p>
 </section>
 <section id="dynamic-indeterminacy" class="level3">
@@ -666,7 +677,7 @@ y_t=\theta_{01} \varepsilon_{1, t}+\theta_{02} \varepsilon_{2, t}+\theta_{11} \v
 <h3 class="anchored" data-anchor-id="short-run-restrictions">Short run restrictions</h3>
 <p>Rembember that, under invertibility, we can write:</p>
 <p><span class="math display">\[
-  y_t = C(L)u_t = C(L) \Omega \varepsilon_t = C(L) \Omega Q \varepsilon_t = C(L) \Sigma^{1/2} Q \varepsilon_t
+  y_t = C(L)u_t = C(L) \Omega \varepsilon_t = C(L) \Sigma^{1/2} Q \varepsilon_t = \Theta(L) \varepsilon_t
 \]</span></p>
 <p>for some orthonormal <span class="math inline">\(Q\)</span> conformable to <span class="math inline">\(\Omega\)</span>. The IRFs are defined as <span class="math inline">\(\Theta(L) = C(L) \Sigma^{1/2} Q\)</span>.<br>
 Remember now that <span class="math inline">\(C(0)\)</span> is defined as the identity matrix, and define the impact matrix <span class="math inline">\(\Theta_0\)</span> as:</p>

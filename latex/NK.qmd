@@ -334,6 +334,14 @@ E_t\sum_{j=0}^{\infty}\alpha^j M_{t,t+j}(1-\tau_{t+j})\Pi_{t+j,t}^{\theta-1}Y_{t
 }.
 $$
 
+Which is very similar in its structure to the previous (e.g. confront the exponents, markup and taxation ...):
+
+$$
+\frac{P_t(i)}{P_t}
+=
+MC_t\frac{\theta}{(1-\tau_t)(\theta-1)}.
+$$
+
 We now focus on the symmetric equilibrium in which all reoptimizing firms choose the same reset price (i.e. $\widetilde P_t(i)=\widetilde P_t$ for all $i$), so write:
 
 $$
@@ -690,7 +698,7 @@ Remember that the model contains two distortions:
 
 To define the output gap, we need a benchmark allocation. We choose here the efficient steady state: zero inflation, no price dispersion, and subsidy $\tau$ chosen to neutralize the monopoly wedge.
 
-Assume thatm in steady state:
+Assume that in steady state:
 
 $$
 \Pi=1, \qquad \Delta=1 \qquad MC=1.

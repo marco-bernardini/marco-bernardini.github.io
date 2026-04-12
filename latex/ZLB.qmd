@@ -1,0 +1,286 @@
+## INTRODUCTION
+
+Consider a negative demand shock to $r_t^*$ (driven by an increase in the discount factor of the households, for example).
+
+The fall in $r_t^*$ pushes down $x_t$ and $\pi_t$. Under the Taylor rule, the policy authority cuts the nominal interest rate:
+$$
+i_t = \phi_\pi \pi_t + \phi_x x_t \quad \rightarrow \text{some volatility}
+$$
+
+$$
+i_t = r_t^* + \phi_\pi \pi_t + \phi_x x_t \quad \rightarrow \text{full stabilization}
+$$
+
+There must exist a lower bound below which a cut is no longer effective. Assume this is
+$$
+i_t = 0
+$$
+
+
+---
+
+## THE MODEL
+
+We have
+$$
+i_t = \max \{ i^{LB}, \ \phi_\pi \pi_t + \phi_x x_t \}
+$$
+
+To remove uncertainty and account for non-linearities assume
+$$
+r_t^* =
+\begin{cases}
+0 \\
+\widetilde r < 0
+\end{cases}
+$$
+
+Assume the economy is such that at $t=0$: $r_0^* = r$.
+
+Assume
+$$
+r_t^* =
+\begin{cases}
+r & \text{with prob } \mu \\
+0 & \text{with prob } 1-\mu
+\end{cases}
+$$
+
+In the long run, $x_t = \pi_t = 0$.
+
+Compute AD, AS; let the subscript $c$ refer to crisis times.  
+Starting with the classical AD curve, an expanding the expectation terms gives:
+$$
+x_c = - ( i^{LB} - \mu \pi_c - r ) + \mu x_c
+$$
+
+$$
+(1-\mu)x_c = r - i^{LB} + \mu \pi_c
+$$
+
+Doing the same for the AS curve gives:
+
+$$
+\pi_t = \kappa x_c + \beta \mu \pi_c
+$$
+
+$$
+(1-\beta\mu)\pi_c = \kappa x_c
+$$
+
+Now, define
+
+$$
+r_c = r - i^{LB}
+$$
+
+Then
+
+$$
+x_c = \frac{1-\beta\mu}{(1-\mu)(1-\beta\mu) - \kappa \mu} \, r_c
+$$
+
+$$
+\pi_c = \frac{\kappa}{(1-\mu)(1-\beta\mu) - \kappa \mu} \, r_c
+$$
+
+Assume the denominator is positive so that $(x_c, \pi_c) < 0$.
+
+Remember:
+$$
+i_t = \phi_\pi \pi_t + \phi_x x_t \Rightarrow i_t < 0
+$$
+
+If $i_t$ cannot go below $0$, then
+$$
+r_t = i_t - \mathbb{E}_t \pi_{t+1} > r_t^*
+$$
+
+causing further drag on demand.
+
+---
+
+## FORWARD GUIDANCE
+
+We have $r_t > r_t^*$ and $i_t = 0 \Rightarrow r_t = -\mathbb{E}_t \pi_{t+1}$.
+
+Hence, we could try raising expected inflation.
+
+We have
+
+$$
+x_t = -\sigma^{-1} ( i_t - \mathbb{E}_t \pi_{t+1} - r_t^* ) + \mathbb{E}_t x_{t+1}
+$$
+
+Iterating forward:
+
+$$
+x_t = -\sigma^{-1} \mathbb{E}_t \sum_{j=0}^{\infty} ( i_{t+j} - \pi_{t+1+j} - r_{t+j}^* )
+$$
+
+So committing to a path for $i_{t+j}$ has a direct impact on the output gap.
+
+Do the same for the AS curve:
+
+$$
+\pi_t = \kappa x_t + \beta \mathbb{E}_t \pi_{t+1} + u_t
+$$
+
+$$
+= \mathbb{E}_t \sum_{j=0}^{\infty} \beta^j \left[ \kappa  x_{t+j} +  u_{t+j} \right]
+$$
+
+Thus, committing to a path for $i_{t+j}$ has an indirect effect on $\pi_t$, providing further demand stimulus.
+
+Notice that the model does not account for discounting when summing over interest rates.
+
+If instead the AD curve was
+
+$$
+x_t = -\sigma^{-1}(i_t - \mathbb{E}_t \pi_{t+1} - r_t^*) + \delta \mathbb{E}_t x_{t+1}
+$$
+
+then
+
+$$
+x_t = -\sigma^{-1} \mathbb{E}_t \sum_{j=0}^{\infty} \delta^j ( i_{t+j} - \pi_{t+1+j} - r_{t+j}^* )
+$$
+
+Then the effect on the output gap would be lower.
+
+This can be achieved through cognitive discounting or OLG.
+
+---
+
+## QUANTITATIVE EASING
+
+The central bank purchases long-term government bonds in exchange for short-term bonds.
+
+By purchasing long-term bonds, the CB bids up their prices, lowering yields.
+
+Introduce long-term bonds in the household problem:
+
+$$
+- \sigma c_t = -\sigma \mathbb{E}_t c_{t+1} + i_t - \mathbb{E}_t \pi_{t+1} - v_b ( b_t^h - b_Lt^h )
+$$
+
+$$
+- \sigma c_t = -\sigma \mathbb{E}_t c_{t+1} + \mathbb{E}_t i_{Lt+1} - \mathbb{E}_t \pi_{t+1} + v_b \delta ( b_t^h - b_Lt^h )
+$$
+
+Where $b^h$ denotes bond holdings and $\delta = b^h / b_L^h$.
+
+Define the term premium:
+
+$$
+\mathbb{E}_t i_{Lt+1} - i_t = v_b (1+\delta)(b_t^h - b_{Lt}^h)
+$$
+
+QE decreases term premium, as $\Rightarrow b_t^h$ decreases and $b_{Lt}^h$ increases.
+
+Rewrite:
+
+$$
+v_b (b_t^h - b_{Lt}^h) = [\mathbb{E}_t i_{Lt+1} - i_t](1+\delta)^{-1}
+$$
+
+Then
+
+$$
+c_t = \mathbb{E}_t c_{t+1} - \sigma^{-1} \left[
+\frac{\delta}{1+\delta} i_t + \frac{1}{1+\delta} \mathbb{E}_t i_{Lt+1} - \mathbb{E}_t \pi_{t+1}
+\right]
+$$
+
+At the ZLB ($i_t=0$), the central bank can intervene on $\mathbb{E}_t i_{Lt+1}$.
+
+---
+
+## FISCAL POLICY
+
+Introducing distortionary labour taxes and government spending gives:
+
+$$
+\text{AD: } y_t = - (i_t - \mathbb{E}_t \pi_{t+n} - r_t^*) + \mathbb{E}_t y_{t+n} + g_t - \mathbb{E}_t g_{t+n}
+$$
+
+$$
+\text{AS: } \pi_t = \kappa y_t + \beta \mathbb{E}_t \pi_{t+n} + \psi(\hat{\tau}_t - g_t)
+$$
+
+$$
+\text{MP: } i_t = \phi_\pi \pi_t + \phi_y y_t
+$$
+
+Government spending is equivalent to a positive demand shock: it raises $y_t$ and $\pi_t$, so the central bank responds by raising $i_t$.
+
+A tax cut is equivalent to a negative cost-push shock (reducing marginal costs), lowering inflation, causing $i_t$ to fall and stimulating demand.
+
+---
+
+### Normal times
+
+$$
+r_t^* \in \{0, \widetilde r\}, \quad r_0^* = \widetilde r
+$$
+
+$$
+r_t^* =
+\begin{cases}
+\widetilde r & \text{with prob} & 1-\mu \\
+0 & \text{with prob} & \mu
+\end{cases}
+$$
+
+Long run:
+
+$$
+\hat{\tau}_t = g_t = \pi_t = y_t= 0
+$$
+
+Substituting into the expectation terms give the AD curve:
+
+$$
+y_n = - (i_n - \mu \pi_n - \widetilde r) + \mu y_n + (1-\mu) g
+$$
+
+$$
+= -[\phi_\pi - \mu]\pi_n + [\mu - \phi_y]y_n + \widetilde r + (1-\mu)g
+$$
+
+and the AS curve:
+
+$$
+\pi_n = \kappa y_n + \beta \mu \pi_n + \psi(\hat{\tau} - g)
+$$
+
+Tax cuts stimulate output; so does government spending.
+
+---
+
+### ZLB
+
+Remember that at the ZLB, $i_t = 0$. Substituting again into the expectation terms gives:
+
+$$
+y_c = \mu \pi_c + \widetilde r + \mu y_c + (1-\mu) g
+$$
+
+$$
+\pi_c = \kappa y_c + \beta \mu \pi_c + \psi(\hat{\tau} - g)
+$$
+
+Assuming $g=0$, solving for $y_c$ shows tax cuts can be contractionary. This should come as no surprise: tax cuts directly reduce inflation, causing the central bank to cut $i_t$ and stimulate demand in normal times. If $i_t$ cannot be cut, then the tax cut is not effective in stimulating demand.
+
+Setting $\hat{\tau}=0$, we can see that government spending is expansionary and the multiplier is larger than in normal times, as the central bank chooses not to offset the spike in inflation raising interest rates.
+
+## EXERCISES
+
+You can use the following exercises to test you understanding of the material:  
+- [Forward Guidance](../assets/Forward_Guidance.pdf)   
+- [Quantitative Easing](../assets/QE.pdf)  
+- [Fiscal Policy](../assets/Fiscal_ZLB.pdf)  
+
+<br><br><br>
+
+![](../images/poodles_2.png){fig-align="right" width="30%"}

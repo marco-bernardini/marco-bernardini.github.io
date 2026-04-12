@@ -7,6 +7,7 @@ This section contains various resources related to macroeconomics and econometri
 
 ## Graduate Macro
 - [The New Keynesian Model](latex/NK.qmd)
+- [The New Keynesian Model - application at the ZLB](latex/ZLB.qmd)
 
 ## Empirical Macroeconomics
 - [Introductory course](latex/empirical.qmd)

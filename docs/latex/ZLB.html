@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Macroeconomics – Marco Bernardini</title>
+<title>zlb – Marco Bernardini</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,8 +69,37 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Marco Bernardini</span>
     </a>
   </div>
@@ -90,23 +119,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./cv.html"> 
+    <a class="nav-link" href="../cv.html"> 
 <span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./macroeconomics.html" aria-current="page"> 
+    <a class="nav-link" href="../macroeconomics.html"> 
 <span class="menu-text">MACRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./microeconomics.html"> 
+    <a class="nav-link" href="../microeconomics.html"> 
 <span class="menu-text">MICRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./data-analysis.html"> 
+    <a class="nav-link" href="../data-analysis.html"> 
 <span class="menu-text">DATA ANALYSIS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./articles.html"> 
+    <a class="nav-link" href="../articles.html"> 
 <span class="menu-text">RESEARCH</span></a>
   </li>  
 </ul>
@@ -125,75 +154,231 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#graduate-macro" id="toc-graduate-macro" class="nav-link active" data-scroll-target="#graduate-macro">Graduate Macro</a></li>
-  <li><a href="#empirical-macroeconomics" id="toc-empirical-macroeconomics" class="nav-link" data-scroll-target="#empirical-macroeconomics">Empirical Macroeconomics</a></li>
-  <li><a href="#corso-introduttivo-di-macroeconomia-con-python" id="toc-corso-introduttivo-di-macroeconomia-con-python" class="nav-link" data-scroll-target="#corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">INTRODUCTION</a></li>
+  <li><a href="#the-model" id="toc-the-model" class="nav-link" data-scroll-target="#the-model">THE MODEL</a></li>
+  <li><a href="#forward-guidance" id="toc-forward-guidance" class="nav-link" data-scroll-target="#forward-guidance">FORWARD GUIDANCE</a></li>
+  <li><a href="#quantitative-easing" id="toc-quantitative-easing" class="nav-link" data-scroll-target="#quantitative-easing">QUANTITATIVE EASING</a></li>
+  <li><a href="#fiscal-policy" id="toc-fiscal-policy" class="nav-link" data-scroll-target="#fiscal-policy">FISCAL POLICY</a>
   <ul class="collapse">
-  <li><a href="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" id="toc-a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="nav-link" data-scroll-target="#a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</a></li>
+  <li><a href="#normal-times" id="toc-normal-times" class="nav-link" data-scroll-target="#normal-times">Normal times</a></li>
+  <li><a href="#zlb" id="toc-zlb" class="nav-link" data-scroll-target="#zlb">ZLB</a></li>
   </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">EXERCISES</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Macroeconomics</h1>
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">INTRODUCTION</h2>
+<p>Consider a negative demand shock to <span class="math inline">\(r_t^*\)</span> (driven by an increase in the discount factor of the households, for example).</p>
+<p>The fall in <span class="math inline">\(r_t^*\)</span> pushes down <span class="math inline">\(x_t\)</span> and <span class="math inline">\(\pi_t\)</span>. Under the Taylor rule, the policy authority cuts the nominal interest rate: <span class="math display">\[
+i_t = \phi_\pi \pi_t + \phi_x x_t \quad \rightarrow \text{some volatility}
+\]</span></p>
+<p><span class="math display">\[
+i_t = r_t^* + \phi_\pi \pi_t + \phi_x x_t \quad \rightarrow \text{full stabilization}
+\]</span></p>
+<p>There must exist a lower bound below which a cut is no longer effective. Assume this is <span class="math display">\[
+i_t = 0
+\]</span></p>
+<hr>
+</section>
+<section id="the-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-model">THE MODEL</h2>
+<p>We have <span class="math display">\[
+i_t = \max \{ i^{LB}, \ \phi_\pi \pi_t + \phi_x x_t \}
+\]</span></p>
+<p>To remove uncertainty and account for non-linearities assume <span class="math display">\[
+r_t^* =
+\begin{cases}
+0 \\
+\widetilde r &lt; 0
+\end{cases}
+\]</span></p>
+<p>Assume the economy is such that at <span class="math inline">\(t=0\)</span>: <span class="math inline">\(r_0^* = r\)</span>.</p>
+<p>Assume <span class="math display">\[
+r_t^* =
+\begin{cases}
+r &amp; \text{with prob } \mu \\
+0 &amp; \text{with prob } 1-\mu
+\end{cases}
+\]</span></p>
+<p>In the long run, <span class="math inline">\(x_t = \pi_t = 0\)</span>.</p>
+<p>Compute AD, AS; let the subscript <span class="math inline">\(c\)</span> refer to crisis times.<br>
+Starting with the classical AD curve, an expanding the expectation terms gives: <span class="math display">\[
+x_c = - ( i^{LB} - \mu \pi_c - r ) + \mu x_c
+\]</span></p>
+<p><span class="math display">\[
+(1-\mu)x_c = r - i^{LB} + \mu \pi_c
+\]</span></p>
+<p>Doing the same for the AS curve gives:</p>
+<p><span class="math display">\[
+\pi_t = \kappa x_c + \beta \mu \pi_c
+\]</span></p>
+<p><span class="math display">\[
+(1-\beta\mu)\pi_c = \kappa x_c
+\]</span></p>
+<p>Now, define</p>
+<p><span class="math display">\[
+r_c = r - i^{LB}
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+x_c = \frac{1-\beta\mu}{(1-\mu)(1-\beta\mu) - \kappa \mu} \, r_c
+\]</span></p>
+<p><span class="math display">\[
+\pi_c = \frac{\kappa}{(1-\mu)(1-\beta\mu) - \kappa \mu} \, r_c
+\]</span></p>
+<p>Assume the denominator is positive so that <span class="math inline">\((x_c, \pi_c) &lt; 0\)</span>.</p>
+<p>Remember: <span class="math display">\[
+i_t = \phi_\pi \pi_t + \phi_x x_t \Rightarrow i_t &lt; 0
+\]</span></p>
+<p>If <span class="math inline">\(i_t\)</span> cannot go below <span class="math inline">\(0\)</span>, then <span class="math display">\[
+r_t = i_t - \mathbb{E}_t \pi_{t+1} &gt; r_t^*
+\]</span></p>
+<p>causing further drag on demand.</p>
+<hr>
+</section>
+<section id="forward-guidance" class="level2">
+<h2 class="anchored" data-anchor-id="forward-guidance">FORWARD GUIDANCE</h2>
+<p>We have <span class="math inline">\(r_t &gt; r_t^*\)</span> and <span class="math inline">\(i_t = 0 \Rightarrow r_t = -\mathbb{E}_t \pi_{t+1}\)</span>.</p>
+<p>Hence, we could try raising expected inflation.</p>
+<p>We have</p>
+<p><span class="math display">\[
+x_t = -\sigma^{-1} ( i_t - \mathbb{E}_t \pi_{t+1} - r_t^* ) + \mathbb{E}_t x_{t+1}
+\]</span></p>
+<p>Iterating forward:</p>
+<p><span class="math display">\[
+x_t = -\sigma^{-1} \mathbb{E}_t \sum_{j=0}^{\infty} ( i_{t+j} - \pi_{t+1+j} - r_{t+j}^* )
+\]</span></p>
+<p>So committing to a path for <span class="math inline">\(i_{t+j}\)</span> has a direct impact on the output gap.</p>
+<p>Do the same for the AS curve:</p>
+<p><span class="math display">\[
+\pi_t = \kappa x_t + \beta \mathbb{E}_t \pi_{t+1} + u_t
+\]</span></p>
+<p><span class="math display">\[
+= \mathbb{E}_t \sum_{j=0}^{\infty} \beta^j \left[ \kappa  x_{t+j} +  u_{t+j} \right]
+\]</span></p>
+<p>Thus, committing to a path for <span class="math inline">\(i_{t+j}\)</span> has an indirect effect on <span class="math inline">\(\pi_t\)</span>, providing further demand stimulus.</p>
+<p>Notice that the model does not account for discounting when summing over interest rates.</p>
+<p>If instead the AD curve was</p>
+<p><span class="math display">\[
+x_t = -\sigma^{-1}(i_t - \mathbb{E}_t \pi_{t+1} - r_t^*) + \delta \mathbb{E}_t x_{t+1}
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+x_t = -\sigma^{-1} \mathbb{E}_t \sum_{j=0}^{\infty} \delta^j ( i_{t+j} - \pi_{t+1+j} - r_{t+j}^* )
+\]</span></p>
+<p>Then the effect on the output gap would be lower.</p>
+<p>This can be achieved through cognitive discounting or OLG.</p>
+<hr>
+</section>
+<section id="quantitative-easing" class="level2">
+<h2 class="anchored" data-anchor-id="quantitative-easing">QUANTITATIVE EASING</h2>
+<p>The central bank purchases long-term government bonds in exchange for short-term bonds.</p>
+<p>By purchasing long-term bonds, the CB bids up their prices, lowering yields.</p>
+<p>Introduce long-term bonds in the household problem:</p>
+<p><span class="math display">\[
+- \sigma c_t = -\sigma \mathbb{E}_t c_{t+1} + i_t - \mathbb{E}_t \pi_{t+1} - v_b ( b_t^h - b_Lt^h )
+\]</span></p>
+<p><span class="math display">\[
+- \sigma c_t = -\sigma \mathbb{E}_t c_{t+1} + \mathbb{E}_t i_{Lt+1} - \mathbb{E}_t \pi_{t+1} + v_b \delta ( b_t^h - b_Lt^h )
+\]</span></p>
+<p>Where <span class="math inline">\(b^h\)</span> denotes bond holdings and <span class="math inline">\(\delta = b^h / b_L^h\)</span>.</p>
+<p>Define the term premium:</p>
+<p><span class="math display">\[
+\mathbb{E}_t i_{Lt+1} - i_t = v_b (1+\delta)(b_t^h - b_{Lt}^h)
+\]</span></p>
+<p>QE decreases term premium, as <span class="math inline">\(\Rightarrow b_t^h\)</span> decreases and <span class="math inline">\(b_{Lt}^h\)</span> increases.</p>
+<p>Rewrite:</p>
+<p><span class="math display">\[
+v_b (b_t^h - b_{Lt}^h) = [\mathbb{E}_t i_{Lt+1} - i_t](1+\delta)^{-1}
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+c_t = \mathbb{E}_t c_{t+1} - \sigma^{-1} \left[
+\frac{\delta}{1+\delta} i_t + \frac{1}{1+\delta} \mathbb{E}_t i_{Lt+1} - \mathbb{E}_t \pi_{t+1}
+\right]
+\]</span></p>
+<p>At the ZLB (<span class="math inline">\(i_t=0\)</span>), the central bank can intervene on <span class="math inline">\(\mathbb{E}_t i_{Lt+1}\)</span>.</p>
+<hr>
+</section>
+<section id="fiscal-policy" class="level2">
+<h2 class="anchored" data-anchor-id="fiscal-policy">FISCAL POLICY</h2>
+<p>Introducing distortionary labour taxes and government spending gives:</p>
+<p><span class="math display">\[
+\text{AD: } y_t = - (i_t - \mathbb{E}_t \pi_{t+n} - r_t^*) + \mathbb{E}_t y_{t+n} + g_t - \mathbb{E}_t g_{t+n}
+\]</span></p>
+<p><span class="math display">\[
+\text{AS: } \pi_t = \kappa y_t + \beta \mathbb{E}_t \pi_{t+n} + \psi(\hat{\tau}_t - g_t)
+\]</span></p>
+<p><span class="math display">\[
+\text{MP: } i_t = \phi_\pi \pi_t + \phi_y y_t
+\]</span></p>
+<p>Government spending is equivalent to a positive demand shock: it raises <span class="math inline">\(y_t\)</span> and <span class="math inline">\(\pi_t\)</span>, so the central bank responds by raising <span class="math inline">\(i_t\)</span>.</p>
+<p>A tax cut is equivalent to a negative cost-push shock (reducing marginal costs), lowering inflation, causing <span class="math inline">\(i_t\)</span> to fall and stimulating demand.</p>
+<hr>
+<section id="normal-times" class="level3">
+<h3 class="anchored" data-anchor-id="normal-times">Normal times</h3>
+<p><span class="math display">\[
+r_t^* \in \{0, \widetilde r\}, \quad r_0^* = \widetilde r
+\]</span></p>
+<p><span class="math display">\[
+r_t^* =
+\begin{cases}
+\widetilde r &amp; \text{with prob} &amp; 1-\mu \\
+0 &amp; \text{with prob} &amp; \mu
+\end{cases}
+\]</span></p>
+<p>Long run:</p>
+<p><span class="math display">\[
+\hat{\tau}_t = g_t = \pi_t = y_t= 0
+\]</span></p>
+<p>Substituting into the expectation terms give the AD curve:</p>
+<p><span class="math display">\[
+y_n = - (i_n - \mu \pi_n - \widetilde r) + \mu y_n + (1-\mu) g
+\]</span></p>
+<p><span class="math display">\[
+= -[\phi_\pi - \mu]\pi_n + [\mu - \phi_y]y_n + \widetilde r + (1-\mu)g
+\]</span></p>
+<p>and the AS curve:</p>
+<p><span class="math display">\[
+\pi_n = \kappa y_n + \beta \mu \pi_n + \psi(\hat{\tau} - g)
+\]</span></p>
+<p>Tax cuts stimulate output; so does government spending.</p>
+<hr>
+</section>
+<section id="zlb" class="level3">
+<h3 class="anchored" data-anchor-id="zlb">ZLB</h3>
+<p>Remember that at the ZLB, <span class="math inline">\(i_t = 0\)</span>. Substituting again into the expectation terms gives:</p>
+<p><span class="math display">\[
+y_c = \mu \pi_c + \widetilde r + \mu y_c + (1-\mu) g
+\]</span></p>
+<p><span class="math display">\[
+\pi_c = \kappa y_c + \beta \mu \pi_c + \psi(\hat{\tau} - g)
+\]</span></p>
+<p>Assuming <span class="math inline">\(g=0\)</span>, solving for <span class="math inline">\(y_c\)</span> shows tax cuts can be contractionary. This should come as no surprise: tax cuts directly reduce inflation, causing the central bank to cut <span class="math inline">\(i_t\)</span> and stimulate demand in normal times. If <span class="math inline">\(i_t\)</span> cannot be cut, then the tax cut is not effective in stimulating demand.</p>
+<p>Setting <span class="math inline">\(\hat{\tau}=0\)</span>, we can see that government spending is expansionary and the multiplier is larger than in normal times, as the central bank chooses not to offset the spike in inflation raising interest rates.</p>
+</section>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">EXERCISES</h2>
+<p>You can use the following exercises to test you understanding of the material:<br>
+- <a href="../assets/Forward_Guidance.pdf">Forward Guidance</a><br>
+- <a href="../assets/QE.pdf">Quantitative Easing</a><br>
+- <a href="../assets/Fiscal_ZLB.pdf">Fiscal Policy</a></p>
+<p><br><br><br></p>
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="../images/poodles_2.png" class="img-fluid quarto-figure quarto-figure-right figure-img" style="width:30.0%"></p>
+</figure>
 </div>
 
 
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This section contains various resources related to macroeconomics and econometrics, including articles, research, interactive notebooks and other useful resources.</p>
-<section id="graduate-macro" class="level2">
-<h2 class="anchored" data-anchor-id="graduate-macro">Graduate Macro</h2>
-<ul>
-<li><a href="./latex/NK.html">The New Keynesian Model</a></li>
-<li><a href="./latex/ZLB.html">The New Keynesian Model - application at the ZLB</a></li>
-</ul>
-</section>
-<section id="empirical-macroeconomics" class="level2">
-<h2 class="anchored" data-anchor-id="empirical-macroeconomics">Empirical Macroeconomics</h2>
-<ul>
-<li><a href="./latex/empirical.html">Introductory course</a></li>
-<li><a href="./latex/LP.html">Local Projections</a></li>
-</ul>
-</section>
-<section id="corso-introduttivo-di-macroeconomia-con-python" class="level2">
-<h2 class="anchored" data-anchor-id="corso-introduttivo-di-macroeconomia-con-python">Corso introduttivo di Macroeconomia con Python</h2>
-<section id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian" class="level3">
-<h3 class="anchored" data-anchor-id="a-series-of-lectures-on-the-principles-of-macroeconomics-in-italian">A series of lectures on the principles of macroeconomics in italian</h3>
-<ul>
-<li><a href="./notebooks/Le variabili macroeconomiche.html">Le variabili macroeconomiche</a><br>
-A notebook exploring macroeconomic variables and their applications.</li>
-<li><a href="./notebooks/La curva di Phillips.html">La curva di Phillips</a><br>
-A notebook exploring the relationship between inflation and unemployment</li>
-<li><a href="./notebooks/La legge di Okun.html">La legge di Okun</a><br>
-A notebook diving into the relationship between unemployment and output</li>
-<li><a href="./D3/money.html">Il mercato della moneta</a><br>
-Financial markets 1 - money</li>
-<li><a href="./notebooks/La regola di Taylor.html">La regola di Taylor</a><br>
-A notebook showing a practical application of the Taylor Rule</li>
-<li><a href="./D3/IS-TR.html">Il modello IS-TR</a><br>
-Tools to experiment and interact with the IS-TR model</li>
-<li><a href="./D3/Mundell-Fleming.html">Il modello Mundell-Fleming (work in progress)</a><br>
-Tools to experiment and interact with the Mundell-Fleming model</li>
-</ul>
-
-
-</section>
 </section>
 
 </main> <!-- /main -->

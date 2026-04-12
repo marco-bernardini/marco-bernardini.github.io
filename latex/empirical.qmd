@@ -427,7 +427,21 @@ $$
   \mathbb{V} u_t = \Sigma = \mathbb{V} \Omega \varepsilon_t = \Omega \Omega^{'}
 $$
 
-The coefficients in $\Omega$ are the contemporaneous transmission coefficients that relate changes in $\varepsilon_t$ to contemporaneous changes in $u_t$.
+The coefficients in $\Omega$ are the contemporaneous transmission coefficients that relate changes in $\varepsilon_t$ to contemporaneous changes in $u_t$.  
+Notice that $\Omega \Omega' = \Sigma$ defines a set: $\left\{\Omega: \Omega \Omega' = \Sigma\right\} = \left\{Q'\Sigma^{\frac{1}{2}}\right\}$.  
+This is very interesting if we write:
+
+$$
+  \varepsilon_t = \Omega^{-1} u_t = Q' \Sigma^{-1/2} u_t
+$$
+
+hence
+
+$$
+  Q \varepsilon_t = \Sigma^{-1/2} u_t
+$$
+
+which means that we are choosing a basis (i.e. a rotation) for the shocks.
 
 ### Failure of invertibility
 
@@ -435,7 +449,10 @@ There are two important cases where invertibility does not hold.
 
 The first is when $\varepsilon_t \in \mathbb R^m$ and $y_t \in \mathbb R^n$, with $n<m$: in these cases, we will not have enough equations to "disentangle" the different shocks. This case is quite trivial thus we will not go into detail here.  
 The second case arises when the econometrician is not able to recover the hidden state from the history of the observables.  
-To clarify this point, consider a scalar state space system:  
+This is very clear in two cases:  
+- agents foresight: if agents base their current decisions on the expected future path of the variables  
+- policy makers foresight: if the central bank or the government use forecasts of the future path of the variables to set their current policy  
+To clarify this point algebraically, consider a scalar state space system:  
 
 $$
 s_t = a s_{t-1} + b \varepsilon_t,
@@ -515,12 +532,6 @@ $$
 b d^{-1}\mathbb E[y_{t+1}\mid \mathcal F_t^y].
 $$
 
-Hence, if
-$$
-(a - b d^{-1} c)^{t+1}s_0 \neq 0,
-$$
-the forecast of $s_{t+1}$ still depends on the unobserved initial state $s_0$. So the econometrician cannot recover $s_{t+1}$ from observables alone.
-
 Defining the part based only on observables as
 $$
 \hat s_{t+1|t}
@@ -567,15 +578,6 @@ $$
   \Omega P P' \Omega ' = \Omega I \Omega ' = \Omega Q Q' \Omega '
 $$
 
-If the reader has issues convincing themselves of the magnitude of this issue, the following widget could also be of help (work in progress):
-
-<iframe
-  src="../widgets/rotation-widget.html"
-  width="100%"
-  height="770"
-  style="border:none; border-radius:12px;"
-></iframe>
-
 Notice that, since we are interested in recovering not only the span of the shocks, but also the magnitude of their effect on observed variables, that of rotational indeterminacy is a problem of great importance. We will therefore dedicate most of the rest of the course to pinning down a specific rotation of the matrix $Q$.
 
 ### Dynamic indeterminacy
@@ -621,14 +623,14 @@ Notice, however, than when we assume invertibility we require automatically the 
 Rembember that, under invertibility, we can write:
 
 $$
-  y_t = C(L)u_t = C(L) \Omega \varepsilon_t = C(L) \Omega Q \varepsilon_t = C(L) \Sigma^{1/2} Q \varepsilon_t
+  y_t = C(L)u_t = C(L) \Omega \varepsilon_t = C(L) \Sigma^{1/2} Q \varepsilon_t = \Theta(L) \varepsilon_t
 $$
 
 for some orthonormal $Q$ conformable to $\Omega$. The IRFs are defined as $\Theta(L) = C(L) \Sigma^{1/2} Q$.  
 Remember now that $C(0)$ is defined as the identity matrix, and define the impact matrix $\Theta_0$ as:
 
 $$
-  \Theta_0 = \Omega Q
+  \Theta_0 = \Sigma^{1/2} Q
 $$
 
 Then we have:
@@ -749,7 +751,7 @@ $$
 Hence identification on $u_t$ pins down impact effects on $y_t$.  
 Arguably, this recursive structure is not particularly realistic nor easily implementable. First, the lower the sampling frequency, the more unrealistic the timing assumptions become. Since this is quite obvious, I will not go further.  
 Second, the recursive causal ordering rules out contemporaneous feedback across variables.  
-To see this, for an ordering $y_{t,1},\dots,y_{n,t}$)$:
+To see this, for an ordering $y_{t,1},\dots,y_{n,t}$:
 
 $$
 u_{it} = \sum_{j \le i} \Theta_{0,ij}\,\varepsilon_{jt}
@@ -1105,7 +1107,7 @@ Narrative IVs are based on the idea of using historical records to identify sour
 
 #### High Frequency IV
 
-High frequency IV are constructed using changes in prices measured at very high frequences around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.
+High frequency IV are constructed using changes in asset prices (usually futures) measured at very high frequencies around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.
 
 <br><br><br>
 
