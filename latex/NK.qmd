@@ -1514,6 +1514,13 @@ $$
 
 Eventually, we can incorporate $\delta_t$ inside the definition of $r_t^*$
 
+---
+
+## EXERCISES
+
+Here is a useful list of exercises to go through the derivations step-by-step:
+- [Derivations](../assets/NKM.pdf)  
+
 <br><br><br>
 
 ![](../images/poodles_2.png){fig-align="right" width="30%"}

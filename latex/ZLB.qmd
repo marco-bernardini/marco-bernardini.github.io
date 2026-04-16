@@ -274,6 +274,8 @@ Assuming $g=0$, solving for $y_c$ shows tax cuts can be contractionary. This sho
 
 Setting $\hat{\tau}=0$, we can see that government spending is expansionary and the multiplier is larger than in normal times, as the central bank chooses not to offset the spike in inflation raising interest rates.
 
+---
+
 ## EXERCISES
 
 You can use the following exercises to test you understanding of the material:  
