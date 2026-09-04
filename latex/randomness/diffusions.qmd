@@ -1,6 +1,6 @@
 # Diffusion Processes
 
-I suggest the reader not accustomed to the language of probability to first read an introductory measure theory set of lecture notes.
+If you're not not accustomed to the language of probability now it's the time to read some lecture notes on measure theory. The following is not an easy read, but it contains all the necessary definitions and results we will need throughout the course.
 
 ## Filtrations
 
@@ -72,68 +72,6 @@ X_t
 $$
 
 To end the book analogy, in our book we are able to understand the story up to page $t$ without having to peek ahead.
-
----
-
-## Stochastic processes
-
-A **stochastic process** is a family of random variables
-
-$$
-X=\{X_t\}_{t\in T}
-$$
-
-defined on the same probability space
-
-$$
-(\Omega,\mathcal{F},\mathbb{P}),
-$$
-
-with values in some state space $E$.
-
-Usually,
-
-$$
-T=[0,\infty)
-$$
-
-and
-
-$$
-E=\mathbb{R}^d.
-$$
-
-The process can equivalently be viewed as a function of two variables,
-
-$$
-X:T\times\Omega\to E,
-$$
-
-with
-
-$$
-X(t,\omega)=X_t(\omega).
-$$
-
-There are two complementary ways to look at it.
-
-For fixed $t$,
-
-$$
-\omega\mapsto X_t(\omega)
-$$
-
-is a random variable.
-
-For fixed $\omega$,
-
-$$
-t\mapsto X_t(\omega)
-$$
-
-is a function of time, called a **sample path**, **trajectory**, or **realization** of the process.
-
----
 
 ## Markov Process
 

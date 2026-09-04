@@ -9,4 +9,5 @@ format: html
 A not-so-gentle but still not technical introduction to stochastic differential equations
 </p>
 
-- [Diffusions](latex/diffusions.qmd)
+- [Brownian motion](latex/randomness/brownian_motion.qmd)
+- [Diffusions](latex/randomness/diffusions.qmd)

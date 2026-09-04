@@ -1,0 +1,591 @@
+# Brownian motion: definition and properties
+
+I choose to open this series of notes with a discussion of Brownian motion, arguably the most popular stochastic process in the theory of SDE. Prerequisites for this part are a basic knowledge of probability and measure theory. 
+
+## Stochastic processes
+
+A **stochastic process** is a family of random variables
+
+$$
+X=\{X_t\}_{t\in T}
+$$
+
+defined on the same probability space
+
+$$
+(\Omega,\mathcal{F},\mathbb{P}),
+$$
+
+with values in some state space $E$.
+
+Usually,
+
+$$
+T=[0,\infty)
+$$
+
+and
+
+$$
+E=\mathbb{R}^d.
+$$
+
+The process can equivalently be viewed as a function of two variables,
+
+$$
+X:T\times\Omega\to E,
+$$
+
+with
+
+$$
+X(t,\omega)=X_t(\omega).
+$$
+
+There are two complementary ways to look at it.
+
+For fixed $t$,
+
+$$
+\omega\mapsto X_t(\omega)
+$$
+
+is a random variable.
+
+For fixed $\omega$,
+
+$$
+t\mapsto X_t(\omega)
+$$
+
+is a function of time, called a **sample path**, **trajectory**, or **realization** of the process.
+
+## Stationary processes
+
+A process is called stationary when its statistical behaviour does not change under shifts in time.
+
+There are two important notions.
+
+### Strict stationarity
+
+A stochastic process $\{X_t\}$ is **strictly stationary** if, for every $n$, every choice of times $t_1,\ldots,t_n$, and every time shift $h$,
+
+$$
+(X_{t_1},\ldots,X_{t_n})
+\overset{d}{=}
+(X_{t_1+h},\ldots,X_{t_n+h}),
+$$
+
+whenever the shifted times remain in the time domain.
+
+Thus all finite-dimensional distributions are invariant under time translation.
+
+Strict stationarity is therefore a statement about the entire law of the process.
+
+---
+
+### Weak stationarity
+
+Suppose $X_t\in L^2$.
+
+The process is **weakly stationary**, or **second-order stationary**, if
+
+$$
+\mathbb{E}[X_t]
+=
+\mu
+$$
+
+is independent of $t$, and the covariance depends only on the time difference:
+
+$$
+\operatorname{Cov}(X_t,X_s)
+=
+C(t-s).
+$$
+
+For a centered process,
+
+$$
+\mathbb{E}[X_t]=0,
+$$
+
+this becomes
+
+$$
+C(t-s)
+=
+\mathbb{E}[X_tX_s].
+$$
+
+The function $C$ is called the **autocovariance** or **correlation function**.
+
+Thus weak stationarity says that the first two moments are invariant under time translation.
+
+Strict stationarity is stronger in general:
+
+$$
+\text{strict stationarity}
++
+X_t\in L^2
+\quad\Longrightarrow\quad
+\text{weak stationarity}.
+$$
+
+The converse is generally false.
+
+### Independent increments
+
+$X_t$ has independent increments if, for all
+
+$$
+t_0 < t_1 < \cdots < t_n,
+$$
+
+the random variables
+
+$$
+X_{t_1}-X_{t_0}, \quad
+X_{t_2}-X_{t_1}, \quad \ldots
+$$
+
+are independent.
+
+If, for all $t_1,t_2,s\in T$ and $B\subset\mathbb R$,
+
+$$
+\mathbb P(X_{t_1+s}-X_{t_1}\in B)
+=
+\mathbb P(X_{t_2+s}-X_{t_2}\in B),
+$$
+
+then $X_t$ has **stationary independent increments**.
+
+## Brownian motion
+
+A Brownian motion
+
+$$
+W(t):\mathbb R^+\to\mathbb R
+$$
+
+is a real-valued stochastic process with a.s. continuous paths such that
+
+$$
+W(0)=0,
+$$
+
+it has independent increments, and, for all $t>s\geq 0$,
+
+$$
+W(t)-W(s)
+$$
+
+has a Gaussian distribution with mean $0$ and variance $t-s$:
+
+$$
+W(t)-W(s)\sim\mathcal N(0,t-s).
+$$
+
+The density of the random variable $W(t)-W(s)$ is
+
+$$
+g(x;t,s)
+=
+\frac{1}{\sqrt{2\pi(t-s)}}
+\exp\left(
+-\frac{x^2}{2(t-s)}
+\right).
+$$
+
+Although Brownian motion has stationary increments, it is not a stationary process. The probability density of the one-dimensional Brownian motion is
+
+$$
+g(x,t)
+=
+\frac{1}{\sqrt{2\pi t}}
+\exp\left(
+-\frac{x^2}{2t}
+\right).
+$$
+
+Similarly, a $d$-dimensional Brownian motion
+
+$$
+W(t):\mathbb R^+\to\mathbb R^d
+$$
+
+is a vector of $d$ independent Brownian motions,
+
+$$
+W(t)
+=
+\left(
+W_1(t),\ldots,W_d(t)
+\right).
+$$
+
+The density of the Gaussian random variable $W(t)-W(s)$ is
+
+$$
+g(x;t,s)
+=
+\frac{1}{[2\pi(t-s)]^{d/2}}
+\exp\left(
+-\frac{\|x\|^2}{2(t-s)}
+\right).
+$$
+
+For $d$-dimensional Brownian motion,
+
+$$
+\mathbb E[W(t)] = 0,
+\qquad \forall t\geq 0,
+$$
+
+and
+
+$$
+\mathbb E
+\left[
+(W(t)-W(s))
+\otimes
+(W(t)-W(s))
+\right]
+=
+(t-s)I.
+$$
+
+Moreover,
+
+$$
+\mathbb E
+\left[
+W(t)\otimes W(s)
+\right]
+=
+\min(t,s)I.
+$$
+
+## Properties of Brownian motion
+
+The following properties will be central to the development of stochastic calculus. 
+I choose to present them in a non-technical way, using heuristic arguments rather than proofs.
+
+### Hölder continuity
+
+Brownian paths are almost surely locally Hölder continuous with any exponent
+
+$$
+\alpha \in \left(0,\frac12\right).
+$$
+
+That is, for every $T>0$ and $\alpha<1/2$, there exists an a.s. finite random constant $C$ such that
+
+$$
+|W_t-W_s|
+\leq C|t-s|^\alpha,
+\qquad s,t\in[0,T].
+$$
+
+### Brownian motion has unbounded variation
+
+For a partition
+
+$$
+\Pi=\{0=t_0<t_1<\cdots<t_n=t\},
+$$
+
+define
+
+$$
+\Delta W_k=W_{t_{k+1}}-W_{t_k},
+\qquad
+\Delta t_k=t_{k+1}-t_k,
+$$
+
+Since (remember that $\Delta W_k\sim\mathcal N(0,\Delta t_k)$)
+
+$$
+\mathbb E[(\Delta W_k)^2]=\Delta t_k,
+\qquad
+\mathbb E[(\Delta W_k)^4]=3(\Delta t_k)^2,
+$$
+
+we have
+
+$$
+\mathbb E[\sum_{t_k<t}(\Delta W_k)^2]
+=
+\sum_{t_k<t}\Delta t_k
+=
+t.
+$$
+
+Moreover, by independence of the increments,
+
+$$
+\begin{aligned}
+\mathbb E[(\sum_{t_k<t}(\Delta W_k)^2-t)^2]
+&=
+\sum_{t_k<t}
+\mathbb E
+\left[
+\left((\Delta W_k)^2-\Delta t_k\right)^2
+\right]
+\\
+&=
+\sum_{t_k<t}
+\left(
+3(\Delta t_k)^2-(\Delta t_k)^2
+\right)
+\\
+&=
+2\sum_{t_k<t}(\Delta t_k)^2
+\longrightarrow 0.
+\end{aligned}
+$$
+
+Hence
+
+$$
+\sum_{t_k<t}(\Delta W_k)^2.
+=
+\sum_{t_k<t}(\Delta W_k)^2
+\longrightarrow t
+\qquad\text{in }L^2.
+$$
+
+Now suppose, by contradiction, that a Brownian path has bounded variation on $[0,t]$. Then
+
+$$
+V_t(W)
+=
+\sup_{\Pi}
+\sum_{t_k<t}|\Delta W_k|
+<\infty,
+$$
+
+so, for every partition $\Pi$,
+
+$$
+\sum_{t_k<t}|\Delta W_k|
+\leq V_t(W).
+$$
+
+Moreover,
+
+$$
+\begin{aligned}
+\sum_{t_k<t}(\Delta W_k)^2
+&=
+\sum_{t_k<t}|\Delta W_k|\,|\Delta W_k|
+\\
+&\leq
+\max_{t_k<t}|\Delta W_k|
+\sum_{t_k<t}|\Delta W_k|
+\\
+&\leq
+\max_{t_k<t}|\Delta W_k|\,V_t(W).
+\end{aligned}
+$$
+
+As $|\Pi|\to0$, continuity of the Brownian path on the compact interval
+$[0,t]$ implies uniform continuity, and therefore
+
+$$
+\max_{t_k<t}|\Delta W_k|
+\longrightarrow0.
+$$
+
+Since $V_t(W)<\infty$ by assumption,
+
+$$
+0
+\leq
+\sum_{t_k<t}(\Delta W_k)^2
+\leq
+\max_{t_k<t}|\Delta W_k|\,V_t(W)
+\longrightarrow0.
+$$
+
+Hence a continuous path of bounded variation must have zero quadratic
+variation:
+
+$$
+\sum_{t_k<t}(\Delta W_k)^2\longrightarrow0.
+$$
+
+But for Brownian motion we have just shown that
+
+$$
+\sum_{t_k<t}(\Delta W_k)^2\longrightarrow t.
+$$
+
+For $t>0$ this is a contradiction. Therefore
+
+$$
+V_t(W)
+=
+\sup_{\Pi}
+\sum_{t_k<t}|W_{t_{k+1}}-W_{t_k}|
+=
+\infty
+\qquad\text{a.s.}
+$$
+
+### Non-differentiability
+
+Brownian paths are almost surely nowhere differentiable.
+
+This should not be surprising: Brownian motion is continuous, but its paths have infinite variation on every non-trivial time interval.
+
+### Quadratic variation
+
+We have just shown that, in $L^2$,
+
+$$
+\sum_{t_k<t}(\Delta W_k)^2
+\longrightarrow t.
+$$
+
+This is conventionally written
+
+$$
+(dW_t)^2=dt
+$$
+
+or, informally over a small increment,
+
+$$
+(\Delta W)^2\sim\Delta t.
+$$
+
+Since the second-order term contributes at the same order as an ordinary time increment it cannot be discarded when Taylor-expanding functions of Brownian motion. 
+
+### Two other increment rules
+
+For a Brownian increment,
+
+$$
+\Delta W
+=
+W_{t+\Delta t}-W_t
+\sim
+\mathcal N(0,\Delta t).
+$$
+
+Equivalently,
+
+$$
+\Delta W=\sqrt{\Delta t}\,Z,
+\qquad
+Z\sim\mathcal N(0,1).
+$$
+
+Thus a Brownian increment is of order $\sqrt{\Delta t}$. Consequently,
+
+$$
+(\Delta W)^2
+=
+\Delta t\,Z^2,
+$$
+
+is of order $\Delta t$, while
+
+$$
+\Delta W\,\Delta t
+=
+(\Delta t)^{3/2}Z
+$$
+
+and
+
+$$
+(\Delta t)^2
+$$
+
+are of higher order.
+
+As before we could show that, in $L^2$,
+
+$$
+\sum_k\Delta W_k\,\Delta t_k
+\longrightarrow 0,
+\qquad
+\sum_k(\Delta t_k)^2
+\longrightarrow 0.
+$$
+
+which gives
+
+$$
+dW_t\,dt=0,
+\qquad
+(dt)^2=0.
+$$
+
+### Brownian scaling
+
+Let $W_t$ be a one-dimensional Brownian motion and let $c>0$. Define
+
+$$
+\frac{1}{c}W_{c^2t}.
+$$
+
+is again a Brownian motion.
+
+Equivalently, setting $a=c^2$,
+
+$$
+\frac{1}{\sqrt a}W_{at}
+\overset{d}{=}W_t.
+$$
+
+This is the **Brownian scaling property**.
+
+### Shift invariance
+
+For every $c>0$, the process
+
+$$
+X_t=W_{c+t}-W_c
+$$
+
+is a Brownian motion independent of
+
+$$
+\{W_u:u\in[0,c]\}.
+$$
+
+### Time reversal
+
+Let
+
+$$
+X_t=W_{1-t}-W_1,
+\qquad t\in[0,1].
+$$
+
+Then
+
+$$
+X_t\overset{d}{=}W_t.
+$$
+
+### Time inversion
+
+Define
+
+$$
+X_0=0,
+\qquad
+X_t=tW_{1/t},
+\quad t>0.
+$$
+
+Then
+
+$$
+X_t\overset{d}{=}W_t.
+$$

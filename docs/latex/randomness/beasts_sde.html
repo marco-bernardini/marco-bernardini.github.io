@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>beasts_sde – Marco Bernardini</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cc1d64809b8ed731f92ea1275fe9f05b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Marco Bernardini</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../cv.html"> 
+<span class="menu-text">CV</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../macroeconomics.html"> 
+<span class="menu-text">MACRO</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../randomness.html"> 
+<span class="menu-text">RANDOMNESS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../data-analysis.html"> 
+<span class="menu-text">DATA ANALYSIS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../articles.html"> 
+<span class="menu-text">RESEARCH</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#martingales-and-other-beasts" id="toc-martingales-and-other-beasts" class="nav-link active" data-scroll-target="#martingales-and-other-beasts">Martingales and Other Beasts</a>
+  <ul class="collapse">
+  <li><a href="#finite-dimensional-distributions" id="toc-finite-dimensional-distributions" class="nav-link" data-scroll-target="#finite-dimensional-distributions">Finite-dimensional distributions</a></li>
+  <li><a href="#stationary-processes" id="toc-stationary-processes" class="nav-link" data-scroll-target="#stationary-processes">Stationary processes</a>
+  <ul class="collapse">
+  <li><a href="#strict-stationarity" id="toc-strict-stationarity" class="nav-link" data-scroll-target="#strict-stationarity">Strict stationarity</a></li>
+  <li><a href="#weak-stationarity" id="toc-weak-stationarity" class="nav-link" data-scroll-target="#weak-stationarity">Weak stationarity</a></li>
+  <li><a href="#stationarity-versus-stationary-increments" id="toc-stationarity-versus-stationary-increments" class="nav-link" data-scroll-target="#stationarity-versus-stationary-increments">Stationarity versus stationary increments</a></li>
+  </ul></li>
+  <li><a href="#martingales" id="toc-martingales" class="nav-link" data-scroll-target="#martingales">Martingales</a>
+  <ul class="collapse">
+  <li><a href="#a-martingale-does-not-mean-independence" id="toc-a-martingale-does-not-mean-independence" class="nav-link" data-scroll-target="#a-martingale-does-not-mean-independence">A martingale does not mean independence</a></li>
+  <li><a href="#constant-expectation" id="toc-constant-expectation" class="nav-link" data-scroll-target="#constant-expectation">Constant expectation</a></li>
+  <li><a href="#martingales-from-conditional-expectations" id="toc-martingales-from-conditional-expectations" class="nav-link" data-scroll-target="#martingales-from-conditional-expectations">Martingales from conditional expectations</a></li>
+  <li><a href="#submartingales-and-supermartingales" id="toc-submartingales-and-supermartingales" class="nav-link" data-scroll-target="#submartingales-and-supermartingales">Submartingales and supermartingales</a></li>
+  <li><a href="#convex-transformations" id="toc-convex-transformations" class="nav-link" data-scroll-target="#convex-transformations">Convex transformations</a></li>
+  <li><a href="#why-martingales-matter" id="toc-why-martingales-matter" class="nav-link" data-scroll-target="#why-martingales-matter">Why martingales matter</a></li>
+  </ul></li>
+  <li><a href="#gaussian-processes" id="toc-gaussian-processes" class="nav-link" data-scroll-target="#gaussian-processes">Gaussian processes</a>
+  <ul class="collapse">
+  <li><a href="#mean-and-covariance-determine-a-gaussian-process" id="toc-mean-and-covariance-determine-a-gaussian-process" class="nav-link" data-scroll-target="#mean-and-covariance-determine-a-gaussian-process">Mean and covariance determine a Gaussian process</a></li>
+  <li><a href="#valid-covariance-functions" id="toc-valid-covariance-functions" class="nav-link" data-scroll-target="#valid-covariance-functions">Valid covariance functions</a></li>
+  <li><a href="#gaussian-processes-and-stationarity" id="toc-gaussian-processes-and-stationarity" class="nav-link" data-scroll-target="#gaussian-processes-and-stationarity">Gaussian processes and stationarity</a></li>
+  <li><a href="#uncorrelated-gaussian-variables-are-independent" id="toc-uncorrelated-gaussian-variables-are-independent" class="nav-link" data-scroll-target="#uncorrelated-gaussian-variables-are-independent">Uncorrelated Gaussian variables are independent</a></li>
+  </ul></li>
+  <li><a href="#markov-processes" id="toc-markov-processes" class="nav-link" data-scroll-target="#markov-processes">Markov processes</a>
+  <ul class="collapse">
+  <li><a href="#markov-does-not-mean-independent" id="toc-markov-does-not-mean-independent" class="nav-link" data-scroll-target="#markov-does-not-mean-independent">Markov does not mean independent</a></li>
+  <li><a href="#transition-probabilities" id="toc-transition-probabilities" class="nav-link" data-scroll-target="#transition-probabilities">Transition probabilities</a></li>
+  <li><a href="#time-homogeneous-markov-processes" id="toc-time-homogeneous-markov-processes" class="nav-link" data-scroll-target="#time-homogeneous-markov-processes">Time-homogeneous Markov processes</a></li>
+  <li><a href="#the-chapmankolmogorov-equation" id="toc-the-chapmankolmogorov-equation" class="nav-link" data-scroll-target="#the-chapmankolmogorov-equation">The Chapman–Kolmogorov equation</a></li>
+  <li><a href="#markovian-state-variables-and-modelling" id="toc-markovian-state-variables-and-modelling" class="nav-link" data-scroll-target="#markovian-state-variables-and-modelling">Markovian state variables and modelling</a></li>
+  </ul></li>
+  <li><a href="#how-the-different-ideas-relate" id="toc-how-the-different-ideas-relate" class="nav-link" data-scroll-target="#how-the-different-ideas-relate">How the different ideas relate</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="martingales-and-other-beasts" class="level1">
+<h1>Martingales and Other Beasts</h1>
+<p>Before introducing Brownian motion, it is useful to organize the main objects that appear in stochastic analysis.</p>
+<p>A stochastic process is not merely a collection of random variables. We also care about:</p>
+<ul>
+<li>how information accumulates through time;</li>
+<li>whether the process has memory;</li>
+<li>whether its statistical properties change through time;</li>
+<li>whether its future values are, in a precise sense, unpredictable from current information.</li>
+</ul>
+<p>These ideas lead naturally to filtrations, martingales, stationary processes, Gaussian processes, and Markov processes.</p>
+<hr>
+<section id="finite-dimensional-distributions" class="level3">
+<h3 class="anchored" data-anchor-id="finite-dimensional-distributions">Finite-dimensional distributions</h3>
+<p>A stochastic process contains an uncountable collection of random variables, but we can probe its law through finite collections of times.</p>
+<p>For times</p>
+<p><span class="math display">\[
+t_1,\ldots,t_n,
+\]</span></p>
+<p>consider the random vector</p>
+<p><span class="math display">\[
+(X_{t_1},\ldots,X_{t_n}).
+\]</span></p>
+<p>Its distribution is called a <strong>finite-dimensional distribution</strong> of <span class="math inline">\(X\)</span>.</p>
+<p>The collection of all such distributions describes the joint probabilistic behaviour of the process at arbitrary finite sets of times.</p>
+<p>This is an important distinction:</p>
+<p><span class="math display">\[
+\text{law of one }X_t
+\]</span></p>
+<p>describes the process at one time, whereas</p>
+<p><span class="math display">\[
+\text{finite-dimensional distributions}
+\]</span></p>
+<p>also describe dependence across time.</p>
+<p>Two processes can have identical one-time distributions while having completely different dynamics.</p>
+<hr>
+</section>
+<section id="stationary-processes" class="level2">
+<h2 class="anchored" data-anchor-id="stationary-processes">Stationary processes</h2>
+<p>A process is called stationary when its statistical behaviour does not change under shifts in time.</p>
+<p>There are two important notions.</p>
+<section id="strict-stationarity" class="level3">
+<h3 class="anchored" data-anchor-id="strict-stationarity">Strict stationarity</h3>
+<p>A stochastic process <span class="math inline">\(\{X_t\}\)</span> is <strong>strictly stationary</strong> if, for every <span class="math inline">\(n\)</span>, every choice of times <span class="math inline">\(t_1,\ldots,t_n\)</span>, and every time shift <span class="math inline">\(h\)</span>,</p>
+<p><span class="math display">\[
+(X_{t_1},\ldots,X_{t_n})
+\overset{d}{=}
+(X_{t_1+h},\ldots,X_{t_n+h}),
+\]</span></p>
+<p>whenever the shifted times remain in the time domain.</p>
+<p>Thus all finite-dimensional distributions are invariant under time translation.</p>
+<p>Strict stationarity is therefore a statement about the entire law of the process.</p>
+<hr>
+</section>
+<section id="weak-stationarity" class="level3">
+<h3 class="anchored" data-anchor-id="weak-stationarity">Weak stationarity</h3>
+<p>Suppose <span class="math inline">\(X_t\in L^2\)</span>.</p>
+<p>The process is <strong>weakly stationary</strong>, or <strong>second-order stationary</strong>, if</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t]
+=
+\mu
+\]</span></p>
+<p>is independent of <span class="math inline">\(t\)</span>, and the covariance depends only on the time difference:</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X_t,X_s)
+=
+C(t-s).
+\]</span></p>
+<p>For a centered process,</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t]=0,
+\]</span></p>
+<p>this becomes</p>
+<p><span class="math display">\[
+C(t-s)
+=
+\mathbb{E}[X_tX_s].
+\]</span></p>
+<p>The function <span class="math inline">\(C\)</span> is called the <strong>autocovariance</strong> or <strong>correlation function</strong>.</p>
+<p>Thus weak stationarity says that the first two moments are invariant under time translation.</p>
+<p>Strict stationarity is stronger in general:</p>
+<p><span class="math display">\[
+\text{strict stationarity}
++
+X_t\in L^2
+\quad\Longrightarrow\quad
+\text{weak stationarity}.
+\]</span></p>
+<p>The converse is generally false.</p>
+<hr>
+</section>
+<section id="stationarity-versus-stationary-increments" class="level3">
+<h3 class="anchored" data-anchor-id="stationarity-versus-stationary-increments">Stationarity versus stationary increments</h3>
+<p>These concepts should not be confused.</p>
+<p>A process has <strong>stationary increments</strong> if the law of</p>
+<p><span class="math display">\[
+X_{t+h}-X_t
+\]</span></p>
+<p>depends only on <span class="math inline">\(h\)</span>, not on <span class="math inline">\(t\)</span>.</p>
+<p>That is,</p>
+<p><span class="math display">\[
+X_{t+h}-X_t
+\overset{d}{=}
+X_h-X_0.
+\]</span></p>
+<p>A process may have stationary increments without itself being stationary.</p>
+<p>This distinction will matter immediately when we introduce Brownian motion.</p>
+<hr>
+</section>
+</section>
+<section id="martingales" class="level2">
+<h2 class="anchored" data-anchor-id="martingales">Martingales</h2>
+<p>Martingales formalize the idea of a process with no predictable drift.</p>
+<p>Let <span class="math inline">\(\{X_t\}\)</span> be adapted to a filtration <span class="math inline">\(\{\mathcal{F}_t\}\)</span>.</p>
+<p>The process is a <strong>martingale</strong> if</p>
+<p><span class="math display">\[
+\mathbb{E}[|X_t|]&lt;\infty
+\]</span></p>
+<p>for every <span class="math inline">\(t\)</span>, and for all <span class="math inline">\(s\leq t\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+=
+X_s.
+\]</span></p>
+<p>This is one of the central definitions of stochastic analysis.</p>
+<p>The interpretation is:</p>
+<blockquote class="blockquote">
+<p>given all information available at time <span class="math inline">\(s\)</span>, the best prediction of the future value <span class="math inline">\(X_t\)</span> is simply the current value <span class="math inline">\(X_s\)</span>.</p>
+</blockquote>
+<p>A martingale is therefore a mathematical model of a <strong>fair game</strong>.</p>
+<hr>
+<section id="a-martingale-does-not-mean-independence" class="level3">
+<h3 class="anchored" data-anchor-id="a-martingale-does-not-mean-independence">A martingale does not mean independence</h3>
+<p>The condition</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+=
+X_s
+\]</span></p>
+<p>does not mean that <span class="math inline">\(X_t\)</span> is independent of the past.</p>
+<p>Indeed, <span class="math inline">\(X_t\)</span> generally depends strongly on <span class="math inline">\(X_s\)</span>.</p>
+<p>The condition concerns only its conditional mean.</p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t-X_s\mid\mathcal{F}_s]
+=
+0.
+\]</span></p>
+<p>So the future increment has zero conditional expectation.</p>
+<hr>
+</section>
+<section id="constant-expectation" class="level3">
+<h3 class="anchored" data-anchor-id="constant-expectation">Constant expectation</h3>
+<p>Using the tower property,</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t]
+=
+\mathbb{E}
+\left[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\right]
+=
+\mathbb{E}[X_s].
+\]</span></p>
+<p>Hence every martingale satisfies</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t]
+=
+\mathbb{E}[X_0].
+\]</span></p>
+<p>A martingale therefore has constant mean.</p>
+<p>The converse is false: a process can have constant expectation without being a martingale.</p>
+<p>A martingale is a conditional statement, not merely an unconditional one.</p>
+<hr>
+</section>
+<section id="martingales-from-conditional-expectations" class="level3">
+<h3 class="anchored" data-anchor-id="martingales-from-conditional-expectations">Martingales from conditional expectations</h3>
+<p>Let <span class="math inline">\(Y\in L^1\)</span> and define</p>
+<p><span class="math display">\[
+M_t
+=
+\mathbb{E}[Y\mid\mathcal{F}_t].
+\]</span></p>
+<p>Then <span class="math inline">\(\{M_t\}\)</span> is a martingale.</p>
+<p>Indeed, if <span class="math inline">\(s\leq t\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[M_t\mid\mathcal{F}_s]
+=
+\mathbb{E}
+\left[
+\mathbb{E}[Y\mid\mathcal{F}_t]
+\mid\mathcal{F}_s
+\right]
+=
+\mathbb{E}[Y\mid\mathcal{F}_s]
+=
+M_s.
+\]</span></p>
+<p>This is perhaps the cleanest interpretation of martingales:</p>
+<p><span class="math display">\[
+M_t
+=
+\text{our current best estimate of some future quantity }Y.
+\]</span></p>
+<p>As information grows, the estimate changes, but it remains conditionally unbiased.</p>
+<hr>
+</section>
+<section id="submartingales-and-supermartingales" class="level3">
+<h3 class="anchored" data-anchor-id="submartingales-and-supermartingales">Submartingales and supermartingales</h3>
+<p>A process is a <strong>submartingale</strong> if</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\geq
+X_s,
+\qquad s\leq t,
+\]</span></p>
+<p>and a <strong>supermartingale</strong> if</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\leq
+X_s.
+\]</span></p>
+<p>Thus, informally,</p>
+<p><span class="math display">\[
+\text{submartingale}
+\quad\leftrightarrow\quad
+\text{non-negative expected drift},
+\]</span></p>
+<p>while</p>
+<p><span class="math display">\[
+\text{supermartingale}
+\quad\leftrightarrow\quad
+\text{non-positive expected drift}.
+\]</span></p>
+<p>Martingales are the boundary case where the conditional expected drift is zero.</p>
+<hr>
+</section>
+<section id="convex-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="convex-transformations">Convex transformations</h3>
+<p>If <span class="math inline">\(X_t\)</span> is a martingale and <span class="math inline">\(\varphi\)</span> is convex, then Jensen’s inequality for conditional expectations gives</p>
+<p><span class="math display">\[
+\varphi(X_t)
+\]</span></p>
+<p>as a submartingale, provided the relevant expectations exist.</p>
+<p>Indeed,</p>
+<p><span class="math display">\[
+\mathbb{E}
+[
+\varphi(X_t)
+\mid
+\mathcal{F}_s
+]
+\geq
+\varphi
+\left(
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\right)
+=
+\varphi(X_s).
+\]</span></p>
+<p>For example, if <span class="math inline">\(X_t\)</span> is a martingale,</p>
+<p><span class="math display">\[
+X_t^2
+\]</span></p>
+<p>is typically a submartingale.</p>
+<hr>
+</section>
+<section id="why-martingales-matter" class="level3">
+<h3 class="anchored" data-anchor-id="why-martingales-matter">Why martingales matter</h3>
+<p>Martingales will become central for at least three reasons.</p>
+<p>First, stochastic integrals of the Itô type are naturally martingales.</p>
+<p>Second, many stochastic processes can be decomposed into</p>
+<p><span class="math display">\[
+\text{predictable drift}
++
+\text{martingale noise}.
+\]</span></p>
+<p>Third, martingale arguments provide powerful tools for stopping problems, stochastic control, finance, and PDE representations.</p>
+<hr>
+</section>
+</section>
+<section id="gaussian-processes" class="level2">
+<h2 class="anchored" data-anchor-id="gaussian-processes">Gaussian processes</h2>
+<p>Before defining a Gaussian process, recall that a random vector</p>
+<p><span class="math display">\[
+X=(X_1,\ldots,X_n)
+\]</span></p>
+<p>is jointly Gaussian if every linear combination</p>
+<p><span class="math display">\[
+a_1X_1+\cdots+a_nX_n
+\]</span></p>
+<p>is a Gaussian random variable.</p>
+<p>A stochastic process <span class="math inline">\(\{X_t\}_{t\in T}\)</span> is a <strong>Gaussian process</strong> if every finite-dimensional random vector</p>
+<p><span class="math display">\[
+(X_{t_1},\ldots,X_{t_n})
+\]</span></p>
+<p>is jointly Gaussian.</p>
+<p>Thus, a Gaussian process is not defined by requiring each <span class="math inline">\(X_t\)</span> individually to be Gaussian. The variables must be <strong>jointly Gaussian across time</strong>.</p>
+<hr>
+<section id="mean-and-covariance-determine-a-gaussian-process" class="level3">
+<h3 class="anchored" data-anchor-id="mean-and-covariance-determine-a-gaussian-process">Mean and covariance determine a Gaussian process</h3>
+<p>Define the mean function</p>
+<p><span class="math display">\[
+m(t)
+=
+\mathbb{E}[X_t]
+\]</span></p>
+<p>and covariance function</p>
+<p><span class="math display">\[
+C(t,s)
+=
+\operatorname{Cov}(X_t,X_s).
+\]</span></p>
+<p>For any finite collection <span class="math inline">\(t_1,\ldots,t_n\)</span>,</p>
+<p><span class="math display">\[
+(X_{t_1},\ldots,X_{t_n})
+\]</span></p>
+<p>has mean vector</p>
+<p><span class="math display">\[
+\mu_i=m(t_i)
+\]</span></p>
+<p>and covariance matrix</p>
+<p><span class="math display">\[
+K_{ij}
+=
+C(t_i,t_j).
+\]</span></p>
+<p>Since a Gaussian random vector is completely determined by its mean and covariance matrix, a Gaussian process is completely characterized by</p>
+<p><span class="math display">\[
+m(t)
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+C(t,s).
+\]</span></p>
+<p>This is one reason Gaussian processes are unusually tractable: infinitely many finite-dimensional distributions are encoded by only two deterministic functions.</p>
+<hr>
+</section>
+<section id="valid-covariance-functions" class="level3">
+<h3 class="anchored" data-anchor-id="valid-covariance-functions">Valid covariance functions</h3>
+<p>A covariance function must satisfy</p>
+<p><span class="math display">\[
+C(t,s)=C(s,t)
+\]</span></p>
+<p>and must be non-negative definite.</p>
+<p>For arbitrary times <span class="math inline">\(t_1,\ldots,t_n\)</span> and coefficients <span class="math inline">\(a_1,\ldots,a_n\)</span>,</p>
+<p><span class="math display">\[
+\sum_{i=1}^n
+\sum_{j=1}^n
+a_i a_j C(t_i,t_j)
+\geq
+0.
+\]</span></p>
+<p>Indeed,</p>
+<p><span class="math display">\[
+\sum_{i,j}
+a_i a_j C(t_i,t_j)
+=
+\operatorname{Var}
+\left(
+\sum_i a_i X_{t_i}
+\right)
+\geq0.
+\]</span></p>
+<p>Hence one cannot choose an arbitrary function <span class="math inline">\(C(t,s)\)</span> and declare it to be a covariance kernel.</p>
+<hr>
+</section>
+<section id="gaussian-processes-and-stationarity" class="level3">
+<h3 class="anchored" data-anchor-id="gaussian-processes-and-stationarity">Gaussian processes and stationarity</h3>
+<p>For a Gaussian process, weak stationarity is enough to imply strict stationarity.</p>
+<p>The reason is that the finite-dimensional distributions are completely determined by their means and covariance matrices.</p>
+<p>Hence, if</p>
+<p><span class="math display">\[
+\mathbb{E}[X_t]
+=
+\mu
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+C(t,s)
+=
+C(t-s),
+\]</span></p>
+<p>then shifting all times leaves the mean vector and covariance matrix unchanged.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\text{Gaussian + weakly stationary}
+\quad\Longrightarrow\quad
+\text{strictly stationary}.
+\]</span></p>
+<p>For Gaussian processes, the two notions of stationarity therefore coincide, assuming finite second moments.</p>
+<hr>
+</section>
+<section id="uncorrelated-gaussian-variables-are-independent" class="level3">
+<h3 class="anchored" data-anchor-id="uncorrelated-gaussian-variables-are-independent">Uncorrelated Gaussian variables are independent</h3>
+<p>Another special feature of Gaussian systems is that zero covariance implies independence.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are jointly Gaussian and</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)=0,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+X\perp Y.
+\]</span></p>
+<p>This fact will later make Gaussian processes particularly easy to analyze through their covariance functions.</p>
+<hr>
+</section>
+</section>
+<section id="markov-processes" class="level2">
+<h2 class="anchored" data-anchor-id="markov-processes">Markov processes</h2>
+<p>A Markov process formalizes a different idea: the future depends on the present, but not on the entire past.</p>
+<p>Let</p>
+<p><span class="math display">\[
+\mathcal{F}_t^X
+=
+\sigma(X_s:s\leq t)
+\]</span></p>
+<p>be the natural filtration of <span class="math inline">\(X\)</span>.</p>
+<p>The process is <strong>Markov</strong> if, for every <span class="math inline">\(s\leq t\)</span> and every measurable set <span class="math inline">\(A\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{P}
+(
+X_t\in A
+\mid
+\mathcal{F}_s^X
+)
+=
+\mathbb{P}
+(
+X_t\in A
+\mid
+X_s
+).
+\]</span></p>
+<p>The left-hand side conditions on the entire history</p>
+<p><span class="math display">\[
+\{X_r:r\leq s\},
+\]</span></p>
+<p>whereas the right-hand side conditions only on the current state <span class="math inline">\(X_s\)</span>.</p>
+<p>Thus the Markov property says:</p>
+<blockquote class="blockquote">
+<p>once the present state is known, the past contains no additional information useful for predicting the future.</p>
+</blockquote>
+<hr>
+<section id="markov-does-not-mean-independent" class="level3">
+<h3 class="anchored" data-anchor-id="markov-does-not-mean-independent">Markov does not mean independent</h3>
+<p>A Markov process can have very strong temporal dependence.</p>
+<p>The Markov property does not say</p>
+<p><span class="math display">\[
+X_t
+\perp
+X_s.
+\]</span></p>
+<p>Rather, it says that the present state contains all relevant information from the past.</p>
+<p>Schematically,</p>
+<p><span class="math display">\[
+\text{past}
+\longrightarrow
+X_s
+\longrightarrow
+\text{future}.
+\]</span></p>
+<p>Once <span class="math inline">\(X_s\)</span> is given, the earlier history becomes irrelevant for predicting the future.</p>
+<hr>
+</section>
+<section id="transition-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="transition-probabilities">Transition probabilities</h3>
+<p>A Markov process can be described through its <strong>transition probabilities</strong></p>
+<p><span class="math display">\[
+P(A,t\mid x,s)
+=
+\mathbb{P}
+(
+X_t\in A
+\mid
+X_s=x
+).
+\]</span></p>
+<p>If a density exists, we write</p>
+<p><span class="math display">\[
+P(A,t\mid x,s)
+=
+\int_A
+p(y,t\mid x,s)\,dy,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+p(y,t\mid x,s)
+\]</span></p>
+<p>is the <strong>transition density</strong>.</p>
+<p>It tells us the distribution of the future state <span class="math inline">\(X_t\)</span> given that the process is at <span class="math inline">\(x\)</span> at time <span class="math inline">\(s\)</span>.</p>
+<hr>
+</section>
+<section id="time-homogeneous-markov-processes" class="level3">
+<h3 class="anchored" data-anchor-id="time-homogeneous-markov-processes">Time-homogeneous Markov processes</h3>
+<p>A Markov process is <strong>time-homogeneous</strong> if its transition probabilities depend only on the elapsed time:</p>
+<p><span class="math display">\[
+P(A,t\mid x,s)
+=
+P(A,t-s\mid x,0).
+\]</span></p>
+<p>We can therefore write</p>
+<p><span class="math display">\[
+P_\tau(x,A)
+=
+\mathbb{P}
+(
+X_{t+\tau}\in A
+\mid
+X_t=x
+).
+\]</span></p>
+<p>For a time-homogeneous process, the transition law depends on</p>
+<p><span class="math display">\[
+\text{current state}
++
+\text{time elapsed},
+\]</span></p>
+<p>but not on the absolute calendar time.</p>
+<hr>
+</section>
+<section id="the-chapmankolmogorov-equation" class="level3">
+<h3 class="anchored" data-anchor-id="the-chapmankolmogorov-equation">The Chapman–Kolmogorov equation</h3>
+<p>Suppose</p>
+<p><span class="math display">\[
+s&lt;u&lt;t.
+\]</span></p>
+<p>A Markov process can travel from <span class="math inline">\(x\)</span> at time <span class="math inline">\(s\)</span> to a set <span class="math inline">\(A\)</span> at time <span class="math inline">\(t\)</span> by passing through some intermediate state <span class="math inline">\(y\)</span> at time <span class="math inline">\(u\)</span>.</p>
+<p>Summing over all possible intermediate states gives the <strong>Chapman–Kolmogorov equation</strong></p>
+<p><span class="math display">\[
+P(A,t\mid x,s)
+=
+\int_E
+P(A,t\mid y,u)
+P(dy,u\mid x,s).
+\]</span></p>
+<p>If transition densities exist,</p>
+<p><span class="math display">\[
+p(z,t\mid x,s)
+=
+\int_E
+p(z,t\mid y,u)
+p(y,u\mid x,s)\,dy.
+\]</span></p>
+<p>This is the probabilistic analogue of a composition law.</p>
+<p>For a time-homogeneous Markov process,</p>
+<p><span class="math display">\[
+P_{t+s}
+=
+P_tP_s.
+\]</span></p>
+<p>This semigroup structure will later lead directly to generators and Kolmogorov equations.</p>
+<hr>
+</section>
+<section id="markovian-state-variables-and-modelling" class="level3">
+<h3 class="anchored" data-anchor-id="markovian-state-variables-and-modelling">Markovian state variables and modelling</h3>
+<p>Whether a model is Markov depends crucially on the choice of state variables.</p>
+<p>A process may fail to be Markov because its current value does not contain enough information about its future evolution.</p>
+<p>Sometimes this can be fixed by enlarging the state.</p>
+<p>For example, suppose position satisfies</p>
+<p><span class="math display">\[
+X_t
+=
+X_0
++
+\int_0^t V_s\,ds.
+\]</span></p>
+<p>Knowing <span class="math inline">\(X_t\)</span> alone may not be sufficient to predict the future, because the current velocity <span class="math inline">\(V_t\)</span> also matters.</p>
+<p>But the enlarged state</p>
+<p><span class="math display">\[
+(X_t,V_t)
+\]</span></p>
+<p>may be Markov.</p>
+<p>This is an important modelling principle:</p>
+<blockquote class="blockquote">
+<p>choose the state so that the present contains all information required to determine future probabilities.</p>
+</blockquote>
+<p>Markovianity is therefore not merely a mathematical property. It is also a statement about whether we have chosen an adequate state representation.</p>
+<hr>
+</section>
+</section>
+<section id="how-the-different-ideas-relate" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-different-ideas-relate">How the different ideas relate</h2>
+<p>The properties introduced above describe different aspects of a stochastic process.</p>
+<p><strong>Stationarity</strong> concerns invariance through time:</p>
+<p><span class="math display">\[
+\text{do the statistics change when time is shifted?}
+\]</span></p>
+<p><strong>Gaussianity</strong> concerns the shape of finite-dimensional distributions:</p>
+<p><span class="math display">\[
+\text{are all finite collections jointly Gaussian?}
+\]</span></p>
+<p><strong>The Markov property</strong> concerns memory:</p>
+<p><span class="math display">\[
+\text{is the present state sufficient to predict the future?}
+\]</span></p>
+<p><strong>The martingale property</strong> concerns conditional drift:</p>
+<p><span class="math display">\[
+\text{is the current value already the best prediction of the future value?}
+\]</span></p>
+<p>These properties are logically distinct.</p>
+<p>A process can be Markov but not stationary.</p>
+<p>A process can be stationary but not Markov.</p>
+<p>A process can be Gaussian but not Markov.</p>
+<p>A process can be Markov but not a martingale.</p>
+<p>The interesting stochastic processes we encounter later arise from particular combinations of these properties.</p>
+<p>Brownian motion, for example, will turn out to be a continuous Gaussian Markov process with stationary independent increments and a martingale structure.</p>
+<p>At that point, rather than memorizing a list of mysterious Brownian-motion properties, we will already know what each of those words means.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
