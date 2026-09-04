@@ -1,0 +1,824 @@
+# Martingales and Other Beasts
+
+Before introducing Brownian motion, it is useful to organize the main objects that appear in stochastic analysis.
+
+A stochastic process is not merely a collection of random variables. We also care about:
+
+- how information accumulates through time;
+- whether the process has memory;
+- whether its statistical properties change through time;
+- whether its future values are, in a precise sense, unpredictable from current information.
+
+These ideas lead naturally to filtrations, martingales, stationary processes, Gaussian processes, and Markov processes.
+
+---
+
+
+
+### Finite-dimensional distributions
+
+A stochastic process contains an uncountable collection of random variables, but we can probe its law through finite collections of times.
+
+For times
+
+$$
+t_1,\ldots,t_n,
+$$
+
+consider the random vector
+
+$$
+(X_{t_1},\ldots,X_{t_n}).
+$$
+
+Its distribution is called a **finite-dimensional distribution** of $X$.
+
+The collection of all such distributions describes the joint probabilistic behaviour of the process at arbitrary finite sets of times.
+
+This is an important distinction:
+
+$$
+\text{law of one }X_t
+$$
+
+describes the process at one time, whereas
+
+$$
+\text{finite-dimensional distributions}
+$$
+
+also describe dependence across time.
+
+Two processes can have identical one-time distributions while having completely different dynamics.
+
+---
+
+## Stationary processes
+
+A process is called stationary when its statistical behaviour does not change under shifts in time.
+
+There are two important notions.
+
+### Strict stationarity
+
+A stochastic process $\{X_t\}$ is **strictly stationary** if, for every $n$, every choice of times $t_1,\ldots,t_n$, and every time shift $h$,
+
+$$
+(X_{t_1},\ldots,X_{t_n})
+\overset{d}{=}
+(X_{t_1+h},\ldots,X_{t_n+h}),
+$$
+
+whenever the shifted times remain in the time domain.
+
+Thus all finite-dimensional distributions are invariant under time translation.
+
+Strict stationarity is therefore a statement about the entire law of the process.
+
+---
+
+### Weak stationarity
+
+Suppose $X_t\in L^2$.
+
+The process is **weakly stationary**, or **second-order stationary**, if
+
+$$
+\mathbb{E}[X_t]
+=
+\mu
+$$
+
+is independent of $t$, and the covariance depends only on the time difference:
+
+$$
+\operatorname{Cov}(X_t,X_s)
+=
+C(t-s).
+$$
+
+For a centered process,
+
+$$
+\mathbb{E}[X_t]=0,
+$$
+
+this becomes
+
+$$
+C(t-s)
+=
+\mathbb{E}[X_tX_s].
+$$
+
+The function $C$ is called the **autocovariance** or **correlation function**.
+
+Thus weak stationarity says that the first two moments are invariant under time translation.
+
+Strict stationarity is stronger in general:
+
+$$
+\text{strict stationarity}
++
+X_t\in L^2
+\quad\Longrightarrow\quad
+\text{weak stationarity}.
+$$
+
+The converse is generally false.
+
+---
+
+### Stationarity versus stationary increments
+
+These concepts should not be confused.
+
+A process has **stationary increments** if the law of
+
+$$
+X_{t+h}-X_t
+$$
+
+depends only on $h$, not on $t$.
+
+That is,
+
+$$
+X_{t+h}-X_t
+\overset{d}{=}
+X_h-X_0.
+$$
+
+A process may have stationary increments without itself being stationary.
+
+This distinction will matter immediately when we introduce Brownian motion.
+
+---
+
+## Martingales
+
+Martingales formalize the idea of a process with no predictable drift.
+
+Let $\{X_t\}$ be adapted to a filtration $\{\mathcal{F}_t\}$.
+
+The process is a **martingale** if
+
+$$
+\mathbb{E}[|X_t|]<\infty
+$$
+
+for every $t$, and for all $s\leq t$,
+
+$$
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+=
+X_s.
+$$
+
+This is one of the central definitions of stochastic analysis.
+
+The interpretation is:
+
+> given all information available at time $s$, the best prediction of the future value $X_t$ is simply the current value $X_s$.
+
+A martingale is therefore a mathematical model of a **fair game**.
+
+---
+
+### A martingale does not mean independence
+
+The condition
+
+$$
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+=
+X_s
+$$
+
+does not mean that $X_t$ is independent of the past.
+
+Indeed, $X_t$ generally depends strongly on $X_s$.
+
+The condition concerns only its conditional mean.
+
+Equivalently,
+
+$$
+\mathbb{E}[X_t-X_s\mid\mathcal{F}_s]
+=
+0.
+$$
+
+So the future increment has zero conditional expectation.
+
+---
+
+### Constant expectation
+
+Using the tower property,
+
+$$
+\mathbb{E}[X_t]
+=
+\mathbb{E}
+\left[
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\right]
+=
+\mathbb{E}[X_s].
+$$
+
+Hence every martingale satisfies
+
+$$
+\mathbb{E}[X_t]
+=
+\mathbb{E}[X_0].
+$$
+
+A martingale therefore has constant mean.
+
+The converse is false: a process can have constant expectation without being a martingale.
+
+A martingale is a conditional statement, not merely an unconditional one.
+
+---
+
+### Martingales from conditional expectations
+
+Let $Y\in L^1$ and define
+
+$$
+M_t
+=
+\mathbb{E}[Y\mid\mathcal{F}_t].
+$$
+
+Then $\{M_t\}$ is a martingale.
+
+Indeed, if $s\leq t$,
+
+$$
+\mathbb{E}[M_t\mid\mathcal{F}_s]
+=
+\mathbb{E}
+\left[
+\mathbb{E}[Y\mid\mathcal{F}_t]
+\mid\mathcal{F}_s
+\right]
+=
+\mathbb{E}[Y\mid\mathcal{F}_s]
+=
+M_s.
+$$
+
+This is perhaps the cleanest interpretation of martingales:
+
+$$
+M_t
+=
+\text{our current best estimate of some future quantity }Y.
+$$
+
+As information grows, the estimate changes, but it remains conditionally unbiased.
+
+---
+
+### Submartingales and supermartingales
+
+A process is a **submartingale** if
+
+$$
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\geq
+X_s,
+\qquad s\leq t,
+$$
+
+and a **supermartingale** if
+
+$$
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\leq
+X_s.
+$$
+
+Thus, informally,
+
+$$
+\text{submartingale}
+\quad\leftrightarrow\quad
+\text{non-negative expected drift},
+$$
+
+while
+
+$$
+\text{supermartingale}
+\quad\leftrightarrow\quad
+\text{non-positive expected drift}.
+$$
+
+Martingales are the boundary case where the conditional expected drift is zero.
+
+---
+
+### Convex transformations
+
+If $X_t$ is a martingale and $\varphi$ is convex, then Jensen's inequality for conditional expectations gives
+
+$$
+\varphi(X_t)
+$$
+
+as a submartingale, provided the relevant expectations exist.
+
+Indeed,
+
+$$
+\mathbb{E}
+[
+\varphi(X_t)
+\mid
+\mathcal{F}_s
+]
+\geq
+\varphi
+\left(
+\mathbb{E}[X_t\mid\mathcal{F}_s]
+\right)
+=
+\varphi(X_s).
+$$
+
+For example, if $X_t$ is a martingale,
+
+$$
+X_t^2
+$$
+
+is typically a submartingale.
+
+---
+
+### Why martingales matter
+
+Martingales will become central for at least three reasons.
+
+First, stochastic integrals of the Itô type are naturally martingales.
+
+Second, many stochastic processes can be decomposed into
+
+$$
+\text{predictable drift}
++
+\text{martingale noise}.
+$$
+
+Third, martingale arguments provide powerful tools for stopping problems, stochastic control, finance, and PDE representations.
+
+---
+
+## Gaussian processes
+
+Before defining a Gaussian process, recall that a random vector
+
+$$
+X=(X_1,\ldots,X_n)
+$$
+
+is jointly Gaussian if every linear combination
+
+$$
+a_1X_1+\cdots+a_nX_n
+$$
+
+is a Gaussian random variable.
+
+A stochastic process $\{X_t\}_{t\in T}$ is a **Gaussian process** if every finite-dimensional random vector
+
+$$
+(X_{t_1},\ldots,X_{t_n})
+$$
+
+is jointly Gaussian.
+
+Thus, a Gaussian process is not defined by requiring each $X_t$ individually to be Gaussian. The variables must be **jointly Gaussian across time**.
+
+---
+
+### Mean and covariance determine a Gaussian process
+
+Define the mean function
+
+$$
+m(t)
+=
+\mathbb{E}[X_t]
+$$
+
+and covariance function
+
+$$
+C(t,s)
+=
+\operatorname{Cov}(X_t,X_s).
+$$
+
+For any finite collection $t_1,\ldots,t_n$,
+
+$$
+(X_{t_1},\ldots,X_{t_n})
+$$
+
+has mean vector
+
+$$
+\mu_i=m(t_i)
+$$
+
+and covariance matrix
+
+$$
+K_{ij}
+=
+C(t_i,t_j).
+$$
+
+Since a Gaussian random vector is completely determined by its mean and covariance matrix, a Gaussian process is completely characterized by
+
+$$
+m(t)
+$$
+
+and
+
+$$
+C(t,s).
+$$
+
+This is one reason Gaussian processes are unusually tractable: infinitely many finite-dimensional distributions are encoded by only two deterministic functions.
+
+---
+
+### Valid covariance functions
+
+A covariance function must satisfy
+
+$$
+C(t,s)=C(s,t)
+$$
+
+and must be non-negative definite.
+
+For arbitrary times $t_1,\ldots,t_n$ and coefficients $a_1,\ldots,a_n$,
+
+$$
+\sum_{i=1}^n
+\sum_{j=1}^n
+a_i a_j C(t_i,t_j)
+\geq
+0.
+$$
+
+Indeed,
+
+$$
+\sum_{i,j}
+a_i a_j C(t_i,t_j)
+=
+\operatorname{Var}
+\left(
+\sum_i a_i X_{t_i}
+\right)
+\geq0.
+$$
+
+Hence one cannot choose an arbitrary function $C(t,s)$ and declare it to be a covariance kernel.
+
+---
+
+### Gaussian processes and stationarity
+
+For a Gaussian process, weak stationarity is enough to imply strict stationarity.
+
+The reason is that the finite-dimensional distributions are completely determined by their means and covariance matrices.
+
+Hence, if
+
+$$
+\mathbb{E}[X_t]
+=
+\mu
+$$
+
+and
+
+$$
+C(t,s)
+=
+C(t-s),
+$$
+
+then shifting all times leaves the mean vector and covariance matrix unchanged.
+
+Therefore,
+
+$$
+\text{Gaussian + weakly stationary}
+\quad\Longrightarrow\quad
+\text{strictly stationary}.
+$$
+
+For Gaussian processes, the two notions of stationarity therefore coincide, assuming finite second moments.
+
+---
+
+### Uncorrelated Gaussian variables are independent
+
+Another special feature of Gaussian systems is that zero covariance implies independence.
+
+If $X$ and $Y$ are jointly Gaussian and
+
+$$
+\operatorname{Cov}(X,Y)=0,
+$$
+
+then
+
+$$
+X\perp Y.
+$$
+
+This fact will later make Gaussian processes particularly easy to analyze through their covariance functions.
+
+---
+
+## Markov processes
+
+A Markov process formalizes a different idea: the future depends on the present, but not on the entire past.
+
+Let
+
+$$
+\mathcal{F}_t^X
+=
+\sigma(X_s:s\leq t)
+$$
+
+be the natural filtration of $X$.
+
+The process is **Markov** if, for every $s\leq t$ and every measurable set $A$,
+
+$$
+\mathbb{P}
+(
+X_t\in A
+\mid
+\mathcal{F}_s^X
+)
+=
+\mathbb{P}
+(
+X_t\in A
+\mid
+X_s
+).
+$$
+
+The left-hand side conditions on the entire history
+
+$$
+\{X_r:r\leq s\},
+$$
+
+whereas the right-hand side conditions only on the current state $X_s$.
+
+Thus the Markov property says:
+
+> once the present state is known, the past contains no additional information useful for predicting the future.
+
+---
+
+### Markov does not mean independent
+
+A Markov process can have very strong temporal dependence.
+
+The Markov property does not say
+
+$$
+X_t
+\perp
+X_s.
+$$
+
+Rather, it says that the present state contains all relevant information from the past.
+
+Schematically,
+
+$$
+\text{past}
+\longrightarrow
+X_s
+\longrightarrow
+\text{future}.
+$$
+
+Once $X_s$ is given, the earlier history becomes irrelevant for predicting the future.
+
+---
+
+### Transition probabilities
+
+A Markov process can be described through its **transition probabilities**
+
+$$
+P(A,t\mid x,s)
+=
+\mathbb{P}
+(
+X_t\in A
+\mid
+X_s=x
+).
+$$
+
+If a density exists, we write
+
+$$
+P(A,t\mid x,s)
+=
+\int_A
+p(y,t\mid x,s)\,dy,
+$$
+
+where
+
+$$
+p(y,t\mid x,s)
+$$
+
+is the **transition density**.
+
+It tells us the distribution of the future state $X_t$ given that the process is at $x$ at time $s$.
+
+---
+
+### Time-homogeneous Markov processes
+
+A Markov process is **time-homogeneous** if its transition probabilities depend only on the elapsed time:
+
+$$
+P(A,t\mid x,s)
+=
+P(A,t-s\mid x,0).
+$$
+
+We can therefore write
+
+$$
+P_\tau(x,A)
+=
+\mathbb{P}
+(
+X_{t+\tau}\in A
+\mid
+X_t=x
+).
+$$
+
+For a time-homogeneous process, the transition law depends on
+
+$$
+\text{current state}
++
+\text{time elapsed},
+$$
+
+but not on the absolute calendar time.
+
+---
+
+### The Chapman--Kolmogorov equation
+
+Suppose
+
+$$
+s<u<t.
+$$
+
+A Markov process can travel from $x$ at time $s$ to a set $A$ at time $t$ by passing through some intermediate state $y$ at time $u$.
+
+Summing over all possible intermediate states gives the **Chapman--Kolmogorov equation**
+
+$$
+P(A,t\mid x,s)
+=
+\int_E
+P(A,t\mid y,u)
+P(dy,u\mid x,s).
+$$
+
+If transition densities exist,
+
+$$
+p(z,t\mid x,s)
+=
+\int_E
+p(z,t\mid y,u)
+p(y,u\mid x,s)\,dy.
+$$
+
+This is the probabilistic analogue of a composition law.
+
+For a time-homogeneous Markov process,
+
+$$
+P_{t+s}
+=
+P_tP_s.
+$$
+
+This semigroup structure will later lead directly to generators and Kolmogorov equations.
+
+---
+
+### Markovian state variables and modelling
+
+Whether a model is Markov depends crucially on the choice of state variables.
+
+A process may fail to be Markov because its current value does not contain enough information about its future evolution.
+
+Sometimes this can be fixed by enlarging the state.
+
+For example, suppose position satisfies
+
+$$
+X_t
+=
+X_0
++
+\int_0^t V_s\,ds.
+$$
+
+Knowing $X_t$ alone may not be sufficient to predict the future, because the current velocity $V_t$ also matters.
+
+But the enlarged state
+
+$$
+(X_t,V_t)
+$$
+
+may be Markov.
+
+This is an important modelling principle:
+
+> choose the state so that the present contains all information required to determine future probabilities.
+
+Markovianity is therefore not merely a mathematical property. It is also a statement about whether we have chosen an adequate state representation.
+
+---
+
+## How the different ideas relate
+
+The properties introduced above describe different aspects of a stochastic process.
+
+**Stationarity** concerns invariance through time:
+
+$$
+\text{do the statistics change when time is shifted?}
+$$
+
+**Gaussianity** concerns the shape of finite-dimensional distributions:
+
+$$
+\text{are all finite collections jointly Gaussian?}
+$$
+
+**The Markov property** concerns memory:
+
+$$
+\text{is the present state sufficient to predict the future?}
+$$
+
+**The martingale property** concerns conditional drift:
+
+$$
+\text{is the current value already the best prediction of the future value?}
+$$
+
+These properties are logically distinct.
+
+A process can be Markov but not stationary.
+
+A process can be stationary but not Markov.
+
+A process can be Gaussian but not Markov.
+
+A process can be Markov but not a martingale.
+
+The interesting stochastic processes we encounter later arise from particular combinations of these properties.
+
+Brownian motion, for example, will turn out to be a continuous Gaussian Markov process with stationary independent increments and a martingale structure.
+
+At that point, rather than memorizing a list of mysterious Brownian-motion properties, we will already know what each of those words means.

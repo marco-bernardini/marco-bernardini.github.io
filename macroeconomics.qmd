@@ -14,7 +14,9 @@ This section contains various resources related to macroeconomics and econometri
 - [Local Projections](latex/LP.qmd)
 
 ## Corso introduttivo di Macroeconomia con Python
-### A series of lectures on the principles of macroeconomics in italian
+<p style="margin-top: -0.5rem; margin-bottom: 1rem; font-size: 1.05rem; font-style: italic;">
+A series of lectures on the principles of macroeconomics in italian
+</p>
 - [Le variabili macroeconomiche](notebooks/Le variabili macroeconomiche.ipynb)  
   A notebook exploring macroeconomic variables and their applications.
 - [La curva di Phillips](notebooks/La%20curva%20di%20Phillips.ipynb)  

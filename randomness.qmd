@@ -1,0 +1,12 @@
+---
+title: "Randomness"
+format: html
+---
+
+## SDE
+
+<p style="margin-top: -0.5rem; margin-bottom: 1rem; font-size: 1.05rem; font-style: italic;">
+A not-so-gentle but still not technical introduction to stochastic differential equations
+</p>
+
+- [Diffusions](latex/diffusions.qmd)

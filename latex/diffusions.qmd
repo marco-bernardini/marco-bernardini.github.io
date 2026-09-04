@@ -1,0 +1,1292 @@
+# Diffusion Processes
+
+I suggest the reader not accustomed to the language of probability to first read an introductory measure theory set of lecture notes.
+
+## Filtrations
+
+Recall that a $\sigma$-algebra represents available information.
+
+In a dynamical setting, information changes with time. We therefore consider a family of $\sigma$-algebras
+
+$$
+\{\mathcal{F}_t\}_{t\geq 0}.
+$$
+
+A **filtration** is an increasing family of sub-$\sigma$-algebras of $\mathcal{F}$:
+
+$$
+\mathcal{F}_s
+\subseteq
+\mathcal{F}_t
+\subseteq
+\mathcal{F},
+\qquad
+s\leq t.
+$$
+
+Hence $\mathcal{F}_t$ contains all information available up to time $t$. Imagine yourself reading a book: the information you have at time $t$ is the information contained in the first $t$ pages, and your information set is increasing as you read more pages.
+
+### The natural filtration
+
+Given a stochastic process $\{X_t\}_{t\geq0}$, its **natural filtration** is
+
+$$
+\mathcal{F}_t^X
+=
+\sigma(X_s:0\leq s\leq t).
+$$
+
+It is the smallest $\sigma$-algebra that makes all observations
+
+$$
+X_s,
+\qquad s\leq t,
+$$
+
+measurable.
+I like to think of this as the least information that should be contained in the first $t$ pages of a book in order to understand the story up to that point.
+
+---
+
+### Adapted processes
+
+A stochastic process $\{X_t\}$ is **adapted** to a filtration $\{\mathcal{F}_t\}$ if
+
+$$
+X_t
+\quad\text{is }\mathcal{F}_t\text{-measurable}
+$$
+
+for every $t$.
+
+Informally, the value $X_t$ can be determined using information available at time $t$.
+
+An adapted process therefore cannot depend on future information.
+
+Every process is automatically adapted to its own natural filtration:
+
+$$
+X_t
+\text{ is }
+\mathcal{F}_t^X\text{-measurable}.
+$$
+
+To end the book analogy, in our book we are able to understand the story up to page $t$ without having to peek ahead.
+
+---
+
+## Stochastic processes
+
+A **stochastic process** is a family of random variables
+
+$$
+X=\{X_t\}_{t\in T}
+$$
+
+defined on the same probability space
+
+$$
+(\Omega,\mathcal{F},\mathbb{P}),
+$$
+
+with values in some state space $E$.
+
+Usually,
+
+$$
+T=[0,\infty)
+$$
+
+and
+
+$$
+E=\mathbb{R}^d.
+$$
+
+The process can equivalently be viewed as a function of two variables,
+
+$$
+X:T\times\Omega\to E,
+$$
+
+with
+
+$$
+X(t,\omega)=X_t(\omega).
+$$
+
+There are two complementary ways to look at it.
+
+For fixed $t$,
+
+$$
+\omega\mapsto X_t(\omega)
+$$
+
+is a random variable.
+
+For fixed $\omega$,
+
+$$
+t\mapsto X_t(\omega)
+$$
+
+is a function of time, called a **sample path**, **trajectory**, or **realization** of the process.
+
+---
+
+## Markov Process
+
+Informally, a Markov process is a stochastic process that retains no memory.
+
+We now set
+
+$$
+\mathcal F_t^X:=\sigma\{X_s:s\leq t\}.
+$$
+
+Then a process $\{X_t,\ t\in\mathbb R_+\}$ is a **Markov process** if
+
+$$
+\mathbb P(X_t\in\Gamma\mid\mathcal F_s^X)
+=
+\mathbb P(X_t\in\Gamma\mid X_s),
+\qquad t\geq s.
+$$
+
+which is, the history of the process up to time $s$ is irrelevant for predicting the future at time $t$. Only the present matters.
+
+### Transition function
+
+Define the transition function
+
+$$
+P(\Gamma,t\mid x,s)
+:=
+\mathbb P(X_t\in\Gamma\mid X_s=x).
+$$
+
+It is a probability measure on $\mathbb R^d$ and satisfies the **Chapman--Kolmogorov equation**
+
+$$
+P(\Gamma,t\mid x,s)
+=
+\int_{\mathbb R^d}
+P(\Gamma,t\mid y,u)\,
+P(dy,u\mid x,s),
+$$
+
+where $\Gamma\in\mathcal B(\mathbb R^d)$, $x\in\mathbb R^d$, and $s\leq u\leq t$.
+
+This formula merely states that the probability of going from $x$ at time $s$ to $\Gamma$ at time $t$ is the sum of the probabilities of going from $x$ at time $s$ to $y$ at time $u$, and then from $y$ at time $u$ to $\Gamma$ at time $t$, integrated over all possible intermediate states $y$.
+Iterating the argument can be useful to see why it works.
+The proof can also be useful:
+
+$$
+\begin{aligned}
+P(\Gamma,t\mid x,s)
+&=
+\mathbb P(X_t\in\Gamma\mid X_s=x)\\
+&=
+\mathbb P(X_t\in\Gamma\mid\mathcal F_s^X)\\
+&=
+\mathbb E[\mathbf 1_\Gamma(X_t)\mid\mathcal F_s^X]\\
+&=
+\mathbb E\left[
+    \mathbb E[
+        \mathbf 1_\Gamma(X_t)
+        \mid\mathcal F_s^X
+    ]
+    \mid\mathcal F_u^X
+\right]\\
+&=
+\mathbb E\left[
+    \mathbb E[
+        \mathbf 1_\Gamma(X_t)
+        \mid\mathcal F_u^X
+    ]
+    \mid\mathcal F_s^X
+\right]\\
+&=
+\mathbb E\left[
+    \mathbb E[
+        \mathbf 1_\Gamma(X_t)
+        \mid X_u
+    ]
+    \mid\mathcal F_s^X
+\right]\\
+&=
+\mathbb E\left[
+    \mathbb P(X_t\in\Gamma\mid X_u=y)
+    \mid X_s=x
+\right]\\
+&=
+\int_{\mathbb R^d}
+P(\Gamma,t\mid y,u)\,
+P(dy,u\mid x,s).
+\end{aligned}
+$$
+
+### Transition probability density
+
+Now rewrite the transition function as
+
+$$
+P(\Gamma,t\mid x,s)
+=
+\int_\Gamma
+p(y,t\mid x,s)\,dy,
+$$
+
+where $p(\cdot\mid\cdot)$ is the transition probability density.
+
+Chapman--Kolmogorov becomes
+
+$$
+\int_\Gamma p(y,t\mid x,s)\,dy
+=
+\int_{\mathbb R^d}
+P(\Gamma,t\mid z,u)
+P(dz,u\mid x,s),
+$$
+
+hence
+
+$$
+\int_\Gamma p(y,t\mid x,s)\,dy
+=
+\int_{\mathbb R^d}
+\int_\Gamma
+p(y,t\mid z,u)
+p(z,u\mid x,s)
+\,dy\,dz.
+$$
+
+It follows that
+
+$$
+p(y,t\mid x,s)
+=
+\int_{\mathbb R^d}
+p(y,t\mid z,u)
+p(z,u\mid x,s)
+\,dz.
+$$
+
+as before.
+
+Consider now a **time-homogeneous Markov process**,
+
+$$
+P(\Gamma,t\mid x,s)
+=
+P(\Gamma,t-s\mid x,0)
+=:P(t-s,x,\Gamma).
+$$
+
+Then
+
+$$
+P(t+s,x,\Gamma)
+=
+\int_{\mathbb R^d}
+P(t,z,\Gamma)\,
+P(s,x,dz).
+$$
+
+Or, in terms of the transition density,
+
+$$
+p(t+s,x,y)
+=
+\int_{\mathbb R^d}
+p(t,z,y)
+p(s,x,z)\,dz.
+$$
+
+Which makes sense if we think of restarting the clock at every intermediate step.
+
+Notice that the transition function and the initial distribution are sufficient to determine the law of a Markov process.
+
+If the process starts from an arbitrary point $x_0\in\mathbb R^d$, its initial distribution is the **Dirac delta**
+
+$$
+\nu(dx)=\delta_{x_0}(dx),
+$$
+
+where $\delta_{x_0}$ is the probability measure concentrated at $x_0$, defined by
+
+$$
+\int_{\mathbb R^d} f(x)\,\delta_{x_0}(dx)=f(x_0).
+$$
+
+Hence,
+
+$$
+\mathbb P_{x_0}(X_t\in\Gamma)
+=
+\int_{\mathbb R^d}
+P(x,t,\Gamma)\,\delta_{x_0}(dx)
+=
+P(x_0,t,\Gamma).
+$$
+
+More generally, if the initial condition is distributed according to $\nu$,
+
+$$
+\mathbb P_\nu(X_t\in\Gamma)
+=
+\int_{\mathbb R^d}
+P(x,t,\Gamma)\,\nu(dx).
+$$
+
+So the general formula simply averages the transition probabilities over all possible starting points.
+
+Similarly, we can calculate the expectation for an observable $f$:
+
+$$
+\mathbb E_\nu[f(X_t)]
+=
+\int_{\mathbb R^d}
+f(x)
+\underbrace{
+\int_{\mathbb R^d}
+\nu(dx_0)\,
+P(x_0,t,dx)
+}_{\mu_t(dx)}.
+$$
+
+
+## Semigroup
+
+To describe time-homogeneous Markov processes, introduce a single-parameter family of linear operators such that
+
+$$
+P_0=I,
+$$
+
+and
+
+$$
+P_{t+s}=P_tP_s,
+\qquad
+\forall s,t\geq0.
+$$
+
+Define
+
+$$
+P_t f(x)
+:=
+\mathbb E[f(X_t)\mid X_0=x]
+=
+\int_{\mathbb R^d}
+f(y)P(t,x,dy).
+$$
+
+As expected,
+
+$$
+P_0f(x)
+=
+\mathbb E[f(X_0)\mid X_0=x]
+=
+f(x).
+$$
+
+Furthermore,
+
+$$
+\begin{aligned}
+P_{t+s}f(x)
+&=
+\int_{\mathbb R^d}
+f(y)P(t+s,x,dy)\\
+&=
+\int_{\mathbb R^d}
+\int_{\mathbb R^d}
+f(y)
+P(t,z,dy)
+P(s,x,dz)\\
+&=
+\int_{\mathbb R^d}
+P_tf(z)
+P(s,x,dz)\\
+&=
+P_s\circ P_tf(x).
+\end{aligned}
+$$
+
+### Infinitesimal generator
+
+Now define $D(\mathcal L)$ as the set of all $f\in C_b(E)$ such that
+
+$$
+\mathcal Lf
+:=
+\lim_{t\to0}
+\frac{P_tf-f}{t}
+$$
+
+exists.
+
+Then the operator $\mathcal L$ is the **infinitesimal generator** of $P_t$, or the generator of the Markov process.
+
+Now,
+
+$$
+\mathcal L
+=
+\lim_{h\to0}
+\frac{P_h-I}{h},
+$$
+
+which reminds us of the definition of the derivative.
+Notice:
+
+$$
+P_h\approx I+h\mathcal L.
+$$
+
+Then
+
+$$
+P_t
+=
+\left(P_{t/n}\right)^n
+\approx
+\left(
+I+\frac{t}{n}\mathcal L
+\right)^n.
+$$
+
+(verify the first equality using the semigroup property).
+Taking the limit,
+
+$$
+P_t
+=
+\lim_{n\to\infty}
+\left(
+I+\frac{t}{n}\mathcal L
+\right)^n
+=
+e^{t\mathcal L}.
+$$
+
+Now define
+
+$$
+u(x,t):=P_tf(x)
+$$
+
+and say we want to find the equation governing $P_t$, i.e. determining the evolution of the conditional expectation of the observable $f$.
+
+Then
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial t}u(x,t)
+&=
+\lim_{h\to0}
+\frac{
+P_{t+h}f(x)-P_tf(x)
+}{h}\\
+&=
+P_t\mathcal Lf(x)\\
+&=
+\mathcal L P_tf(x).
+\end{aligned}
+$$
+
+Therefore
+
+$$
+\frac{\partial u}{\partial t}
+=
+\mathcal Lu.
+$$
+
+Since $P_0=I$, we have
+
+$$
+u(x,0)=f(x).
+$$
+
+Hence $u(x,t)$ satisfies the initial value problem
+
+$$
+\begin{cases}
+\dfrac{\partial u}{\partial t}
+=
+\mathcal Lu,\\[6pt]
+u(x,0)=f(x).
+\end{cases}
+$$
+
+This is the **backward Kolmogorov equation**.
+
+## Adjoint semigroup
+
+While $P_t$ acts on continuous bounded functions, we can define $P_t^*$, which acts on probability measures:
+
+$$
+P_t^*\mu(\Gamma)
+=
+\int_{\mathbb R^d}
+P(t,x,\Gamma)\,d\mu(x).
+$$
+
+Formally, we have
+
+$$
+\int_{\mathbb R^d}
+P_tf(x)\,d\mu(x)
+=
+\int_{\mathbb R^d}
+f(x)\,d(P_t^*\mu)(x).
+$$
+
+Which makes sense if we think of $P_t^*$ as the $L^2$ adjoint of $P_t$.
+We can also define, as before, the generator $\mathcal L^*$ of the semigroup $P_t^*$, and we have
+
+$$
+P_t^*
+=
+e^{t\mathcal L^*}.
+$$
+
+Also,
+
+$$
+\int
+(\mathcal Lf)\,d\mu
+=
+\int
+f(\mathcal L^*\mu)\,dx.
+$$
+
+Now define the law of the Markov process as
+
+$$
+\mu_t
+=
+P_t^*\mu,
+$$
+
+which evolves according to
+
+$$
+\begin{cases}
+\dfrac{\partial\mu_t}{\partial t}
+=
+\mathcal L^*\mu_t,\\[6pt]
+\mu_0=\mu.
+\end{cases}
+$$
+
+Assuming $\mu$ and $\mu_t$ have densities, denote them by $\rho_0(\cdot)$ and $\rho(\cdot,t)$.
+
+Then
+
+$$
+\begin{cases}
+\dfrac{\partial\rho}{\partial t}
+=
+\mathcal L^*\rho,\\[6pt]
+\rho(x,0)=\rho_0(x).
+\end{cases}
+$$
+
+Is the **Fokker--Planck**, or **forward Kolmogorov**, equation.
+
+To conclude this introduction, the **backward and forward Kolmogorov equations** describe the evolution of the same Markov process from two complementary perspectives.
+
+The **backward Kolmogorov equation** governs the evolution of an observable $f$, as it tells us how the expected future value of $f(X_t)$ depends on the **initial state** $x$:
+
+$$
+\partial_t u=\mathcal L u.
+$$
+
+The **forward Kolmogorov equation**, instead, governs the evolution of the **law of the process**. If $\rho(x,t)$ is the probability density of $X_t$, then
+
+$$
+\partial_t\rho=\mathcal L^*\rho.
+$$
+
+Hence, $\mathcal L$ propagates observables, while its adjoint $\mathcal L^*$ propagates probability distributions.
+
+## Diffusion process
+
+A Markov process consists of three parts:
+
+- a drift;
+- a random part;
+- a jump process.
+
+A **diffusion process** is a Markov process with continuous paths, hence no jumps.
+
+In one dimension, we need the following.
+
+### Continuity
+
+For all $\varepsilon>0$ and all $x$,
+
+$$
+\int_{|x-y|>\varepsilon}
+P(dy,t\mid x,s)
+=
+o(t-s).
+$$
+
+### Drift
+
+There exists $b(x,s)$ such that, for all $\varepsilon>0$ and all $x$,
+
+$$
+\int_{|y-x|\leq\varepsilon}
+(y-x)
+P(dy,t\mid x,s)
+=
+b(x,s)(t-s)
++
+o(t-s).
+$$
+
+### Diffusion
+
+There exists $\Sigma(x,s)$ such that, for all $\varepsilon>0$ and all $x$,
+
+$$
+\int_{|y-x|\leq\varepsilon}
+(y-x)^2
+P(dy,t\mid x,s)
+=
+\Sigma(x,s)(t-s)
++
+o(t-s).
+$$
+
+Assuming that the first two moments exist, we can write, even more intuitively,
+
+$$
+b(x,s)
+=
+\lim_{t\to s}
+\mathbb E
+\left[
+\frac{X_t-X_s}{t-s}
+\mid X_s=x
+\right],
+$$
+
+and
+
+$$
+\Sigma(x,s)
+=
+\lim_{t\to s}
+\mathbb E
+\left[
+\frac{(X_t-X_s)^2}{t-s}
+\mid X_s=x
+\right].
+$$
+
+
+## Kolmogorov equations
+
+From the definition of a diffusion process, we can derive explicit formulas for the forward and backward Kolmogorov equations.
+
+### Backward Kolmogorov
+
+Let
+
+$$
+u(x,s)
+:=
+\mathbb E[f(X_t)\mid X_s=x]
+=
+\int_{\mathbb R^d}
+f(y)P(dy,t\mid x,s).
+$$
+
+Then $u(x,s)$ solves the final value problem for a PDE of parabolic type:
+
+$$
+\begin{cases}
+-\dfrac{\partial u}{\partial s}
+=
+b(x,s)
+\dfrac{\partial u}{\partial x}
++
+\dfrac{1}{2}
+\Sigma(x,s)
+\dfrac{\partial^2u}{\partial x^2},
+\\[8pt]
+u(x,t)=f(x).
+\end{cases}
+$$
+
+Parts of the proof are very interesting, so I recommend reading it at least once.
+
+Proof:
+
+The continuity assumption for the diffusion process, together with the boundedness of $f$, implies that
+
+$$
+\begin{aligned}
+u(x,s)
+&=
+\int_{\mathbb{R}} f(y)P(dy,t\mid x,s)
+\\
+&=
+\int_{|y-x|\leq\varepsilon}
+f(y)P(dy,t\mid x,s)
++
+\int_{|y-x|>\varepsilon}
+f(y)P(dy,t\mid x,s)
+\\
+&\leq
+\int_{|y-x|\leq\varepsilon}
+f(y)P(dy,t\mid x,s)
++
+\lVert f\rVert_{L^\infty}
+\int_{|y-x|>\varepsilon}
+P(dy,t\mid x,s)
+\\
+&=
+\int_{|y-x|\leq\varepsilon}
+f(y)P(dy,t\mid x,s)
++
+o(t-s).
+\end{aligned}
+$$
+
+We add and subtract the final condition $f(x)$ and use the previous
+calculation to obtain
+
+$$
+\begin{aligned}
+u(x,s)
+&=
+\int_{\mathbb{R}} f(y)P(dy,t\mid x,s)
+\\
+&=
+f(x)
++
+\int_{\mathbb{R}}
+\bigl(f(y)-f(x)\bigr)P(dy,t\mid x,s)
+\\
+&=
+f(x)
++
+\int_{|y-x|\leq\varepsilon}
+\bigl(f(y)-f(x)\bigr)P(dy,t\mid x,s)
+\\
+&\qquad
++
+\int_{|y-x|>\varepsilon}
+\bigl(f(y)-f(x)\bigr)P(dy,t\mid x,s)
+\\
+&=
+f(x)
++
+\int_{|y-x|\leq\varepsilon}
+\bigl(f(y)-f(x)\bigr)P(dy,t\mid x,s)
++
+o(t-s).
+\end{aligned}
+$$
+
+Now we show that $u(s,x)$ solves the backward Kolmogorov equation. We use the Chapman--Kolmogorov equation:
+
+$$
+\begin{aligned}
+u(x,\sigma)
+&=
+\int_{\mathbb{R}}
+f(z)P(dz,t\mid x,\sigma)
+\\
+&=
+\int_{\mathbb{R}}
+\int_{\mathbb{R}}
+f(z)P(dz,t\mid y,\rho)
+P(dy,\rho\mid x,\sigma)
+\\
+&=
+\int_{\mathbb{R}}
+u(y,\rho)P(dy,\rho\mid x,\sigma).
+\end{aligned}
+$$
+
+Where we are integrating over future paths. 
+We use Taylor's theorem to obtain
+
+$$
+u(z,\rho)-u(x,\rho)
+=
+\frac{\partial u(x,\rho)}{\partial x}(z-x)
++
+\frac{1}{2}
+\frac{\partial^2u(x,\rho)}{\partial x^2}
+(z-x)^2(1+\alpha_\varepsilon),
+\qquad |z-x|\leq\varepsilon,
+$$
+
+where
+
+$$
+\lim_{\varepsilon\to0}\alpha_\varepsilon=0.
+$$
+
+Now we will use the last two results:
+
+$$
+\begin{aligned}
+\frac{u(x,s)-u(x,s+h)}{h}
+&=
+\frac{1}{h}
+\left(
+\int_{\mathbb{R}}
+P(dy,s+h\mid x,s)u(y,s+h)
+-
+u(x,s+h)
+\right)
+\\
+&=
+\frac{1}{h}
+\int_{\mathbb{R}}
+P(dy,s+h\mid x,s)
+\bigl(u(y,s+h)-u(x,s+h)\bigr)
+\\
+&=
+\frac{1}{h}
+\int_{|x-y|<\varepsilon}
+P(dy,s+h\mid x,s)
+\bigl(u(y,s+h)-u(x,s+h)\bigr)
++
+o(1)
+\\
+&=
+\frac{\partial u}{\partial x}(x,s+h)
+\frac{1}{h}
+\int_{|x-y|<\varepsilon}
+(y-x)P(dy,s+h\mid x,s)
+\\
+&\qquad
++
+\frac{1}{2}
+\frac{\partial^2u}{\partial x^2}(x,s+h)
+\frac{1}{h}
+\int_{|x-y|<\varepsilon}
+(y-x)^2P(dy,s+h\mid x,s)
+(1+\alpha_\varepsilon)
++
+o(1)
+\\
+&=
+b(x,s)
+\frac{\partial u}{\partial x}(x,s+h)
++
+\frac{1}{2}
+\Sigma(x,s)
+\frac{\partial^2u}{\partial x^2}(x,s+h)
+(1+\alpha_\varepsilon)
++
+o(1).
+\end{aligned}
+$$
+
+where we have used the definition of the drift and diffusion coefficients in the last step. The result follows by taking the limit $h\to0$ and $\varepsilon\to0$.
+
+
+If $b=b(x)$ and $\Sigma=\Sigma(x)$, we can rewrite this as an initial value problem by letting
+
+$$
+v=u(x,t-s).
+$$
+
+Then
+
+$$
+\begin{cases}
+\dfrac{\partial v}{\partial(t-s)}
+=
+b(x)\dfrac{\partial v}{\partial x}
++
+\dfrac{1}{2}
+\Sigma(x)
+\dfrac{\partial^2v}{\partial x^2},
+\\[8pt]
+v(x,0)=f(x).
+\end{cases}
+$$
+
+In the time-homogeneous case, we can finally set $s=0$ to write
+
+$$
+\begin{cases}
+\dfrac{\partial u}{\partial t}
+=
+b(x)\dfrac{\partial u}{\partial x}
++
+\dfrac{1}{2}
+\Sigma(x)
+\dfrac{\partial^2u}{\partial x^2},
+\\[8pt]
+u(x,0)=f(x),
+\end{cases}
+$$
+
+where
+
+$$
+\mathcal L
+=
+b(x)\partial_x
++
+\frac{1}{2}
+\Sigma(x)\partial_{xx}.
+$$
+
+
+### Forward Kolmogorov (Fokker--Planck)
+
+We have
+
+$$
+P(dy,t\mid x,s)
+=
+p(y,t\mid x,s)\,dy.
+$$
+
+Under suitable conditions, the transition probability density is the solution to the initial value problem
+
+$$
+\begin{cases}
+\dfrac{\partial p}{\partial t}
+=
+-\dfrac{\partial}{\partial y}
+\left(
+b(t,y)p
+\right)
++
+\dfrac{1}{2}
+\dfrac{\partial^2}{\partial y^2}
+\left(
+\Sigma(t,y)p
+\right),
+\\[10pt]
+p(y,s\mid x,s)
+=
+\delta(x-y).
+\end{cases}
+$$
+
+The proof is less interesting than the backward case, but it is presented for completeness.
+
+Proof:
+
+Fix $f(y)\in C_0^2(\mathbb{R})$. An argument similar to that used in the proof of the backward Kolmogorov equation gives
+
+$$
+\lim_{h\to0}
+\frac{1}{h}
+\left(
+\int_{\mathbb{R}} f(y)p(y,s+h\mid x,s)\,dy-f(x)
+\right)
+=
+b(x,s)\frac{df}{dx}(x)
++
+\frac{1}{2}\Sigma(x,s)\frac{d^2f}{dx^2}(x).
+$$
+
+On the other hand,
+
+$$
+\begin{aligned}
+\int_{\mathbb{R}}
+f(y)\frac{\partial}{\partial t}p(y,t\mid x,s)\,dy
+&=
+\frac{\partial}{\partial t}
+\int_{\mathbb{R}}f(y)p(y,t\mid x,s)\,dy
+\\
+&=
+\lim_{h\to0}\frac{1}{h}
+\int_{\mathbb{R}}
+\bigl(p(y,t+h\mid x,s)-p(y,t\mid x,s)\bigr)f(y)\,dy
+\\
+&=
+\lim_{h\to0}\frac{1}{h}
+\left(
+\int_{\mathbb{R}}p(y,t+h\mid x,s)f(y)\,dy
+-
+\int_{\mathbb{R}}p(z,t\mid x,s)f(z)\,dz
+\right)
+\\
+&=
+\lim_{h\to0}\frac{1}{h}
+\left(
+\int_{\mathbb{R}}\int_{\mathbb{R}}
+p(y,t+h\mid z,t)p(z,t\mid x,s)f(y)\,dy\,dz
+-
+\int_{\mathbb{R}}p(z,t\mid x,s)f(z)\,dz
+\right)
+\\
+&=
+\lim_{h\to0}
+\int_{\mathbb{R}}
+p(z,t\mid x,s)
+\frac{1}{h}
+\left(
+\int_{\mathbb{R}}p(y,t+h\mid z,t)f(y)\,dy-f(z)
+\right)dz
+\\
+&=
+\int_{\mathbb{R}}
+p(z,t\mid x,s)
+\left(
+b(z,t)\frac{df}{dz}(z)
++
+\frac{1}{2}\Sigma(z,t)\frac{d^2f}{dz^2}(z)
+\right)dz
+\\
+&=
+\int_{\mathbb{R}}
+b(z,t)p(z,t\mid x,s)f'(z)\,dz
++
+\frac{1}{2}
+\int_{\mathbb{R}}
+\Sigma(z,t)p(z,t\mid x,s)f''(z)\,dz
+\\
+&=
+\left[
+b(z,t)p(z,t\mid x,s)f(z)
+\right]_{-\infty}^{\infty}
+-
+\int_{\mathbb{R}}
+\frac{\partial}{\partial z}
+\bigl(b(z,t)p(z,t\mid x,s)\bigr)f(z)\,dz
+\\
+&\quad
++
+\frac{1}{2}
+\left[
+\Sigma(z,t)p(z,t\mid x,s)f'(z)
+\right]_{-\infty}^{\infty}
+-
+\frac{1}{2}
+\int_{\mathbb{R}}
+\frac{\partial}{\partial z}
+\bigl(\Sigma(z,t)p(z,t\mid x,s)\bigr)f'(z)\,dz
+\\
+&=
+-
+\int_{\mathbb{R}}
+\frac{\partial}{\partial z}
+\bigl(b(z,t)p(z,t\mid x,s)\bigr)f(z)\,dz
+\\
+&\quad
+-
+\frac{1}{2}
+\left[
+\frac{\partial}{\partial z}
+\bigl(\Sigma(z,t)p(z,t\mid x,s)\bigr)f(z)
+\right]_{-\infty}^{\infty}
+\\
+&\quad
++
+\frac{1}{2}
+\int_{\mathbb{R}}
+\frac{\partial^2}{\partial z^2}
+\bigl(\Sigma(z,t)p(z,t\mid x,s)\bigr)f(z)\,dz
+\\
+&=
+\int_{\mathbb{R}}
+\left(
+-
+\frac{\partial}{\partial z}
+\bigl(b(z,t)p(z,t\mid x,s)\bigr)
++
+\frac{1}{2}
+\frac{\partial^2}{\partial z^2}
+\bigl(\Sigma(z,t)p(z,t\mid x,s)\bigr)
+\right)f(z)\,dz.
+\end{aligned}
+$$
+
+Here the boundary terms vanish since $f\in C_0^2(\mathbb{R})$. Hence
+
+$$
+\int_{\mathbb{R}}
+\left[
+\frac{\partial p}{\partial t}
++
+\frac{\partial}{\partial z}(bp)
+-
+\frac{1}{2}\frac{\partial^2}{\partial z^2}(\Sigma p)
+\right]f(z)\,dz
+=0
+$$
+
+for every $f\in C_0^2(\mathbb{R})$. Therefore the integrand is zero (in the weak sense, and pointwise under the assumed smoothness), giving
+
+$$
+\boxed{
+\frac{\partial p}{\partial t}
+=
+-\frac{\partial}{\partial z}(bp)
++
+\frac{1}{2}\frac{\partial^2}{\partial z^2}(\Sigma p).
+}
+$$
+
+Assume that the initial distribution of $X_t$ is $\rho_0(x)$ and set $s=0$ above.
+
+Define
+
+$$
+\rho(y,t)
+:=
+\int
+p(y,t\mid x,0)
+\rho_0(x)\,dx.
+$$
+
+Then we can obtain the probability density at y of the process $X_t$, initially distributed according to $\rho_0(x)$.
+
+$$
+\begin{cases}
+\dfrac{\partial\rho}{\partial t}
+=
+-\dfrac{\partial}{\partial y}
+\left(
+b \rho
+\right)
++
+\dfrac{1}{2}
+\dfrac{\partial^2}{\partial y^2}
+\left(
+\Sigma \rho
+\right),
+\\[10pt]
+\rho(y,0)=\rho_0(y).
+\end{cases}
+$$
+
+
+## Diffusion processes in $\mathbb R^d$
+
+For a process in $\mathbb R^d$, we define the drift and diffusion coefficients
+
+$$
+b(x,s)
+=
+\lim_{t\to s}
+\frac{1}{t-s}
+\int_{|y-x|<\varepsilon}
+(y-x)
+P(dy,t\mid x,s),
+$$
+
+and
+
+$$
+\Sigma(x,s)
+=
+\lim_{t\to s}
+\frac{1}{t-s}
+\int_{|y-x|<\varepsilon}
+(y-x)\otimes(y-x)
+P(dy,t\mid x,s).
+$$
+
+As before, the generator is
+
+$$
+\mathcal L
+=
+b(x,s)\cdot\nabla
++
+\frac{1}{2}
+\Sigma(x,s):\nabla\nabla,
+$$
+
+where
+
+$$
+A:\nabla\nabla f
+=
+\sum_{i,j}
+A_{ij}
+\frac{\partial^2f}
+{\partial x_i\partial x_j}.
+$$
+
+### Backward Kolmogorov
+
+The backward Kolmogorov equation is
+
+$$
+\begin{cases}
+-\dfrac{\partial u}{\partial s}
+=
+b(x,s)\cdot\nabla_xu
++
+\dfrac{1}{2}
+\Sigma(x,s):\nabla_x\nabla_xu,
+\\[10pt]
+u(t,x)=f(x).
+\end{cases}
+$$
+
+For a time-homogeneous process, this becomes
+
+$$
+\begin{cases}
+\dfrac{\partial u}{\partial t}
+=
+\mathcal Lu,
+\\[6pt]
+u(x,0)=f(x).
+\end{cases}
+$$
+
+### Forward Kolmogorov
+
+The forward Kolmogorov equation is
+
+$$
+\begin{cases}
+\dfrac{\partial p}{\partial t}
+=
+\nabla_y\cdot
+\left(
+-b(t,y)p
++
+\dfrac{1}{2}
+\nabla_y\cdot
+\left(
+\Sigma(t,y)p
+\right)
+\right),
+\\[10pt]
+p(y,s\mid x,s)
+=
+\delta(x-y).
+\end{cases}
+$$
+
+For a time-homogeneous process,
+
+$$
+\begin{cases}
+\dfrac{\partial\rho}{\partial t}
+=
+\mathcal L^*\rho,
+\\[6pt]
+\rho(x,0)=\rho_0(x).
+\end{cases}
+$$
+

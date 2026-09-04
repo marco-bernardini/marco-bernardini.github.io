@@ -127,8 +127,8 @@ window.Quarto = {
 <span class="menu-text">MACRO</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../microeconomics.html"> 
-<span class="menu-text">MICRO</span></a>
+    <a class="nav-link" href="../randomness.html"> 
+<span class="menu-text">RANDOMNESS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../data-analysis.html"> 
@@ -682,7 +682,7 @@ y_t=\theta_{01} \varepsilon_{1, t}+\theta_{02} \varepsilon_{2, t}+\theta_{11} \v
 <p>for some orthonormal <span class="math inline">\(Q\)</span> conformable to <span class="math inline">\(\Omega\)</span>. The IRFs are defined as <span class="math inline">\(\Theta(L) = C(L) \Sigma^{1/2} Q\)</span>.<br>
 Remember now that <span class="math inline">\(C(0)\)</span> is defined as the identity matrix, and define the impact matrix <span class="math inline">\(\Theta_0\)</span> as:</p>
 <p><span class="math display">\[
-  \Theta_0 = \Omega Q
+  \Theta_0 = \Sigma^{1/2} Q
 \]</span></p>
 <p>Then we have:</p>
 <p><span class="math display">\[
@@ -784,7 +784,7 @@ u_t = \Theta_0 \varepsilon_t
 <p>Hence identification on <span class="math inline">\(u_t\)</span> pins down impact effects on <span class="math inline">\(y_t\)</span>.<br>
 Arguably, this recursive structure is not particularly realistic nor easily implementable. First, the lower the sampling frequency, the more unrealistic the timing assumptions become. Since this is quite obvious, I will not go further.<br>
 Second, the recursive causal ordering rules out contemporaneous feedback across variables.<br>
-To see this, for an ordering <span class="math inline">\(y_{t,1},\dots,y_{n,t}\)</span>)$:</p>
+To see this, for an ordering <span class="math inline">\(y_{t,1},\dots,y_{n,t}\)</span>:</p>
 <p><span class="math display">\[
 u_{it} = \sum_{j \le i} \Theta_{0,ij}\,\varepsilon_{jt}
 \]</span></p>
@@ -1072,7 +1072,7 @@ In the literature, there are two main methods for choosing instrumental variable
 </section>
 <section id="high-frequency-iv" class="level4">
 <h4 class="anchored" data-anchor-id="high-frequency-iv">High Frequency IV</h4>
-<p>High frequency IV are constructed using changes in prices measured at very high frequences around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.</p>
+<p>High frequency IV are constructed using changes in asset prices (usually futures) measured at very high frequencies around particular events. Under efficient markets, these changes should give a measure of the unexpected component of the event, which can be used as an instrument for the shock of interest.</p>
 <p><br><br><br></p>
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
