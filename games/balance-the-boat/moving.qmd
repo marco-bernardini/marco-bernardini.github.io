@@ -1,0 +1,89 @@
+---
+title: "Boat Moving — Balance the Boat"
+description: "Follow the rhythm of a sweep rowing stroke. Control blade depth on the drive and boat balance on the recovery."
+title-block-style: none
+page-layout: full
+toc: false
+format:
+  html:
+    css: [assets/game.css, assets/moving.css]
+    anchor-sections: false
+---
+
+```{=html}
+<div id="balance-game" class="balance-game boat-moving" data-game="moving" data-state="loading">
+  <header class="boat-heading">
+    <div>
+      <a class="boat-back" href="../">← Games</a>
+      <div class="boat-eyebrow">FIND YOUR RHYTHM</div>
+      <h1>Balance the Boat<span class="boat-title-dot">.</span></h1>
+      <p>A clean drive. A quiet recovery. Stroke after stroke.</p>
+    </div>
+    <nav class="boat-levels" aria-label="Game levels">
+      <a class="boat-level-link" href="./"><span class="boat-level-number">01</span> Boat Still</a>
+      <span class="boat-level-active" aria-current="page"><span class="boat-level-number">02</span> Boat Moving <span class="boat-live-dot" aria-hidden="true"></span></span>
+    </nav>
+  </header>
+
+  <div class="moving-toolbar" role="group" aria-label="Run settings">
+    <div class="moving-setting"><label for="moving-mode">EXERCISE</label><select id="moving-mode"><option value="drive">Drive practice</option><option value="recovery">Recovery practice</option><option value="continuous" selected>Continuous rowing</option></select></div>
+    <div class="moving-setting"><label for="moving-rate">RHYTHM</label><select id="moving-rate"><option value="8">8 strokes/min · easy</option><option value="12">12 strokes/min · hard</option></select></div>
+    <div class="moving-actions"><button class="boat-primary" id="moving-toggle" type="button" disabled>Start rowing <span aria-hidden="true">→</span></button><button class="moving-reset" id="moving-restart" type="button" disabled>Restart</button></div>
+  </div>
+
+  <section class="boat-playground" aria-label="Moving boat exercise">
+    <div class="boat-scene-panel">
+      <div class="boat-scene-top">
+        <div><span class="boat-eyebrow" id="moving-phase">READY TO ROW</span><p id="boat-challenge">Preparing the boat…</p></div>
+        <span class="moving-stroke-number" id="moving-stroke">2 warm-up + 10 scored</span>
+      </div>
+      <div class="moving-cycle" aria-hidden="true"><span class="moving-cycle-drive">DRIVE</span><span class="moving-cycle-recovery">RECOVERY</span><i id="moving-cycle-marker"></i></div>
+      <div class="boat-viewport" id="boat-viewport">
+        <canvas id="boat-canvas" tabindex="0" aria-label="Animated sweep rower viewed from behind. Use Up and Down to correct handle height. Blade depth and boat balance are described below."></canvas>
+        <div class="boat-load-message" id="boat-load-message" role="status">Launching your boat…</div>
+        <div class="boat-water-tag" aria-hidden="true">ONE HANDLE / TWO PHASES</div>
+        <div class="moving-pause-label" id="moving-pause-label" hidden>Paused <small>Take a breath. Resume when ready.</small></div>
+        <div class="boat-success moving-summary" id="moving-summary" hidden>
+          <span class="boat-eyebrow">YOUR TEN STROKES</span><h2>Run complete.</h2>
+          <div class="moving-result-grid"><div id="moving-drive-result"><strong id="moving-drive-score">0%</strong><span>Drive direction</span></div><div id="moving-recovery-result"><strong id="moving-recovery-score">0%</strong><span>Recovery direction</span></div></div>
+          <p id="moving-choice-result"></p><p id="moving-score-note"></p>
+          <button class="boat-primary" id="moving-again" type="button">Try again <span aria-hidden="true">→</span></button>
+          <button class="moving-reset" id="moving-next-exercise" type="button">Try Drive practice</button>
+        </div>
+      </div>
+      <div class="boat-side-labels" aria-hidden="true"><span><b>BOWSIDE</b><small>Starboard · your left</small></span><span class="boat-view-label">VIEW FROM THE BOW</span><span><b>STROKESIDE</b><small>Port · your right</small></span></div>
+      <div class="boat-balance-bar">
+        <div class="moving-readouts"><div><span class="boat-eyebrow" id="moving-blade-caption">BLADE POSITION</span><output id="moving-blade" aria-live="off">Ready</output></div><div><span class="boat-eyebrow">BOAT BALANCE</span><output id="boat-angle" aria-live="off">Level</output></div></div>
+        <div class="boat-meter" aria-hidden="true"><span class="boat-meter-zone"></span><span class="boat-meter-center"></span><span class="boat-meter-needle" id="boat-needle"></span></div>
+        <div class="boat-meter-labels" aria-hidden="true"><span>Bowside low</span><span>Level</span><span>Bowside high</span></div>
+        <div class="moving-feedback"><span class="moving-feedback-dot" aria-hidden="true"></span><span id="moving-feedback">Choose an exercise, then start rowing.</span></div>
+      </div>
+    </div>
+
+    <div class="boat-controls" role="group" aria-labelledby="boat-controls-title">
+      <div class="boat-controls-intro"><span class="boat-eyebrow">YOU’RE IN CONTROL</span><h2 id="boat-controls-title">Find the feel.</h2><p id="moving-control-hint">Correct the handle height as the stroke moves beneath your hands.</p></div>
+      <div class="boat-slider-control">
+        <button type="button" id="boat-raise" class="boat-step" aria-label="Raise the handle" disabled>↑</button>
+        <label for="boat-height" class="boat-slider-label">Raise handle</label>
+        <div class="boat-slider-track"><span class="boat-slider-ruler" aria-hidden="true"></span><input type="range" id="boat-height" min="0" max="100" step="0.25" value="50" aria-label="Handle height correction" aria-describedby="boat-input-help" disabled></div>
+        <span class="boat-slider-label">Lower handle</span><button type="button" id="boat-lower" class="boat-step" aria-label="Lower the handle" disabled>↓</button>
+      </div>
+      <p class="boat-input-help" id="boat-input-help">Drag, or use <kbd>↑</kbd> <kbd>↓</kbd><br>Resets after catch and feathering.</p>
+      <div class="boat-rig-note"><span class="boat-rig-dot" aria-hidden="true"></span><span id="boat-rig">Setting your side…</span></div>
+    </div>
+  </section>
+
+  <div class="boat-below"><p><span class="boat-note-dot" aria-hidden="true"></span><span id="moving-run-note">Two warm-up strokes. Then ten to find your flow.</span></p><span id="moving-live-score">Drive — · Recovery —</span></div>
+  <details class="boat-how"><summary>How to find your rhythm <span aria-hidden="true">+</span></summary><div>
+    <p><strong>Drive:</strong> keep the squared blade covered without burying it too deeply. A deep draw lifts your oar side and progressively buries more shaft. Lower the handle to correct it. A high blade misses the water at the catch and drops your side; raise the handle to place it in the water. The submerged blade and shaft are blue; the white line marks the water surface.</p>
+    <p><strong>Recovery:</strong> the blade is feathered in the air. Use the boat and balance indicator to bring the boat level, keeping the blade clear of the water. Practice modes let the other phase run automatically. Continuous rowing asks you to control both.</p>
+    <p>Each run keeps one oar side, chosen at random. The easy rhythm is 8 strokes/minute; hard is 12. Your slider resets to centre after the catch and after feathering, so make a fresh correction for each drive and recovery. The physical handle moves smoothly through the reset. The normal stroke path, seat travel, feathering and blade placement are automatic.</p>
+    <p>Two warm-up strokes are unscored. Each of the next ten drives and recoveries counts as one direction choice. You get credit for choosing the correct direction, even if the boat takes time to settle or you move too far. If you use both directions, the one you actively use for longer wins: held-arrow time, drag movement time, or button taps. Ties and phases with no input count as uncorrected. Catch/release input, automatic slider resets, pauses and the automatic phase in a practice exercise do not earn votes.</p>
+    <p>This is a teaching model of one station in a crew shell. Loaded drive and unloaded recovery use an effective crew-load response, with water support only where the blade is actually in contact. Real crew balance also depends on body movement, timing, rigging and conditions.</p>
+    <p>Pause freezes the stroke and scoring. Leaving the page or switching tabs pauses the run; press Resume when you return. Changing exercise or rhythm prepares a new run.</p>
+  </div></details>
+  <p id="boat-announcement" class="boat-sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <noscript><p class="boat-error">This game needs JavaScript and a browser with WebGL 2. Please enable JavaScript to play.</p></noscript>
+</div>
+<script type="module" src="js/boot.js"></script>
+```

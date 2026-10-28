@@ -1,0 +1,75 @@
+---
+title: "Balance the Boat"
+description: "Find your feel for a sweep rowing boat. Adjust the handle and bring the boat back to level."
+title-block-style: none
+page-layout: full
+toc: false
+format:
+  html:
+    css: assets/game.css
+    anchor-sections: false
+---
+
+```{=html}
+<div id="balance-game" class="balance-game" data-state="loading">
+  <header class="boat-heading">
+    <div>
+      <a class="boat-back" href="../">← Games</a>
+      <div class="boat-eyebrow">A LITTLE FEEL GOES A LONG WAY</div>
+      <h1>Balance the Boat<span class="boat-title-dot">.</span></h1>
+      <p>Find the level. Feel the difference.</p>
+    </div>
+    <div class="boat-levels" aria-label="Game levels">
+      <span class="boat-level-active"><span class="boat-level-number">01</span> Boat Still <span class="boat-live-dot" aria-hidden="true"></span></span>
+      <a class="boat-level-link" href="moving.html"><span class="boat-level-number">02</span> Boat Moving <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <section class="boat-playground" aria-label="Boat Still balance exercise">
+    <div class="boat-scene-panel">
+      <div class="boat-scene-top">
+        <div><span class="boat-eyebrow">YOUR CHALLENGE</span><p id="boat-challenge">Preparing the boat…</p></div>
+        <span class="boat-round" id="boat-round">01</span>
+      </div>
+      <div class="boat-viewport" id="boat-viewport">
+        <canvas id="boat-canvas" tabindex="0" aria-label="3D view from behind the rower. Use Up and Down to adjust the handle; the boat balance is described below."></canvas>
+        <div class="boat-load-message" id="boat-load-message" role="status">Launching your boat…</div>
+        <div class="boat-water-tag" aria-hidden="true">STILL WATER / FINISH POSITION</div>
+        <div class="boat-success" id="boat-success" hidden>
+          <span class="boat-success-icon" aria-hidden="true">✓</span>
+          <span class="boat-eyebrow">THAT’S THE FEELING</span>
+          <h2>Balanced!</h2>
+          <p id="boat-explanation"></p>
+          <button type="button" class="boat-primary" id="boat-next">Next challenge <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <div class="boat-side-labels" aria-hidden="true"><span><b>BOWSIDE</b><small>Starboard · your left</small></span><span class="boat-view-label">VIEW FROM THE BOW</span><span><b>STROKESIDE</b><small>Port · your right</small></span></div>
+      <div class="boat-balance-bar">
+        <div class="boat-balance-caption"><span class="boat-eyebrow">BOAT BALANCE</span><output id="boat-angle" aria-live="off">Waiting for the scene</output></div>
+        <div class="boat-meter" aria-hidden="true"><span class="boat-meter-zone"></span><span class="boat-meter-center"></span><span class="boat-meter-needle" id="boat-needle"></span></div>
+        <div class="boat-meter-labels" aria-hidden="true"><span>Bowside low</span><span>Level</span><span>Bowside high</span></div>
+        <div class="boat-hold"><span id="boat-hold-label">Bring the boat level, then hold for a moment.</span><progress id="boat-hold-progress" max="0.8" value="0" aria-label="Stable balance hold"></progress></div>
+      </div>
+    </div>
+
+    <div class="boat-controls" role="group" aria-labelledby="boat-controls-title">
+      <div class="boat-controls-intro"><span class="boat-eyebrow">YOU’RE IN CONTROL</span><h2 id="boat-controls-title">A lighter touch.</h2><p>Move the handle up or down until the boat sits level.</p></div>
+      <div class="boat-slider-control">
+        <button type="button" id="boat-raise" class="boat-step" aria-label="Raise the handle" disabled>↑</button>
+        <label for="boat-height" class="boat-slider-label">Raise handle</label>
+        <div class="boat-slider-track"><span class="boat-slider-ruler" aria-hidden="true"></span><input type="range" id="boat-height" min="0" max="100" step="0.25" value="50" aria-label="Handle height" aria-describedby="boat-input-help" disabled></div>
+        <span class="boat-slider-label">Lower handle</span>
+        <button type="button" id="boat-lower" class="boat-step" aria-label="Lower the handle" disabled>↓</button>
+      </div>
+      <p class="boat-input-help" id="boat-input-help">Drag the slider, or use <kbd>↑</kbd> <kbd>↓</kbd><br>Small movements go a long way.</p>
+      <div class="boat-rig-note"><span class="boat-rig-dot" aria-hidden="true"></span><span id="boat-rig">Setting your side…</span></div>
+    </div>
+  </section>
+
+  <div class="boat-below"><p><span class="boat-note-dot" aria-hidden="true"></span> Calm water. Feathered blade. Just you and the balance.</p><span id="boat-completed">0 challenges balanced</span></div>
+  <details class="boat-how"><summary>How the balance works <span aria-hidden="true">+</span></summary><div><p>This is a stationary sweep-rowing exercise: one oar, with the rower sitting at the finish and the feathered blade supported by the water. Raise the handle to increase support and lift your oar side; lower it to let that side fall.</p><p>The camera looks from the bow toward the rower’s back, so bowside (starboard) is on your left. Strokeside (port) is on your right. The other crew members are represented as passive support. This is a teaching model for this position; blade contact and balance behave differently during a moving stroke.</p><p>Keep the boat within 1° of level and let it settle for 0.8 seconds. Use the boat, waterline, and balance indicator to find the right height.</p></div></details>
+  <p id="boat-announcement" class="boat-sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+  <noscript><p class="boat-error">This game needs JavaScript and a browser with WebGL 2. Please enable JavaScript to play.</p></noscript>
+</div>
+<script type="module" src="js/boot.js"></script>
+```

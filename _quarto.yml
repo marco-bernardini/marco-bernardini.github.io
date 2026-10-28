@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
 
 website:
   title: "Marco Bernardini"
@@ -17,11 +20,15 @@ website:
         text: DATA ANALYSIS
       - href: articles.qmd
         text: RESEARCH
+      - href: games/index.qmd
+        text: GAMES
   
 resources:
   - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf
   - assets/Tesi Marco Bernardini.pdf
   - widgets/
+  - games/balance-the-boat/assets/
+  - games/balance-the-boat/js/
     
 format:
   html:

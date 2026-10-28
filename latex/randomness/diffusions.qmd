@@ -1071,13 +1071,11 @@ $$
 for every $f\in C_0^2(\mathbb{R})$. Therefore the integrand is zero (in the weak sense, and pointwise under the assumed smoothness), giving
 
 $$
-\boxed{
 \frac{\partial p}{\partial t}
 =
 -\frac{\partial}{\partial z}(bp)
 +
 \frac{1}{2}\frac{\partial^2}{\partial z^2}(\Sigma p).
-}
 $$
 
 Assume that the initial distribution of $X_t$ is $\rho_0(x)$ and set $s=0$ above.
