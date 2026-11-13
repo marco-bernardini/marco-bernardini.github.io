@@ -22,10 +22,13 @@ website:
         text: RESEARCH
       - href: games/index.qmd
         text: GAMES
+      - href: sabc/index.qmd
+        text: SABC
   
 resources:
   - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf
   - assets/Tesi Marco Bernardini.pdf
+  - sabc/planner/
   - widgets/
   - games/balance-the-boat/assets/
   - games/balance-the-boat/js/

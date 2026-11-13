@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#302F2A">
+  <title>SABC — Crew planner</title>
+  <meta name="description" content="Find shared training times for your SABC crew.">
+  <link rel="icon" href="./assets/sabc-logo.png" type="image/png">
+  <link rel="stylesheet" href="./planner.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="SABC crew planner home">
+      <img src="./assets/sabc-logo.png" width="52" height="48" alt="SABC crest">
+      <span><strong>SABC</strong><span class="brand-divider"></span><span class="brand-subtitle">Crew planner</span></span>
+    </a>
+    <div class="refresh-area">
+        <p id="updated-at" class="updated-at">Loading saved availability…</p>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <h1 class="sr-only">SABC crew planner</h1>
+    <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+
+    <div class="planner-layout">
+      <aside class="sidebar" aria-label="Crew selection and shared windows">
+        <section class="panel crew-panel" aria-labelledby="crew-title">
+          <div class="panel-heading"><h2 id="crew-title">Your crew <span class="count-badge" id="crew-count">0</span></h2><button id="clear-button" class="text-button" type="button" disabled>Clear all</button></div>
+          <p class="panel-description">Add the people you want to row with.</p>
+          <div class="member-picker" id="member-picker">
+            <label class="sr-only" for="member-search">Search and select members</label>
+            <div class="search-field">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+              <input id="member-search" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="member-options" placeholder="Search members…" autocomplete="off" disabled>
+              <button id="toggle-picker" class="picker-toggle" type="button" aria-label="Show member dropdown" aria-expanded="false" disabled><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 8 4 4 4-4"/></svg></button>
+            </div>
+            <div class="member-dropdown" id="member-dropdown" hidden>
+              <div class="dropdown-caption" id="dropdown-caption">Club members</div>
+              <div id="member-options" role="listbox" aria-label="Club members" aria-multiselectable="true"></div>
+            </div>
+          </div>
+          <div id="selected-members" class="selected-members" aria-label="Selected members"></div>
+          <p class="crew-empty" id="crew-empty"><span class="empty-avatars" aria-hidden="true"><i>+</i><i>+</i><i>+</i></span>Your crew will appear here.</p>
+          <p class="member-total" id="member-total">Loading members…</p>
+        </section>
+
+        <section class="panel windows-panel" aria-labelledby="windows-title">
+          <div class="panel-heading"><h2 id="windows-title"><span class="status-dot free-dot"></span>Shared windows</h2><span id="window-count" class="subtle-count">—</span></div>
+          <p class="panel-description" id="windows-summary">Your shared free time, at a glance.</p>
+          <div id="shared-windows" class="shared-windows"><p class="muted-empty">Select members to find a time together.</p></div>
+        </section>
+
+      </aside>
+
+      <section class="panel calendar-panel" aria-labelledby="calendar-title">
+        <div class="calendar-toolbar">
+          <div><div class="calendar-title-line"><svg class="calendar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 11h18"/></svg><h2 id="calendar-title">Weekly availability</h2></div>
+            <p id="calendar-subtitle">Monday – Sunday <span>·</span> 06:00 – 20:00</p>
+          </div>
+          <div class="legend" aria-label="Calendar legend"><span><i class="legend-free"></i>Everyone free</span><span><i class="legend-busy"></i>Unavailable</span></div>
+        </div>
+        <div class="calendar-scroll" id="calendar-scroll" tabindex="0" aria-label="Weekly calendar. Scroll for later times or more days on small screens.">
+          <div class="calendar-grid" id="calendar-grid"></div>
+          <div class="calendar-empty" id="calendar-empty">
+            <div class="calendar-empty-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="10" r="4"/><path d="M4 26v-3a8 8 0 0 1 16 0v3M24 11v10m-5-5h10"/></svg></div>
+            <h3>Your crew starts here</h3><p>Select a member to bring<br>the week into view.</p>
+          </div>
+        </div>
+        <div class="calendar-footer"><span id="calendar-timezone">Europe/London</span><span id="shared-total">Choose your crew to see shared hours</span><span class="precision-note">30-minute grid · exact time ranges</span></div>
+      </section>
+    </div>
+    <footer class="page-footer"><span class="info-symbol" aria-hidden="true">i</span><p>Availability as shown by the club website. Blank days are treated as free; they may include members who haven't filled in their availability. Check the last-update time before planning.</p><a href="https://sabc-woad.vercel.app/availability" target="_blank" rel="noopener noreferrer">Club availability <span aria-hidden="true">↗</span></a></footer>
+  </main>
+  <noscript><p class="notice">Please enable JavaScript to use the planner.</p></noscript>
+</body>
+</html>
