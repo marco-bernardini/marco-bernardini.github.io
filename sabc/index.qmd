@@ -6,6 +6,7 @@ toc: false
 ---
 
 ```{=html}
+<p><a href="../rowing/">← Rowing</a></p>
 <iframe title="SABC crew availability planner" src="planner/index.html" style="width:100%;height:calc(100vh - 110px);min-height:720px;border:0;border-radius:12px" loading="eager"></iframe>
 <p><a href="planner/" target="_blank" rel="noopener">Open the planner in a full window ↗</a></p>
 ```

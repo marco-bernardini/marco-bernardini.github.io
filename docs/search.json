@@ -922,5 +922,12 @@
     "title": "Le variabili macroeconomiche",
     "section": "Tasso di Inflazione",
     "text": "Tasso di Inflazione\nL’inflazione rappresenta un aumento sostenuto del livello generale dei prezzi. Il tasso di inflazione è il tasso a cui il livello dei prezzi aumenta nel tempo.\n\nCome si misura l’inflazione?\nIl livello dei prezzi si può calcolare in due modi:\n\n\nUtilizzando il deflatore del PIL, ovvero il rapporto tra il PIL nominale e il PIL reale nell’anno di interesse\n\n\nLindice armonizzato dei prezzi al consumo, ovvero un numero indice che fissa un prezzo pari a 100 nell’anno base\n\n\nChiamando \\(P_t\\) il livello generale dei prezzi nell’anno \\(t\\), segue che il tasso di inflazione \\(\\pi\\) viene definito come \\(\\pi =\n\\frac{P_t - P_{t-1}}{P_{t-1}} \\approx \\ln P_t - \\ln P_{t-1}\\)\n\n# Chiave per l'Inflation Rate\nHICP_key = 'ICP/M.U2.N.000000.4.ANR'  # Codice identificativo dell'Inflation Rate\nHICP = make_df_ECB(HICP_key, 'Inflation Rate')  # Ottieni i dati dal database ECB\n\n# Creiamo il grafico\nfig, ax = plt.subplots()  # Crea una figura e un asse\n\n# Traccia l'inflazione\nax.plot(HICP)  # Traccia il grafico dell'inflazione\n\n# Imposta etichetta per l'asse X e Y\nax.set_xlabel('Trimestre')  # Etichetta per l'asse X\nax.set_ylabel('Tasso di Inflazione')  # Etichetta per l'asse Y\n\n# Titolo del grafico\nplt.title('Tasso di Inflazione nell\\'Area Euro', loc='left')  # Aggiungi il titolo a sinistra\n\n# Ottimizza il layout per evitare sovrapposizioni\nfig.tight_layout()\n\n# Mostra il grafico\nplt.show()"
+  },
+  {
+    "objectID": "rowing/index.html",
+    "href": "rowing/index.html",
+    "title": "Rowing",
+    "section": "",
+    "text": "Plan your crew’s next session, or practise finding a boat’s balance.\n\n  \n  01 / CREW PLANNINGSABC PlannerSelect your crew and find shared availability.Open the planner ↗\n\n\n  \n    \n      \n      \n        \n        \n        \n        \n        \n        \n        \n        \n      \n    \n  \n  02 / GAMEGAME: Balance the BoatLearn the balance. Then find your rhythm.Boat Still & Boat Moving ↗"
   }
 ]

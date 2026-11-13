@@ -14,7 +14,7 @@ format:
 <div id="balance-game" class="balance-game" data-state="loading">
   <header class="boat-heading">
     <div>
-      <a class="boat-back" href="../">← Games</a>
+      <a class="boat-back" href="../../rowing/">← Rowing</a>
       <div class="boat-eyebrow">A LITTLE FEEL GOES A LONG WAY</div>
       <h1>Balance the Boat<span class="boat-title-dot">.</span></h1>
       <p>Find the level. Feel the difference.</p>

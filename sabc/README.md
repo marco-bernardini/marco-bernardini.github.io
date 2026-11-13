@@ -1,6 +1,6 @@
 # SABC online planner
 
-The SABC navigation entry embeds the isolated planner in `planner/`. Visitors read
+The Rowing section links to the SABC page, which embeds the isolated planner in `planner/`. Visitors read
 the published JSON and see its last successful fetch time. No public refresh
 button, automatic club requests, Python server or external proxy is needed.
 

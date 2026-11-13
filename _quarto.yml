@@ -20,10 +20,8 @@ website:
         text: DATA ANALYSIS
       - href: articles.qmd
         text: RESEARCH
-      - href: games/index.qmd
-        text: GAMES
-      - href: sabc/index.qmd
-        text: SABC
+      - href: rowing/index.qmd
+        text: ROWING
   
 resources:
   - assets/Humanizing_Macroeconomics__Beyond_Rationality.pdf

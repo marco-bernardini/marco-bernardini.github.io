@@ -6,9 +6,9 @@ The first game is [Balance the Boat](balance-the-boat/README.md).
 
 ## Site structure
 
-- `games/index.qmd` is the Games landing page.
+- `rowing/index.qmd` is the main Rowing landing page; `games/index.qmd` remains available at its original URL.
 - `games/balance-the-boat/index.qmd` is the game page.
-- The Games entry in `_quarto.yml` adds the section to the existing navbar.
+- The Rowing entry in `_quarto.yml` groups the SABC planner and the game in the navbar.
 - Keep game styles, JavaScript, and dependencies local to each game.
 - Register game assets as Quarto resources so they are copied into `docs/`.
 - Generate published HTML with Quarto; do not hand-edit generated pages.

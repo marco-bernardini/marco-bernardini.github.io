@@ -14,7 +14,7 @@ format:
 <div id="balance-game" class="balance-game boat-moving" data-game="moving" data-state="loading">
   <header class="boat-heading">
     <div>
-      <a class="boat-back" href="../">← Games</a>
+      <a class="boat-back" href="../../rowing/">← Rowing</a>
       <div class="boat-eyebrow">FIND YOUR RHYTHM</div>
       <h1>Balance the Boat<span class="boat-title-dot">.</span></h1>
       <p>A clean drive. A quiet recovery. Stroke after stroke.</p>
