@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "source_url": "https://sabc-woad.vercel.app/availability",
-  "scrape_started_at": "2026-11-13T09:50:57.497332+00:00",
-  "scraped_at": "2026-11-13T09:50:59.229173+00:00",
+  "scrape_started_at": "2026-11-13T09:53:33.800241+00:00",
+  "scraped_at": "2026-11-13T09:53:36.275306+00:00",
   "timezone": "Europe/London",
   "schedule_type": "recurring_weekly",
   "timezone_basis": "Assumed club local timezone; not supplied by the website",
