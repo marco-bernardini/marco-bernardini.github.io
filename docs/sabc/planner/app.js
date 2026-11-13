@@ -147,7 +147,10 @@ function renderCrew(members) {
     remove.setAttribute("aria-label", `Remove ${member.name}`);
     remove.addEventListener("click", () => {
       toggleMember(member.id);
-      $("member-search").focus();
+      setPicker(false);
+      // Keep keyboard focus on a control without focusing the search field.
+      const nextControl = $("selected-members").querySelector(".remove-member") || $("toggle-picker");
+      nextControl.focus({ preventScroll: true });
     });
     chip.append(avatar(member), el("span", "chip-name", member.name), remove);
     fragment.append(chip);
