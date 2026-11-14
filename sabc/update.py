@@ -54,8 +54,8 @@ def main():
     args = parser.parse_args()
     try:
         if not args.local_only:
-            if git("status", "--porcelain", capture=True).strip():
-                raise ScrapeError("Commit or stash existing changes first. Use --local-only to fetch without publishing.")
+            if git("status", "--porcelain", "--untracked-files=no", capture=True).strip():
+                raise ScrapeError("Commit or stash changes to tracked files first. Use --local-only to fetch without publishing.")
             if git("branch", "--show-current", capture=True).strip() != "main":
                 raise ScrapeError("Run the publishing command from the main branch")
             git("pull", "--ff-only")

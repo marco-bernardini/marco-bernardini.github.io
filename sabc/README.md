@@ -11,7 +11,7 @@ python sabc/update.py
 ```
 
 Requires Python 3.10+, Git and your existing GitHub push credentials. No Python
-packages are needed. Start on `main` with a clean working tree. The command pulls
+packages are needed. Start on `main` with no changes to tracked files. Untracked files and folders are left untouched. The command pulls
 with `--ff-only`, fetches the member list and bulk availability (two requests,
 with retries on transient errors), validates every member/day, updates both the
 source JSON and the copy served from `docs/`, commits just those files, and pushes
